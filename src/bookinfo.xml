@@ -1,0 +1,17 @@
+    <docinfo>
+        <title>A Second Course in Linear Algebra</title>
+        <!-- Multiple authors will go into an eventual "authorgroup" -->
+        <author>
+            <personname>Robert A. Beezer</personname>
+            <department>Department of Mathematics and Computer Science</department>
+            <institution>University of Puget Sound</institution>
+            <email>beezer@pugetsound.edu</email>
+        </author>
+        <date>DRAFT September 5, 2013 DRAFT</date>
+        <!-- A demo macro, not really so useful, but good test            -->
+        <!-- Latex style, once only, works for MathJax and pdflatex       -->
+        <macros>
+            \newcommand{\inverse}[1]{{#1}^{-1}}
+        </macros>
+
+    </docinfo>

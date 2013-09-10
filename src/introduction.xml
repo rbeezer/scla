@@ -1,0 +1,34 @@
+<section xml:id="sec-introduction">
+    <title>Introduction</title>
+
+    <p>This book is about advanced topics in linear algebra.  So we presume you have some experience with matrix algebra, vector spaces (possibly abstract ones), eigenvalues, linear transformations, and matrix representations of linear transformations.  All of this material can be found in <booktitle>A First Course in Linear Algebra</booktitle>, which we will reference frequently.</p>
+    
+    <todo>Consult FCLA often.</todo>
+   
+    <p>Our approach is mathematical, which means we include proofs of our results.  However, we are also practical, and will not always be as general as we could be.  For example, we will stick to a single inner product throughout (the sesquilinear one that is most useful when employing complex numbers).  We will sometimes be careful about our field of scalars, but will not dwell on the distinctions peculiar to the real numbers (versus the algebraically closed complex numbers).  This is not a course in numerical linear algebra, but much of what we do provides the mathematical underpinninngs of that topic, so this could be a very useful resource for study in that area.  We will make mention of algorithmic performance, relying on Trefethen and Bau's excellent <booktitle>Numerical Linear Algebra</booktitle> for details.</p>
+    
+    <p>Many topics we consider are motivated by trying to find simpler versions of matrices.  Here <q>simpler</q> can be taken to mean many zero entries.  Barring a zero entry, then maybe an entry equal to one is second-best.  An overall form that is much like a diagonal matrix is also desirable, since diagonal matrices are simple to work with. (forward referenc eto exercise).  A familiar example may help to make these ideas more precise.</p>    
+    
+    <example xml:id="ex-rref-factorization">
+        <title>Reduced Row-Echelon Form as a Factorization</title>
+        
+        <p>Given an <m>m\times n</m> matrix, <m>A</m>, we know that its reduced row-echelon form is unique (Theorem <xref acro="RREFU" type="theorem" />).  We also know that we can accomplish row-operations by multiplying <m>A</m> on the left by a (nonsingular)  elementary matrix (Subsection <xref acro="DM.EM" type="subsection" />).  Suppose we perform repeated row-operations to transform <m>A</m> into a matrix in reduced row-echelon form, <m>B</m>.  Then the product of the elementary matrices is a square nonsingular matrix, <m>J</m> such that <me>B = JA</me> or equivalently <me>A = \inverse{J}B</me>.</p>
+        
+        <p>We call the second version a <term>factorization</term>, or <term>matrix decomposition</term>, of <m>A</m> (Though some might use the same terms for the first version, perhaps saying it is a factorization of <m>B</m>).  The pieces of this decomposition have certain properties.  The matrix <m>\inverse{J}</m> is a nonsingular matrix of size <m>m</m>. The matrix <m>B</m> has an abundance of zero entries, and some strategically placed <q>leading ones</q> which signify the pivot columns.  The exact structure of <m>B</m> is described by Definition <xref acro="RREF" type="definition" /> and Theorem <xref acro="RREF" type="definition" /> tells us that we can accomplish this decomposition given any matrix <m>A</m>.</p>
+        
+        <p>If <m>A</m> is not of full rank, then there are many possibilities for the matrix <m>J</m>, even though <m>B</m> is unique.  However, results on extended echelon form (Subsection <xref acro="FS.PEEF" type="subsection" /> suggest a choice for <m>J</m> that is unambiguous.  We say that choice is <term>canonical</term>.  This example gives the following theorem, where we have changed the notation slightly.</p>
+                
+    </example>
+    
+    <todo>State theorem, replace J-ibnverse by something.</todo>
+   
+    <p>Again, many of the topics in this book will have a flavor similar to the previous example and theorem.  However, we will often need to limit the possibilities for the original matrix (it may need to be square, or its eigenvalues may need certain properties).  We may get more specific information about the components of the factorization, or we may get less.  We will also be interested in obtaining <term>canonical forms</term> of matrices.  You can view orthonormal diagonalization (Section <xref acro="OD" type="section" />) as a good example of another matrix decomposition, and we will cover it again in some detail in (cite forward) <xref label="" />.</p>
+    
+    <todo>Encourage return here.</todo>
+
+
+   <todo>matrices linear transforms</todo>
+   <todo>exercise on easy aspects of diagonal matreices</todo>
+   <todo>exercise on OD as decomposition</todo>
+
+</section>
