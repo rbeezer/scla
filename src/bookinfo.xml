@@ -7,11 +7,11 @@
             <institution>University of Puget Sound</institution>
             <email>beezer@pugetsound.edu</email>
         </author>
-        <date>DRAFT September 5, 2013 DRAFT</date>
+        <date>DRAFT September 10, 2013 DRAFT</date>
         <!-- A demo macro, not really so useful, but good test            -->
         <!-- Latex style, once only, works for MathJax and pdflatex       -->
         <macros>
-            \newcommand{\inverse}[1]{{#1}^{-1}}
+\newcommand{\inverse}[1]{{#1}^{-1}}
         </macros>
 
     </docinfo>
