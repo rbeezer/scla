@@ -20,6 +20,6 @@
         <xi:include href="./decompositions.xml" />
         <xi:include href="./applications.xml" />
         <xi:include href="./topics.xml" />
-    </book>
+   </book>
 
 </mathbook>
