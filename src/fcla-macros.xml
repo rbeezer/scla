@@ -445,12 +445,6 @@
 %
 \newcommand*{\adjoint}[1]{\ensuremath{#1\sp{\ast}}}
 
-% Inverse of a matrix
-%
-%  Usage:  \inverse{A}
-%  Presumes math mode
-%
-\newcommand*{\inverse}[1]{\ensuremath{#1\sp{-1}}}
 
 % Similarity
 %

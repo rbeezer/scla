@@ -11,7 +11,11 @@
         <!-- A demo macro, not really so useful, but good test            -->
         <!-- Latex style, once only, works for MathJax and pdflatex       -->
         <macros>
-\newcommand{\inverse}[1]{{#1}^{-1}}
+% Inverse of a matrix
+%
+%  Usage:  \inverse{A}
+%
+\newcommand{\inverse}[1]{{#1^{-1}}}
         </macros>
 
     </docinfo>
