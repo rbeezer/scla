@@ -3,15 +3,15 @@
     
     <p>The <term>LU decomposition</term> begins with any matrix and describes it as a product of a lower-triangular matrix (<m>L</m>) and an upper-triangular matrix (<m>U</m>).  Hence the customary shorthand name, <q>LU</q>.  The term <term>triangular decomposition</term> might be more evocative, if not more verbose.</p>
     
-    <p>You will notice that the LU decomposition feels very much like reduced row-echelon form, and in some ways could be considered an improvement.  Triangular matrices are defined in Subsection <xref acro="OD.TM" type="subsection" /> and two basic facts are that the product of two triangular matrices <q>of the same type</q> (<ie /> both upper or both lower) is again of that type (Theorem <xref acro="PTMT" type="theorem" />) and the inverse of a nonsingular triangular matrix will be triangular of the same type (Theorem <xref acro="ITMT" type="theorem" />).</p>
+    <p>You will notice that the LU decomposition feels very much like reduced row-echelon form, and in some ways could be considered an improvement.  Triangular matrices are defined in Subsection <acroref acro="OD.TM" type="subsection" /> and two basic facts are that the product of two triangular matrices <q>of the same type</q> (<ie /> both upper or both lower) is again of that type (Theorem <acroref acro="PTMT" type="theorem" />) and the inverse of a nonsingular triangular matrix will be triangular of the same type (Theorem <acroref acro="ITMT" type="theorem" />).</p>
     
     <subsection xml:id="subsection-LU-nonsingular">
         <title>LU Decomposition, Nonsingular Case</title>
         
         <todo>Define principal minors</todo>
 
-        <theorem xml:id="theorem-triangular-decomposition">
-            <title>Triangular Decomposition</title>
+        <theorem xml:id="theorem-LU">
+            <title>LU (Triangular) Decomposition</title>
             <statement>
                 <p>Suppose <m>A</m> is a square matrix of size <m>n</m>.  Let <m>A_k</m> be the <m>k\times k</m> matrix formed from <m>A</m> by taking the first <m>k</m> rows and the first <m>k</m> columns.  Suppose that <m>A_k</m> is nonsingular for all <m>1\leq k\leq n</m>.  Then there is a lower triangular matrix <m>L</m> with all of its diagonal entries equal to 1 and an upper triangular matrix <m>U</m> such that <m>A=LU</m>.  Furthermore, this decomposition is unique.</p>
             </statement>
@@ -20,7 +20,7 @@
                 <p>We will row reduce <m>A</m> to a row-equivalent upper triangular matrix through a series of row operations, forming intermediate matrices <m>A^\prime_j</m>, <m>1\leq j\leq n</m>, that denote the state of the conversion after working on column <m>j</m>.  First, the lone entry of <m>A_1</m> is <m>\matrixentry{A}{11}</m> and this scalar must be nonzero if <m>A_1</m> is nonsingular (<acroref type="theorem" acro="SMZD" />).  We can use row operations <acroref type="definition" acro="RO" /> of the form <m>\rowopadd{\alpha}{1}{k}</m>, <m>2\leq k\leq n</m>, where <m>\alpha=-\matrixentry{A}{1k}/\matrixentry{A}{11}</m> to place zeros in the first column below the diagonal.  The first two rows and columns of <m>A^\prime_1</m> are a <m>2\times 2</m> upper triangular matrix whose determinant is equal to the determinant of <m>A_2</m>, since the matrices are row-equivalent through a sequence of row operations strictly of the third type (<acroref type="theorem" acro="DRCMA" />).  As such the diagonal entries of this <m>2\times 2</m> submatrix of <m>A^\prime_1</m> are nonzero.  We can employ this nonzero diagonal element with row operations of the form <m>\rowopadd{\alpha}{2}{k}</m>, <m>3\leq k\leq n</m> to place zeros below the diagonal in the second column.  We can continue this process, column by column.  The key observations are that our hypothesis on the nonsingularity of the <m>A_k</m> will guarantee a nonzero diagonal entry for each column when we need it, that the row operations employed are always of the third type using a multiple of a row to transform another row <em>with a greater row index</em>, and that the final result will be a nonsingular upper triangular matrix.  This is the desired matrix <m>U</m>.</p>
             
             
-                <p>Each row operation described in the previous paragraph can be accomplished with matrix multiplication by the appropriate elementary matrix (<acroref type="theorem" acro="EMDRO" />).  Since every row operation employed is adding a multiple of a row to a subsequent row these elementary matrices are of the form <m>\elemadd{\alpha}{j}{k}</m> with <m>j\lt k</m>.  By <acroref type="definition" acro="ELEM" />, these matrices are lower triangular with every diagonal entry equal to 1.  We know that the product of two such matrices will again be lower triangular (<acroref type="theorem" acro="PTMT" />), but also, as you can also easily check using a proof with a style similar to one above, that the product maintains all 1's on the diagonal.  Let <m>E_1,\,E_2,\,E_3,\,\dots,\,E_m</m> denote the elementary matrices for this sequence of row operations.  Then
+                <p>Each row operation described in the previous paragraph can be accomplished with matrix multiplication by the appropriate elementary matrix (<acroref type="theorem" acro="EMDRO" />).  Since every row operation employed is adding a multiple of a row to a subsequent row these elementary matrices are of the form <m>\elemadd{\alpha}{j}{k}</m> with <m>j&lt;k</m>.  By <acroref type="definition" acro="ELEM" />, these matrices are lower triangular with every diagonal entry equal to 1.  We know that the product of two such matrices will again be lower triangular (<acroref type="theorem" acro="PTMT" />), but also, as you can also easily check using a proof with a style similar to one above, that the product maintains all 1's on the diagonal.  Let <m>E_1,\,E_2,\,E_3,\,\dots,\,E_m</m> denote the elementary matrices for this sequence of row operations.  Then
                 <me>U=E_mE_{m-1}\dots E_3E_2E_1A=L^{\prime}A</me>
                 where <m>L^\prime</m> is the product of the elementary matrices, and we know <m>L^\prime</m> is lower triangular with all 1's on the diagonal.  Our desired matrix <m>L</m> is then <m>L=\inverse{\left(L^\prime\right)}</m>.  By <acroref type="theorem" acro="ITMT" />, <m>L</m> is lower triangular with all 1's on the diagonal and <m>A=LU</m>, as desired.</p>
         
@@ -139,7 +139,7 @@
 
         <p>An application of <acroref type="theorem" acro="SLEMM" /> demonstrates that <m>\vect{x}</m> is a solution to <m>\linearsystem{A}{\vect{b}}</m>.</p>
 
-        <example acro="TDSSE" index="triangular decomposition!solving systems of equations" xml:id="example-abc">
+        <example xml:id="example-LU-system-solve">
             <title>Triangular decomposition solves a system of equations</title>
 
             <p>Here we illustrate the previous discussion, recycling the decomposition found previously in <acroref type="example" acro="TD4" />.  Consider the linear system <m>\linearsystem{A}{\vect{b}}</m> with
@@ -196,7 +196,7 @@
 
     </subsection>
         
-    <subsection acro="CTD" xml:id="subsect-">
+    <subsection acro="CTD" xml:id="subsection-computing-LU">
         <title>Computing Triangular Decompositions</title>
     
         <p>It would be a simple matter to adjust the algorithm for converting a matrix to reduced row-echelon form and obtain an algorithm to compute the triangular decomposition of the matrix, along the lines of <acroref type="example" acro="TD4" /> and the discussion preceding this example.  However, it is possible to obtain relatively simple formulas for the entries of the decomposition, and if computed in the proper order, an implementation will be straightforward.  We will state the result as a theorem and then give an example of its use.</p>
