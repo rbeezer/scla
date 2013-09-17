@@ -8,14 +8,133 @@
             <email>beezer@pugetsound.edu</email>
         </author>
         <date>DRAFT September 10, 2013 DRAFT</date>
-        <!-- A demo macro, not really so useful, but good test            -->
-        <!-- Latex style, once only, works for MathJax and pdflatex       -->
+        
+<!-- These subsequent macro definitions allow for a consistent look for   -->
+<!-- mathematical structures.  It is relatively safe to play around with  -->
+<!--  variants if you desire other notation or looks.                     -->
+<!-- Edits here are effective for both HTML (MathJax) and LaTeX variants. -->
+
         <macros>
+% These macros are automatically generated from the "macros"
+% element.  Make permanent edits there.
+            
 % Inverse of a matrix
-%
-%  Usage:  \inverse{A}
-%
+% Usage:  \inverse{A}
 \newcommand{\inverse}[1]{{#1^{-1}}}
-        </macros>
+
+%  Zero vector, standardized
+%  Usage: \zerovector
+\newcommand{\zerovector}{{\vect{0}}}
+
+
+%%%%%%%%%%%%%%%%%%%%%
+%
+%     Systems of Equations
+%
+%%%%%%%%%%%%%%%%%%%%%
+%
+%  In-line form of an augmented matrix for a system of equations
+%  Usage: \augmented{coefficient-matrix}{constant-vector}
+\newcommand{\augmented}[2]{{\left\lbrack\left.#1\,\right\rvert\,#2\right\rbrack}}
+%
+%  Notation for a linear system before introducing matrix multiplication
+%  Usage: \linearsystem{coefficient-matrix}{constant-vector}
+\newcommand{\linearsystem}[2]{{{\mathcal L}{\mathcal S}\!\left(#1,\,#2\right)}}
+%
+%  Notation for a homogenous system before introducing matrix multiplication
+%  Usage: \homosystem{coefficient-matrix}
+\newcommand{\homosystem}[1]{{\linearsystem{#1}{\zerovector}}}
+%
+%%%%%%%%%%%%%%%%%%%%%
+%
+%     Row Operations, Echelon Form
+%
+%%%%%%%%%%%%%%%%%%%%%
+%
+% Row operations on matrices
+%
+% Three commands to shorten up descriptions of gaussian elimination
+%
+% Usage: \rowopswap{row-i}{row-j}
+% Usage: \rowopmult{scalar}{row-i}
+% Usage: \rowopadd{scalar}{row-multiplied}{row-added-to}
+\newcommand{\rowopswap}[2]{{R_{#1}\leftrightarrow R_{#2}}}
+\newcommand{\rowopmult}[2]{{#1R_{#2}}}
+\newcommand{\rowopadd}[3]{{#1R_{#2}+R_{#3}}}
+%
+% Mark leading 1's in echelon form with fbox
+% Usage: \leading{a-1-usually}
+\newcommand{\leading}[1]{{\fbox{#1}}}
+%
+%  Row-reduce arrow
+%  Usage:  \rref inbetween a matrix and its reduced row-echelon form
+\newcommand{\rref}{{\xrightarrow{\text{RREF}}}}
+%
+%  Elementary Matrices
+%  Usage: \elemswap{subscript}{subscript}
+%  Usage: \elemmult{scalar}{subscript}
+%  Usage: \elemadd{scalar}{subscript-mult}{subscript-target}
+%
+\newcommand{\elemswap}[2]{{E_{#1,#2}}}
+\newcommand{\elemmult}[2]{{E_{#2}\left(#1\right)}}
+\newcommand{\elemadd}[3]{{E_{#2,#3}\left(#1\right)}}
+%
+%%%%%%%%%%%%%%%%%%%%%
+%
+%     2-D Constructions (Lists, Vectors, Matrices)
+%
+%%%%%%%%%%%%%%%%%%%%%
+%
+%  A list of scalars of generic length
+%  Usage:  \scalarlist{scalar letter}{terminal subscript}
+\newcommand{\scalarlist}[2]
+{{{#1}_{1},\,{#1}_{2},\,{#1}_{3},\,\ldots,\,{#1}_{#2}}}
+%
+%  Vector styling, bold (or use wiggles, arrows, whatever)
+%  Subscripts go outside this construction
+%  Usage: \vect{a symbol to use as a vector}
+%  Have to already be in math mode
+%
+\newcommand{\vect}[1]{\mathbf{#1}}
+%
+%  A column vector
+%  Usage: \colvector{list-delimited-by-\\}
+%
+\newcommand{\colvector}[1]{{\begin{bmatrix}#1\end{bmatrix}}}
+%
+%  A generic vector with components
+%  Usage: \vectorcomponents{component-letter}{final-subscript}
+\newcommand{\vectorcomponents}[2]
+{{\colvector{#1_{1}\\#1_{2}\\#1_{3}\\\vdots\\#1_{#2}}}}
+%
+%  A list of vectors of generic length
+%  Usage:  \vectorlist{vector letter}{terminal subscript}
+\newcommand{\vectorlist}[2]
+{{\vect{#1}_{1},\,\vect{#1}_{2},\,\vect{#1}_{3},\,\ldots,\,\vect{#1}_{#2}}}
+%
+%  Vector entries, entry i of vector v
+%  (vector-expession still needs \vect, etc.)
+%  Usage:  \vectorentry{vector-expression}{single-subscript}
+\newcommand{\vectorentry}[2]{{\left\lbrack#1\right\rbrack_{#2}}}
+%
+%  Matrix entries, entry i,j of matrix A
+%  Usage:  \matrixentry{matrix-expression}{paired-subscripts}
+%
+\newcommand{\matrixentry}[2]{{\left\lbrack#1\right\rbrack_{#2}}}
+
+%  A generic linear combination
+%  Usage:  \lincombo{scalar letter}{vector letter}{terminal subscript}
+\newcommand{\lincombo}[3]
+{{#1_{1}\vect{#2}_{1}+#1_{2}\vect{#2}_{2}+#1_{3}\vect{#2}_{3}+\cdots +#1_{#3}\vect{#2}_{#3}}}
+%
+%  Matrix, column by column, as vectors
+%  Usage:  \matrixcolumns{matrix letter}{terminal subscript}
+\newcommand{\matrixcolumns}[2]
+{{\left\lbrack\vect{#1}_{1}|\vect{#1}_{2}|\vect{#1}_{3}|\ldots|\vect{#1}_{#2}\right\rbrack}}
+
+
+
+
+    </macros>
 
     </docinfo>
