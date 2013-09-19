@@ -48,18 +48,6 @@
 % Usage:  \Z
 \newcommand{\Z}{{{\mathbb Z}}}
 
-% Complex numbers, set of scalars
-% (Will obsolete \complex{\null} construction eventually)
-%
-% Usage:  \complexes
-\newcommand{\complexes}{{{\mathbb C}}}
-
-% n-space over complex field
-%
-% Usage: \complex{integer-dimension, or \null}
-%
-\newcommand{\complex}[1]{{{\mathbb C}^{#1}}}
-
 % n-space over real field
 %
 % Usage: \real{integer-dimension, or \null}
@@ -255,31 +243,6 @@
 %     Matrices
 %
 %%%%%%%%%%%%%%%%%%%%%
-
-% Transpose of a matrix
-%
-%  Usage:  \transpose{A}
-%  Presumes math mode
-%
-\newcommand{\transpose}[1]{{#1^{t}}}
-
-% Adjoint of a matrix
-%
-%  This macro is a convenience to call \transpose and \conjugate properly
-%  It shouldn't need to be modified (or mathematical meanings will change)
-%
-%  Usage:  \adj{A}
-%  Presumes math mode
-%
-\newcommand{\adj}[1]{{\transpose{\left(\conjugate{#1}\right)}}}
-
-%  This macro controls the symbol used for the adjoint
-%  It can be edited to taste
-%
-%  Usage:  \adjoint{A}
-%  Presumes math mode
-%
-\newcommand{\adjoint}[1]{{#1^{\ast}}}
 
 
 % Similarity

@@ -1,0 +1,25 @@
+<section xml:id="section-QR" filebase="QR">
+    <title>QR (Gram-Schmidt) Decomposition</title>
+    
+    <p>The <term>QR decomposition</term> begins with any matrix and describes it as a product of a unitary matrix (<m>Q</m>) and a matrix in row-echelon form (<m>R</m>).  Hence the customary shorthand name, <q>QR</q>.  If the LU decompositiR decomposition is reminiscent of the <term>Gram-Schmidt</term> process (see Subsection <acroref type="subsection" acro="0.GSP" />).</p>
+
+    <p>The Gram-Schmidt procedure is based on Theorem <acroref type="theorem" acro="GSP" />.  We begin with a set of linearly independent vectors and progressively convert them into a new set of nonzero vectors that form an orthogonal set, which can be easily converted to an orthonormal set.  An orthonormal set is a wondrous thing, so the other portion of the conclusion is often overlooked.  The new set of vectors spans the same subspace as the space spanned by the original set.  This is half the reason that the Gram-Schmidt procedure is so useful.</p>
+   
+    <p>As a preview of our main theorem, let's convert this idea into the language of matrices for a special case.  Let <m>A</m> be a square matrix of size <m>n</m>.  Take the columns of <m>A</m> as a set of vectors, which will form a basis of <m>\complex{n}</m>.  Apply the Gram-Schmidt procedure to this set of <m>n</m> vectors. The manufacture of the <m>i</m>-th vector of this new set is the <m>i</m>-th vector of the original set, added to a linear combination of vectors <m>1</m> through <m>i-1</m> of the new set.  If we recursively unpack these linear combinations, we can express each new vector as a linear combination of vectors <m>1</m> through <m>i</m> of the original set, where the <m>i</m>-th vector has a coefficient of <m>1</m>.  Record the scalars of this linear combination in a column vector, whose last nonzero entry is <m>1</m>.  Make these column vectors the columns of a square matrix, <m>R^\prime</m>, of size <m>n</m>.  Define <m>Q=AR^\prime</m>.</p>
+   
+    <p>By the Gram-Schmidt procedure, the columns of <m>Q</m> are an orthogonal set of nonzero vetors, and so <m>\adjoint{Q}Q</m> will be a diagonal matrix with nonzero entries.  The matrix <m>R^\prime</m> is square, upper-triangular, and each diagonal entry is <m>1</m>.  Hence <m>R^\prime</m> is invertible, so let <m>R</m> denote the inverse, which is again upper-triangular with diagonal entries equal to <m>1</m>.  We then obtain <m>A=QR</m>.  It is a simple matter to scale the columns of <m>Q</m> to form an orthonormal set, and the requisite scaling of the columns of <m>R^\prime</m> will not impede the existence of <m>R</m>, though we can only claim diagonal entries are nonzero. In this way, we can claim that <m>Q</m> is a unitary matrix.</p>
+
+    <p>A QR decomposition can be created for any matrix <mdash /> it need not be square and it need not have full rank.  The matrix <m>Q</m> is unitary, and <m>R</m> has zeros below the diagonal.  Thus, each column of <m>A</m> can be expressed as a linear combination of the columns of <m>Q</m>, which form an orthonormal basis.  So the column space of <m>A</m> is spanned by an orthonormal subset of the columns of <m>Q</m>, giving us the essence of the Gram-Schmidt procedure without the hypothesis that our original set is linearly independent.  For the statement of Theorem <acroref type="theorem" acro="GSP" />, it was a convenience to hypothesize that <m>S</m> is linearly independent.  Can you examine the proof and see what changes are required if we lift this hypothesis?</p>
+   
+    <theorem xml:id="theorem-QR">
+        <statement><p>In-progress</p>
+        </statement>
+    </theorem>
+    
+    
+    
+    
+    <todo>Full rank, positive diagonal entreies, gives uniqueness</todo>
+    
+    
+</section>

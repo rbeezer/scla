@@ -29,6 +29,20 @@
 
 %%%%%%%%%%%%%%%%%%%%%
 %
+%     Conveniences
+%
+%%%%%%%%%%%%%%%%%%%%%
+%  Complex numbers, as set of scalars
+%  Usage:  \complexes
+\newcommand{\complexes}{{{\mathbb C}}}
+%
+%  n-space over complex field
+%  Usage: \complex{integer-dimension}
+\newcommand{\complex}[1]{{{\mathbb C}^{#1}}}
+
+
+%%%%%%%%%%%%%%%%%%%%%
+%
 %     Systems of Equations
 %
 %%%%%%%%%%%%%%%%%%%%%
@@ -131,6 +145,27 @@
 %  Usage:  \matrixcolumns{matrix letter}{terminal subscript}
 \newcommand{\matrixcolumns}[2]
 {{\left\lbrack\vect{#1}_{1}|\vect{#1}_{2}|\vect{#1}_{3}|\ldots|\vect{#1}_{#2}\right\rbrack}}
+
+%%%%%%%%%%%%%%%%%%%%%
+%
+%     Special Matrices
+%
+%%%%%%%%%%%%%%%%%%%%%
+
+%  Transpose of a matrix
+%  Usage:  \transpose{A}
+\newcommand{\transpose}[1]{{#1^{t}}}
+%
+%  Adjoint of a matrix (twice)
+%  This macro is a convenience to call \transpose and \conjugate properly
+%  It shouldn't need to be modified (or mathematical meanings will change)
+%  Usage:  \adj{A}
+\newcommand{\adj}[1]{{\transpose{\left(\conjugate{#1}\right)}}}
+%
+%  This macro controls the symbol used for the adjoint
+%  It can be edited to taste
+%  Usage:  \adjoint{A}
+\newcommand{\adjoint}[1]{{#1^{\ast}}}
 
 
 
