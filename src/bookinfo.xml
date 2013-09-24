@@ -1,5 +1,4 @@
     <docinfo>
-        <title>A Second Course in Linear Algebra</title>
         <!-- Multiple authors will go into an eventual "authorgroup" -->
         <author>
             <personname>Robert A. Beezer</personname>
@@ -7,7 +6,12 @@
             <institution>University of Puget Sound</institution>
             <email>beezer@pugetsound.edu</email>
         </author>
-        <date>DRAFT September 10, 2013 DRAFT</date>
+        <copyright>
+            <year>2004-13</year>
+            <holder>Robert A. Beezer</holder>
+            <shortlicense>GFDL License.</shortlicense>
+        </copyright>
+        <date>DRAFT <today /> DRAFT</date>
         
 <!-- These subsequent macro definitions allow for a consistent look for   -->
 <!-- mathematical structures.  It is relatively safe to play around with  -->

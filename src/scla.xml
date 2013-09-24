@@ -2,8 +2,15 @@
 
 <!-- USE XINCLUDE SWITCH ON XSLTPROC -->
 
-<book xmlns:xi="http://www.w3.org/2001/XInclude">
+<mathbook xmlns:xi="http://www.w3.org/2001/XInclude">
+
     <xi:include href="./bookinfo.xml" />
-    <xi:include href="./fundamentals.xml" />
-    <xi:include href="./decompositions.xml" />
-</book>
+    
+    <book>
+        <title>A Second Course in Linear Algebra</title>
+
+        <xi:include href="./fundamentals.xml" />
+        <xi:include href="./decompositions.xml" />
+    </book>
+
+</mathbook>
