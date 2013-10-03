@@ -6,7 +6,7 @@
 
     <xi:include href="./bookinfo.xml" />
     
-    <book>
+    <book filebase="scla">
         <title>A Second Course in Linear Algebra</title>
 
         <xi:include href="./fundamentals.xml" />

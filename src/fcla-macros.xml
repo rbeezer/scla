@@ -61,39 +61,6 @@
 %
 \newcommand{\modulus}[1]{{\left\lvert#1\right\rvert}}
 
-% Complex number conjugation
-%
-%  Usage: \conjugate{a+bi}
-%  Presumes math mode
-%
-\newcommand{\conjugate}[1]{{\overline{#1}}}
-
-
-% Standardized look for the zero vector
-%
-% Usage: \zerovector
-% Presumes math mode
-%
-\newcommand{\zerovector}{{\vect{0}}}
-
-% Zero matrix
-%
-%  Usage: \zeromatrix
-%  For use in math mode, use a subscript when size is important
-%
-\newcommand{\zeromatrix}{{{\cal O}}}
-
-% An inner product without matrix notation
-%
-% Usage: \innerproduct{a-vector}{a-vector}
-% Presumes math mode
-\newcommand{\innerproduct}[2]{{\left\langle#1,\,#2\right\rangle}}
-
-% Norm of a vector
-%
-% Usage: \norm{a-vector}
-% Presumes math mode
-\newcommand{\norm}[1]{{\left\lVert#1\right\rVert}}
 
 % Determinant of a matrix (functional notation)
 %
@@ -107,117 +74,11 @@
 %  Presumes math mode
 \newcommand{\detbars}[1]{{\left\lvert#1\right\rvert}}
 
-% Dimension
-%
-%  Usage: \dimension{vector-space-letter}
-%  Presumes math mode
-%
-\newcommand{\dimension}[1]{{\dim\left(#1\right)}}
-
-% Nullity
-%
-%  Usage: \nullity{matrix-or-lintrans-letter}
-%  Presumes math mode
-%
-\newcommand{\nullity}[1]{{n\left(#1\right)}}
-
-% Rank
-%
-%  Usage: \rank{matrix-or-lintrans-letter}
-%  Presumes math mode
-%
-\newcommand{\rank}[1]{{r\left(#1\right)}}
 
 
-%%%%%%%%%%%%%%%%%%%%%
-%
-%     Sets
-%
-%%%%%%%%%%%%%%%%%%%%%
 
-%  A convenience for simple sets
-%
-%  Usage:  \set{list of element}
-%  Presumes math mode
-%
-\newcommand{\set}[1]{{\left\{#1\right\}}}
-
-%  Sets with vertical bar, "such that", sized for objects, not condition
-%
-%  Usage:  \setparts{objects}{condition}
-%  Presumes math mode
-%
-%%\newcommand{\setparts}[2]{{\left\{ #1\mid#2\right\}}}
-\newcommand{\setparts}[2]{{\left\{\left. #1\right\rvert#2\right\}}}
-
-%  Set Cardinality
-%
-%  Usage:  \card{a-set-letter}
-%  Presumes math mode
-%
-\newcommand{\card}[1]{{\left\lvert#1\right\rvert}}
-
-%  Set Union
-%  Use \cup
-
-%  Set Intersection
-%  Use \cap
-
-%  Set Complement
-%
-%  Usage:  \setcomplement{a-set-letter}
-%  Presumes math mode
-%
-\newcommand{\setcomplement}[1]{{\overline{#1}}}
-
-
-%%%%%%%%%%%%%%%%%%%%%
-%
-%     Subspace Constructions
-%
-%%%%%%%%%%%%%%%%%%%%%
-
-% Span of a set of vectors
-%
-% \span and \sp are used by TeX for other things
-%
-% Usage: \spn{set-of-vectors}
-% Presumes math mode, uses ams-math \text command
-%
-% Obsoleted 2006/01/05:  Sp notation
-\newcommand{\spn}[1]{{\left\langle#1\right\rangle}}
-
-% Null space of a matrix
-%
-%  A convenience for null spaces
-%
-%  Usage:  \nsp{A}
-%  Presumes math mode
-%
-\newcommand{\nsp}[1]{{{\mathcal N}\!\left(#1\right)}}
-
-% Column Space of a matrix
-%
-%  Usage:  \csp{A}
-%  Presumes math mode
-%
-\newcommand{\csp}[1]{{\mathcal{C}\!\left(#1\right)}}
-
-% Row Space of a matrix
-%
-%  Usage:  \rsp{A}
-%  Presumes math mode
-%
-\newcommand{\rsp}[1]{{\mathcal{R}\!\left(#1\right)}}
-
-% Left Null space of a matrix
-%
-%  A convenience for null spaces
-%
-%  Usage:  \lns{A}
-%  Presumes math mode
-%
-\newcommand{\lns}[1]{{\mathcal{L}\!\left(#1\right)}}
+% 2013/10/3 These were "subspace constructions"
+% Reconsider with linear transformation macros
 
 % Range of a linear transformation
 %
@@ -261,107 +122,6 @@
 \newcommand{\submatrix}[3]{{#1\left(#2|#3\right)}}
 
 
-%%%%%%%%%%%%%%%%%%%%%
-%
-%     Eigenvalues & Eigenspaces
-%
-%%%%%%%%%%%%%%%%%%%%%
-
-% Characteristic polynomial
-%
-%  Usage: \charpoly{matrix-letter}{variable-letter}
-%  Presumes math mode
-%
-\newcommand{\charpoly}[2]{{p_{#1}\left(#2\right)}}
-
-% Eigenspace
-%
-%  Usage: \eigenspace{matrix-letter}{eigenvalue-letter}
-%  Presumes math mode
-%
-\newcommand{\eigenspace}[2]{{{\mathcal E}_{#1}\left(#2\right)}}
-
-% Generalized Eigenspace
-%
-%  Usage: \geneigenspace{lin-trans-letter}{eigenvalue-letter}
-%  Presumes math mode
-%
-\newcommand{\geneigenspace}[2]{{{\mathcal G}_{#1}\left(#2\right)}}
-
-% Algebraic multiplicty
-%
-%  Usage: \algmult{matrix-letter}{eigenvalue-letter}
-%  Presumes math mode
-%
-\newcommand{\algmult}[2]{{\alpha_{#1}\left(#2\right)}}
-
-% Geometric multiplicty
-%
-%  Usage: \geomult{matrix-letter}{eigenvalue-letter}
-%  Presumes math mode
-%
-\newcommand{\geomult}[2]{{\gamma_{#1}\left(#2\right)}}
-
-% Index (of eigenvalue)
-%
-%  Usage: \indx{matrix-letter}{eigenvalue-letter}
-%  Presumes math mode
-%
-\newcommand{\indx}[2]{{\iota_{#1}\left(#2\right)}}
-
-
-% Eigensystem
-%
-%  Usage: \eigensystem{matrixletter}{eigenvalue}{list of basis vectors}
-%  Presumes math mode and in align* environment
-%
-\newcommand{\eigensystem}[3]{
-{\lambda&=#2&\eigenspace{#1}{#2}&=\spn{\set{#3}}}
-}
-
-%%%%%%%%%%%%%%%%%%%%%
-%
-%     Linear Transformations
-%
-%%%%%%%%%%%%%%%%%%%%%
-
-% Linear transformation definition
-%
-%  Usage: \ltdefn{name-letter}{domain}{range}
-%  Presumes math mode
-%
-% Through v 2.12:
-% \newcommand{\ltdefn}[3]{{#1\colon #2\mapsto#3}}
-% Now reserved for describing the action on an individual element
-\newcommand{\ltdefn}[3]{{#1\colon #2\rightarrow#3}}
-
-% Linear transformation output
-%
-%  Usage: \lt{name-letter}{input}
-%  Presumes math mode
-%
-\newcommand{\lt}[2]{{#1\left(#2\right)}}
-
-% Linear transformation inverse
-%
-%  Usage: \ltinverse{name-letter}
-%  Presumes math mode
-%
-\newcommand{\ltinverse}[1]{{#1^{-1}}}
-
-% Linear transformation restriction
-%
-%  Usage: \restrict{name-letter}{subspace-letter}
-%  Presumes math mode
-%
-\newcommand{\restrict}[2]{{{#1}|_{#2}}}
-
-% Linear transformation preimage
-%
-%  Usage: \preimage{name-letter}{codomain-element}
-%  Presumes math mode
-%
-\newcommand{\preimage}[2]{{#1^{-1}\left(#2\right)}}
 
 %%%%%%%%%%%%%%%%%%%%%
 %
@@ -519,5 +279,18 @@
 \newlength{\oneindent}
 \setlength{\oneindent}{1.5em}
 \newcommand{\codeindent}[1]{\noindent\hspace*{#1\oneindent}}]]></latex>
+
+
+%  2013/10/03 Including ampersands is problematic here, 
+%  think about fixes later
+% Eigensystem
+%  Usage: \eigensystem{matrixletter}{eigenvalue}{list of basis vectors}
+    %  Presumes math mode and in align* environment (or md, me
+%
+%% \newcommand{\eigensystem}[3]{
+{\lambda&amp;=#2&amp;\eigenspace{#1}{#2}&amp;=\spn{\set{#3}}}
+}
+
+
 
 </macros>

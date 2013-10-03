@@ -9,5 +9,6 @@
     
     <xi:include href="./LU.xml" />
     <xi:include href="./QR.xml" />
+    <xi:include href="./SVD.xml" />
     
 </chapter>
