@@ -240,7 +240,7 @@
                 <mrow>
                 <![CDATA[&=\matrixentry{A}{ij}-\sum_{k=1}^{i-1}\matrixentry{L}{ik}\matrixentry{U}{kj}]]></mrow>
             </md>
-            <![CDATA[And for <m>1\leq j<i\leq n</m>,]]>
+            And for <m>1\leq j\lt i\leq n</m>,
             <md>
                 <mrow>\matrixentry{L}{ij}
                 <![CDATA[&=]]>
