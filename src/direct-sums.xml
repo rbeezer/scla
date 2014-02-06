@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<section acro="DS">
+<title>Direct Sums</title>
+
+<subsection acro="DS">
+<title>Direct Sums</title>
+
+<p>Some of the more advanced ideas in linear algebra are closely related to decomposing (<acroref type="technique" acro="DC" />) vector spaces into direct sums of subspaces.  A direct sum is a short-hand way to describe the relationship between a vector space and two, or more, of its subspaces.  As we will use it, it is not a way to construct new vector spaces from others.</p>
+
+<definition acro="DS" index="direct sum">
+<title>Direct Sum</title>
+    <statement>
+        <p>Suppose that <m>V</m> is a vector space with two subspaces <m>U</m> and <m>W</m> such that
+        for every <m>\vect{v}\in V</m>,
+        <ol><li> There exists vectors <m>\vect{u}\in U</m>, <m>\vect{w}\in W</m> such that <m>\vect{v}=\vect{u}+\vect{w}</m></li>
+        <li>If <m>\vect{v}=\vect{u}_1+\vect{w}_1</m> and <m>\vect{v}=\vect{u}_2+\vect{w}_2</m> where <m>\vect{u}_1,\,\vect{u}_2\in U</m>, <m>\vect{w}_1,\,\vect{w}_2\in W</m> then <m>\vect{u}_1=\vect{u}_2</m> and <m>\vect{w}_1=\vect{w}_2</m>.</li></ol>
+        </p>
+
+        <p>Then <m>V</m> is the <define>direct sum</define> of <m>U</m> and <m>W</m> and we write <m>V=U\ds W</m>.</p>
+    </statement>
+    <notation acro="DS" index="direct sum">
+        <title>Direct Sum</title>
+        <usage><m>V=U\ds W</m></usage>
+    </notation>
+</definition>
+
+<p>Informally, when we say <m>V</m> is the direct sum of the subspaces <m>U</m> and <m>W</m>, we are saying that each vector of <m>V</m> can always be expressed as the sum of a vector from <m>U</m> and a vector from <m>W</m>, and this expression can only be accomplished in one way (<ie /> uniquely).  This statement should begin to feel something like our definitions of nonsingular matrices (<acroref type="definition" acro="NM" />) and linear independence (<acroref type="definition" acro="LI" />).   It should not be hard to imagine the natural extension of this definition to the case of more than two subspaces.  Could you provide a careful definition of  <m>V=U_1\ds U_2\ds U_3\ds \dots\ds U_m</m> (<acroref type="exercise" acro="PD.M50" />)?</p>
+
+<example acro="SDS" index="direct sum">
+    <title>Simple direct sum</title>
+
+    <p>In <m>\complex{3}</m>, define
+    <md>
+        <mrow>\vect{v}_1&amp;=\colvector{3\\2\\5}
+    &amp;
+    \vect{v}_2&amp;=\colvector{-1\\2\\1}
+    &amp;
+        \vect{v}_3&amp;=\colvector{2\\1\\-2}</mrow>
+    </md>
+    Then <m>\complex{3}=\spn{\set{\vect{v}_1,\,\vect{v}_2}}\ds\spn{\set{\vect{v}_3}}</m>.  This statement derives from the fact that <m>B=\set{\vect{v}_1,\,\vect{v}_2,\,\vect{v}_3}</m> is basis for <m>\complex{3}</m>.  The spanning property of <m>B</m> yields the decomposition of any vector into a sum of vectors from the two subspaces, and the linear independence of <m>B</m> yields the uniqueness of the decomposition.  We will illustrate these claims with a numerical example.</p>
+
+    <p>Choose <m>\vect{v}=\colvector{10\\1\\6}</m>.  Then
+        <me>\vect{v}=2\vect{v}_1+(-2)\vect{v}_2+1\vect{v}_3 
+            =\left(2\vect{v}_1+(-2)\vect{v}_2\right)+\left(1\vect{v}_3\right)</me>
+    where we have added parentheses for emphasis.  Obviously <m>1\vect{v_3}\in\spn{\set{\vect{v}_3}}</m>, while <m>2\vect{v}_1+(-2)\vect{v}_2\in\spn{\set{\vect{v}_1,\,\vect{v}_2}}</m>.  <acroref type="theorem" acro="VRRB" /> provides the uniqueness of the scalars in these linear combinations.</p>
+</example>
+
+<p><acroref type="example" acro="SDS" /> is easy to generalize into a theorem.</p>
+
+<theorem acro="DSFB" index="direct sum!from a basis">
+    <title>Direct Sum From a Basis</title>
+    <statement>
+        <p>Suppose that <m>V</m> is a vector space with a basis
+        <m>B=\set{\vect{v}_1,\,\vect{v}_2,\,\vect{v}_3,\,\dots,\,\vect{v}_n}</m> and <m>m\leq n</m>.  Define
+            <md><mrow>U&amp;=\spn{\set{\vect{v}_1,\,\vect{v}_2,\,\vect{v}_3,\,\dots,\,\vect{v}_m}}
+        &amp;
+            W&amp;=\spn{\set{\vect{v}_{m+1},\,\vect{v}_{m+2},\,\vect{v}_{m+3},\,\dots,\,\vect{v}_n}}</mrow></md></p>
+
+        <p>Then <m>V=U\ds W</m>.</p>
+    </statement>
+
+    <proof>
+        <p>Choose any vector <m>\vect{v}\in V</m>.  Then by <acroref type="theorem" acro="VRRB" /> there are unique scalars, <m>\scalarlist{a}{n}</m> such that<md>
+        <mrow>\vect{v}&amp;=\lincombo{a}{v}{n}</mrow>
+        <mrow>&amp;=\left(a_1\vect{v}_1+a_2\vect{v}_2+a_3\vect{v}_3+\dots+a_m\vect{v}_m\right)+</mrow>
+        <mrow>&amp;=\left(a_{m+1}\vect{v}_{m+1}+a_{m+2}\vect{v}_{m+2}+a_{m+3}\vect{v}_{m+3}+\dots+a_n\vect{v}_n\right)</mrow>
+        <mrow>&amp;=\vect{u}+\vect{w}</mrow></md>
+        where we have implicitly defined <m>\vect{u}</m> and <m>\vect{w}</m> in the last line.  It should be clear that <m>\vect{u}\in{U}</m>, and similarly, <m>\vect{w}\in{W}</m> (and not simply by the choice of their names).</p>
+
+        <p>Suppose we had another decomposition of <m>\vect{v}</m>, say <m>\vect{v}=\vect{u}^\ast+\vect{w}^\ast</m>.  Then we could write <m>\vect{u}^\ast</m> as a linear combination of <m>\vect{v}_1</m> through <m>\vect{v}_m</m>, say using scalars <m>\scalarlist{b}{m}</m>.  And we could write <m>\vect{w}^\ast</m> as a linear combination of <m>\vect{v}_{m+1}</m> through <m>\vect{v}_n</m>, say using scalars <m>\scalarlist{c}{n-m}</m>.  These two collections of scalars would then together give a linear combination of <m>\vect{v}_1</m> through <m>\vect{v}_n</m>  that  equals <m>\vect{v}</m>.  By the uniqueness of <m>\scalarlist{a}{n}</m>, <m>a_i=b_i</m> for <m>1\leq i\leq m</m> and <m>a_{m+i}=c_{i}</m> for <m>1\leq i\leq n-m</m>.  From the equality of these scalars we conclude that <m>\vect{u}=\vect{u}^\ast</m> and <m>\vect{w}=\vect{w}^\ast</m>.  So with both conditions of <acroref type="definition" acro="DS" /> fulfilled we see that <m>V=U\ds W</m>.</p>
+
+    </proof>
+</theorem>
+
+<p>Given one subspace of a vector space, we can always find another subspace that will pair with the first to form a direct sum.  The main idea of this theorem, and its proof, is the idea of extending a linearly independent subset into a basis with repeated applications of <acroref type="theorem" acro="ELIS" />.</p>
+
+<theorem acro="DSFOS" index="direct sum!from one subspace">
+    <title>Direct Sum From One Subspace</title>
+    <statement>
+    <p>Suppose that <m>U</m> is a subspace of the vector space <m>V</m>.  Then there exists a subspace <m>W</m> of <m>V</m> such that <m>V=U\ds W</m>.</p>
+    </statement>
+
+    <!--  David Braithwaite suggest firming up the "eventually" - cite finite dimension, principally -->
+    <proof>
+        <p>If <m>U=V</m>, then choose <m>W=\set{\zerovector}</m>.  Otherwise, choose a basis <m>B=\set{\vectorlist{v}{m}}</m> for <m>U</m>.  Then since <m>B</m> is a linearly independent set, <acroref type="theorem" acro="ELIS" /> tells us there is a vector <m>\vect{v}_{m+1}</m> in <m>V</m>, but not in <m>U</m>, such that <m>B\cup\set{\vect{v}_{m+1}}</m> is linearly independent.  Define the subspace <m>U_1=\spn{B\cup\set{\vect{v}_{m+1}}}</m>.</p>
+
+        <p>We can repeat this procedure, in the case were <m>U_1\neq V</m>, creating a new vector <m>\vect{v}_{m+2}</m> in <m>V</m>, but not in <m>U_1</m>, and a new subspace <m>U_2=\spn{B\cup\set{\vect{v}_{m+1},\,\vect{v}_{m+2}}}</m>.  If we continue repeating this procedure, eventually, <m>U_k=V</m> for some <m>k</m>, and we can no longer apply <acroref type="theorem" acro="ELIS" />.  No matter, in this case <m>B\cup\set{\vect{v}_{m+1},\,\vect{v}_{m+2},\,\dots,\,\vect{v}_{m+k}}</m> is a linearly independent set that spans <m>V</m>, <ie /> a basis for <m>V</m>.</p>
+
+        <p>Define <m>W=\spn{\set{\vect{v}_{m+1},\,\vect{v}_{m+2},\,\dots,\,\vect{v}_{m+k}}}</m>.  We now are exactly in position to apply <acroref type="theorem" acro="DSFB" /> and see that <m>V=U\ds W</m>.</p>
+    </proof>
+</theorem>
+
+<p>There are several different ways to define a direct sum.  Our next two theorems give equivalences (<acroref type="technique" acro="E" />) for direct sums, and therefore could have been employed as definitions.  The first should further cement the notion that a direct sum has some connection with linear independence.</p>
+
+<theorem acro="DSZV" index="direct sum!decomposing zero vector">
+    <title>Direct Sums and Zero Vectors</title>
+    <statement>
+        <p>Suppose <m>U</m> and <m>W</m> are subspaces of the vector space <m>V</m>.  Then <m>V=U\ds W</m> if and only if<ol>
+            <li>For every <m>\vect{v}\in V</m>, there exists vectors <m>\vect{u}\in U</m>, <m>\vect{w}\in W</m> such that <m>\vect{v}=\vect{u}+\vect{w}</m>.</li>
+            <li>Whenever <m>\zerovector=\vect{u}+\vect{w}</m> with <m>\vect{u}\in U</m>, <m>\vect{w}\in W</m> then <m>\vect{u}=\vect{w}=\zerovector</m>.</li>
+            </ol></p>
+    </statement>
+    <proof>
+        <p>The first condition is identical in the definition and the theorem, so we only need to establish the equivalence of the second conditions.</p>
+
+        <p><implyforward />
+        Assume that <m>V=U\ds W</m>, according to <acroref type="definition" acro="DS" />.   By <acroref type="property" acro="Z" />, <m>\zerovector\in V</m> and <m>\zerovector=\zerovector+\zerovector</m>.  If we also assume that <m>\zerovector=\vect{u}+\vect{w}</m>, then the uniqueness of the decomposition gives <m>\vect{u}=\zerovector</m> and <m>\vect{w}=\zerovector</m>.</p>
+
+        <p><implyreverse />
+        Suppose that <m>\vect{v}\in V</m>, <m>\vect{v}=\vect{u}_1+\vect{w}_1</m> and <m>\vect{v}=\vect{u}_2+\vect{w}_2</m> where <m>\vect{u}_1,\,\vect{u}_2\in U</m>, <m>\vect{w}_1,\,\vect{w}_2\in W</m>.  Then
+        <md>
+        <mrow>\zerovector&amp;=\vect{v}-\vect{v}&amp;&amp;\text{<acroref type="property" acro="AI" />}</mrow>
+        <mrow>&amp;=\left(\vect{u}_1+\vect{w}_1\right)-\left(\vect{u}_2+\vect{w}_2\right)</mrow>
+        <mrow>&amp;=\left(\vect{u}_1-\vect{u}_2\right)+\left(\vect{w}_1-\vect{w}_2\right)&amp;&amp;\text{<acroref type="property" acro="AA" />}</mrow></md></p>
+
+        <p>By <acroref type="property" acro="AC" />, <m>\vect{u}_1-\vect{u}_2\in U</m> and <m>\vect{w}_1-\vect{w}_2\in W</m>.  We can now apply our hypothesis, the second statement of the theorem, to conclude that<md>
+        <mrow>\vect{u}_1-\vect{u}_2&amp;=\zerovector &amp; \vect{w}_1-\vect{w}_2&amp;=\zerovector</mrow>
+        <mrow>\vect{u}_1&amp;=\vect{u}_2 &amp; \vect{w}_1&amp;=\vect{w}_2</mrow>
+        </md>which establishes the uniqueness needed for the second condition of the definition.</p>
+    </proof>
+</theorem>
+
+<p>Our second equivalence lends further credence to calling a direct sum a decomposition.  The two subspaces of a direct sum have no (nontrivial) elements in common.</p>
+
+<theorem acro="DSZI" index="direct sum!zero intersection">
+    <title>Direct Sums and Zero Intersection</title>
+    <statement>
+        <p>Suppose <m>U</m> and <m>W</m> are subspaces of the vector space <m>V</m>.  Then <m>V=U\ds W</m> if and only if<ol>
+            <li>For every <m>\vect{v}\in V</m>, there exists vectors <m>\vect{u}\in U</m>, <m>\vect{w}\in W</m> such that <m>\vect{v}=\vect{u}+\vect{w}</m>.</li>
+            <li> <m>U\cap W=\set{\zerovector}</m>.</li>
+        </ol></p>
+    </statement>
+    <proof>
+        <p>The first condition is identical in the definition and the theorem, so we only need to establish the equivalence of the second conditions.</p>
+
+        <p><implyforward />
+        Assume that <m>V=U\ds W</m>, according to <acroref type="definition" acro="DS" />.   By <acroref type="property" acro="Z" /> and <acroref type="definition" acro="SI" />, <m>\set{\zerovector}\subseteq U\cap W</m>.  To establish the opposite inclusion, suppose that <m>\vect{x}\in U\cap W</m>.  Then, since <m>\vect{x}</m> is an element of both <m>U</m> and <m>W</m>, we can write two decompositions of <m>\vect{x}</m> as a vector from <m>U</m> plus a vector from <m>W</m>,
+            <md><mrow>\vect{x}&amp;=\vect{x}+\zerovector &amp; \vect{x}&amp;=\zerovector+\vect{x}</mrow></md>
+        </p>
+
+        <p>By the uniqueness of the decomposition, we see (twice) that <m>\vect{x}=\zerovector</m> and <m>U\cap W\subseteq\set{\zerovector}</m>.  Applying <acroref type="definition" acro="SE" />, we have <m>U\cap W=\set{\zerovector}</m>.</p>
+
+        <p><implyreverse />
+        Assume that <m>U\cap W=\set{\zerovector}</m>.  And assume further that <m>\vect{v}\in V</m> is such that  <m>\vect{v}=\vect{u}_1+\vect{w}_1</m> and <m>\vect{v}=\vect{u}_2+\vect{w}_2</m> where <m>\vect{u}_1,\,\vect{u}_2\in U</m>, <m>\vect{w}_1,\,\vect{w}_2\in W</m>.  Define <m>\vect{x}=\vect{u}_1-\vect{u}_2</m>.  then by <acroref type="property" acro="AC" />, <m>\vect{x}\in U</m>.  Also<md>
+        <mrow>\vect{x}&amp;=\vect{u}_1-\vect{u}_2</mrow>
+        <mrow>&amp;=\left(\vect{v}-\vect{w}_1\right)-\left(\vect{v}-\vect{w}_2\right)</mrow>
+        <mrow>&amp;=\left(\vect{v}-\vect{v}\right)-\left(\vect{w}_1-\vect{w}_2\right)</mrow>
+        <mrow>&amp;=\vect{w}_2-\vect{w}_1</mrow>
+        </md></p>
+
+        <p>So <m>\vect{x}\in W</m> by <acroref type="property" acro="AC" />.  Thus, <m>\vect{x}\in U\cap W =\set{\zerovector}</m> (<acroref type="definition" acro="SI" />).  So <m>\vect{x}=\zerovector</m> and<md>
+        <mrow>\vect{u}_1-\vect{u}_2&amp;=\zerovector &amp; \vect{w}_2-\vect{w}_1&amp;= \zerovector</mrow>
+        <mrow>\vect{u}_1&amp;=\vect{u}_2 &amp; \vect{w}_2&amp;=\vect{w}_1</mrow>
+        </md>yielding the desired uniqueness of the second condition of the definition.</p>
+    </proof>
+</theorem>
+
+<p>If the statement of <acroref type="theorem" acro="DSZV" /> did not remind you of linear independence, the next theorem should establish the connection.</p>
+
+<theorem acro="DSLI" index="direct sums!linear independence">
+    <title>Direct Sums and Linear Independence</title>
+    <statement>
+        <p>Suppose <m>U</m> and <m>W</m> are subspaces of the vector space <m>V</m> with <m>V=U\ds W</m>.  Suppose that <m>R</m> is a linearly independent subset of <m>U</m> and <m>S</m> is a linearly independent subset of <m>W</m>.  Then <m>R\cup S</m> is a linearly independent subset of <m>V</m>.</p>
+    </statement>
+
+    <proof>
+        <p>Let <m>R=\set{\vectorlist{u}{k}}</m> and <m>S=\set{\vectorlist{w}{\ell}}</m>.  Begin with a relation of linear dependence (<acroref type="definition" acro="RLD" />) on the set <m>R\cup S</m> using scalars <m>\scalarlist{a}{k}</m> and <m>\scalarlist{b}{\ell}</m>.  Then,<md>
+        <mrow>\zerovector&amp;=\lincombo{a}{u}{k} + \lincombo{b}{w}{\ell}</mrow>
+        <mrow>&amp;=\left(\lincombo{a}{u}{k}\right) + \left(\lincombo{b}{w}{\ell}\right)</mrow>
+        <mrow>&amp;=\vect{u}+\vect{w}</mrow>
+        </md>where we have made an implicit definition of the vectors <m>\vect{u}\in U</m>, <m>\vect{w}\in W</m>.</p>
+
+        <p>Applying <acroref type="theorem" acro="DSZV" /> we conclude that
+        <md>
+        <mrow>\vect{u}&amp;=\lincombo{a}{u}{k}=\zerovector</mrow>
+        <mrow>\vect{w}&amp;=\lincombo{b}{w}{\ell}=\zerovector</mrow>
+        </md>
+        </p>
+
+        <p>Now the linear independence of <m>R</m> and <m>S</m> (individually) yields
+            <md><mrow>a_1&amp;=a_2=a_3=\cdots=a_k=0 &amp; b_1&amp;=b_2=b_3=\cdots=b_\ell=0</mrow></md></p>
+
+        <p>Forced to acknowledge that only a trivial linear combination yields the zero vector, <acroref type="definition" acro="LI" /> says the set <m>R\cup S</m> is linearly independent in <m>V</m>.</p>
+    </proof>
+</theorem>
+
+<p>Our last theorem in this collection will go some ways towards explaining the word <q>sum</q> in the moniker <q>direct sum</q>.</p>
+
+<theorem acro="DSD" index="direct sum!dimension">
+    <title>Direct Sums and Dimension</title>
+    <statement>
+        <p>Suppose <m>U</m> and <m>W</m> are subspaces of the vector space <m>V</m> with <m>V=U\ds W</m>.  Then <m>\dimension{V}=\dimension{U}+\dimension{W}</m>.</p>
+    </statement>
+
+    <proof>
+        <p>We will establish this equality of positive integers with two inequalities.  We will need a basis of <m>U</m> (call it <m>B</m>) and a basis of <m>W</m> (call it <m>C</m>).</p>
+
+        <p>First,  note that <m>B</m> and <m>C</m> have sizes equal to the dimensions of the respective subspaces.  The union of these two linearly independent sets, <m>B\cup C</m> will be linearly independent in <m>V</m> by <acroref type="theorem" acro="DSLI" />.  Further, the two bases have no vectors in common by <acroref type="theorem" acro="DSZI" />, since <m>B\cap C\subseteq\set{\zerovector}</m> and the zero vector is never an element of a linearly independent set (<acroref type="exercise" acro="LI.T10" />).  So the size of the union is exactly the sum of the dimensions of <m>U</m> and <m>W</m>.  By <acroref type="theorem" acro="G" /> the size  of <m>B\cup C</m> cannot exceed the dimension of <m>V</m> without being linearly dependent.  These observations give us <m>\dimension{U}+\dimension{W}\leq\dimension{V}</m>.</p>
+
+        <p>Grab any vector <m>\vect{v}\in V</m>.  Then by <acroref type="theorem" acro="DSZI" /> we can write <m>\vect{v}=\vect{u}+\vect{w}</m> with <m>\vect{u}\in U</m> and <m>\vect{w}\in W</m>.  Individually, we can write <m>\vect{u}</m> as a linear combination of the basis elements in <m>B</m>, and similarly, we can write <m>\vect{w}</m> as a linear combination of the basis elements in <m>C</m>, since the bases are spanning sets for their respective subspaces.  These two sets of scalars will provide a linear combination of all of the vectors in <m>B\cup C</m> which will equal <m>\vect{v}</m>.  The upshot of this is that <m>B\cup C</m> is a spanning set for <m>V</m>.  By <acroref type="theorem" acro="G" />, the size of <m>B\cup C</m> cannot be smaller than the dimension of <m>V</m> without failing to span <m>V</m>.  These observations give us <m>\dimension{U}+\dimension{W}\geq\dimension{V}</m>.</p>
+    </proof>
+</theorem>
+
+<p>There is a certain appealling symmetry in the previous proof, where both linear independence and spanning properties of the bases are used, both of the first two conclusions of <acroref type="theorem" acro="G" /> are employed, and we have quoted both of the two conditions of <acroref type="theorem" acro="DSZI" />.</p>
+
+<p>One final theorem tells us that we can successively decompose direct sums into sums of smaller and smaller subspaces.</p>
+
+<theorem acro="RDS" index="direct sums!repeated">
+    <title>Repeated Direct Sums</title>
+    <statement>
+        <p>Suppose <m>V</m> is a vector space with subspaces <m>U</m> and <m>W</m> with <m>V=U\ds W</m>.  Suppose that <m>X</m> and <m>Y</m> are subspaces of <m>W</m> with <m>W=X\ds Y</m>.  Then <m>V=U\ds X\ds Y</m>.</p>
+    </statement>
+
+    <proof>
+        <p>Suppose that  <m>\vect{v}\in V</m>.  Then due to <m>V=U\ds W</m>, there exist vectors <m>\vect{u}\in U</m> and <m>\vect{w}\in W</m> such that <m>\vect{v}=\vect{u}+\vect{w}</m>.   Due to <m>W=X\ds Y</m>, there exist vectors <m>\vect{x}\in X</m> and <m>\vect{y}\in Y</m> such that <m>\vect{w}=\vect{x}+\vect{y}</m>.   All together,
+        <me>\vect{v}=\vect{u}+\vect{w}=\vect{u}+\vect{x}+\vect{y}</me>
+        which would be the first condition of a definition of a 3-way direct product.</p>
+
+        <p>Now consider the uniqueness.  Suppose that<md>
+            <mrow>\vect{v}&amp;=\vect{u}_1+\vect{x}_1+\vect{y}_1 &amp; \vect{v}&amp;=\vect{u}_2+\vect{x}_2+\vect{y}_2</mrow>
+        </md></p>
+
+        <p>Because <m>\vect{x}_1+\vect{y}_1\in W</m>, <m>\vect{x}_2+\vect{y}_2\in W</m>, and <m>V=U\ds W</m>, we conclude that<md>
+            <mrow>\vect{u}_1&amp;=\vect{u}_2 &amp; \vect{x}_1+\vect{y}_1&amp;=\vect{x}_2+\vect{y}_2</mrow>
+        </md></p>
+
+        <p>From the second equality, an application of <m>W=X\ds Y</m> yields the conclusions <m>\vect{x}_1=\vect{x}_2</m> and <m>\vect{y}_1=\vect{y}_2</m>.  This establishes the uniqueness of the decomposition of <m>\vect{v}</m> into a sum of vectors from <m>U</m>, <m>X</m> and <m>Y</m>.</p>
+    </proof>
+</theorem>
+
+<p>Remember that when we write <m>V=U\ds W</m> there always needs to be a <q>superspace,</q> in this case <m>V</m>.  The statement <m>U\ds W</m> is meaningless.  Writing <m>V=U\ds W</m> is simply a shorthand for a somewhat complicated relationship between <m>V</m>, <m>U</m> and <m>W</m>, as described in the two conditions of <acroref type="definition" acro="DS" />, or <acroref type="theorem" acro="DSZV" />, or <acroref type="theorem" acro="DSZI" />.  <acroref type="theorem" acro="DSFB" /> and <acroref type="theorem" acro="DSFOS" /> gives us sure-fire ways to build direct sums, while <acroref type="theorem" acro="DSLI" />,  <acroref type="theorem" acro="DSD" /> and <acroref type="theorem" acro="RDS" /> tell us interesting properties of direct sums.</p>
+
+<p>This subsection has been long on theorems and short on examples.  If we were to use the term <q>lemma</q> we might have chosen to label some of these results as such, since they will be important tools in other proofs, but may not have much interest on their own (see <acroref type="technique" acro="LC" />).  We will be referencing these results heavily in later sections, and will remind you then to come back for a second look.</p>
+
+</subsection>
+
+</section>

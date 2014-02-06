@@ -73,6 +73,11 @@
 %  Rank
 %  Usage: \rank{matrix-or-lintrans-letter}
 \newcommand{\rank}[1]{{r\left(#1\right)}}
+%
+%  Direct sum
+%  Usage: \ds between a couple of subspaces
+%
+\newcommand{\ds}{\oplus}
 
 
 

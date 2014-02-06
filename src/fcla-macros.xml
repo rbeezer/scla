@@ -250,12 +250,6 @@
 %
 %%%%%%%%%%%%%%%%%%%%%
 
-%  Direct sum
-%    Conveniece for actual symbol
-%
-%  Usage: \ds between a couple of subspaces
-%
-\newcommand{\ds}{\oplus}
 
 %  Square Root of a Matrix
 %

@@ -4,5 +4,6 @@
     <title>The Fundamentals</title>
     
     <xi:include href="./introduction.xml" />
+    <xi:include href="./direct-sums.xml" />
     
 </chapter>
