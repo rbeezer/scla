@@ -54,13 +54,6 @@
 %
 \newcommand{\real}[1]{{{\mathbb R}^{#1}}}
 
-% Complex number modulus
-%
-%  Usage: \modulus{a+bi}
-%  Presumes math mode
-%
-\newcommand{\modulus}[1]{{\left\lvert#1\right\rvert}}
-
 
 % Determinant of a matrix (functional notation)
 %

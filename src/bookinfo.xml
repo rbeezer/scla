@@ -34,17 +34,26 @@
 %
 %  Complex numbers, as set of scalars
 %  Usage:  \complexes
-\newcommand{\complexes}{{{\mathbb C}}}
+\newcommand{\complexes}{{\mathbb C}}
 %
 %  n-space over complex field
 %  Usage: \complex{integer-dimension}
-\newcommand{\complex}[1]{{{\mathbb C}^{#1}}}
+\newcommand{\complex}[1]{{\mathbb C}^{#1}}
+%
+%  n-space over complex field
+%  Usage: \complex{integer-dimension}
+\newcommand{\real}[1]{{\mathbb R}^{#1}}
 
 
 
 %  Complex number conjugation
 %  Usage: \conjugate{a+bi}
 \newcommand{\conjugate}[1]{{\overline{#1}}}
+%
+%  Complex number modulus
+%  Usage: \modulus{a+bi}
+%  Presumes math mode
+\newcommand{\modulus}[1]{{\left\lvert#1\right\rvert}}
 %
 %  Zero vector
 %  Usage: \zerovector
