@@ -119,7 +119,7 @@
     <p>As a practical matter, we would choose the Householder vector which moves <m>\vect{x}</m> the furthest, to get better numerical behavior.  So in our example above, the second choice would be better, since <m>\vect{x}</m> will be moved a distance <m>2\norm{\vect{v}}</m> and the second <m>\vect{v}</m> has a larger norm.</p>
 
     <exercise xml:id="exercise-householder-vector">
-        <statement><p>Begin with the condition that a Householder matrix will accomplish <m>P\vect{x}=\alpha\vect{e}_1</m> and <q>discover</q> the choice for the Householder vector described in Lemma <xref ref="theorem-householder-choice" />. Hint: The condition implies that the Householder vector <m>\vect{v}</m> is in the span of <m>\set{\vect{x}, \vect{e}_1}</m>.</p></statement>
+        <statement><p>Begin with the condition that a Householder matrix will accomplish <m>P\vect{x}=\alpha\vect{e}_1</m> and <q>discover</q> the choice for the Householder vector described in Theorem<nbsp /> <xref ref="theorem-householder-choice" />. Hint: The condition implies that the Householder vector <m>\vect{v}</m> is in the span of <m>\set{\vect{x}, \vect{e}_1}</m>.</p></statement>
     </exercise>
 
     <exercise xml:id="exercise-normal-normals">
