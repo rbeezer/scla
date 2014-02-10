@@ -1,0 +1,129 @@
+<section xml:id="section-householder" filebase="householder">
+    <title>Householder Reflections</title>
+    
+    <p>When we decompose matrices into products of other matrices, we often wish to create matrices with many zero entries.  A <term>Householder matrix</term> is a unitary matrix which transforms a vector into a vector of the same size that is a nonzero multiple of the first column of an identity matrix, thus creating a vector with just a single nonzero entry.  A typical application is to <q>zero out</q> entries of a matrix below the diagonal, column-by-column, in order to achieve a triangular matrix.</p>
+
+    <definition xml:id="definition-householder">
+        <statement>
+            <p>Given a nonzero vector <m>\vect{v}\in\complex{n}</m>, the Householder matrix for <m>\vect{v}</m> is<me>P = I_n-\left(\frac{2}{\innerproduct{\vect{v}}{\vect{v}}}\right)\vect{v}\adjoint{\vect{v}}</me>.  The  vector <m>\vect{v}</m> is called the Householder vector.</p>
+        </statement>
+    </definition>
+
+    <p>A Householder matrix is both Hermitian and unitary.</p>
+
+    <lemma xml:id="lemma-householder-hermitian">
+        <statement><p>The Householder matrix for <m>\vect{v}\in\complex{n}</m> is Hermitian.</p></statement>
+
+        <proof><md>
+            <mrow>\adjoint{P}&amp;=\adjoint{\left(I_n-\left(\frac{2}{\innerproduct{\vect{v}}{\vect{v}}}\right)\vect{v}\adjoint{\vect{v}}\right)}</mrow>
+            <mrow>&amp;=\adjoint{I_n}-\left(\frac{2}{\innerproduct{\vect{v}}{\vect{v}}}\right)\adjoint{\left(\vect{v}\adjoint{\vect{v}}\right)}</mrow>
+            <mrow>&amp;=I_n- \left(\frac{2}{\innerproduct{\vect{v}}{\vect{v}}}\right) \adjoint{\left(\adjoint{\vect{v}}\right)}\adjoint{\vect{v}}</mrow>
+            <mrow>&amp;=I_n-\left(\frac{2}{\innerproduct{\vect{v}}{\vect{v}}}\right)\vect{v}\adjoint{\vect{v}}</mrow>
+            <mrow>&amp;=P</mrow>
+           </md>
+        </proof>
+    </lemma>
+
+    <lemma xml:id="lemma-householder-unitary">
+        <statement><p>The Householder matrix for <m>\vect{v}\in\complex{n}</m> is unitary.</p></statement>
+
+        <proof><md>
+            <mrow>\adjoint{P}P&amp;=PP</mrow>
+            <mrow>&amp;=\left(I_n-\left(\frac{2}{\innerproduct{\vect{v}}{\vect{v}}}\right)\vect{v}\adjoint{\vect{v}}\right)\left(I_n-\left(\frac{2}{\innerproduct{\vect{v}}{\vect{v}}}\right)\vect{v}\adjoint{\vect{v}}\right)</mrow>
+            <mrow>&amp;=I_n^2
+            -\left(\frac{2}{\innerproduct{\vect{v}}{\vect{v}}}\right)\vect{v}\adjoint{\vect{v}}
+            -\left(\frac{2}{\innerproduct{\vect{v}}{\vect{v}}}\right)\vect{v}\adjoint{\vect{v}}
+            -\left(\frac{4}{\innerproduct{\vect{v}}{\vect{v}}^2}\right)\vect{v}\adjoint{\vect{v}}\vect{v}\adjoint{\vect{v}}</mrow>
+            <mrow>&amp;=I_n
+            -\left(\frac{4}{\innerproduct{\vect{v}}{\vect{v}}}\right)\vect{v}\adjoint{\vect{v}}
+            -\left(\frac{4}{\innerproduct{\vect{v}}{\vect{v}}^2}\right)\vect{v}\innerproduct{\vect{v}}{\vect{v}}\adjoint{\vect{v}}</mrow>
+            <mrow>&amp;=I_n
+            -\left(\frac{4}{\innerproduct{\vect{v}}{\vect{v}}}\right)\vect{v}\adjoint{\vect{v}}
+            -\left(\frac{4}{\innerproduct{\vect{v}}{\vect{v}}}\right)\vect{v}\adjoint{\vect{v}}</mrow>
+            <mrow>&amp;=I_n</mrow>
+            </md>
+        </proof>
+    </lemma>
+
+    <p>Our aim with a Householder matrix is to convert a vector <m>\vect{x}</m> into a scalar multiple of the first column of the identity matrix, <m>\vect{e}_1</m>.  Which Householder vector should we choose for constructing such a matrix, and which multiple will we get?  It is an instructive exercise to reverse-engineer the choice by setting <m>P\vect{x}=\alpha\vect{e}_1</m> (Exercise <xref ref="exercise-householder-vector" />).  Instead, we give the answer and prove that it does the desired job.</p>
+
+    <theorem xml:id="theorem-householder-choice">
+        <!--        <statement><p>Given the vector <m>\vect{x}</m>, define <m>\rho=\norm{\vect{x}}\vectorentry{x}{1}/\modulus{\vectorentry{\vect{x}}{1}}</m> and <m>\vect{v}=\vect{x}\pm\rho\vect{e}_1</m> and let <m>P</m> be the Householder matrix for the Householder vector <m>\vect{v}</m>.  Then <m>P\vect{x}=\mp\rho\vect{e}_1</m>.</p></statement>-->
+        <statement><p>Given a vector <m>\vect{x}\in\real{n}</m>, define <m>\vect{v}=\vect{x}\pm\norm{\vect{x}}\vect{e}_1</m> and let <m>P</m> be the Householder matrix for the Householder vector <m>\vect{v}</m>.  Then <m>P\vect{x}=\mp\norm{\vect{x}}\vect{e}_1</m>.</p></statement>
+
+        <proof>We first establish an unmotivated identity.<md>
+            <mrow>\innerproduct{\vect{v}}{\vect{v}}
+            &amp;=\adjoint{\left(\vect{x}\pm\norm{\vect{x}}\vect{e}_1\right)}\left(\vect{x}\pm\norm{\vect{x}}\vect{e}_1\right)</mrow>
+        <mrow>&amp;=\adjoint{\vect{x}}\vect{x}
+            \pm\adjoint{\vect{x}}\norm{\vect{x}}\vect{e}_1
+            \pm\adjoint{\left(\norm{\vect{x}}\vect{e}_1\right)}\vect{x}
+            +\adjoint{\left(\norm{\vect{x}}\vect{e}_1\right)}\left(\norm{\vect{x}}\vect{e}_1\right)</mrow>
+        <mrow>&amp;=\adjoint{\vect{x}}\vect{x}
+            \pm\norm{\vect{x}}\adjoint{\vect{e}_1}\vect{x}
+            \pm\norm{\vect{x}}\adjoint{\vect{e}_1}\vect{x}
+            +\adjoint{\vect{x}}\vect{x}\adjoint{\vect{e}_1}\vect{e}_1</mrow>
+        <mrow>&amp;=2\left(\adjoint{\vect{x}}\vect{x}\pm\norm{\vect{x}}\adjoint{\vect{e}_1}\vect{x}\right)</mrow>
+        <mrow>&amp;=2\left(\adjoint{\vect{x}}\pm\norm{\vect{x}}\adjoint{\vect{e}_1}\right)\vect{x}</mrow>
+        <mrow>&amp;=2\adjoint{\left(\vect{x}\pm\norm{\vect{x}}\vect{e}_1\right)}\vect{x}</mrow>
+        <mrow>&amp;=2\adjoint{\vect{v}}\vect{x}</mrow>
+           </md>
+            Then
+            <md><mrow>P\vect{x}
+            &amp;=\left(I_n-\left(\frac{2}{\innerproduct{\vect{v}}{\vect{v}}}\right)\vect{v}\adjoint{\vect{v}}\right)\vect{x}</mrow>
+            <mrow>&amp;=I_n\vect{x}-\left(\frac{2}{\innerproduct{\vect{v}}{\vect{v}}}\right)\vect{v}\adjoint{\vect{v}}\vect{x}</mrow>
+            <mrow>&amp;=\vect{x}-\left(\frac{2}{2\adjoint{\vect{v}}\vect{x}}\right)\vect{v}\adjoint{\vect{v}}\vect{x}</mrow>
+            <mrow>&amp;=\vect{x}-\vect{v}</mrow>
+            <mrow>&amp;=\vect{x}-\left(\vect{x}\pm\norm{\vect{x}}\vect{e}_1\right)</mrow>
+            <mrow>&amp;=\mp\norm{\vect{x}}\vect{e}_1</mrow>
+            </md>
+
+
+
+
+        </proof>
+    </theorem>
+
+    <todo>Prove Householder works as advertised</todo>
+
+    <todo>State a Householder version for vectors with complex entries</todo>
+
+
+    <example xml:id="example-householder">
+        <p>Consider the vector <m>\vect{x}</m> and construct the Householder vector <m>\vect{v}</m>.<md>
+            <mrow>\vect{x}&amp;=\colvector{4\\4\\7}&amp;\vect{v}&amp;=\vect{x}-9\vect{e}_1=\colvector{-5\\4\\7}</mrow>
+            </md>  Then the Householder matrix for <m>\vect{v}</m> is
+            <me>P = \begin{bmatrix}
+                <![CDATA[
+                \frac{4}{9} & \frac{4}{9} & \frac{7}{9} \\
+                \frac{4}{9} & \frac{29}{45} & -\frac{28}{45} \\
+                \frac{7}{9} & -\frac{28}{45} & -\frac{4}{45}
+                ]]>
+                \end{bmatrix}</me>
+            We can check that the matrix behaves as we expect.<me>P\vect{x}=\colvector{9\\0\\0}</me></p>
+    </example>
+
+    <p>A Householder matrix is often called a <term>Householder reflection</term>.  Why?  Any Householder matrix, when thought of as a mapping of points in a physical space, will fix the elements of a hyperplane and reflect any other points about that hyperplane.  To see this, consider any vector <m>\vect{w}</m> and compare it with its image, <m>P\vect{w}</m><md>
+        <mrow>P\vect{w}-\vect{w}
+            &amp;=I_n\vect{w}
+            -\left(\frac{2}{\innerproduct{\vect{v}}{\vect{v}}}\right)\vect{v}\adjoint{\vect{v}}\vect{w}
+            -\vect{w}</mrow>
+        <mrow>&amp;=-\frac{2}{\innerproduct{\vect{v}}{\vect{v}}}\vect{v}\innerproduct{\vect{v}}{\vect{w}}</mrow>
+        <mrow>&amp;=-\frac{2\innerproduct{\vect{v}}{\vect{w}}}{\innerproduct{\vect{v}}{\vect{v}}}\vect{v}</mrow>
+    </md>
+    So this difference is always a scalar multiple of the Householder vector <m>\vect{v}</m>, and thus every point gets moved in the same direction, the direction described by <m>\vect{v}</m>.  Which points are fixed by <m>P</m>?  The difference above is the zero vector precisely when the scalar multiple is zero, which will happen when <m>\innerproduct{\vect{v}}{\vect{w}}=0</m>.  So the set of points/vectors which are orthogonal to <m>\vect{v}</m> will be unmoved.  This is a subspace of dimension one less than the full space, which are typically described by the term <term>hyperplanes</term>.</p>
+
+    <p>To be more specific, consider the specific situation of Example <xref ref="example-householder" />, viewed in <m>\real{3}</m>.  The hyperplane is the subspace orthogonal to <m>\vect{v}</m>, or the two-dimensional plane with <m>\vect{v}</m> as its normal vector, and equation <m>-5x+4y+7z=0</m>.  The points <m>(4,4,7)</m> and <m>(9,0,0)</m> lie on either side of the plane and are a reflection of each other in the plane, by which we mean the vector <m>(4,4,7)-(9,0,0)=(-5,4,7)</m> is perpendicular (orthogonal, normal) to the plane.</p>
+
+    <p>Our choice of <m>\vect{v}</m> can be replaced by <m>\vect{v}=\vect{x}+\norm{\vect{x}}\vect{e}_1</m>, so in the previous example we would have <m>\vect{v}=\colvector{13\\4\\7}</m>, and then <m>P</m> would take <m>\vect{x}</m> to <m>\colvector{-9\\0\\0}</m>.  This would be a reflection across the plane with equation <m>13x+4y+7z=0</m>.  Notice that the normal vector of this plane is orthogonal to the normal vector of the previous plane, which is not an accident (Exercise <xref ref="exercise-normal-normals" />).</p>
+
+    <p>As a practical matter, we would choose the Householder vector which moves <m>\vect{x}</m> the furthest, to get better numerical behavior.  So in our example above, the second choice would be better, since <m>\vect{x}</m> will be moved a distance <m>2\norm{\vect{v}}</m> and the second <m>\vect{v}</m> has a larger norm.</p>
+
+    <exercise xml:id="exercise-householder-vector">
+        <statement><p>Begin with the condition that a Householder matrix will accomplish <m>P\vect{x}=\alpha\vect{e}_1</m> and <q>discover</q> the choice for the Householder vector described in Lemma <xref ref="theorem-householder-choice" />. Hint: The condition implies that the Householder vector <m>\vect{v}</m> is in the span of <m>\set{\vect{x}, \vect{e}_1}</m>.</p></statement>
+    </exercise>
+
+    <exercise xml:id="exercise-normal-normals">
+        <statement><p>In the real case, we have two choices for a Householder vector which will <q>zero out</q> most of a vector.  Show that these two vectors,  <m>\vect{x}+\norm{\vect{x}}\vect{e}_1</m> and <m>\vect{x}-\norm{\vect{x}}\vect{e}_1</m>, are orthogonal to each other.</p></statement>
+    </exercise>
+
+</section>
