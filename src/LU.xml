@@ -130,7 +130,7 @@
         
     </subsection>
         
-    <subsection acro="TDSSE" xml-id="sunsect-" >
+    <subsection acro="TDSSE" xml:id="subsection-solving-LU" >
         <title>Solving Systems with Triangular Decompositions</title>
        
         <p>In this section we give an explanation of why you might be interested in a triangular decomposition for a matrix.  Many of the computational problems in linear algebra revolve around solving large systems of equations, or nearly equivalently, finding inverses of large matrices.  Suppose we have a system of equations with coefficient matrix <m>A</m> and vector of constants <m>\vect{b}</m>, and suppose further that <m>A</m> has the triangular decomposition <m>A=LU</m>.</p>
