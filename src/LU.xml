@@ -1,13 +1,13 @@
 <section xml:id="section-LU" filebase="LU">
     <title>LU (Triangular) Decomposition</title>
-    
+
     <p>The <term>LU decomposition</term> begins with any matrix and describes it as a product of a lower-triangular matrix (<m>L</m>) and an upper-triangular matrix (<m>U</m>).  Hence the customary shorthand name, <q>LU</q>.  The term <term>triangular decomposition</term> might be more evocative, if not more verbose.</p>
-    
+
     <p>You will notice that the LU decomposition feels very much like reduced row-echelon form, and in some ways could be considered an improvement.  Triangular matrices are defined in Subsection <acroref acro="OD.TM" type="subsection" /> and two basic facts are that the product of two triangular matrices <q>of the same type</q> (<ie /> both upper or both lower) is again of that type (Theorem <acroref acro="PTMT" type="theorem" />) and the inverse of a nonsingular triangular matrix will be triangular of the same type (Theorem <acroref acro="ITMT" type="theorem" />).</p>
-    
+
     <subsection xml:id="subsection-LU-nonsingular">
         <title>LU Decomposition, Nonsingular Case</title>
-        
+
         <todo>Define principal minors</todo>
 
         <theorem xml:id="theorem-LU">
@@ -18,12 +18,11 @@
 
             <proof>
                 <p>We will row reduce <m>A</m> to a row-equivalent upper triangular matrix through a series of row operations, forming intermediate matrices <m>A^\prime_j</m>, <m>1\leq j\leq n</m>, that denote the state of the conversion after working on column <m>j</m>.  First, the lone entry of <m>A_1</m> is <m>\matrixentry{A}{11}</m> and this scalar must be nonzero if <m>A_1</m> is nonsingular (<acroref type="theorem" acro="SMZD" />).  We can use row operations <acroref type="definition" acro="RO" /> of the form <m>\rowopadd{\alpha}{1}{k}</m>, <m>2\leq k\leq n</m>, where <m>\alpha=-\matrixentry{A}{1k}/\matrixentry{A}{11}</m> to place zeros in the first column below the diagonal.  The first two rows and columns of <m>A^\prime_1</m> are a <m>2\times 2</m> upper triangular matrix whose determinant is equal to the determinant of <m>A_2</m>, since the matrices are row-equivalent through a sequence of row operations strictly of the third type (<acroref type="theorem" acro="DRCMA" />).  As such the diagonal entries of this <m>2\times 2</m> submatrix of <m>A^\prime_1</m> are nonzero.  We can employ this nonzero diagonal element with row operations of the form <m>\rowopadd{\alpha}{2}{k}</m>, <m>3\leq k\leq n</m> to place zeros below the diagonal in the second column.  We can continue this process, column by column.  The key observations are that our hypothesis on the nonsingularity of the <m>A_k</m> will guarantee a nonzero diagonal entry for each column when we need it, that the row operations employed are always of the third type using a multiple of a row to transform another row <em>with a greater row index</em>, and that the final result will be a nonsingular upper triangular matrix.  This is the desired matrix <m>U</m>.</p>
-            
-            
+
                 <p>Each row operation described in the previous paragraph can be accomplished with matrix multiplication by the appropriate elementary matrix (<acroref type="theorem" acro="EMDRO" />).  Since every row operation employed is adding a multiple of a row to a subsequent row these elementary matrices are of the form <m>\elemadd{\alpha}{j}{k}</m> with <m>j&lt;k</m>.  By <acroref type="definition" acro="ELEM" />, these matrices are lower triangular with every diagonal entry equal to 1.  We know that the product of two such matrices will again be lower triangular (<acroref type="theorem" acro="PTMT" />), but also, as you can also easily check using a proof with a style similar to one above, that the product maintains all 1's on the diagonal.  Let <m>E_1,\,E_2,\,E_3,\,\dots,\,E_m</m> denote the elementary matrices for this sequence of row operations.  Then
                 <me>U=E_mE_{m-1}\dots E_3E_2E_1A=L^{\prime}A</me>
                 where <m>L^\prime</m> is the product of the elementary matrices, and we know <m>L^\prime</m> is lower triangular with all 1's on the diagonal.  Our desired matrix <m>L</m> is then <m>L=\inverse{\left(L^\prime\right)}</m>.  By <acroref type="theorem" acro="ITMT" />, <m>L</m> is lower triangular with all 1's on the diagonal and <m>A=LU</m>, as desired.</p>
-        
+
                 <p>The process just described is deterministic.  That is, the proof is constructive, with no freedom for each of us to walk through it differently.  But could there be other matrices with the same properties as <m>L</m> and <m>U</m> that give such a decomposition of <m>A</m>?  In other words, is the decomposition unique (<acroref type="technique" acro="U" />)?  Suppose that we have two triangular decompositions, <m>A=L_1U_1</m> and <m>A=L_2U_2</m>.  Since <m>A</m> is nonsingular, two applications of <acroref type="theorem" acro="NPNT" /> imply that <m>L_1,\,L_2,\,U_1,\,U_2</m> are all nonsingular.  We have
                 <md>
                     <mrow>\inverse{L_2}L_1<![CDATA[&=\inverse{L_2}I_nL_1&&]]>\text{<acroref type="theorem" acro="MMIM" />}</mrow>
@@ -33,7 +32,7 @@
                     <mrow><![CDATA[&=I_nU_2\inverse{U_1}I_n&&]]>\text{<acroref type="definition" acro="MI" />}</mrow>
                     <mrow><![CDATA[&=U_2\inverse{U_1}&&]]>\text{<acroref type="theorem" acro="MMIM" />}</mrow>
                 </md></p>
-                
+
                 <p><acroref type="theorem" acro="ITMT" /> tells us that <m>\inverse{L_2}</m> is lower triangular and has 1's as the diagonal entries.  By <acroref type="theorem" acro="PTMT" />, the product <m>\inverse{L_2}L_1</m> is again lower triangular, and it is simple to check (as before) that the diagonal entries of the product are again all 1's.  By the entirely similar process we can conclude that the product <m>U_2\inverse{U_1}</m> is upper triangular.  Because these two products are equal, their common value is a matrix that is both lower triangular <em>and</em> upper triangular, with all 1's on the diagonal.  The only matrix meeting these three requirements is the identity matrix (<acroref type="definition" acro="IM" />).  So, we have,
                 <md>
                     <mrow>I_n=\inverse{L_2}L_1&amp;\Rightarrow L_2=L_1
@@ -45,10 +44,9 @@
         </theorem>
 
         <p>Studying the proofs of some previous theorems will perhaps give you an idea for an approach to computing a triangular decomposition.  In the proof of <acroref type="theorem" acro="CINM" /> we augmented a nonsingular matrix with an identity matrix of the same size, and row-reduced until the original matrix became the identity matrix (as we knew in advance would happen, since we knew <acroref type="theorem" acro="NMRRI" />).  <acroref type="theorem" acro="PEEF" /> tells us about properties of extended echelon form, and in particular, that <m>B=JA</m>, where <m>A</m> is the matrix that begins on the left, and <m>B</m> is the reduced row-echelon form of <m>A</m>.  The matrix <m>J</m> is the result on the right side of the augmented matrix, which is the result of applying the same row operations to the identity matrix.  We should recognize now that <m>J</m> is just the product of the elementary matrices (<acroref type="subsection" acro="DM.EM" />) that perform these row operations.  <acroref type="theorem" acro="ITMT" /> used the extended echelon form to discern properties of the inverse of a triangular matrix.  <acroref type="theorem" acro="TD" /> proves the existence of a triangular decomposition by applying specific row operations, and tracking the relevant elementary row operations.  It is not a great leap to combine these observations into a computational procedure.</p>
-   
-   
+
         <p>To find the triangular decomposition of <m>A</m>, augment <m>A</m> with the identity matrix of the same size and call this new <m>2n\times n</m> matrix, <m>M</m>.  Perform row operations on <m>M</m> that convert the first <m>n</m> columns to an upper triangular matrix.  Do this using only row operations that add a scalar multiple of one row to another row <em>with higher index</em> (<ie /> lower down).  In this way, the last <m>n</m> columns of <m>M</m> will be converted into a lower triangular matrix with 1's on the diagonal (since <m>M</m> has 1's in these locations initially).  We could think of this process as doing about half of the work required to compute the inverse of <m>A</m>.  Take the first <m>n</m> columns of the row-equivalent version of <m>M</m> and call this matrix <m>U</m>.</p>
-        
+
         <p>Take the final <m>n</m> columns of the row-equivalent version of <m>M</m> and call this matrix <m>L^\prime</m>.  Then by a proof employing elementary matrices, or a proof similar in spirit to the one used to prove <acroref type="theorem" acro="PEEF" />, we arrive at a result similar to the second assertion of <acroref type="theorem" acro="PEEF" />.  Namely, <m>U=L^\prime A</m>.  Multiplication on the left, by the inverse of <m>L^\prime</m>, will give us a decomposition of <m>A</m> (which we know to be unique).  Ready? Lets try it.</p>
 
         <example acro="TD4" index="triangular decomposition!size 4">
@@ -93,10 +91,10 @@
             <![CDATA[ 0 & 0 & 0 & 2 & -1 & -4 & 2 & 1]]>
             \end{bmatrix}</mrow>
             </md></p>
-            
+
             <p>So at this point, we have <m>U</m> and <m>L^\prime</m>,
             <md>
-                <mrow><![CDATA[U&=]]>
+            <mrow><![CDATA[U&=]]>
             \begin{bmatrix}
             <![CDATA[ -2 & 6 & -8 & 7 \\]]>
             <![CDATA[ 0 & 4 & 2 & 1 \\]]>
@@ -125,16 +123,14 @@
             </me>
             It is instructive to verify that indeed <m>LU=A</m>.</p>
         </example>
-        
 
-        
     </subsection>
-        
+
     <subsection acro="TDSSE" xml:id="subsection-solving-LU" >
         <title>Solving Systems with Triangular Decompositions</title>
-       
+
         <p>In this section we give an explanation of why you might be interested in a triangular decomposition for a matrix.  Many of the computational problems in linear algebra revolve around solving large systems of equations, or nearly equivalently, finding inverses of large matrices.  Suppose we have a system of equations with coefficient matrix <m>A</m> and vector of constants <m>\vect{b}</m>, and suppose further that <m>A</m> has the triangular decomposition <m>A=LU</m>.</p>
-       
+
         <p>Let <m>\vect{y}</m> be the solution to the linear system <m>\linearsystem{L}{\vect{b}}</m>, so that by <acroref type="theorem" acro="SLEMM" />, we have <m>L\vect{y}=\vect{b}</m>.  Notice that since <m>L</m> is nonsingular, this solution is unique, and the form of <m>L</m> makes it trivial to solve the system.  The first component of <m>\vect{y}</m> is determined easily, and we can continue on through determining the components of <m>\vect{y}</m>, without even ever dividing.  Now, with <m>\vect{y}</m> in hand, consider the linear system, <m>\linearsystem{U}{\vect{y}}</m>.  Let <m>\vect{x}</m> be the unique solution to this system, so by <acroref type="theorem" acro="SLEMM" /> we have <m>U\vect{x}=\vect{y}</m>.  Notice that a system of equations with <m>U</m> as a coefficient matrix is also straightforward to solve, though we will compute the bottom entries of <m>\vect{x}</m> first, and we will need to divide.  The upshot of all this is that <m>\vect{x}</m> is a solution to <m>\linearsystem{A}{\vect{b}}</m>, as we now show, <me>A\vect{x}=LU\vect{x}=L\left(U\vect{x}\right)=L\vect{y}=\vect{b}</me></p>
 
         <p>An application of <acroref type="theorem" acro="SLEMM" /> demonstrates that <m>\vect{x}</m> is a solution to <m>\linearsystem{A}{\vect{b}}</m>.</p>
@@ -156,7 +152,7 @@
                 <![CDATA[&=\colvector{-10\\-2\\-1\\-8}]]></mrow>
             </md></p>
 
-       <p>First we solve the system <m>\linearsystem{L}{\vect{b}}</m> (see <acroref type="example" acro="TD4" /> for <m>L</m>),    
+        <p>First we solve the system <m>\linearsystem{L}{\vect{b}}</m> (see <acroref type="example" acro="TD4" /> for <m>L</m>),
             <md>
                 <mrow><![CDATA[y_1 &= -10]]></mrow>
                 <mrow><![CDATA[2y_1 + y_2 &= -2]]></mrow>
@@ -195,15 +191,15 @@
         </example>
 
     </subsection>
-        
+
     <subsection acro="CTD" xml:id="subsection-computing-LU">
         <title>Computing Triangular Decompositions</title>
-    
+
         <p>It would be a simple matter to adjust the algorithm for converting a matrix to reduced row-echelon form and obtain an algorithm to compute the triangular decomposition of the matrix, along the lines of <acroref type="example" acro="TD4" /> and the discussion preceding this example.  However, it is possible to obtain relatively simple formulas for the entries of the decomposition, and if computed in the proper order, an implementation will be straightforward.  We will state the result as a theorem and then give an example of its use.</p>
-        
+
         <theorem acro="TDEE" index="triangular decomposition!entry by entry">
             <title>Triangular Decomposition, Entry by Entry</title>
-            
+
             <statement>
                 <p>Suppose that <m>A</m> is a square matrix of size <m>n</m> with a triangular decomposition <m>A=LU</m>, where <m>L</m> is lower triangular with diagonal entries all equal to 1, and <m>U</m> is upper triangular.  Then
                 <md>
@@ -222,23 +218,17 @@
             <md>
                 <mrow><![CDATA[\matrixentry{A}{ij}
                 &=\sum_{k=1}^{n}\matrixentry{L}{ik}\matrixentry{U}{kj}&&]]>\text{<acroref type="theorem" acro="EMP" />}</mrow>
-                <mrow>
-                <![CDATA[&=\sum_{k=1}^{\min(i,\,j)}\matrixentry{L}{ik}\matrixentry{U}{kj}]]></mrow>
+                <mrow><![CDATA[&=\sum_{k=1}^{\min(i,\,j)}\matrixentry{L}{ik}\matrixentry{U}{kj}]]></mrow>
             </md>
             Now, assume that <m>1\leq i\leq j\leq n</m>,
             <md>
                 <mrow>\matrixentry{U}{ij}
                 <![CDATA[&=\matrixentry{A}{ij}-\matrixentry{A}{ij}+\matrixentry{U}{ij}]]></mrow>
-                <mrow>
-                <![CDATA[&=\matrixentry{A}{ij}-\sum_{k=1}^{\min(i,\,j)}\matrixentry{L}{ik}\matrixentry{U}{kj}+\matrixentry{U}{ij}]]></mrow>
-                <mrow>
-                <![CDATA[&=\matrixentry{A}{ij}-\sum_{k=1}^{i}\matrixentry{L}{ik}\matrixentry{U}{kj}+\matrixentry{U}{ij}]]></mrow>
-                <mrow>
-                <![CDATA[&=\matrixentry{A}{ij}-\sum_{k=1}^{i-1}\matrixentry{L}{ik}\matrixentry{U}{kj}-\matrixentry{L}{ii}\matrixentry{U}{ij}+\matrixentry{U}{ij}]]></mrow>
-                <mrow>
-                <![CDATA[&=\matrixentry{A}{ij}-\sum_{k=1}^{i-1}\matrixentry{L}{ik}\matrixentry{U}{kj}-\matrixentry{U}{ij}+\matrixentry{U}{ij}]]></mrow>
-                <mrow>
-                <![CDATA[&=\matrixentry{A}{ij}-\sum_{k=1}^{i-1}\matrixentry{L}{ik}\matrixentry{U}{kj}]]></mrow>
+                <mrow><![CDATA[&=\matrixentry{A}{ij}-\sum_{k=1}^{\min(i,\,j)}\matrixentry{L}{ik}\matrixentry{U}{kj}+\matrixentry{U}{ij}]]></mrow>
+                <mrow><![CDATA[&=\matrixentry{A}{ij}-\sum_{k=1}^{i}\matrixentry{L}{ik}\matrixentry{U}{kj}+\matrixentry{U}{ij}]]></mrow>
+                <mrow><![CDATA[&=\matrixentry{A}{ij}-\sum_{k=1}^{i-1}\matrixentry{L}{ik}\matrixentry{U}{kj}-\matrixentry{L}{ii}\matrixentry{U}{ij}+\matrixentry{U}{ij}]]></mrow>
+                <mrow><![CDATA[&=\matrixentry{A}{ij}-\sum_{k=1}^{i-1}\matrixentry{L}{ik}\matrixentry{U}{kj}-\matrixentry{U}{ij}+\matrixentry{U}{ij}]]></mrow>
+                <mrow><![CDATA[&=\matrixentry{A}{ij}-\sum_{k=1}^{i-1}\matrixentry{L}{ik}\matrixentry{U}{kj}]]></mrow>
             </md>
             And for <m>1\leq j\lt i\leq n</m>,
             <md>
@@ -246,24 +236,19 @@
                 <![CDATA[&=]]>
                 \frac{1}{\matrixentry{U}{jj}}
                 \left(\matrixentry{L}{ij}\matrixentry{U}{jj}\right)</mrow>
-                <mrow>
-                <![CDATA[&=]]>
+                <mrow><![CDATA[&=]]>
                 \frac{1}{\matrixentry{U}{jj}}
                 \left(\matrixentry{A}{ij}-\matrixentry{A}{ij}+\matrixentry{L}{ij}\matrixentry{U}{jj}\right)</mrow>
-                <mrow>
-                <![CDATA[&=]]>
+                <mrow><![CDATA[&=]]>
                 \frac{1}{\matrixentry{U}{jj}}
                 \left(\matrixentry{A}{ij}-\sum_{k=1}^{\min(i,\,j)}\matrixentry{L}{ik}\matrixentry{U}{kj}+\matrixentry{L}{ij}\matrixentry{U}{jj}\right)</mrow>
-                <mrow>
-                <![CDATA[&=]]>
+                <mrow><![CDATA[&=]]>
                 \frac{1}{\matrixentry{U}{jj}}
                 \left(\matrixentry{A}{ij}-\sum_{k=1}^{j}\matrixentry{L}{ik}\matrixentry{U}{kj}+\matrixentry{L}{ij}\matrixentry{U}{jj}\right)</mrow>
-                <mrow>
-                <![CDATA[&=]]>
+                <mrow><![CDATA[&=]]>
                 \frac{1}{\matrixentry{U}{jj}}
                 \left(\matrixentry{A}{ij}-\sum_{k=1}^{j-1}\matrixentry{L}{ik}\matrixentry{U}{kj}-\matrixentry{L}{ij}\matrixentry{U}{jj}+\matrixentry{L}{ij}\matrixentry{U}{jj}\right)</mrow>
-                <mrow>
-                <![CDATA[&=]]>
+                <mrow><![CDATA[&=]]>
                 \frac{1}{\matrixentry{U}{jj}}
                 \left(\matrixentry{A}{ij}-\sum_{k=1}^{j-1}\matrixentry{L}{ik}\matrixentry{U}{kj}\right)</mrow>
             </md>
@@ -271,10 +256,9 @@
         </theorem>
 
         <p>At first glance, these formulas may look exceedingly complex.  Upon closer examination, it looks even worse.  We have expressions for entries of <m>U</m> that depend on other entries of <m>U</m> and also on entries of <m>L</m>.  But then the formula for entries of <m>L</m> depend on entries from <m>L</m> and entries from <m>U</m>.  Do these formula have circular dependencies?  Or perhaps equivalently, how do we get started?  The key is to be organized about the computations and employ these two (similar) formulas in a specific order.  First compute the first row of <m>L</m>, followed by the first column of <m>U</m>.  Then the second row of <m>L</m>, followed by the second column of <m>U</m>.  And so on.  In this way, all of the values required for each new entry will have already been computed previously.</p>
-   
-   
+
         <p>Of course, the formula for entries of <m>L</m> require division by diagonal entries of <m>U</m>.  These entries might be zero, but in this case <m>A</m> is nonsingular and does not have a triangular decomposition.  So we need not check the hypothesis carefully and can launch into the arithmetic dictated by the formulas, confident that we will be reminded when a decomposition is not possible.  Note that these formula give us all of the values that we need for the decomposition, since we require that <m>L</m> has 1's on the diagonal.  If we replace the 1's on the diagonal of <m>L</m> by zeros, and add the matrix <m>U</m>, we get an <m>n\times n</m> matrix containing all the information we need to resurrect the triangular decomposition.  This is mostly a notational convenience, but it is a frequent way of presenting the information.  We'll employ it in the next example.</p>
-   
+
         <example acro="TDEE6" index="triangular decomposition! entry by entry, size 6">
             <title>Triangular decomposition, entry by entry, size 6</title>
 
@@ -289,7 +273,7 @@
             9 & 3 & -12 & -3 & -21 & -2 ]]>
             \end{bmatrix}
             </me></p>
-        
+
             <p>Using the notational convenience of packaging the two triangular matrices into one matrix, and using the ordering of the computations mentioned above, we display the results after computing a single row and column of each of the two triangular matrices.
             <md>
                 <mrow><![CDATA[&]]>
@@ -310,7 +294,7 @@
                 <![CDATA[ 2 & -1  \\]]>
                 <![CDATA[ 3 & -3]]>
                 \end{bmatrix}</mrow>
-                
+
                 <mrow><![CDATA[&]]>
                 \begin{bmatrix}
                 <![CDATA[ 3 & 3 & -3 & -2 & -1 & 0 \\]]>
@@ -329,7 +313,7 @@
                 <![CDATA[ 2 & -1 & -2 & -1  \\]]>
                 <![CDATA[ 3 & -3 & -3 & -3]]>
                 \end{bmatrix}</mrow>
-                
+
                 <mrow><![CDATA[&]]>
                 \begin{bmatrix}
                 <![CDATA[ 3 & 3 & -3 & -2 & -1 & 0 \\]]>
@@ -349,7 +333,7 @@
                 <![CDATA[ 3 & -3 & -3 & -3 & 0 & -2]]>
                 \end{bmatrix}</mrow>
             </md></p>
-        
+
             <p>Splitting out the pieces of this matrix, we have the decomposition,
             <md>
                 <mrow><![CDATA[L&=]]>
@@ -373,18 +357,18 @@
                 \end{bmatrix}</mrow>
             </md></p>
         </example>
-        
-    </subsection>        
+
+    </subsection>
 
     <subsection acro="" xml-id="subsect" >
         <title>Triangular Decomposition with Pivoting</title>
-    
+
         <p>The hypotheses of <acroref type="theorem" acro="TD" /> can be weakened slightly to include matrices where not every <m>A_k</m> is nonsingular.  The introduces a rearrangement of the rows and columns of <m>A</m> to force as many as possible of the smaller submatrices to be nonsingular.  Then permutation matrices also enter into the decomposition.  We will not present the details here, but instead suggest consulting a more advanced text on matrix analysis.</p> 
-     
+
         <todo>Pivoting proofs, an example</todo>
-            
+
         <todo>LU for rectangular case</todo>
-    
+
     </subsection>
-    
+
 </section>
