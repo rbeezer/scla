@@ -33,13 +33,13 @@
             <mrow>&amp;=I_n^2
             -\left(\frac{2}{\innerproduct{\vect{v}}{\vect{v}}}\right)\vect{v}\adjoint{\vect{v}}
             -\left(\frac{2}{\innerproduct{\vect{v}}{\vect{v}}}\right)\vect{v}\adjoint{\vect{v}}
-            -\left(\frac{4}{\innerproduct{\vect{v}}{\vect{v}}^2}\right)\vect{v}\adjoint{\vect{v}}\vect{v}\adjoint{\vect{v}}</mrow>
+            +\left(\frac{4}{\innerproduct{\vect{v}}{\vect{v}}^2}\right)\vect{v}\adjoint{\vect{v}}\vect{v}\adjoint{\vect{v}}</mrow>
             <mrow>&amp;=I_n
             -\left(\frac{4}{\innerproduct{\vect{v}}{\vect{v}}}\right)\vect{v}\adjoint{\vect{v}}
-            -\left(\frac{4}{\innerproduct{\vect{v}}{\vect{v}}^2}\right)\vect{v}\innerproduct{\vect{v}}{\vect{v}}\adjoint{\vect{v}}</mrow>
+            +\left(\frac{4}{\innerproduct{\vect{v}}{\vect{v}}^2}\right)\vect{v}\innerproduct{\vect{v}}{\vect{v}}\adjoint{\vect{v}}</mrow>
             <mrow>&amp;=I_n
             -\left(\frac{4}{\innerproduct{\vect{v}}{\vect{v}}}\right)\vect{v}\adjoint{\vect{v}}
-            -\left(\frac{4}{\innerproduct{\vect{v}}{\vect{v}}}\right)\vect{v}\adjoint{\vect{v}}</mrow>
+            +\left(\frac{4}{\innerproduct{\vect{v}}{\vect{v}}}\right)\vect{v}\adjoint{\vect{v}}</mrow>
             <mrow>&amp;=I_n</mrow>
             </md>
         </proof>
