@@ -126,4 +126,8 @@
         <statement><p>In the real case, we have two choices for a Householder vector which will <q>zero out</q> most of a vector.  Show that these two vectors,  <m>\vect{x}+\norm{\vect{x}}\vect{e}_1</m> and <m>\vect{x}-\norm{\vect{x}}\vect{e}_1</m>, are orthogonal to each other.</p></statement>
     </exercise>
 
+    <exercise xml:id="exercise-householder-matrix-vector-product">
+        <statement><p>Suppose that <m>P</m> is a Householder matrix of size <m>n</m> and <m>\vect{b}\in\complex{n}</m> is any vector.  Find an expression for the matrix-vector product <m>P\vect{b}</m> which will suggest a way to compute this vector with fewer than the <m>\oh{2n^2}</m> operations required for a general matrix-vector product.</p></statement>
+    </exercise>
+
 </section>
