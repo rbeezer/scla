@@ -118,16 +118,22 @@
 
     <p>As a practical matter, we would choose the Householder vector which moves <m>\vect{x}</m> the furthest, to get better numerical behavior.  So in our example above, the second choice would be better, since <m>\vect{x}</m> will be moved a distance <m>2\norm{\vect{v}}</m> and the second <m>\vect{v}</m> has a larger norm.</p>
 
-    <exercise xml:id="exercise-householder-vector">
-        <statement><p>Begin with the condition that a Householder matrix will accomplish <m>P\vect{x}=\alpha\vect{e}_1</m> and <q>discover</q> the choice for the Householder vector described in Theorem<nbsp /> <xref ref="theorem-householder-choice" />. Hint: The condition implies that the Householder vector <m>\vect{v}</m> is in the span of <m>\set{\vect{x}, \vect{e}_1}</m>.</p></statement>
-    </exercise>
 
     <exercise xml:id="exercise-normal-normals">
         <statement><p>In the real case, we have two choices for a Householder vector which will <q>zero out</q> most of a vector.  Show that these two vectors,  <m>\vect{x}+\norm{\vect{x}}\vect{e}_1</m> and <m>\vect{x}-\norm{\vect{x}}\vect{e}_1</m>, are orthogonal to each other.</p></statement>
     </exercise>
 
+    <exercise xml:id="exercise-householder-complex">
+        <statement><p>Prove the following generalization of Theorem<nbsp /><xref ref="theorem-householder-choice" />.  Given a vector <m>\vect{x}\in\complex{n}</m>, define <m>\rho=\vectorentry{\vect{x}}{1}/\modulus{\vectorentry{\vect{x}}{1}}</m> and <m>\vect{v}=\vect{x}\pm\rho\norm{\vect{x}}\vect{e}_1</m> and let <m>P</m> be the Householder matrix for the Householder vector <m>\vect{v}</m>.  Then <m>P\vect{x}=\mp\rho\norm{\vect{x}}\vect{e}_1</m>.</p></statement>
+        <hint><p>You can establish the same identity as in the first part of the proof of Theorem<nbsp /><xref ref="theorem-householder-choice" />.</p></hint>
+    </exercise>
+
     <exercise xml:id="exercise-householder-matrix-vector-product">
         <statement><p>Suppose that <m>P</m> is a Householder matrix of size <m>n</m> and <m>\vect{b}\in\complex{n}</m> is any vector.  Find an expression for the matrix-vector product <m>P\vect{b}</m> which will suggest a way to compute this vector with fewer than the <m>\oh{2n^2}</m> operations required for a general matrix-vector product.</p></statement>
+    </exercise>
+
+    <exercise xml:id="exercise-householder-vector">
+        <statement><p>Begin with the condition that a Householder matrix will accomplish <m>P\vect{x}=\alpha\vect{e}_1</m> and <q>discover</q> the choice for the Householder vector described in Theorem<nbsp /> <xref ref="theorem-householder-choice" />. Hint: The condition implies that the Householder vector <m>\vect{v}</m> is in the span of <m>\set{\vect{x}, \vect{e}_1}</m>.</p></statement>
     </exercise>
 
 </section>
