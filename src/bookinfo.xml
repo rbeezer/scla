@@ -32,6 +32,19 @@
 %
 %%%%%%%%%%%%%%%%%%%%%
 %
+%  Order of (asymptotically limit of fraction is 1)
+%  Usage: \orderof{some function}
+%
+\newcommand{\orderof}[1]{\sim #1}
+%
+%  Real numbers, as set of scalars
+%  Usage:  \reals
+\newcommand{\reals}{{\mathbb R}}
+%
+%  n-space over real field
+%  Usage: \complex{integer-dimension}
+\newcommand{\real}[1]{{\mathbb R}^{#1}}
+%
 %  Complex numbers, as set of scalars
 %  Usage:  \complexes
 \newcommand{\complexes}{{\mathbb C}}
@@ -40,12 +53,6 @@
 %  Usage: \complex{integer-dimension}
 \newcommand{\complex}[1]{{\mathbb C}^{#1}}
 %
-%  n-space over complex field
-%  Usage: \complex{integer-dimension}
-\newcommand{\real}[1]{{\mathbb R}^{#1}}
-
-
-
 %  Complex number conjugation
 %  Usage: \conjugate{a+bi}
 \newcommand{\conjugate}[1]{{\overline{#1}}}

@@ -129,7 +129,7 @@
     </exercise>
 
     <exercise xml:id="exercise-householder-matrix-vector-product">
-        <statement><p>Suppose that <m>P</m> is a Householder matrix of size <m>n</m> and <m>\vect{b}\in\complex{n}</m> is any vector.  Find an expression for the matrix-vector product <m>P\vect{b}</m> which will suggest a way to compute this vector with fewer than the <m>\oh{2n^2}</m> operations required for a general matrix-vector product.</p></statement>
+        <statement><p>Suppose that <m>P</m> is a Householder matrix of size <m>n</m> and <m>\vect{b}\in\complex{n}</m> is any vector.  Find an expression for the matrix-vector product <m>P\vect{b}</m> which will suggest a way to compute this vector with fewer than the <m>\orderof{2n^2}</m> operations required for a general matrix-vector product.</p></statement>
     </exercise>
 
     <exercise xml:id="exercise-householder-vector">
