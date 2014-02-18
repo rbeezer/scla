@@ -123,6 +123,11 @@
 %  Left null space of a matrix
 %  Usage:  \lns{A}
 \newcommand{\lns}[1]{{\mathcal{L}\!\left(#1\right)}}
+%
+%  Orthogonal complement of a vector space
+%  Avoiding TeX's \perp
+%  Usage:  \per{A}
+\newcommand{\per}[1]{#1^\perp}
 
 
 

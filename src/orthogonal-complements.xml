@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<section xml:id="section-orthogonal-complements">
+    <title>Orthogonal Complements</title>
+
+    <p>Theorem<nbsp /><xref provisional="above on repeated sums" /> mentions repeated sums, which are of interest.  However, when we begin with a vector space <m>V</m> and a single subspace <m>W</m>, we can ask about the existence of another subspace, <m>W</m>, such that <m>V=U\ds W</m>.  The answer is that such a <m>W</m> always exists, and we then refer to it as a <term>complement</term>of <m>U</m>.</p>
+
+    <todo>Complments exist, basis extension</todo>
+    <todo>Complement not unique</todo>
+    <todo>Define orthogonal complement</todo>
+    <todo>As a left null space of sorts</todo>
+    <todo>Hence unique></todo>
+
+    <definition xml:id="definition-subspace-complement">
+        <title>Subspace Complement</title>
+        <statement>
+            <p>Suppose that <m>V</m> is a vector space with a subspace <m>U</m>.  If <m>W</m> is a subspace such that <m>V=U\ds W</m>, then <m>W</m> is the complement of <m>V</m>.</p>
+        </statement>
+    </definition>
+
+    <p>Every subspace has a complement, and generally it is not unique.</p>
+
+    <lemma xml:id="lemma-subspace-complement-exists">
+        <title>Every Subspace has a Complement</title>
+        <statement>
+            <p>Suppose that <m>V</m> is a vector space with a subspace <m>U</m>.  Then there exists a subspace <m>W</m> such that <m>V=U\ds W</m>, so <m>W</m> is the complement of <m>V</m>.</p>
+        </statement>
+
+        <proof>
+            <p>Suppose that <m>\dimension{V}=n</m> and <m>\dimension{U}=k</m>, and let <m>B=\set{\vectorlist{u}{k}}</m> be a basis of <m>U</m>.  With <m>n-k</m> applications of <acroref type="theorem" acro="ELIS" /> we obtain vectors <m>\vectorlist{v}{n-k}</m> that succesively create bases <m>B_i=\set{\vectorlist{u}{k},\,\vectorlist{v}{i}}</m>, <m>0\leq i\leq n-k</m> for subspaces <m>U=U_0, U_1,\dots,U_{n-k}=V</m>, where <m>\dimension{U_i}=k+i</m>.</p>
+
+            <p>Define <m>W=\spn{\set{\vectorlist{v}{n-k}}}</m>.    Since <m>\set{\vectorlist{u}{k},\,\vectorlist{v}{i}}</m> is a basis for <m>V</m> and <m>\set{\vectorlist{u}{k}}</m> is a basis for <m>U</m>, we can apply Theorem <xref provisional="Direct Sum From a Basis (above)" /> to see that <m>V=U\ds W</m>, so <m>W</m> is the complement of <m>V</m>.  (Compare with <xref provisional="Direct Sum From One Subspace (above)" />, which has identical content, but a different write-up.)</p>
+        </proof>
+    </lemma>
+
+    <p>The freedom given when we <q>extend</q> a linearly independent set (or basis) to create a basis for the complement means that we can create a complement in many ways, so it is not unique.</p>
+
+    <exercise xml:id="exercise-3d-complements">
+        <!-- Rows of matrix(QQ, [[1, -6, -8], [1, -5, -7]]) -->
+        <statement>
+            <p>Consider the subspace <m>U</m> of <m>V=\complex{3}</m>, <me>U=\spn{\set{\colvector{1\\-6\\-8},\colvector{1\\-5\\-7}}}.</me>  Create two different complements of <m>U</m>, being sure to <em>prove</em> that your complements are unequal (and not simply have unequal bases).  Before reading ahead, can you think of an ideal (or <q>canonical</q>) choice for the complement?</p>
+        </statement>
+    </exercise>
+
+    <exercise xml:id="exercise-5d-complements">
+        <!-- Rows of matrix(QQ, [[1, -4, -2, 6, -5], [1, -4, -1, 4, -3]]) -->
+        <statement>
+            <p>Consider the subspace <m>U</m> of <m>V=\complex{5}</m>, <me>U=\spn{\set{\colvector{1\\-4\\-2\\6\\-5},\colvector{1\\-4\\-1\\4\\-3}}}.</me>  Create a complement of <m>U</m>.  (If you have read ahead, do not create an orthogonal complement for this exercise.)</p>
+        </statement>
+    </exercise>
+
+    <p>With an inner product, and a notion of orthogonality, we can define a canonical, and useful, complement for every subspace.</p>
+
+    <definition xml:id="definition-orthogonal-complement">
+        <title>Orthogonal Complement</title>
+        <statement>
+            <p>Suppose that <m>V</m> is a vector space with a subspace <m>U</m>.  Then the orthogonal complement of <m>U</m> (relative to <m>V</m>) is <me>\per{U} = \setparts{\vect{v}\in V}{\innerproduct{\vect{v}}{\vect{u}}=0\text{ for every }\vect{u}\in U}.</me></p>
+        </statement>
+    </definition>
+
+    <p>A matrix formulation of the orthogonal complement will help us establish that the moniker <q>complement</q> is deserved.</p>
+
+    <theorem xml:id="theorem-orthogonal-complement-matrices">
+        <title>Orthogonal Complement as a Null Space</title>
+        <statement>
+            <p>Suppose that <m>V</m> is a vector space with a subspace <m>U</m>.  Let <m>A</m> be a matrix whose columns are a basis for <m>U</m>. Then <m>\per{U}=\nsp{\adjoint{A}}</m>.</p>
+        </statement>
+
+        <proof>
+            <p>Membership in the orthogonal complement requires a vector to be orthogonal to <em>every</em> vector of <m>U</m>.  However, because of the linearity of the inner product (<acroref type="theorem" acro="IPVA" />, <acroref type="theorem" acro="IPSM" />), it is equivalent to require that a vector be orthogonal to each member of a basis for <m>U</m>.  So membership in the orthogonal complement is equivalent to being orthogonal to each column of <m>A</m>. We obtain the desired set equality from the equivalences,
+            <me>\vect{v}\in\per{U}
+            \iff
+            \adjoint{\vect{v}}A=\adjoint{\zerovector}
+            \iff
+            \adjoint{A}\vect{v}=\zerovector
+            \iff
+            \vect{v}\in\nsp{\adjoint{A}}.</me></p>
+        </proof>
+    </theorem>
+
+    <theorem xml:id="theorem-orthogonal-complement-decomposition">
+        <title>Orthogonal Complement Decomposition</title>
+        <statement>
+            <p>Suppose that <m>V</m> is a vector space with a subspace <m>U</m>.  Then <m>V=U\ds\per{U}</m>.</p>
+        </statement>
+
+        <proof>
+            <p>We first establish that <m>U\cap\per{U}=\set{\zerovector}</m>.  Suppose <m>\vect{v}\in U</m> and <m>\vect{v}\in\per{U}</m>.  Then <m>\innerproduct{\vect{u}}{\vect{u}}=0</m> and by <acroref type="theorem" acro="PIP" /> we conclude that <m>\vect{v}=\zerovector</m>.</p>
+
+            <p>We now show that an arbitrary vector <m>\vect{v}</m> can be written as a sum of vectors from <m>U</m> and <m>\per{U}</m>.  Without loss of generality, we can assume we have an orthonormal basis for <m>U</m>, for if not, we can apply the Gram-Schmidt process to any basis of <m>U</m> to create an orthogonal spanning set, whose individual vectors can be scaled to have norm one (<acroref type="theorem" acro="GSP" />).  Denote this basis as <m>B=\set{\vectorlist{u}{k}}</m>.</p>
+
+            <p>Define the vector <m>\vect{v}_1</m> as a linear combination of the vectors of <m>B</m>, so <m>\vect{v}_1\in U</m>. <me>\vect{v}_1 = \sum_{i=1}^k\innerproduct{\vect{u}_i}{\vect{v}}\,\vect{u}_i</me>.  Define <m>\vect{v}_2 = \vect{v}-\vect{v}_1</m>, so trivially by construction, <m>\vect{v}=\vect{v}_1+\vect{v}_2</m>.  It remains to show that <m>\vect{v}_2\in\per{U}</m>.  We repeatedly use properties of the inner product.  This construction and proof may remind you of the Gram-Schmidt process.  For <m>1\leq j\leq k</m>,<md>
+            <mrow>\innerproduct{\vect{v}_2}{\vect{u}_j}
+            &amp;=\innerproduct{\vect{v}}{\vect{u}_j}-\innerproduct{\vect{v}_1}{\vect{u}_j}</mrow>
+            <mrow>&amp;=\innerproduct{\vect{v}}{\vect{u}_j}-\sum_{i=1}^k\innerproduct{\innerproduct{\vect{u}_i}{\vect{v}}\,\vect{u}_i}{\vect{u}_j}</mrow>
+            <mrow>&amp;=\innerproduct{\vect{v}}{\vect{u}_j}-\sum_{i=1}^k\conjugate{\innerproduct{\vect{u}_i}{\vect{v}}}\innerproduct{\vect{u}_i}{\vect{u}_j}</mrow>
+            <mrow>&amp;=\innerproduct{\vect{v}}{\vect{u}_j}-\conjugate{\innerproduct{\vect{u}_j}{\vect{v}}}\innerproduct{\vect{u}_j}{\vect{u}_j}</mrow>
+            <mrow>&amp;=\innerproduct{\vect{v}}{\vect{u}_j}-\innerproduct{\vect{v}}{\vect{u}_j}</mrow>
+            <mrow>&amp;=0</mrow></md></p>
+
+            <p>We have fulfilled the hypotheses of <xref provisional="Direct Sums and Zero Intersection (above)" /> and so can say <m>V=U\ds\per{U}</m>.</p>
+        </proof>
+    </theorem>
+
+    <p>Theorem<nbsp /><xref ref="theorem-orthogonal-complement-decomposition" /> gives us a canonical choice of a complementary subspace, which has useful orthogonality properties.  It also allows us to decompose any vector (uniquely) into an element of a subspace, plus an orthogonal vector.  This might remind you in some ways of <q>resolving a vector into compoments</q> if you have studied physics some.</p>
+
+    <exercise xml:id="exercise-orthogonal-complements">
+        <statement>
+            <p>Compute the orthogonal complments of the two subspaces from Exercises <xref ref="exercise-3d-complements" /> and <xref ref="exercise-5d-complements" />.  For the subspace of <m>\complex{5}</m> verify that your first complement was not the orthogonal complement (or return to the exercise and find a complement that is not orthogonal).</p>
+        </statement>
+    </exercise>
+
+</section>
