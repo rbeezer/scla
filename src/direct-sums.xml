@@ -238,6 +238,7 @@
 
     <p>Remember that when we write <m>V=U\ds W</m> there always needs to be a <q>superspace,</q> in this case <m>V</m>.  The statement <m>U\ds W</m> is meaningless.  Writing <m>V=U\ds W</m> is simply a shorthand for a somewhat complicated relationship between <m>V</m>, <m>U</m> and <m>W</m>, as described in the two conditions of <acroref type="definition" acro="DS" />, or Theorem<nbsp /><xref ref="theorem-direct-sum-zero-vector" />, or <acroref type="theorem" acro="DSZI" />.  Theorem<nbsp /><xref ref="theorem-direct-sum-split-basis" /> and <acroref type="theorem" acro="DSFOS" /> gives us sure-fire ways to build direct sums, while <acroref type="theorem" acro="DSLI" />,  <acroref type="theorem" acro="DSD" /> and <acroref type="theorem" acro="RDS" /> tell us interesting properties of direct sums.</p>
 
+
     <p>This subsection has been long on theorems and short on examples.  If we were to use the term <q>lemma</q> we might have chosen to label some of these results as such, since they will be important tools in other proofs, but may not have much interest on their own (see <acroref type="technique" acro="LC" />).  We will be referencing these results heavily in later sections, and will remind you then to come back for a second look.</p>
 
     </subsection>

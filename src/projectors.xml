@@ -209,6 +209,7 @@
             </proof>
         </theorem>
 
+
         <p>Suppose the basis vectors of <m>U</m> described in Theorem<nbsp /><xref ref="theorem-orthogonal-projector-construction" /> form an orthonormal set, and in acknowledgment we denote the matrix with these vectors as columns by <m>Q</m>.  Then the projector simplifies to <m>P=Q\inverse{\left(\adjoint{Q}Q\right)}\adjoint{Q}=Q\adjoint{Q}.</m>  The other interesting special case is when <m>U</m> is 1-dimensional (a <q>line</q>).  Then <m>\adjoint{A}A</m> is just the square of the norm of the lone basis vector.  With this scalar moved out of the way, the remaining computation, <m>A\adjoint{A}</m>, is an outer product that results in a rank <m>1</m> matrix (as we would expect).</p>
 
         <exercise>
