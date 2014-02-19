@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+   
+<chapter xml:id="chap-applications" filebase="applications" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>Applications</title>
+    
+    <xi:include href="./least-squares.xml" />
+    
+</chapter>

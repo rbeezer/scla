@@ -11,6 +11,7 @@
 
         <xi:include href="./fundamentals.xml" />
         <xi:include href="./decompositions.xml" />
+        <xi:include href="./applications.xml" />
     </book>
 
 </mathbook>
