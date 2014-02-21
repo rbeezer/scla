@@ -58,7 +58,7 @@
             <proof>
                 <p>We proceed by induction on <m>n</m>.  When <m>n=1</m> form the Householder matrix, <m>P</m>, which will convert all of the entries of the lone column of <m>A</m> into zeros, except the first one (Theorem<nbsp /><xref ref="theorem-householder-choice" />).  Denote the resulting column vector as the matrix <m>R</m>, which is upper triangular.  Define <m>Q=\adjoint{P}</m>, which is unitary.  Then <m>A = \adjoint{P}PA=QR</m>.</p>
                 
-                <p>Now consider general <m>n</m>.  Let <m>\hat{A}</m> be the first <m>n-1</m> columns of <m>A</m>, so by induction there is a unitary matrix <m>\hat{Q}</m> and an upper-triangular matrix <m>\hat{R}</m> providing a QR decomposition of <m>\hat{A}</m>.  Let <m>\vect{v}</m> denote the final column of <m>A</m> and compute <m>\vect{w}=\adjoint{\hat{Q}}\vect{v}</m>.  Compute the Householder matrix, <m>P</m>, of size <m>m-n+1</m> which will operate on entries <m>m</m> through <m>n</m> of <m>\vect{w}</m>, creating zeros in all but the first entry  (Theorem<nbsp /><xref ref="theorem-householder-choice" />).  Let <m>\vect{r}</m> denote the vector of length <m>m</m> whose first <m>n-1</m> entries are equal to those of <m>\vect{w}</m>  and the remaining entries are the result of multiplication by <m>P</m>.  We have the pieces in place, so observe that:<md>
+                <p>Now consider general <m>n</m>.  Let <m>\hat{A}</m> be the first <m>n-1</m> columns of <m>A</m>, so by induction there is a unitary matrix <m>\hat{Q}</m> of size <m>m</m> and an upper-triangular matrix <m>\hat{R}</m> providing a QR decomposition of <m>\hat{A}</m>.  Partition <m>\hat{R}</m> into a square upper triangular matrix <m>R_1</m> comprised of the first <m>n-1</m> rows of <m>\hat{R}</m>, leaving a second matrix with <m>m-n+1</m> rows and zero in every entry.  Let <m>\vect{v}</m> denote the final column of <m>A</m> and compute <m>\vect{w}=\adjoint{\hat{Q}}\vect{v}</m>.  Partition <m>\vect{w}</m> into two pieces by denoting the first <m>n-1</m> entries as <m>\vect{w}_1</m>, and entries <m>n</m> through <m>m</m> as <m>\vect{w}_2</m>.  Compute the Householder matrix, <m>P</m>, of size <m>m-n+1</m> that takes <m>\vect{w}_2</m>, to a multiple of <m>\vect{e}_1</m>  (Theorem<nbsp /><xref ref="theorem-householder-choice" />).  We have all the pieces in place, so now observe:<md>
                 <mrow>\left[\begin{array}{c|c}I_{n-1}&amp;0\\\hline0&amp;P\end{array}\right]
                 \adjoint{\hat{Q}}A
                 &amp;=\left[\begin{array}{c|c}I_{n-1}&amp;0\\\hline0&amp;P\end{array}\right]
@@ -70,10 +70,14 @@
                 <mrow>&amp;=
                 \left[\begin{array}{c|c}I_{n-1}&amp;0\\\hline0&amp;P\end{array}\right]
                 \left[\begin{array}{c|c}\hat{R}&amp;\vect{w}\end{array}\right]</mrow> 
-                <mrow>&amp;=\left[\begin{array}{c|c}\hat{R}&amp;\vect{r}\end{array}\right]</mrow> 
+                <mrow>&amp;=
+                \left[\begin{array}{c|c}I_{n-1}&amp;0\\\hline0&amp;P\end{array}\right]
+                \left[\begin{array}{c|c}R_1&amp;\vect{w}_1\\\hline0&amp;\vect{w}_2\end{array}\right]</mrow>
+                <mrow>&amp;=
+                \left[\begin{array}{c|c}R_1&amp;\vect{w}_1\\\hline0&amp;P\vect{w}_2\end{array}\right]</mrow>
                 </md></p>
 
-                <p>Notice that the first two matrices in these equations are unitary, and hence so is their product.  The final matrix has been engineered to be upper triangular, through the manipulations of the final column of <m>A</m>.  If we move the unitary matrix to the other side of the equation, with an inverse (adjoint), we arrive at a QR decomposition of <m>A</m>and complete the induction step.</p>
+                <p>Notice that the first two matrices in these equations are unitary, and hence so is their product.  Because of the action of the Householder matrix, the final matrix is upper triangular.  If we move the unitary matrix to the other side of the equation, with an inverse (adjoint), we arrive at a QR decomposition of <m>A</m> and complete the induction step.</p>
 
             </proof>
         </theorem>
