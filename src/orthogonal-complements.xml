@@ -63,11 +63,11 @@
     <theorem xml:id="theorem-orthogonal-complement-matrices">
         <title>Orthogonal Complement as a Null Space</title>
         <statement>
-            <p>Suppose that <m>V</m> is a vector space with a subspace <m>U</m>.  Let <m>A</m> be a matrix whose columns are a basis for <m>U</m>. Then <m>\per{U}=\nsp{\adjoint{A}}</m>.</p>
+            <p>Suppose that <m>V</m> is a vector space with a subspace <m>U</m>.  Let <m>A</m> be a matrix whose columns are a spanning set for <m>U</m>. Then <m>\per{U}=\nsp{\adjoint{A}}</m>.</p>
         </statement>
 
         <proof>
-            <p>Membership in the orthogonal complement requires a vector to be orthogonal to <em>every</em> vector of <m>U</m>.  However, because of the linearity of the inner product (<acroref type="theorem" acro="IPVA" />, <acroref type="theorem" acro="IPSM" />), it is equivalent to require that a vector be orthogonal to each member of a basis for <m>U</m>.  So membership in the orthogonal complement is equivalent to being orthogonal to each column of <m>A</m>. We obtain the desired set equality from the equivalences,
+            <p>Membership in the orthogonal complement requires a vector to be orthogonal to <em>every</em> vector of <m>U</m>.  However, because of the linearity of the inner product (<acroref type="theorem" acro="IPVA" />, <acroref type="theorem" acro="IPSM" />), it is equivalent to require that a vector be orthogonal to each member of a spanning set for <m>U</m>.  So membership in the orthogonal complement is equivalent to being orthogonal to each column of <m>A</m>. We obtain the desired set equality from the equivalences,
             <me>\vect{v}\in\per{U}
             \iff
             \adjoint{\vect{v}}A=\adjoint{\zerovector}
@@ -103,6 +103,19 @@
     </theorem>
 
     <p>Theorem<nbsp /><xref ref="theorem-orthogonal-complement-decomposition" /> gives us a canonical choice of a complementary subspace, which has useful orthogonality properties.  It also allows us to decompose any vector (uniquely) into an element of a subspace, plus an orthogonal vector.  This might remind you in some ways of <q>resolving a vector into compoments</q> if you have studied physics some.</p>
+
+    <p>Given a matrix, we get a natural vector space decomposition.</p>
+
+    <corollary xml:id="corollary-matrix-subspace-decomposition">
+        <title>Matrix Subspace Decomposition</title>
+        <statement>
+            <p>Suppose that <m>A</m> is an <m>m\times n</m> matrix.  Then <me>\complex{m}=\csp{A}\ds\per{\csp{A}}=\csp{A}\ds\nsp{\adjoint{A}}.</me></p>
+        </statement>
+
+        <proof>
+            <p>Theorem<nbsp /><xref ref="theorem-orthogonal-complement-decomposition" /> provides the first equality and Theorem<nbsp /><xref ref="theorem-orthogonal-complement-matrices" /> gives the second.</p>
+        </proof>
+    </corollary>
 
     <exercise xml:id="exercise-orthogonal-complements">
         <statement>
