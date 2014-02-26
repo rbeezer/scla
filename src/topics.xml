@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+   
+<chapter xml:id="chapter-topics" filebase="topics" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>Topics</title>
+    
+    <p>In this chapter we collect a variety of useful topics that are independent of much of trhe other material, though not exclusively so.</p>
+    
+    <xi:include href="./vandermonde.xml" />
+    
+</chapter>
