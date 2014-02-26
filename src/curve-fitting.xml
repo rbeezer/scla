@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<section xml:id="section-curve-fitting" filebase="curve-fitting">
+	<title>Curve Fitting</title>
+
+	<subsection xml:id="subsection-interpolating-polynomials">
+		<title>Interpolating Polynomials</title>
+
+		<p>Given two points in the plane, there is a unique line through them.  Given three points in the plane, and not in a line, there is a unique parabola through them.  Given four points in the plane, there is a unique polynomial, of degree 3 or less, passing through them.  And so on.  We can prove this result, and give a procedure for finding the polynomial with the help of Vandermonde matrices (<xref provisional="section on vandermonde matrices" />).</p>
+
+		<theorem xml:id="theorem-interpolating-polynomial">
+			<title>Interpolating Polynomial</title>
+
+			<statement>
+				<p>Suppose <m>\setparts{(x_i,\,y_i)}{1\leq i\leq n+1}</m> is a set of <m>n+1</m> points in the plane where the <m>x</m>-coordinates are all different.  Then there is a unique polynomial of degree <m>n</m> or less, <m>p(x)</m>, such that <m>p(x_i)=y_i</m>, <m>1\leq i\leq n+1</m>.</p>
+			</statement>
+
+			<proof>
+				<p>Write <m>p(x)=a_0+a_1x+a_2x^2+\cdots+a_nx^n</m>.  To meet the conclusion of the theorem, we desire,
+				<md>
+				<mrow>y_i&amp;=p(x_i)=a_0+a_1x_i+a_2x_i^2+\cdots+a_nx_i^n
+				&amp;
+				1\leq i\leq n+1&amp;
+				</mrow>
+				</md> This is a system of <m>n+1</m> linear equations in the <m>n+1</m> variables <m>a_0,\,a_1,\,a_2,\,\ldots,\,a_n</m>.  The vector of constants in this system is the vector containing the <m>y</m>-coordinates of the points.   More importantly, the coefficient matrix is a Vandermonde matrix (<xref provisional="definition-vandermonde" />) built from the <m>x</m>-coordinates <m>\scalarlist{x}{n+1}</m>.  Since we have required that these scalars all be different, <xref provisional="theorem-NVM" /> tells us that the coefficient matrix is nonsingular and <acroref type="theorem" acro="NMUS" /> says the solution for the coefficients of the polynomial exists, and the solution is unique.  As a practical matter, <acroref type="theorem" acro="SNCM" /> provides an expression for the solution.</p>
+			</proof>
+		</theorem>
+
+		<example xml:id="example-PTFP">
+			<title>Polynomial through five points</title>
+
+			<p>Suppose we have the following 5 points in the plane and we wish to pass a degree 4 polynomial through them.</p>
+
+	        <table>
+	            <tgroup cols="6" align="center">
+	                <tbody>
+	                    <row><entry><m>i</m></entry><entry>1</entry><entry>2</entry><entry>3</entry><entry>4</entry><entry>5</entry></row>
+	                    <row><entry><m>x_i</m></entry><entry>-3</entry><entry>-1</entry><entry>2</entry><entry>3</entry><entry>6</entry></row>
+	                    <row><entry><m>y_i</m></entry><entry>276</entry><entry>16</entry><entry>31</entry><entry>144</entry><entry>2319</entry></row>
+	                </tbody>
+	            </tgroup>
+	            <caption>Points on a polynomial</caption>
+	        </table>
+
+			<p>The required system of equations has a coefficient matrix that is the Vandermonde matrix where row <m>i</m> is successive powers of <m>x_i</m>
+			<me><![CDATA[A=
+			\begin{bmatrix}
+			1 & -3 & 9 & -27 & 81 \\
+			1 & -1 & 1 & -1 & 1 \\
+			1 & 2 & 4 & 8 & 16 \\
+			1 & 3 & 9 & 27 & 81 \\
+			1 & 6 & 36 & 216 & 1296
+			\end{bmatrix}]]></me>  <acroref type="theorem" acro="NMUS" /> provides a solution as
+			<md>
+				<mrow>\colvector{a_0\\a_1\\a_2\\a_3\\a_4}
+				&amp;=\inverse{A}\colvector{276 \\ 16 \\ 31 \\ 144 \\ 2319}</mrow>
+				<mrow>&amp;=
+				\begin{bmatrix}
+				<![CDATA[ -\frac{1}{15} & \frac{9}{14} & \frac{9}{10} & -\frac{1}{2} & \frac{1}{42} \\
+				 0 & -\frac{3}{7} & \frac{3}{4} & -\frac{1}{3} & \frac{1}{84} \\
+				 \frac{5}{108} & -\frac{1}{56} & -\frac{1}{4} & \frac{17}{72} & -\frac{11}{756} \\
+				 -\frac{1}{54} & \frac{1}{21} & -\frac{1}{12} & \frac{1}{18} & -\frac{1}{756} \\
+				 \frac{1}{540} & -\frac{1}{168} & \frac{1}{60} & -\frac{1}{72} & \frac{1}{756} ]]>
+				\end{bmatrix}
+				\colvector{276 \\ 16 \\ 31 \\ 144 \\ 2319}
+				=\colvector{3 \\ -4 \\ 5 \\ -2 \\ 2}</mrow>
+			</md> So the polynomial is <m>p(x)=3 - 4x + 5x^2 - 2x^3 + 2x^4</m>.</p>
+		</example>
+
+		<p>The unique polynomial passing through a set of points is known as the <term>interpolating polynomial</term> and it has many uses.  Unfortunately, when confronted with data from an experiment the situation may not be so simple or clear cut.  Read on.</p>
+	</subsection>
+
+	<subsection>
+		<title>Fitting Curves Through Data</title>
+
+		<p>To construct an interpolating polynomial, we presumed we wanted a curve passing through a set of points <em>exactly</em>.  Sometimes we have a similar, but distinctly different situation.  We have a set of data points <m>x_i</m>, <m>1\leq i\leq n</m>, where the <m>x_i</m> are <m>m</m>-tuples.  We have a model or a physical law which suggests that each <m>m</m>-tuple satisfies some linear equation with <m>k</m> unknown parameters.  We wish to estimate the parameters.  If we can formulate a linear system with the parameters as the variables, then we can use a least-squares estimate (Section<nbsp /><xref ref="section-least-squares" />).  We illustrate with two examples.</p>
+
+		<example>
+			<title>Fitting a Third Degree Polynomial</title>
+
+			<p>Suppose we believe the twelve data points below are related by a degree three polynomial, <m>y=p(x)=a_0+a_1x+a_2x^2+a_3x^3</m>.  We have four unknown parameters, the coefficients of the polynomial.  For each point we can create a <m>5</m> tuple, <m>(1, x_i, x_i^2, x_i^3, y_i)</m>, with entries that are related by the linear equation <m>a_0+a_1x_i+a_2x_i^2+a_3x_i^3=y_i</m>.  So we have <m>12</m> linear equations in <m>4</m> variables.  The coefficent matrix <m>A</m> has <m>12</m> rows and <m>4</m> columns, similar in spirit to a Vandemonde matrix (Section<nbsp /><xref ref="section-vandermonde-matrix" />), though not even square.  The vector of constants is the <m>12</m> values of <m>y_i</m>.</p>
+
+	        <table>
+	            <tgroup cols="2" align="center">
+	            	<thead>
+	            		<row><entry><m>x_i</m></entry><entry><m>y_i</m></entry></row>
+	            	</thead>
+	                <tbody>
+						<row><entry>0.142</entry><entry>-10.867</entry></row>
+						<row><entry>0.645</entry><entry> 10.120</entry></row>
+						<row><entry>0.953</entry><entry> 8.1728</entry></row>
+						<row><entry>2.958</entry><entry> 11.693</entry></row>
+						<row><entry>2.975</entry><entry> 18.931</entry></row>
+						<row><entry>3.167</entry><entry> 16.215</entry></row>
+						<row><entry>3.413</entry><entry>  3.863</entry></row>
+						<row><entry>4.301</entry><entry> -7.971</entry></row>
+						<row><entry>5.552</entry><entry>-24.108</entry></row>
+						<row><entry>6.576</entry><entry>-31.217</entry></row>
+						<row><entry>7.957</entry><entry>  0.719</entry></row>
+						<row><entry>8.027</entry><entry>  9.550</entry></row>
+	                </tbody>
+	            </tgroup>
+	            <caption>Points on a polynomial</caption>
+	        </table>
+
+	        <p>Here are the relevant pieces of the system, the normal equations, and the solution.<md>
+	        	<mrow>A&amp;=
+	        	\begin{bmatrix}<![CDATA[
+				1 & 0.142 & 0.020 & 0.003 \\
+				1 & 0.646 & 0.417 & 0.269 \\
+				1 & 0.954 & 0.909 & 0.867 \\
+				1 & 2.958 & 8.751 & 25.886 \\
+				1 & 2.975 & 8.851 & 26.332 \\
+				1 & 3.167 & 10.032 & 31.775 \\
+				1 & 3.413 & 11.649 & 39.757 \\
+				1 & 4.302 & 18.504 & 79.595 \\
+				1 & 5.552 & 30.830 & 171.180 \\
+				1 & 6.576 & 43.247 & 284.403 \\
+				1 & 7.958 & 63.325 & 503.917 \\
+				1 & 8.028 & 64.444 & 517.341
+	        	]]>\end{bmatrix}
+	        	&amp;
+	        	\vect{b}&amp;=
+	        	\colvector{-10.867 \\ 10.120 \\ 8.172 \\ 11.693 \\ 18.931 \\ 16.215 \\ 3.863 \\ -7.971 \\ -24.108 \\ -31.217 \\ 0.719 \\ 9.550 }
+	        	</mrow></md>
+	        	<md>
+	        	<mrow>\adjoint{A}A&amp;=
+	        	\begin{bmatrix}<![CDATA[
+				12.000 & 46.671 & 260.978 & 1681.324 \\
+				46.671 & 260.978 & 1681.324 & 11718.472 \\
+				260.978 & 1681.324 & 11718.472 & 85542.108 \\
+				1681.324 & 11718.472 & 85542.108 & 642050.755
+	        	]]>\end{bmatrix}</mrow></md>
+	        	<md><mrow>
+	        	\adjoint{A}\vect{b}&amp;=
+	        	\colvector{5.102 \\ -122.81 \\ -1090.783 \\ -6856.475}
+	        	&amp;
+	        	\vect{x}&amp;=
+	        	\colvector{-17.726 \\ 47.157 \\ -16.122 \\ 1.323}</mrow>
+        	</md>  So the polynomial obtained from a least-squares fit is <me>\hat{p}(x)=1.323x^3-16.122x^2+47.157x-17.726</me></p>
+
+		</example>
+
+		<p>With other models, it may be necessary to rearrange the equation to <q>linearize</q> it.  For example, if the relationship between <m>x</m> and <m>y</m> is exponential and is given by <m>y=ae^{bx}</m> then applying the logarithm to both sides would yield <m>\log(y)=\log(a) + bx</m>.  Then by using pairs <m>(x_i, \log(y_i))</m>, a least-squares solution would provide estimates of <m>\log(a)</m> and <m>b</m>, which could be easily converted to estimates of <m>a</m> and <m>b</m>.</p>
+
+	</subsection>
+
+</section>

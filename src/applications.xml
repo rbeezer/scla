@@ -4,5 +4,6 @@
     <title>Applications</title>
     
     <xi:include href="./least-squares.xml" />
+    <xi:include href="./curve-fitting.xml" />
     
 </chapter>
