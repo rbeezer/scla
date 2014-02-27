@@ -1,5 +1,5 @@
-<section xml:id="section-householder" filebase="householder">
-    <title>Householder Reflections</title>
+<section xml:id="section-reflections" filebase="reflections">
+    <title>Reflections</title>
     
     <p>When we decompose matrices into products of other matrices, we often wish to create matrices with many zero entries.  A <term>Householder matrix</term> is a unitary matrix which transforms a vector into a vector of the same size that is a nonzero multiple of the first column of an identity matrix, thus creating a vector with just a single nonzero entry.  A typical application is to <q>zero out</q> entries of a matrix below the diagonal, column-by-column, in order to achieve a triangular matrix.</p>
 
