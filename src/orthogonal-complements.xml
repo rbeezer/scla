@@ -124,9 +124,24 @@
         </proof>
     </corollary>
 
+    <exercise xml:id="exercise-orthogonal-complement-3D">
+        <statement>
+            <p>Compute the orthogonal complement of the subspace <m>U\subset\complex{3}</m>.
+            <me>U=\spn{\set{\colvector{1\\-1\\5}, \colvector{3\\1\\3} }}</me></p>
+        </statement>
+        <solution><p>Form the matrix <m>A</m>, whose columns are the two basis vectors given for <m>U</m> and compute the null space <m>\nsp{\adjoint{A}}</m> by row-reducing the matrix.  (Theorem<nbsp /><xref ref="theorem-orthogonal-complement-matrices" />)<me>\adjoint{A}=\begin{bmatrix}<![CDATA[
+        1 & -1 & 5\\
+        3 &  1 & 3]]>\end{bmatrix}
+        \rref
+        \begin{bmatrix}<![CDATA[
+        1 & 0 &  2\\
+        0 & 1 & -3]]>\end{bmatrix}</me> So <me>\per{U}=\nsp{\adjoint{A}}=\spn{\set{\colvector{-2\\3\\1}}}</me></p>
+        </solution>
+    </exercise>
+
     <exercise xml:id="exercise-orthogonal-complements">
         <statement>
-            <p>Compute the orthogonal complments of the two subspaces from Exercises <xref ref="exercise-3d-complements" /> and <xref ref="exercise-5d-complements" />.  For the subspace of <m>\complex{5}</m> verify that your first complement was not the orthogonal complement (or return to the exercise and find a complement that is not orthogonal).</p>
+            <p>Compute the orthogonal complements of the two subspaces from Exercises <xref ref="exercise-3d-complements" /> and <xref ref="exercise-5d-complements" />.  For the subspace of <m>\complex{5}</m> verify that your first complement was not the orthogonal complement (or return to the exercise and find a complement that is not orthogonal).</p>
         </statement>
     </exercise>
 

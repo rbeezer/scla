@@ -217,6 +217,13 @@
 
     </subsection>
 
+    <exercise xml:id="exercise-QR-real-square-unique" >
+        <statement>
+            <p>Suppose that <m>A</m> is a nonsingular matrix with <em>real</em> entries.  Then <m>A</m> has a QR decomposition where (1) <m>A=QR</m>, (2) <m>Q</m> is unitary, and (3) <m>R</m> is upper triangular with positive entries, (4) <m>Q</m> and <m>R</m> are also matrices with real entries.  Prove that this decomposition is unique.  (So you may assume such a decomposition exists, you are just being asked to establish uniqueness.)</p>
+        </statement>
+        <solution>
+            <p>Assume there are two such decompositions, so <m>R_1Q_1=A=R_2Q_2</m> and rearrange to obtain <m>\inverse{R_2}R_1=Q_2\adjoint{Q_1}</m>.  The left-hand side will be an upper triangular matrix with positive diagonal entries.  The right-hand side is a product of two unitary matrices, hence is unitary, and its columns form an orthonormal set.  Now, viewing the columns of the left-hand matrix as an orthonormal set will allow you to progressively conclude that the columns (from left to right) are the columns of an identity matrix.  Thus, <m>\inverse{R_2}R_1=I</m> and <m>R_1=R_2</m>, and similarly, <m>Q_1=Q_2</m>.</p>
+        </solution>
+    </exercise>
 
-    <todo>orthogonal complement</todo>
 </section>

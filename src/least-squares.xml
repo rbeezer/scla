@@ -134,5 +134,22 @@
 
     </subsection>
 
+    <exercise xml:id="exercise-3d-least-squares">
+        <statement>
+            <p>Compute the least-squares solution to the system \(A\vect{x}=\vect{b}\).  Compute the residual vector associated with your solution. <md>
+                <mrow>A&amp;=\begin{bmatrix}<![CDATA[1&1\\0&0\\2&3]]>\end{bmatrix}
+                &amp;
+                \vect{b}&amp;=\colvector{2\\1\\4}</mrow>
+            </md></p>
+        </statement>
+        <solution>
+            <p>We compute the pieces of the normal equations<md>
+                <mrow>\adjoint{A}A&amp;=\begin{bmatrix}<![CDATA[5 & 7\\7 & 10]]>\end{bmatrix}
+                &amp;
+                \adjoint{A}\vect{b}&amp;=\colvector{10\\14}</mrow>
+            </md>  So the solution is <me>\vect{x}=\inverse{\begin{bmatrix}<![CDATA[5 & 7\\7 & 10]]>\end{bmatrix}}\colvector{10\\14}=\begin{bmatrix}<![CDATA[10 & -7\\-7 & 5]]>\end{bmatrix}\colvector{10\\14}=\colvector{2\\0}</me>  The residual is the difference <me>A\vect{x}-\vect{b} = \begin{bmatrix}<![CDATA[1&1\\0&0\\2&3]]>\end{bmatrix}\colvector{2\\0}-\colvector{2\\1\\4}=\colvector{0\\-1\\0}</me>  Notice that residual is indeed orthogonal to the column space of <m>A</m>.</p>
+        </solution>
+    </exercise>
+
 
 </section>
