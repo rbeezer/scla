@@ -6,6 +6,6 @@
     <xi:include href="./introduction.xml" />
     <xi:include href="./direct-sums.xml" />
     <xi:include href="./orthogonal-complements.xml" />
-    <xi:include href="./householder.xml" />
+    <xi:include href="./reflectors.xml" />
     
 </chapter>
