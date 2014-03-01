@@ -7,7 +7,7 @@
 <!-- Copyright (C) 2004-2014  Robert A. Beezer    -->
 <!-- See the file COPYING for copying conditions. -->
 
-<section xml:id="sec-introduction">
+<section xml:id="section-introduction" filebase="introduction">
     <title>Introduction</title>
 
     <p>This book is about advanced topics in linear algebra.  So we presume you have some experience with matrix algebra, vector spaces (possibly abstract ones), eigenvalues, linear transformations, and matrix representations of linear transformations.  All of this material can be found in <booktitle>A First Course in Linear Algebra</booktitle>, which we will reference frequently.</p>

@@ -7,8 +7,8 @@
 <!-- Copyright (C) 2004-2014  Robert A. Beezer    -->
 <!-- See the file COPYING for copying conditions. -->
 
-<section acro="DS">
-<title>Direct Sums</title>
+<section xml:id="section-direct-sums" filebase="direct-sums">
+    <title>Direct Sums</title>
 
 <subsection acro="DS">
 <title>Direct Sums</title>

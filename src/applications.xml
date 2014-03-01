@@ -7,7 +7,7 @@
 <!-- Copyright (C) 2004-2014  Robert A. Beezer    -->
 <!-- See the file COPYING for copying conditions. -->
 
-<chapter xml:id="chap-applications" filebase="applications" xmlns:xi="http://www.w3.org/2001/XInclude">
+<chapter xml:id="chapter-applications" filebase="applications" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Applications</title>
     
     <xi:include href="./least-squares.xml" />
