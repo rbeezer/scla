@@ -130,8 +130,7 @@
 				260.978 & 1681.324 & 11718.472 & 85542.108 \\
 				1681.324 & 11718.472 & 85542.108 & 642050.755
 	        	]]>\end{bmatrix}</mrow></md>
-	        	<md><mrow>
-	        	\adjoint{A}\vect{b}&amp;=
+				<md><mrow>\adjoint{A}\vect{b}&amp;=
 	        	\colvector{5.102 \\ -122.81 \\ -1090.783 \\ -6856.475}
 	        	&amp;
 	        	\vect{x}&amp;=
