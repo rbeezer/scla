@@ -1,4 +1,13 @@
-    <docinfo>
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- This file is part of the book                -->
+<!--                                              -->
+<!--      A Second Course in Linear Algebra       -->
+<!--                                              -->
+<!-- Copyright (C) 2004-2014  Robert A. Beezer    -->
+<!-- See the file COPYING for copying conditions. -->
+
+   <docinfo>
         <!-- Multiple authors will go into an eventual "authorgroup" -->
         <author>
             <personname>Robert A. Beezer</personname>
