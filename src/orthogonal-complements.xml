@@ -92,7 +92,7 @@
         </statement>
 
         <proof>
-            <p>We first establish that <m>U\cap\per{U}=\set{\zerovector}</m>.  Suppose <m>\vect{v}\in U</m> and <m>\vect{v}\in\per{U}</m>.  Then <m>\innerproduct{\vect{u}}{\vect{u}}=0</m> and by <acroref type="theorem" acro="PIP" /> we conclude that <m>\vect{v}=\zerovector</m>.</p>
+            <p>We first establish that <m>U\cap\per{U}=\set{\zerovector}</m>.  Suppose <m>\vect{u}\in U</m> and <m>\vect{u}\in\per{U}</m>.  Then <m>\innerproduct{\vect{u}}{\vect{u}}=0</m> and by <acroref type="theorem" acro="PIP" /> we conclude that <m>\vect{u}=\zerovector</m>.</p>
 
             <p>We now show that an arbitrary vector <m>\vect{v}</m> can be written as a sum of vectors from <m>U</m> and <m>\per{U}</m>.  Without loss of generality, we can assume we have an orthonormal basis for <m>U</m>, for if not, we can apply the Gram-Schmidt process to any basis of <m>U</m> to create an orthogonal spanning set, whose individual vectors can be scaled to have norm one (<acroref type="theorem" acro="GSP" />).  Denote this basis as <m>B=\set{\vectorlist{u}{k}}</m>.</p>
 
