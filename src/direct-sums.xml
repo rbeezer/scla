@@ -100,7 +100,7 @@
 
     <p>There are several different ways to define a direct sum.  Our next two theorems give equivalences (<acroref type="technique" acro="E" />) for direct sums, and therefore could have been employed as definitions.  The first should further cement the notion that a direct sum has some connection with linear independence.</p>
 
-    <theorem acro="DSZV" index="direct sum!decomposing zero vector">
+    <theorem xml:id="theorem-direct-sum-zero-vector" acro="DSZV">
         <title>Direct Sums and Zero Vectors</title>
         <statement>
             <p>Suppose <m>U</m> and <m>W</m> are subspaces of the vector space <m>V</m>.  Then <m>V=U\ds W</m> if and only if<ol>
@@ -163,7 +163,7 @@
         </proof>
     </theorem>
 
-    <p>If the statement of <acroref type="theorem" acro="DSZV" /> did not remind you of linear independence, the next theorem should establish the connection.</p>
+    <p>If the statement of Theorem<nbsp /><xref ref="theorem-direct-sum-zero-vector" /> did not remind you of linear independence, the next theorem should establish the connection.</p>
 
     <theorem acro="DSLI" index="direct sums!linear independence">
         <title>Direct Sums and Linear Independence</title>
@@ -178,7 +178,7 @@
             <mrow>&amp;=\vect{u}+\vect{w}</mrow>
             </md>where we have made an implicit definition of the vectors <m>\vect{u}\in U</m>, <m>\vect{w}\in W</m>.</p>
 
-            <p>Applying <acroref type="theorem" acro="DSZV" /> we conclude that
+            <p>Applying Theorem<nbsp /><xref ref="theorem-direct-sum-zero-vector" /> we conclude that
             <md>
             <mrow>\vect{u}&amp;=\lincombo{a}{u}{k}=\zerovector</mrow>
             <mrow>\vect{w}&amp;=\lincombo{b}{w}{\ell}=\zerovector</mrow>
@@ -236,7 +236,7 @@
         </proof>
     </theorem>
 
-    <p>Remember that when we write <m>V=U\ds W</m> there always needs to be a <q>superspace,</q> in this case <m>V</m>.  The statement <m>U\ds W</m> is meaningless.  Writing <m>V=U\ds W</m> is simply a shorthand for a somewhat complicated relationship between <m>V</m>, <m>U</m> and <m>W</m>, as described in the two conditions of <acroref type="definition" acro="DS" />, or <acroref type="theorem" acro="DSZV" />, or <acroref type="theorem" acro="DSZI" />.  <acroref type="theorem" acro="DSFB" /> and <acroref type="theorem" acro="DSFOS" /> gives us sure-fire ways to build direct sums, while <acroref type="theorem" acro="DSLI" />,  <acroref type="theorem" acro="DSD" /> and <acroref type="theorem" acro="RDS" /> tell us interesting properties of direct sums.</p>
+    <p>Remember that when we write <m>V=U\ds W</m> there always needs to be a <q>superspace,</q> in this case <m>V</m>.  The statement <m>U\ds W</m> is meaningless.  Writing <m>V=U\ds W</m> is simply a shorthand for a somewhat complicated relationship between <m>V</m>, <m>U</m> and <m>W</m>, as described in the two conditions of <acroref type="definition" acro="DS" />, or Theorem<nbsp /><xref ref="theorem-direct-sum-zero-vector" />, or <acroref type="theorem" acro="DSZI" />.  <acroref type="theorem" acro="DSFB" /> and <acroref type="theorem" acro="DSFOS" /> gives us sure-fire ways to build direct sums, while <acroref type="theorem" acro="DSLI" />,  <acroref type="theorem" acro="DSD" /> and <acroref type="theorem" acro="RDS" /> tell us interesting properties of direct sums.</p>
 
     <p>This subsection has been long on theorems and short on examples.  If we were to use the term <q>lemma</q> we might have chosen to label some of these results as such, since they will be important tools in other proofs, but may not have much interest on their own (see <acroref type="technique" acro="LC" />).  We will be referencing these results heavily in later sections, and will remind you then to come back for a second look.</p>
 

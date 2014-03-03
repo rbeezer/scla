@@ -1,0 +1,242 @@
+<section xml:id="section-projectors" filebase="projectors">
+    <title>Projectors</title>
+
+    <p>When we multiply a vector by a matrix, we form a linear combination of the columns of the matrix.  Said differently, the result of the product is in the column space of the matrix.  So we can think of a matrix as moving a vector into a subspace, and we call that subspace the column space of the matrix <m>\csp{A}</m>.  In the case of a linear transformation, we call this subspace the range, <m>\rng{T}</m>, or we might call it the image.  A <term>projector</term> is a square matrix which moves vectors into a subspace (like any matrix can), but fixes vectors already in the subspace.  This property earns a projector the moniker <term>idempotent</term>.  We will see that projectors have a variety of interesting properties.</p>
+
+    <subsection xml:id="subsection-oblique-projectors">
+        <title>Oblique Projectors</title>
+
+
+        <definition xml:id="definition-projector">
+            <statement>
+                <p>A square matrix <m>P</m> is a projector if <m>P^2=P</m>.</p>
+            </statement>
+        </definition>
+
+        <p>A projector fixes vectors in its column space.</p>
+
+        <lemma xml:id="lemma-projector-fixing">
+            <title>Projectors Fix Column Space</title>
+            <statement>
+                <p>Suppose <m>P</m> is a projector and <m>\vect{x}\in\csp{P}</m>.  Then <m>P\vect{x}-\vect{x}=\zerovector</m>.</p>
+            </statement>
+
+            <proof>
+                <p>Since <m>\vect{x}\in\csp{P}</m>, there is a vector <m>\vect{w}</m> such that <m>P\vect{w}=\vect{x}</m>.  Then <me>P\vect{x}-\vect{x}=P\left(P\vect{w}\right)-P\vect{w}=P^2\vect{w}-P\vect{w}=P\vect{w}-P\vect{w}=\zerovector.</me></p>
+            </proof>
+        </lemma>
+
+        <p>For a general vector, the difference between the vector and its image under a projector may not always be the zero vector, but it will be a vector in the null space of the projector.</p>
+
+        <lemma xml:id="lemma-projector-direction">
+            <title>Projector Directions are Null Space</title>
+            <statement>
+                <p>Suppose <m>P</m> is a projector of size <m>n</m> and <m>\vect{x}\in\complex{n}</m> is any vector.  Then <m>P\vect{x}-\vect{x}\in\nsp{P}</m>.  Furthermore, <m>\nsp{P}=\setparts{P\vect{x}-\vect{x}}{\vect{x}\in\complex{n}}</m>.</p>
+            </statement>
+
+            <proof>
+                <p>First, <me>P(P\vect{x}-\vect{x})=P^2\vect{x}-P\vect{x}=P\vect{x}-P\vect{x}=\zerovector.</me></p>
+
+                <p>To establish the second half of the claimed set equality, suppose <m>\vect{z}\in\nsp{P}</m>, then<me>\vect{z}=\zerovector - \left(-\vect{z}\right)=P\left(-\vect{z}\right)- \left(-\vect{z}\right)</me>which establishes that <m>\vect{z}\in\setparts{P\vect{x}-\vect{x}}{\vect{x}\in\complex{n}}</m>.</p>
+            </proof>
+        </lemma>
+
+        <p>When the null space of a projector has dimension one, it is easy to understand the choice of the term <q>projector</q>.  Imagine the setting in three dimensions where the column space of the projector is a subspace of dimension two, which is physically a plane through the origin.  Imagine some vector as an arrow from the origin, or as just the point that would be at the tip of the arrow.  A light shines on the vector and casts a shadow onto the plane (either another arrow, or just a point).   This shadow is the projection, the image of the projector.  The image of the shadow is unchanged, since shining the light on the vector that is the shadow will not move it.  What direction does the light come from?  What is the vector that describes the change from the vector to its shadow (projection)?  For a vector<m>\vect{x}</m>, this direction is <m>P\vect{x}-\vect{x}</m>, an element of the null space of <m>P</m>.  So if <m>\nsp{P}</m> has dimension one, then every vector is moved in the same direction, a multiple of a lone basis vector for <m>\nsp{P}</m>.  This matches our assumptions about physical light from a distant source, with rays all moving parallel to each other.  Here is a simple example of just this scenario.</p>
+
+        <example xml:id="example-projector-three-dimensions">
+            <title>Projector in Three Dimensions</title>
+
+            <p>Verify the following facts about the matrix <m>P</m> to understand that it is a projector and to understand its geometry.  <me>P = \frac{1}{13}
+            \begin{bmatrix}<![CDATA[
+            11 & -3 & -5 \\
+            -4 & 7 & -10 \\
+            -2 & -3 & 8
+            ]]>\end{bmatrix}</me></p>
+
+            <ol>
+                <li><p><m>P^2=P</m></p></li>
+                <li><p><m>\csp{P}=\spn{\set{\colvector{1\\0\\\frac{-2}{5}},\,\colvector{0\\1\\\frac{-3}{5}}}}</m></p></li>
+                <li><p><m>\nsp{P}=\spn{\set{\colvector{1\\2\\1}}}</m></p></li>
+            </ol>
+
+            <p>So <m>P</m> sends every vector onto a two-dimensional subspace, with an equation we might write as <m>2x+3y+5z=0</m> in Cartesian coordinates, or which we might describe as the plane through the origin with normal vector <m>\vect{n}=2\vec{i}+3\vec{j}+5\vec{k}</m>.  Vectors, or points, are always moved in the direction of the vector <m>\vect{d}=\vec{i}+2\vec{j}+1\vec{k}</m><mdash />this is the direction the light is shining.  Exercise<nbsp /><xref ref="exercise-projector-three-dimensions" /> asks you to experiment further.</p>
+        </example>
+
+        <exercise xml:id="exercise-projector-three-dimensions">
+            <statement>
+                <p>Continue experimenting with Example<nbsp /><xref ref="example-projector-three-dimensions" /> by constructing a vector <em>not</em> in the column space of <m>P</m>.  Compute its image under <m>P</m> and verify that it is a linear combination of the basis vectors given in the example.  Compute the direction your vector moved and verify that it is a scalar multiple of the basis vector for the null space given in the example.   Finally, construct a new vector in the column space and verify that it is unmoved by <m>P</m>.</p>
+            </statement>
+        </exercise>
+
+        <p>Given a projector, we can define a complementary projector, which has some interesting properties.</p>
+
+        <definition xml:id="definition-complementary-projector">
+            <statement>
+                <p>Given a projector <m>P</m>, the complementary projector to <m>P</m> is <m>I-P</m>.</p>
+            </statement>
+        </definition>
+
+        <p>The next lemma justifies calling <m>I-P</m> a projector.</p>
+
+        <lemma xml:id="lemma-complementary-projector">
+            <title>Complementary Projector is a Projector</title>
+            <statement>
+                <p>If <m>P</m> is a projector then <m>I-P</m> is also a projector.</p>
+            </statement>
+
+            <proof>
+                <p><me>\left(I-P\right)^2=I^2-P-P+P^2=I-P-P+P=I-P</me>.</p>
+            </proof>
+        </lemma>
+
+        <p>The complementary projector to <m>P</m> projects onto the null space of <m>P</m>.</p>
+
+        <lemma xml:id="lemma-complementary-projector-column-space">
+            <title>Complementary Projector's Column Space</title>
+            <statement>
+                <p>Suppose <m>P</m> is a projector.  Then <m>\csp{I-P}=\nsp{P}</m> and therefore  <m>\nsp{I-P}=\csp{P}</m>.</p>
+            </statement>
+
+            <proof>
+                <p>First, suppose <m>\vect{x}\in\nsp{P}</m>.  Then <me>\left(I-P\right)\vect{x}=I\vect{x}-P\vect{x}=\vect{x}</me> demonstrating that <m>\vect{x}</m> is a linear combination of the columns of <m>I-P</m>.  So <m>\nsp{P}\subseteq\csp{I-P}</m>.</p>
+
+                <p>Now, suppose <m>\vect{x}\in\csp{I-P}</m>.  Then there is a vector <m>\vect{w}</m> such that <m>\vect{x}=\left(I-P\right)\vect{w}</m>.  Then <me>P\vect{x} = P\left(I-P\right)\vect{w}=(P-P^2)\vect{w}=\zeromatrix\vect{w}=\zerovector.</me>    So <m>\csp{I-P}\subseteq\nsp{P}</m>.</p>
+
+                <p>To establish the second conclusion, replace the projector <m>P</m> in the first conclusion by the projector <m>I-P</m>.</p>            
+            </proof>
+        </lemma>
+
+        <p>Using these facts about complementary projectors we find a simple direct sum decomposition.</p>
+
+        <theorem xml:id="theorem-projector-decomposition">
+            <title>Projector Vector Space Decomposition</title>
+            <statement>
+                <p>Suppose <m>P</m> is a projector of size <m>n</m>.  Then <m>\complex{n}=\csp{P}\ds\nsp{P}</m>.</p>
+            </statement>
+
+            <proof>
+                <p>First, we show that <m>\csp{P}\cap\nsp{P}=\set{\zerovector}</m>.  Suppose <m>\vect{x}\in\csp{P}\cap\nsp{P}</m>.  Since <m>\vect{x}\in\csp{P}</m>, Lemma<nbsp /><xref ref="lemma-complementary-projector-column-space" /> implies that <m>\vect{x}\in\nsp{I-P}</m>.  So <me>\vect{x}=\vect{x}-\zerovector=\vect{x}-P\vect{x}=\left(I-P\right)\vect{x}=\zerovector.</me></p>
+
+                <p>Using Lemma<nbsp /><xref ref="lemma-complementary-projector-column-space" /> again, <m>\nsp{P}=\csp{I-P}</m>.  We show that an arbitrary vector <m>\vect{w}\in\complex{n}</m> can be written as a sum of two vectors from the two column spaces, <me>\vect{w} = I\vect{w} - P\vect{w} + P\vect{w} = \left(I-P\right)\vect{w} + P\vect{w}.</me></p>
+
+                <p>So <m>\complex{n}</m>, <m>\csp{P}</m> and <m>\nsp{P}</m> meet the hypotheses of Theorem<nbsp /><xref ref="theorem-direct-sum-zero-vector" />, allowing us to establish the direct sum.</p>
+            </proof>
+        </theorem>
+
+    </subsection>
+
+    <subsection xml:id="subsection-orthogonal-projectors">
+        <title>Orthogonal Projectors</title>
+
+        <p>The projectors of the previous section would be termed <term>oblique projectors</term> since no assumption was made about the direction that a vector was moved when projected.  We remedy that situation now by defining an <term>orthogonal projector</term> to be a projector where the complementary subspace is orthogonal to the space the projector projects onto.</p>
+
+        <definition xml:id="definition-orthogonal-projector">
+            <statement>
+                <p>A projector <m>P</m> is orthogonal if <m>\nsp{P}=\per{\left(\csp{P}\right)}</m>.</p>
+            </statement>
+        </definition>
+
+        <p>We know from Theorem<nbsp /><xref ref="theorem-projector-decomposition" /> that for a projector <m>P</m>, <m>\complex{n}=\csp{P}\ds\nsp{P}</m>.  We also know by Corollary<nbsp /><xref ref="corollary-matrix-subspace-decomposition" />, that for any <m>m\times n</m> matrix <m>A</m>, <m>\complex{m}=\csp{A}\ds\per{\csp{A}}=\csp{A}\ds\nsp{\adjoint{A}}</m>.  So, superficially, we might expect orthogonal projectors to be Hermitian.  And so it is.</p>
+
+        <theorem xml:id="theorem-orthogonal-projector-hermitian">
+            <title>Orthogonal Projectors are Hermitian</title>
+            <statement>
+                <p>Suppose <m>P</m> is a projector.  Then <m>P</m> is an orthogonal projector if and only if <m>P</m> is Hermitian.</p>
+            </statement>
+
+            <proof>
+                <p><acroref acro="HMIP" type="theorem" /> says that Hermitian matrices are characterized by the property that <m>\innerproduct{A\vect{x}}{\vect{y}}=\innerproduct{\vect{x}}{A\vect{y}}</m> for every choice of the vectors <m>\vect{x}, \vect{y}</m>.  We will use this result in both halves of the proof.</p>
+
+                <p><reverse /> Suppose that <m>\vect{x}\in\nsp{P}</m>.  Then for any <m>\vect{y}\in\csp{P}</m>, there is a vector <m>\vect{w}</m> that allows us to write <me>\innerproduct{\vect{x}}{\vect{y}}
+                =\innerproduct{\vect{x}}{P\vect{w}}
+                =\innerproduct{P\vect{x}}{\vect{w}}
+                =\innerproduct{\zerovector}{\vect{w}}
+                =0.</me>  So <m>\nsp{P}\subseteq\per{\csp{A}}.</m></p>
+
+                <p>Now suppose that <m>\vect{x}\in\per{\csp{P}}</m>.  Consider, <me>\innerproduct{P\vect{x}}{P\vect{x}}
+                =\innerproduct{P^2\vect{x}}{\vect{x}}
+                =\innerproduct{P\vect{x}}{\vect{x}}
+                =0.</me>  By <acroref type="theorem" acro="PIP" />, we conclude that <m>P\vect{x}=\zerovector</m> and <m>\vect{x}\in\nsp{P}</m>.  So <m>\per{\csp{A}}\subseteq\nsp{P}</m> and we have establish the set equality of Definition<nbsp /><xref ref="definition-orthogonal-projector" />.</p>
+
+                <p><forward /> Let <m>\vect{u},\vect{v}\in\complex{n}</m> be any two vectors.  Decompose each into two pieces, the first from the column space, the second from the null space, according to Theorem<nbsp /><xref ref="theorem-projector-decomposition" />.  So <md>
+                    <mrow>\vect{u}&amp;=\vect{u}_1+\vect{u}_2&amp;\vect{v}&amp;=\vect{v}_1+\vect{v}_2</mrow>
+                </md> with <m>\vect{u}_1,\vect{v}_1\in\csp{P}</m> and <m>\vect{u}_2,\vect{v}_2\in\nsp{P}</m>.  Then <md>
+                    <mrow>\innerproduct{P\vect{u}}{\vect{v}}
+                    &amp;=\innerproduct{P\vect{u}_1+P\vect{u}_2}{\vect{v}_1+\vect{v}_2}
+                    =\innerproduct{P\vect{u}_1}{\vect{v}_1+\vect{v}_2}</mrow>
+                    <mrow>&amp;=\innerproduct{\vect{u}_1}{\vect{v}_1+\vect{v}_2}
+                    =\innerproduct{\vect{u}_1}{\vect{v}_1}+\innerproduct{\vect{u}_1}{\vect{v}_2}
+                    =\innerproduct{\vect{u}_1}{\vect{v}_1}</mrow>
+                    <mrow>\innerproduct{\vect{u}}{P\vect{v}}
+                    &amp;=\innerproduct{\vect{u}_1+\vect{u}_2}{P\vect{v}_1+P\vect{v}_2}
+                    =\innerproduct{\vect{u}_1+\vect{u}_2}{P\vect{v}_1}</mrow>
+                    <mrow>&amp;=\innerproduct{\vect{u}_1+\vect{u}_2}{\vect{v}_1}
+                    =\innerproduct{\vect{u}_1}{\vect{v}_1}+\innerproduct{\vect{u}_2}{\vect{v}_1}
+                    =\innerproduct{\vect{u}_1}{\vect{v}_1}</mrow>
+                </md>  Since <m>\innerproduct{P\vect{u}}{\vect{v}}=\innerproduct{\vect{u}}{P\vect{v}}</m> for all choices of <m>\vect{u},\vect{v}\in\complex{n}</m>, <acroref acro="HMIP" type="theorem" />,  establishes that <m>P</m> is Hermitian.</p>
+            </proof>
+        </theorem>
+
+        <p>There is an easy recipe for creating orthogonal projectors onto a given subspace.  We will first informally motivate the construction, then give the formal proof.  Suppose <m>U</m> is a subspace with a basis <m>\vectorlist{u}{k}</m> and let <m>A</m> be a matrix with these basis vectors as the columns.  Let <m>P</m> denote the desired orthogonal projector, and consider its action on an arbitrary vector <m>\vect{x}</m>.  To project onto <m>U</m>, we must have <m>P\vect{x}\in\csp{A}</m>, so there is a vector <m>\vect{w}</m> such that <m>P\vect{x}=A\vect{w}</m>.  The orthogonality condition will be satisfied if <m>P\vect{x}-\vect{x}</m> is orthogonal to every vector of <m>U</m>.  It is enough to require orthogonality to each basis vector of <m>U</m>, and hence to each column of <m>A</m>.  So we have <md>
+            <mrow>&amp;\adjoint{A}\left(P\vect{x}-\vect{x}\right)=\zerovector</mrow>
+            <mrow>&amp;\adjoint{A}A\vect{w}-\adjoint{A}\vect{x}=\zerovector</mrow>
+            <mrow>&amp;\adjoint{A}A\vect{w}=\adjoint{A}\vect{x}</mrow>
+        </md>  As <m>A</m> has full rank, <m>\adjoint{A}A</m> is nonsingular (<xref provisional="adjoint-A is nonsingular result" />), so we can employ its inverse to find <me>P\vect{x}=A\vect{w}=A\inverse{\left(\adjoint{A}A\right)}\adjoint{A}\vect{x}</me>  This suggests that <m>P=A\inverse{\left(\adjoint{A}A\right)}\adjoint{A}</m>.  And so it is.</p>
+
+
+        <theorem xml:id="theorem-orthogonal-projector-construction">
+            <title>Orthogonal Projector Construction</title>
+            <statement>
+                <p>Suppose <m>U</m> is a subspace and <m>A</m> is a matrix whose columns form a basis of <m>U</m>.  Then <m>P=A\inverse{\left(\adjoint{A}A\right)}\adjoint{A}</m> is an orthogonal projector onto <m>U</m>.</p>
+            </statement>
+
+            <proof>
+                <p>Because <m>A</m> is the leftmost term in the product for <m>P</m>, <m>\csp{P}\subseteq\csp{A}</m>.  Because <m>\inverse{\left(\adjoint{A}A\right)}\adjoint{A}</m> has full (column) rank,  <m>\csp{A}\subseteq\csp{P}</m>.  So the image of the projector is exactly <m>U</m>.</p>
+
+                <p>Now we verify that <m>P</m> is a projector. <md>
+                    <mrow>P^2=&amp;\left(A\inverse{\left(\adjoint{A}A\right)}\adjoint{A}\right)\left(A\inverse{\left(\adjoint{A}A\right)}\adjoint{A}\right)</mrow>
+                    <mrow>=&amp;A\inverse{\left(\adjoint{A}A\right)}\left(\adjoint{A}A\right)\inverse{\left(\adjoint{A}A\right)}\adjoint{A}</mrow>
+                    <mrow>=&amp;A\inverse{\left(\adjoint{A}A\right)}\adjoint{A}</mrow>
+                    <mrow>=&amp;P</mrow>
+                </md></p>
+
+                <p>And lastly, orthogonality against a basis of <m>U</m>. <md>
+                    <mrow>\adjoint{A}\left(P\vect{x}-\vect{x}\right)&amp;=\adjoint{A}A\inverse{\left(\adjoint{A}A\right)}\adjoint{A}\vect{x}-\adjoint{A}\vect{x}</mrow>
+                    <mrow>&amp;=\adjoint{A}\vect{x}-\adjoint{A}\vect{x}</mrow>
+                    <mrow>&amp;=\zerovector</mrow>
+                </md></p>
+
+            </proof>
+        </theorem>
+
+        <p>Suppose the basis vectors of <m>U</m> described in Theorem<nbsp /><xref ref="theorem-orthogonal-projector-construction" /> form an orthonormal set, and in acknowledgment we denote the matrix with these vectors as columns by <m>Q</m>.  Then the projector simplifies to <m>P=Q\inverse{\left(\adjoint{Q}Q\right)}\adjoint{Q}=Q\adjoint{Q}.</m>  The other interesting special case is when <m>U</m> is 1-dimensional (a <q>line</q>).  Then <m>\adjoint{A}A</m> is just the square of the norm of the lone basis vector.  With this scalar moved out of the way, the remaining computation, <m>A\adjoint{A}</m>, is an outer product that results in a rank <m>1</m> matrix (as we would expect).</p>
+
+        <exercise>
+            <statement>
+                <p>Illustrate Theorem<nbsp /><xref ref="theorem-orthogonal-projector-hermitian" /> by proving directly that the orthogonal projector described in Theorem<nbsp /><xref ref="theorem-orthogonal-projector-construction" /> is Hermitian.</p>
+            </statement>
+        </exercise>
+
+        <exercise>
+            <statement>
+                <p>Construct the orthogonal projector onto the line spanned by <me>\vect{v}=\colvector{4\\2\\1\\10}.</me>  Illustrate its use by projecting some vector not on the line, and verifying that the difference between the vector and its projection is orthogonal to the line.</p>
+            </statement>
+        </exercise>
+
+        <exercise xml:id="exercise-2d-orthogonal-projector">
+            <statement>
+                <p>Construct the orthogonal projector onto the subspace <me>U=\spn{\set{\colvector{1\\1\\1\\1}, \colvector{4\\2\\2\\5}}}.</me>  Illustrate its use by projecting some vector not in the subspace, and verifying that the difference between the vector and its projection is orthogonal to the line.</p>
+            </statement>
+        </exercise>
+
+        <exercise>
+            <statement>
+                <p>Redo Exercise<nbsp /><xref ref="exercise-2d-orthogonal-projector" /> but first convert the basis for <m>U</m> to an orthonormal basis via the Gram-Schmidt process <acroref type="theorem" acro="GSP" /> and then use the simpler construction applicable to the case of an orthonormal basis.</p>
+            </statement>
+        </exercise>
+
+
+    </subsection>
+
+
+</section>

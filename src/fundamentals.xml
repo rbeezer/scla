@@ -14,5 +14,6 @@
     <xi:include href="./direct-sums.xml" />
     <xi:include href="./orthogonal-complements.xml" />
     <xi:include href="./reflectors.xml" />
+    <xi:include href="./projectors.xml" />
     
 </chapter>

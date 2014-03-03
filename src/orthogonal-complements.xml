@@ -105,7 +105,7 @@
             <mrow>&amp;=\innerproduct{\vect{v}}{\vect{u}_j}-\innerproduct{\vect{v}}{\vect{u}_j}</mrow>
             <mrow>&amp;=0</mrow></md></p>
 
-            <p>We have fulfilled the hypotheses of <xref provisional="Direct Sums and Zero Intersection (above)" /> and so can say <m>V=U\ds\per{U}</m>.</p>
+            <p>We have fulfilled the hypotheses of <xref ref="theorem-direct-sum-zero-vector" /> and so can say <m>V=U\ds\per{U}</m>.</p>
         </proof>
     </theorem>
 
