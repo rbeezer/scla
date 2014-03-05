@@ -1,0 +1,220 @@
+<section xml:id="section-invariant-subspaces" filebase="invariant-subspaces">
+    <title>Invariant Subspaces</title>
+
+    <definition xml:id="definition-invariant-subspace">
+        <title>Invariant Subspace</title>
+        <statement>
+            <p>Suppose that <m>\ltdefn{T}{V}{V}</m> is a linear transformation and <m>W</m> is a subspace of <m>V</m>.  Suppose further that <m>\lteval{T}{\vect{w}}\in W</m> for every <m>\vect{w}\in W</m>.  Then <m>W</m> is an <term>invariant subspace</term> of <m>V</m> relative to <m>T</m>.</p>
+        </statement>
+    </definition>
+
+    <p>We do not have any special notation for an invariant subspace, so it is important to recognize that an invariant subspace is always relative to both a superspace (<m>V</m>) and a linear transformation (<m>T</m>), which will sometimes not be mentioned, yet will be clear from the context.  Note also that the linear transformation involved must have an equal domain and codomain <mdash /> the definition would not make much sense if our outputs were not of the same type as our inputs.</p>
+
+    <p>As is our habit, we begin with an example that demonstrates the existence of invariant subspaces, while leaving other questions unanswered for the moment.  We will return later to understand how this example was constructed, but for now, just understand how we check the existence of the invariant subspaces.</p>
+
+    <example xml:id="example-two-invariant-subspaces">
+        <title>Two invariant subspaces</title>
+
+        <p>Consider the linear transformation <m>\ltdefn{T}{\complex{4}}{\complex{4}}</m> defined by <m>\lteval{T}{\vect{x}}=A\vect{x}</m> where <m>A</m> is given by
+        <me>A=\begin{bmatrix}
+        <![CDATA[ -8 & 6 & -15 & 9 \\
+        -8 & 14 & -10 & 18 \\
+        1 & 1 & 3 & 0 \\
+        3 & -8 & 2 & -11]]>
+        \end{bmatrix}</me>
+        Define (with zero motivation),<md>
+        <mrow>\vect{w_1}&amp;=\colvector{-7\\-2\\3\\0}
+        &amp;
+        \vect{w_2}&amp;=\colvector{-1\\-2\\0\\1}</mrow>
+        </md> and set <m>W=\spn{\set{\vect{w}_1,\,\vect{w}_2}}</m>.  We verify that <m>W</m> is an invariant subspace of <m>\complex{4}</m> with respect to <m>T</m>.  By the definition of <m>W</m>, any vector chosen from <m>W</m> can be written as a linear combination of <m>\vect{w}_1</m> and <m>\vect{w}_2</m>.  Suppose that <m>\vect{w}\in W</m>, and then check the details of the following verification, <md>
+            <mrow>\lteval{T}{\vect{w}}&amp;=\lteval{T}{a_1\vect{w}_1+a_2\vect{w}_2}&amp;&amp;<acroref type="definition" acro="SS" /></mrow>
+            <mrow>&amp;=a_1\lteval{T}{\vect{w}_1}+a_2\lteval{T}{\vect{w}_2}&amp;&amp;<acroref type="theorem" acro="LTLC" /></mrow>
+            <mrow>&amp;=a_1\colvector{-1\\-2\\0\\1}+a_2\colvector{5\\-2\\-3\\2}</mrow>
+            <mrow>&amp;=a_1\vect{w}_2+a_2\left((-1)\vect{w}_1+2\vect{w}_2\right)</mrow>
+            <mrow>&amp;=(-a_2)\vect{w}_1+(a_1+2a_2)\vect{w}_2\in W</mrow>
+        </md> So, by <acroref type="definition" acro="IS" />, <m>W</m> is an invariant subspace of <m>\complex{4}</m> relative to <m>T</m>.</p>
+
+        <p>In an entirely similar manner we construct another invariant subspace of <m>T</m>.With zero motivation, define <md>
+            <mrow>\vect{x_1}&amp;=\colvector{-3\\-1\\1\\0}
+            &amp;
+            \vect{x_2}&amp;=\colvector{0\\-1\\0\\1}</mrow>
+        </md> and set <m>X=\spn{\set{\vect{x}_1,\,\vect{x}_2}}</m>.  We verify that <m>X</m> is an invariant subspace of <m>\complex{4}</m> with respect to <m>T</m>.  By the definition of <m>X</m>, any vector chosen from <m>X</m> can be written as a linear combination of <m>\vect{x}_1</m> and <m>\vect{x}_2</m>.  Suppose that <m>\vect{x}\in X</m>, and then check the details of the following verification, <md> 
+            <mrow>\lteval{T}{\vect{x}}&amp;=\lteval{T}{b_1\vect{x}_1+b_2\vect{x}_2}&amp;&amp;<acroref type="definition" acro="SS" /></mrow> 
+            <mrow>&amp;=b_1\lteval{T}{\vect{x}_1}+b_2\lteval{T}{\vect{x}_2}&amp;&amp;<acroref type="theorem" acro="LTLC" /></mrow>
+            <mrow>&amp;=b_1\colvector{3\\0\\-1\\1}+b_2\colvector{3\\4\\-1\\-3}</mrow>
+            <mrow>&amp;=b_1\left((-1)\vect{x}_1+\vect{x}_2\right)+b_2\left((-1)\vect{x}_1+(-3)\vect{x}_2\right)</mrow> 
+            <mrow>&amp;=(-b_1-b_2)\vect{x}_1+(b_1-3b_2)\vect{x}_2\in X</mrow>
+        </md> So, by <acroref type="definition" acro="IS" />, <m>X</m> is an invariant subspace of <m>\complex{4}</m> relative to <m>T</m>.</p>
+
+        <p>There is a bit of magic in each of these verifications where the two outputs of <m>T</m> happen to equal linear combinations of the two inputs.  But this is the essential nature of an invariant subspace.  We'll have a peek under the hood later, and it won't look so magical after all.</p>
+
+        <p>Verify that <m>B=\set{\vect{w}_1,\,\vect{w}_2,\,\vect{x}_1,\,\vect{x}_2}</m> is linearly independent, and hence a basis of <m>\complex{4}</m>.  Splitting this basis in half, Theorem<nbsp /><xref ref="theorem-direct-sum-split-basis" /> tells us that <m>\complex{4}=W\ds X</m>.  To see exactly why a decomposition of a vector space into a direct sum of invariant subspaces might be interesting work Exercise<nbsp /><xref ref="exercise-block-matrix-representation" /> now.</p> 
+    </example>
+
+    <exercise xml:id="exercise-block-matrix-representation">
+        <statement>
+            <p>Construct a matrix representation of the linear transformation <m>T</m> of Exercise<nbsp /><xref ref="example-two-invariant-subspaces" /> relative to the basis formed as the union of the bases of the two invariant subspaces, <m>\matrixrep{T}{B}{B}</m>.  Comment on your observations, perhaps after computing a few powers of the matrix representation (which represent repeated compositions of <m>T</m> with itself).  Hmmmmmm.</p>
+        </statement>
+    </exercise>
+
+    <exercise xml:id="exercise-invariant-subspaces">
+        <statement>
+            <p>Prove that the subspaces <m>U, V\subseteq\complex{5}</m> are invariant with respect to the linear transformation <m>\ltdefn{R}{\complex{5}}{\complex{5}}</m> defined by <m>\lteval{R}{\vect{x}}=B\vect{x}</m>. <me>B=\begin{bmatrix}
+            <![CDATA[4 & 47 & 3 & -46 & 20 \\
+            10 & 61 & 8 & -56 & 10 \\
+            -10 & -69 & -7 & 67 & -20 \\
+            11 & 70 & 9 & -64 & 12 \\
+            3 & 19 & 3 & -16 & 1]]>\end{bmatrix}</me> <md>
+                <mrow>U&amp;=\spn{\set{
+                \colvector{1\\0\\-1\\0\\0},\,
+                \colvector{0\\1\\-1\\1\\0}
+                }}
+                &amp;
+                V&amp;=\spn{\set{
+                \colvector{1\\1\\-1\\1\\0},\,
+                \colvector{3\\3\\-2\\4\\2},\,
+                \colvector{-2\\3\\-2\\3\\1}
+                }}</mrow> </md>
+            </p>
+            <sage><input>
+            B = matrix(QQ, [[4, 47, 3, -46, 20], 
+                            [10, 61, 8, -56, 10], 
+                            [-10, -69, -7, 67, -20], 
+                            [11, 70, 9, -64, 12], 
+                            [3, 19, 3, -16, 1]])
+            </input></sage>
+
+            <sage />
+        </statement>
+    </exercise>
+
+    <p>Example<nbsp /><xref ref="example-two-invariant-subspaces" /> is a bit mysterious at this stage.   Do we know any other examples of invariant subspaces?  Yes, as it turns out, we have already seen quite a few.  We will give some specific examples, and for more general situations, describe broad classes of invariant subspaces by theorems.  First up is eigenspaces.</p>
+
+    <theorem xml:id="theorem-eigenspaces-invariant"> 
+        <title>Eigenspaces are Invariant Subspaces</title>
+        <statement>
+            <p>Suppose that <m>\ltdefn{T}{V}{V}</m> is a linear transformation with eigenvalue <m>\lambda</m> and associated eigenspace <m>\eigenspace{T}{\lambda}</m>.  Let <m>W</m> be any subspace of <m>\eigenspace{T}{\lambda}</m>.  Then <m>W</m> is an invariant subspace of <m>V</m> relative to <m>T</m>.</p> 
+        </statement>
+
+        <proof>
+            <p>Choose <m>\vect{w}\in W</m>.  Then <me>\lteval{T}{\vect{w}}=\lambda\vect{w}\in W.</me> So by Definition<nbsp /><xref ref="definition-invariant-subspace" />, <m>W</m> is an invariant subspace of <m>V</m> relative to <m>T</m>.</p>
+        </proof>
+    </theorem>
+
+    <p>Theorem<nbsp /><xref ref="theorem-eigenspaces-invariant" /> is general enough to determine that an entire eigenspace is an invariant subspace, or that simply the span of a single eigenvector is an invariant subspace.  It is not always the case that any subspace of an invariant subspace is again an invariant subspace, but eigenspaces do have this property.  Here is an example of the theorem, which also allows us to very quickly build several invariant subspaces.</p>
+
+    <example xml:id="example-invariant-eigenspaces">
+        <title>Eigenspaces as Invariant Subspaces</title>
+
+        <p>Define the linear transformation <m>\ltdefn{S}{M_{22}}{M_{22}}</m> by <me>\lteval{S}{\begin{bmatrix}a&amp;b\\c&amp;d\end{bmatrix}}
+        =
+        \begin{bmatrix}
+        -2a + 19b - 33c + 21d  &amp;  -3a + 16b - 24c + 15d \\
+        -2a + 9b - 13c + 9d    &amp;   -a + 4b - 6c + 5d
+        \end{bmatrix}</me> Build a matrix representation of <m>S</m> relative to the standard basis (<acroref type="definition" acro="MR" />) and compute eigenvalues and eigenspaces of <m>S</m> with the computational techniques of <acroref type="chapter" acro="E" /> in concert with <acroref type="theorem" acro="EER" />.  Then <md>
+            <mrow>\eigenspace{S}{1}&amp;=\spn{\set{\begin{bmatrix}4&amp;3\\2&amp;1\end{bmatrix}}}
+            &amp;
+            \eigenspace{S}{2}&amp;=\spn{\set{
+            \begin{bmatrix} 6&amp; 3\\1&amp;0\end{bmatrix},\,
+            \begin{bmatrix}-9&amp;-3\\0&amp;1\end{bmatrix}
+            }}</mrow>
+        </md> So by Theorem<nbsp /><xref ref="theorem-eigenspaces-invariant" />, both <m>\eigenspace{S}{1}</m> and <m>\eigenspace{S}{2}</m> are invariant subspaces of <m>M_{22}</m> relative to <m>S</m>.</p>
+
+        <p>However, Theorem<nbsp /><xref ref="theorem-eigenspaces-invariant" /> provides even more invariant subspaces.  Since <m>\eigenspace{S}{1}</m> has dimension 1, it has no interesting subspaces, however <m>\eigenspace{S}{2}</m> has dimension 2 and has a plethora of subspaces.  For example, set <me>\vect{u}=
+        2\begin{bmatrix} 6&amp; 3\\1&amp;0\end{bmatrix}+
+        3\begin{bmatrix}-9&amp;-3\\0&amp;1\end{bmatrix}
+        =
+        \begin{bmatrix}-6&amp;-3\\2&amp;3\end{bmatrix}</me> and define <m>U=\spn{\set{\vect{u}}}</m>.  Then since <m>U</m> is a subspace of <m>\eigenspace{S}{2}</m>, Theorem<nbsp /><xref ref="theorem-eigenspaces-invariant" /> says that <m>U</m> is an invariant subspace of <m>M_{22}</m> (or we could check this claim directly based simply on the fact that <m>\vect{u}</m> is an eigenvector of <m>S</m>).</p>
+    </example>
+
+    <p>For every linear transformation there are some obvious, trivial invariant subspaces.  Suppose that <m>\ltdefn{T}{V}{V}</m> is a linear transformation.  Then simply because <m>T</m> is a function, the subspace <m>V</m> is an invariant subspace of <m>T</m>.  In only a minor twist on this theme, the range of <m>T</m>, <m>\rng{T}</m>, is an invariant subspace of <m>T</m> by <acroref type="definition" acro="RLT" />.  Finally, <acroref type="theorem" acro="LTTZZ" /> provides the justification for claiming that <m>\set{\zerovector}</m> is an invariant subspace of <m>T</m>.</p>
+
+    <p>That the trivial subspace is always an invariant subspace is a special case of the next theorem.  But first, work the following straightforward exercise <em>before</em> reading the next theorem.  We'll wait.</p>
+
+    <exercise>
+        <statement>
+            <p>Prove that the kernel of a linear transformation (<acroref type="definition" acro="KLT" />), <m>\krn{T}</m>, is an invariant subspace.</p>
+        </statement>
+    </exercise>
+
+    <theorem xml:id="theorem-kernel-powers-invariant">
+        <title>Kernels of Powers are Invariant Subspaces</title>
+        <statement>
+            <p>Suppose that <m>\ltdefn{T}{V}{V}</m> is a linear transformation and <m>k</m> is a non-negative integer.  Then <m>\krn{T^k}</m> is an invariant subspace of <m>V</m>.</p>
+        </statement>
+
+        <proof>
+            <p>Suppose that <m>\vect{z}\in\krn{T^k}</m>.  Then <me>\lteval{T^k}{\lteval{T}{\vect{z}}}=\lteval{T^{k+1}}{\vect{z}}=\lteval{T}{\lteval{T^k}{\vect{z}}}=\lteval{T}{\zerovector}=\zerovector.</me> So by <acroref type="definition" acro="KLT" />, we see that <m>\lteval{T}{\vect{z}}\in\krn{T^k}</m>.  Thus <m>\krn{T^k}</m> is an invariant subspace of <m>V</m> relative to <m>T</m> by Definition<nbsp /><xref ref="definition-invariant-subspace" />.</p>
+        </proof>
+    </theorem>
+
+    <p>Two special cases of  Theorem<nbsp /><xref ref="theorem-kernel-powers-invariant" /> occur when we choose <m>k=0</m> and <m>k=1</m>.  The next example is unusual, but a good illustration.</p>
+
+    <example xml:id="example-kernel-powers-invariant">
+        <p>Consider the <m>10\times 10</m> matrix <m>A</m> below as defining a linear transformation <m>\ltdefn{T}{\complex{10}}{\complex{10}}</m>.  We also provide a Sage version of the matrix for use online. <me>A=\begin{bmatrix}
+        <![CDATA[-1 & -9 & -24 & -16 & -40 & -36 & 72 & 66 & 21 & 59 \\
+        19 & 4 & 7 & -18 & 2 & -12 & 67 & 69 & 16 & -35 \\
+        -1 & 1 & 2 & 5 & 5 & 6 & -17 & -17 & -5 & -8 \\
+        2 & -2 & -7 & -8 & -13 & -13 & 32 & 28 & 11 & 14 \\
+        -11 & -2 & -1 & 12 & 6 & 11 & -50 & -44 & -16 & 13 \\
+        4 & -1 & -5 & -14 & -16 & -16 & 55 & 43 & 24 & 17 \\
+        -14 & 1 & 7 & 20 & 19 & 26 & -82 & -79 & -21 & -1 \\
+        12 & 0 & -4 & -17 & -14 & -20 & 68 & 64 & 19 & -2 \\
+        10 & -2 & -9 & -16 & -20 & -24 & 68 & 65 & 17 & 9 \\
+        -1 & -2 & -5 & -3 & -8 & -7 & 13 & 12 & 4 & 14]]>
+        \end{bmatrix}</me></p>
+
+        <sage><input>
+        matrix(QQ, [[-1, -9, -24, -16, -40, -36, 72, 66, 21, 59], 
+                    [19, 4, 7, -18, 2, -12, 67, 69, 16, -35], 
+                    [-1, 1, 2, 5, 5, 6, -17, -17, -5, -8], 
+                    [2, -2, -7, -8, -13, -13, 32, 28, 11, 14], 
+                    [-11, -2, -1, 12, 6, 11, -50, -44, -16, 13], 
+                    [4, -1, -5, -14, -16, -16, 55, 43, 24, 17], 
+                    [-14, 1, 7, 20, 19, 26, -82, -79, -21, -1], 
+                    [12, 0, -4, -17, -14, -20, 68, 64, 19, -2], 
+                    [10, -2, -9, -16, -20, -24, 68, 65, 17, 9], 
+                    [-1, -2, -5, -3, -8, -7, 13, 12, 4, 14]
+                    ])
+        </input></sage>
+
+        <sage />
+
+        <p>The matrix <m>A</m> has rank <m>9</m> and so <m>T</m> has a nontrivial kernel.  But it gets better.  <m>T</m> has been constructed specially so that the nullity of <m>T^k</m> is exactly <m>k</m>, for <m>0\leq k\leq 10</m>.  This is an extremely unusual situation, but is a good illustration of a very general theorem about kernels of null spaces, coming next.  We compute the invariant subspace <m>\krn{T^5}</m>, you can practice with others.</p>
+
+        <p>We work with the matrix, recalling that null spaces and column spaces of matrices correspond to kernels and ranges of linear transformations once we understand matrix representations of linear transformations (<acroref type="section" acro="MR" />). <md>
+            <mrow>A^5&amp;=\begin{bmatrix}
+            <![CDATA[37 & 24 & 65 & -35 & 77 & 32 & 80 & 98 & 23 & -125 \\
+            19 & 11 & 37 & -21 & 46 & 19 & 29 & 49 & 6 & -70 \\
+            -7 & -5 & -15 & 8 & -18 & -8 & -15 & -19 & -6 & 26 \\
+            14 & 9 & 27 & -15 & 33 & 14 & 26 & 37 & 7 & -50 \\
+            -8 & -7 & -25 & 14 & -33 & -16 & -10 & -23 & -5 & 37 \\
+            12 & 11 & 35 & -19 & 45 & 22 & 22 & 35 & 11 & -52 \\
+            -27 & -18 & -56 & 31 & -69 & -30 & -49 & -72 & -15 & 100 \\
+            20 & 14 & 45 & -25 & 56 & 25 & 35 & 54 & 12 & -77 \\
+            24 & 16 & 49 & -27 & 60 & 26 & 45 & 64 & 14 & -88 \\
+            8 & 5 & 13 & -7 & 15 & 6 & 18 & 21 & 5 & -26]]>
+            \end{bmatrix}</mrow>
+            <mrow>\krn{T^5}&amp;=\nsp{A^5}=\spn{\set{
+            \colvector{1\\-1\\0\\0\\-1\\2\\0\\0\\0\\0},\,
+            \colvector{-1\\-3\\-3\\-2\\2\\0\\1\\0\\0\\0},\,
+            \colvector{-2\\-1\\0\\0\\0\\0\\0\\1\\0\\0},\,
+            \colvector{1\\-1\\-4\\-2\\2\\0\\0\\0\\1\\0},\,
+            \colvector{5\\-3\\1\\1\\1\\0\\0\\0\\0\\2}
+            }}</mrow>
+        </md></p>
+
+        <p>As an illustration of <m>\krn{T^5}</m> as a subspace invariant under <m>T</m>, we form a linear combination of the five basis vectors (named <m>\vect{z}_i</m>, in order), which will be then be an element of the invariant subspace.  We apply <m>T</m>, so the output should again be in the subspace, which we verify by giving an expression for the output as a linear combination of the basis vectors for the subspace. <md>
+            <mrow>\vect{z}&amp;=3\vect{z}_1 - \vect{z}_2 + 3\vect{z}_3 + 2\vect{z}_4 - 2\vect{z}_5=\colvector{-10\\1\\-9\\-6\\-3\\6\\-1\\3\\2\\-4}</mrow>
+            <mrow>\lteval{T}{\vect{z}}&amp;=A\vect{z}=\colvector{149\\93\\-28\\68\\-73\\94\\-136\\110\\116\\28}</mrow>
+            <mrow>&amp;=47\vect{z}_1 - 136\vect{z}_2 + 110\vect{z}_3 +116\vect{z}_4 +14\vect{z}_5</mrow>
+        </md></p>
+    </example>
+
+    <exercise ref="exercise-kernel-powers-invariant">
+        <statement>
+            <p>Reprise Example<nbsp /><xref ref="example-kernel-powers-invariant" /> using the same linear transformation.  Use a different power (not <m>k=0,1,5,9,10</m> on your first attempt), form a vector in the kernel of your chosen power, then apply <m>T</m> to it.  Your output should be in the kernel.  (Check this with Sage by using the <c>in</c> Python operator.)  Thus, you should be able to write the output as a linear combination of the basis vectors.  Rinse, repeat.</p>
+        </statement>
+    </exercise>
+
+</section>

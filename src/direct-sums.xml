@@ -55,7 +55,7 @@
 
     <p><acroref type="example" acro="SDS" /> is easy to generalize into a theorem.</p>
 
-    <theorem acro="DSFB" index="direct sum!from a basis">
+    <theorem xml:id="theorem-direct-sum-split-basis">
         <title>Direct Sum From a Basis</title>
         <statement>
             <p>Suppose that <m>V</m> is a vector space with a basis
@@ -94,7 +94,7 @@
 
             <p>We can repeat this procedure, in the case were <m>U_1\neq V</m>, creating a new vector <m>\vect{v}_{m+2}</m> in <m>V</m>, but not in <m>U_1</m>, and a new subspace <m>U_2=\spn{B\cup\set{\vect{v}_{m+1},\,\vect{v}_{m+2}}}</m>.  If we continue repeating this procedure, eventually, <m>U_k=V</m> for some <m>k</m>, and we can no longer apply <acroref type="theorem" acro="ELIS" />.  No matter, in this case <m>B\cup\set{\vect{v}_{m+1},\,\vect{v}_{m+2},\,\dots,\,\vect{v}_{m+k}}</m> is a linearly independent set that spans <m>V</m>, <ie /> a basis for <m>V</m>.</p>
 
-            <p>Define <m>W=\spn{\set{\vect{v}_{m+1},\,\vect{v}_{m+2},\,\dots,\,\vect{v}_{m+k}}}</m>.  We now are exactly in position to apply <acroref type="theorem" acro="DSFB" /> and see that <m>V=U\ds W</m>.</p>
+            <p>Define <m>W=\spn{\set{\vect{v}_{m+1},\,\vect{v}_{m+2},\,\dots,\,\vect{v}_{m+k}}}</m>.  We now are exactly in position to apply Theorem<nbsp /><xref ref="theorem-direct-sum-split-basis" /> and see that <m>V=U\ds W</m>.</p>
         </proof>
     </theorem>
 
@@ -236,7 +236,7 @@
         </proof>
     </theorem>
 
-    <p>Remember that when we write <m>V=U\ds W</m> there always needs to be a <q>superspace,</q> in this case <m>V</m>.  The statement <m>U\ds W</m> is meaningless.  Writing <m>V=U\ds W</m> is simply a shorthand for a somewhat complicated relationship between <m>V</m>, <m>U</m> and <m>W</m>, as described in the two conditions of <acroref type="definition" acro="DS" />, or Theorem<nbsp /><xref ref="theorem-direct-sum-zero-vector" />, or <acroref type="theorem" acro="DSZI" />.  <acroref type="theorem" acro="DSFB" /> and <acroref type="theorem" acro="DSFOS" /> gives us sure-fire ways to build direct sums, while <acroref type="theorem" acro="DSLI" />,  <acroref type="theorem" acro="DSD" /> and <acroref type="theorem" acro="RDS" /> tell us interesting properties of direct sums.</p>
+    <p>Remember that when we write <m>V=U\ds W</m> there always needs to be a <q>superspace,</q> in this case <m>V</m>.  The statement <m>U\ds W</m> is meaningless.  Writing <m>V=U\ds W</m> is simply a shorthand for a somewhat complicated relationship between <m>V</m>, <m>U</m> and <m>W</m>, as described in the two conditions of <acroref type="definition" acro="DS" />, or Theorem<nbsp /><xref ref="theorem-direct-sum-zero-vector" />, or <acroref type="theorem" acro="DSZI" />.  Theorem<nbsp /><xref ref="theorem-direct-sum-split-basis" /> and <acroref type="theorem" acro="DSFOS" /> gives us sure-fire ways to build direct sums, while <acroref type="theorem" acro="DSLI" />,  <acroref type="theorem" acro="DSD" /> and <acroref type="theorem" acro="RDS" /> tell us interesting properties of direct sums.</p>
 
     <p>This subsection has been long on theorems and short on examples.  If we were to use the term <q>lemma</q> we might have chosen to label some of these results as such, since they will be important tools in other proofs, but may not have much interest on their own (see <acroref type="technique" acro="LC" />).  We will be referencing these results heavily in later sections, and will remind you then to come back for a second look.</p>
 

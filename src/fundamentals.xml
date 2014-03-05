@@ -13,6 +13,7 @@
     <xi:include href="./introduction.xml" />
     <xi:include href="./direct-sums.xml" />
     <xi:include href="./orthogonal-complements.xml" />
+    <xi:include href="./invariant-subspaces.xml" />
     <xi:include href="./reflectors.xml" />
     <xi:include href="./projectors.xml" />
     
