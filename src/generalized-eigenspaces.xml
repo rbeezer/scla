@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- This file is part of the book                -->
+<!--                                              -->
+<!--      A Second Course in Linear Algebra       -->
+<!--                                              -->
+<!-- Copyright (C) 2004-2014  Robert A. Beezer    -->
+<!-- See the file COPYING for copying conditions. -->
+
+<section xml:id="section-generalized-eigenspaces" filebase="generalized-eigenspaces">
+    <title>Generalized Eigenspaces</title>
+
+    <introduction>
+        <p>In this section we will define a new type of invariant subspace and explore its key properties.  This generalization of eigenvalues and eigenspaces will allow us to move from diagonal matrix representations of diagonalizable matrices to nearly diagonal matrix representations of arbitrary matrices.</p>
+    </introduction>
+
+    <subsection xml:id="subsection-kernels-of-powers">
+        <title>Kernels of Powers of Linear Transformations</title>
+
+        <p>With Section<nbsp /><xref provisional="section-jodan-canonical-form" /> as our goal, we will become increasingly interested in kernels of powers of linear transformations, which will go a long way to helping us understand the structure of a linear transformation, or its matrix representation.  We need the next theorem to help us understand generalized eigenspaces, though its specialization in Theorem<nbsp /><xref provisional="theorem-about-powers-nilpotent" /> to nilpotent linear transformations will be the real workhorse.</p>
+
+        <theorem xml:id="theorem-kernels-of-powers"> <!-- was KPLT -->
+            <title>Kernels of Powers of Linear Transformations</title>
+            <statement>
+                <p>Suppose <m>\ltdefn{T}{V}{V}</m> is a linear transformation, where <m>\dimension{V}=n</m>.  Then there is an integer <m>m</m>, <m>0\leq m\leq n</m>, such that <me>\set{\zerovector}=\krn{T^0}\subsetneq\krn{T^1}\subsetneq\krn{T^2}\subsetneq\cdots\subsetneq\krn{T^m}=\krn{T^{m+1}}=\krn{T^{m+2}}=\cdots</me></p>
+            </statement>
+
+            <proof>
+                <p>There are several items to verify in the conclusion as stated.  First, we show that <m>\krn{T^k}\subseteq\krn{T^{k+1}}</m> for any <m>k</m>. Choose <m>\vect{z}\in\krn{T^k}</m>.  Then <me>\lteval{T^{k+1}}{\vect{z}} =\lteval{T}{\lteval{T^k}{\vect{z}}} =\lteval{T}{\zerovector} =\zerovector</me> so <m>\vect{z}\in\krn{T^{k+1}}</m></p>
+
+                <p>Second, we demonstrate the existence of a power <m>m</m> where consecutive powers result in equal kernels.  A by-product will be the condition that <m>m</m> can be chosen so that <m>m\leq n</m>.  To the contrary, suppose that <me>\set{\zerovector}=\krn{T^0}\subsetneq\krn{T^1}\subsetneq\krn{T^2}\subsetneq\cdots \subsetneq\krn{T^{n-1}}\subsetneq\krn{T^n}\subsetneq\krn{T^{n+1}}\subsetneq\cdots</me> Since <m>\krn{T^k}\subsetneq\krn{T^{k+1}}</m>, <acroref type="theorem" acro="PSSD" /> implies that <m>\dimension{\krn{T^{k+1}}}\geq\dimension{\krn{T^k}}+1</m>.  Repeated application of this observation yields <md>
+                    <mrow>\dimension{\krn{T^{n+1}}}&amp;\geq\dimension{\krn{T^n}}+1</mrow>
+                    <mrow>&amp;\geq\dimension{\krn{T^{n-1}}}+2</mrow>
+                    <mrow>&amp;\geq\dimension{\krn{T^{n-2}}}+3</mrow>
+                    <mrow>&amp;\vdots</mrow>
+                    <mrow>&amp;\geq\dimension{\krn{T^{0}}}+(n+1)</mrow>
+                    <mrow>&amp;=n+1</mrow>
+                </md> As <m>\krn{T^{n+1}}</m> is a subspace of <m>V</m>, of dimension <m>n</m>, this is a contradiction.</p>
+
+                <p>The contradiction yields the existence of an integer <m>k</m> such that <m>\krn{T^k}=\krn{T^{k+1}}</m>, so we can define <m>m</m> to be smallest such integer with this property.  From the argument above about dimensions resulting from a strictly increasing chain of subspaces, we conclude that <m>m\leq n</m>.</p>
+
+                <p>It remains to show that once two consecutive kernels are equal, then all of the remaining kernels are equal.  More formally, if <m>\krn{T^m}=\krn{T^{m+1}}</m>, then <m>\krn{T^m}=\krn{T^{m+j}}</m> for all <m>j\geq 1</m>.  The proof is by induction on <m>j</m>.  The base case (<m>j=1</m>) is precisely our defining property for <m>m</m>.</p>
+
+                <p>For the induction step, our hypothesis is that <m>\krn{T^m}=\krn{T^{m+j}}</m>.  We want to establish that <m>\krn{T^m}=\krn{T^{m+j+1}}</m>.  At the outset of this proof we showed that  <m>\krn{T^m}\subseteq\krn{T^{m+j+1}}</m>.  So we need only show the subset inclusion in the opposite direction.  To wit, choose <m>\vect{z}\in\krn{T^{m+j+1}}</m>.  Then <me>\zerovector
+                =\lteval{T^{m+j+1}}{\vect{z}}
+                =\lteval{T^{m+j}}{\lteval{T}{\vect{z}}}
+                =\lteval{T^{m}}{\lteval{T}{\vect{z}}}
+                =\lteval{T^{m+1}}{\vect{z}}
+                =\lteval{T^{m}}{\vect{z}}</me>  So <m>\vect{z}\in\krn{T^{m}}</m> as desired.</p>
+            </proof>
+        </theorem>
+
+        <example xml:id="example-kernels-of-powers">
+            <title>Kernels of Powers</title>
+
+            <p>As an illustration of Theorem<nbsp /><xref ref="theorem-kernels-of-powers" /> consider the linear transformation <m>\ltdefn{T}{\complex{10}}{\complex{10}}</m> defined by <m>\lteval{T}{\vect{x}}=A\vect{x}</m>.  <me>A=\begin{bmatrix}
+            <![CDATA[-27 & 17 & -12 & -1 & 24 & 16 & 26 & -2 & -1 & -3 \\
+            -66 & 45 & -55 & 11 & 73 & 44 & 45 & -6 & 15 & 1 \\
+            -85 & 58 & -65 & 13 & 94 & 56 & 61 & -6 & 16 & -4 \\
+            -81 & 58 & -55 & 4 & 83 & 52 & 70 & -7 & 6 & -6 \\
+            -33 & 21 & -22 & 6 & 37 & 21 & 23 & -1 & 6 & -4 \\
+            -38 & 28 & -25 & 1 & 39 & 25 & 34 & -3 & 1 & -4 \\
+            20 & -15 & 23 & -8 & -28 & -15 & -8 & 1 & -9 & 0 \\
+            41 & -30 & 39 & -12 & -53 & -29 & -23 & 2 & -13 & 3 \\
+            58 & -43 & 43 & -6 & -64 & -38 & -47 & 4 & -6 & 6 \\
+            -69 & 46 & -47 & 7 & 72 & 44 & 54 & -5 & 9 & -4]]>\end{bmatrix}</me></p>
+
+            <sage><input>
+            A = matrix(QQ, [[-27, 17, -12, -1, 24, 16, 26, -2, -1, -3], 
+                            [-66, 45, -55, 11, 73, 44, 45, -6, 15, 1], 
+                            [-85, 58, -65, 13, 94, 56, 61, -6, 16, -4], 
+                            [-81, 58, -55, 4, 83, 52, 70, -7, 6, -6], 
+                            [-33, 21, -22, 6, 37, 21, 23, -1, 6, -4], 
+                            [-38, 28, -25, 1, 39, 25, 34, -3, 1, -4], 
+                            [20, -15, 23, -8, -28, -15, -8, 1, -9, 0], 
+                            [41, -30, 39, -12, -53, -29, -23, 2, -13, 3], 
+                            [58, -43, 43, -6, -64, -38, -47, 4, -6, 6], 
+                            [-69, 46, -47, 7, 72, 44, 54, -5, 9, -4]])
+            </input></sage>
+
+
+            <p>This linear transformation is engineered to illustrate the full generality of the theorem.  The kernels of the powers (null spaces of the matrix powers) increase, with the nullity incrementing first by twos, then by ones, until we top out to find the maximum nullity of <m>8</m> at the <m>m=6</m> power, well less than the maximum of <m>n=10</m>. <md>
+                <mrow>\dimension{\krn{T^0}}&amp;=0  &amp;
+                \dimension{\krn{T^1}}&amp;=2  &amp;
+                \dimension{\krn{T^2}}&amp;=4</mrow>
+                <mrow>\dimension{\krn{T^3}}&amp;=5  &amp;
+                \dimension{\krn{T^4}}&amp;=6  &amp;
+                \dimension{\krn{T^5}}&amp;=7</mrow>
+                <mrow>\dimension{\krn{T^6}}&amp;=8  &amp;
+                \dimension{\krn{T^7}}&amp;=8</mrow>
+            </md></p>
+
+            <p>It is somewhat interesting to row-reduce the powers of <m>A</m>, since the null spaces of these powers are the kernels of the powers of <m>T</m>.  These are best done with software, but here are two examples, first a mid-range power, then an extreme power. <md>
+                <mrow>A^4&amp;\rref\begin{bmatrix}<![CDATA[
+                1 & 0 & 0 & 0 & -1 & -3 & 3 & -3 & 0 & 0 \\
+                0 & 1 & 0 & 0 & 0 & -4 & 7 & -5 & 0 & -1 \\
+                0 & 0 & 1 & 0 & 0 & -1 & 2 & -1 & 0 & -1 \\
+                0 & 0 & 0 & 1 & 1 & -1 & 1 & -1 & 1 & -1 \\
+                0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+                0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+                0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+                0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+                0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+                0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0]]>\end{bmatrix}</mrow>
+                <mrow>A^{50}&amp;\rref\begin{bmatrix}<![CDATA[1 & 0 & -3 & \frac{2}{3} & -\frac{1}{3} & -\frac{2}{3} & -\frac{7}{3} & -\frac{2}{3} & \frac{2}{3} & \frac{7}{3} \\
+                0 & 1 & -5 & 1 & 1 & 0 & -2 & -1 & 1 & 3 \\
+                0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+                0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+                0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+                0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+                0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+                0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+                0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+                0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0]]>\end{bmatrix}</mrow>
+            </md>  Once we get to the sixth power, the kernels do not change, and so because of the uniqueness of reduced row-echelon form, these do not change either.</p>
+        </example>
+
+    </subsection>
+
+
+    <subsection xml:id="subsection-generalized-eigenspaces">
+        <title>Generalized Eigenspaces</title>
+
+        <p>These are the two main definitions of this section.</p>
+
+        <definition xml:id="definition-generalized-eigenvector"> <!-- was GEV -->
+            <title>Generalized Eigenvector</title>
+            <statement>
+                <p> Suppose that <m>\ltdefn{T}{V}{V}</m> is a linear transformation.  Suppose further that for <m>\vect{x}\neq\zerovector</m>, <m>\lteval{\left(T-\lambda I_V\right)^k}{\vect{x}}=\zerovector</m> for some <m>k>0</m>.  Then <m>\vect{x}</m> is a <term>generalized eigenvector</term> of <m>T</m> with eigenvalue <m>\lambda</m>.</p>
+            </statement>
+        </definition>
+
+        <definition xml:id="definition-generalized-eigenspace">  <!-- was GES -->
+            <title>Generalized Eigenspace</title>
+            <statement>
+                <p>Suppose that <m>\ltdefn{T}{V}{V}</m> is a linear transformation.  Define the <term>generalized eigenspace</term> of <m>T</m> for <m>\lambda</m> as <me>\geneigenspace{T}{\lambda}=\setparts{\vect{x}}{\lteval{\left(T-\lambda I_V\right)^k}{\vect{x}}=\zerovector\text{ for some }k\geq 0}</me></p>
+            </statement>
+            <notation acro="GES" index="generalized eigenspace"> <title>Generalized Eigenspace</title> <usage><m>\geneigenspace{T}{\lambda}</m></usage></notation>
+        </definition>
+
+        <p>So the generalized eigenspace is composed of generalized eigenvectors, plus the zero vector.  As the name implies, the generalized eigenspace is a subspace of <m>V</m>.  But more topically, it is an invariant subspace of <m>V</m> relative to <m>T</m>.</p>
+
+        <theorem xml:id="theorem-generalized-eigenspace-invariant"> <!-- was GESIS -->
+            <title>Generalized Eigenspace is an Invariant Subspace</title>
+            <statement>
+                <p>Suppose that <m>\ltdefn{T}{V}{V}</m> is a linear transformation. Then the generalized eigenspace <m>\geneigenspace{T}{\lambda}</m> is an invariant subspace of <m>V</m> relative to <m>T</m>.</p>
+            </statement>
+
+            <proof>
+                <p>First we establish that <m>\geneigenspace{T}{\lambda}</m> is a subspace of <m>V</m>.  First <m>\lteval{\left(T-\lambda I_V\right)^1}{\zerovector}=\zerovector</m> by <acroref type="theorem" acro="LTTZZ" />, so <m>\zerovector\in\geneigenspace{T}{\lambda}</m>.</p>
+
+                <p>Suppose that <m>\vect{x},\,\vect{y}\in\geneigenspace{T}{\lambda}</m>.  Then there are integers <m>k,\,\ell</m> such that <m>\lteval{\left(T-\lambda I_V\right)^k}{\vect{x}}=\zerovector</m> and <m>\lteval{\left(T-\lambda I_V\right)^\ell}{\vect{y}}=\zerovector</m>.  Set <m>m=k+\ell</m>,<md> 
+                    <mrow>\lteval{\left(T-\lambda I_V\right)^m}{\vect{x}+\vect{y}}&amp;=\lteval{\left(T-\lambda I_V\right)^m}{\vect{x}}+ \lteval{\left(T-\lambda I_V\right)^m}{\vect{y}}</mrow> 
+                    <mrow>&amp;=\lteval{\left(T-\lambda I_V\right)^{k+\ell}}{\vect{x}}+ \lteval{\left(T-\lambda I_V\right)^{k+\ell}}{\vect{y}}</mrow>
+                    <mrow>&amp;=\lteval{\left(T-\lambda I_V\right)^{\ell}}{\lteval{\left(T-\lambda I_V\right)^{k}}{\vect{x}}}+</mrow>
+                    <mrow>&amp;\quad\quad\lteval{\left(T-\lambda I_V\right)^{k}}{\lteval{\left(T-\lambda I_V\right)^{\ell}}{\vect{y}}}</mrow> 
+                    <mrow>&amp;= \lteval{\left(T-\lambda I_V\right)^{\ell}}{\zerovector}+ \lteval{\left(T-\lambda I_V\right)^{k}}{\zerovector} </mrow>
+                    <mrow>&amp;=\zerovector+\zerovector=\zerovector</mrow> 
+                </md>  So <m>\vect{x}+\vect{y}\in\geneigenspace{T}{\lambda}</m>.</p>
+
+                <p>Suppose that <m>\vect{x}\in\geneigenspace{T}{\lambda}</m> and <m>\alpha\in\complexes</m>.  Then there is an integer <m>k</m> such that <m>\lteval{\left(T-\lambda I_V\right)^k}{\vect{x}}=\zerovector</m>. <md>
+                    <mrow>\lteval{\left(T-\lambda I_V\right)^k}{\alpha\vect{x}}&amp;=\alpha\lteval{\left(T-\lambda I_V\right)^k}{\vect{x}}</mrow>
+                    <mrow>&amp;=\alpha\zerovector=\zerovector</mrow>
+                </md>  So <m>\alpha\vect{x}\in\geneigenspace{T}{\lambda}</m>.  By <acroref type="theorem" acro="TSS" />, <m>\geneigenspace{T}{\lambda}</m> is a subspace of <m>V</m>.</p>
+
+                <p>Now we show that <m>\geneigenspace{T}{\lambda}</m> is invariant relative to <m>T</m>.  Suppose that <m>\vect{x}\in\geneigenspace{T}{\lambda}</m>.  Then by Definition<nbsp /><xref ref="definition-generalized-eigenspace" /> there is an integer <m>k</m> such that <m>\lteval{\left(T-\lambda I_V\right)^k}{\vect{x}}=\zerovector</m>.  The following argument is due to Zoltan Toth. <md> 
+                    <mrow>\lteval{\left(T-\lambda I_V\right)^k}{\lteval{T}{\vect{x}}}&amp;=\lteval{\left(T-\lambda I_V\right)^k}{\lteval{T}{\vect{x}}} - \lambda\zerovector</mrow>
+                    <mrow>&amp;=\lteval{\left(T-\lambda I_V\right)^k}{\lteval{T}{\vect{x}}} - \lambda\lteval{\left(T-\lambda I_V\right)^k}{\vect{x}}</mrow>
+                    <mrow>&amp;=\lteval{\left(T-\lambda I_V\right)^k}{\lteval{T}{\vect{x}}} - \lteval{\left(T-\lambda I_V\right)^k}{\lambda\vect{x}}</mrow> 
+                    <mrow>&amp;=\lteval{\left(T-\lambda I_V\right)^k}{\lteval{T}{\vect{x}}-\lambda\vect{x}}</mrow>
+                    <mrow>&amp;=\lteval{\left(T-\lambda I_V\right)^k}{\lteval{\left(T-\lambda I_V\right)}{\vect{x}}}</mrow>
+                    <mrow>&amp;=\lteval{\left(T-\lambda I_V\right)^{k+1}}{\vect{x}}</mrow>
+                    <mrow>&amp;=\lteval{\left(T-\lambda I_V\right)}{\lteval{\left(T-\lambda I_V\right)^k}{\vect{x}}}</mrow>
+                    <mrow>&amp;=\lteval{\left(T-\lambda I_V\right)}{\zerovector}=\zerovector</mrow>
+                </md>  This qualifies <m>\lteval{T}{\vect{x}}</m> for membership in <m>\geneigenspace{T}{\lambda}</m>, so by Definition<nbsp /><xref ref="definition-generalized-eigenspace" />, <m>\geneigenspace{T}{\lambda}</m> is invariant relative to <m>T</m>.</p>
+            </proof>
+        </theorem>
+
+        <p>Before we compute some generalized eigenspaces, we state and prove one theorem that will make it much easier to create a generalized eigenspace, since it will allow us to use tools we already know well, and will remove some of the ambiguity of the clause <q>for some <m>k</m></q> in the definition.</p>
+
+        <theorem xml:id="theorem-generalized-eigenspace-kernel"> <!-- was GEK --> 
+            <title>Generalized Eigenspace as a Kernel</title>
+            <statement>
+                <p>Suppose that <m>\ltdefn{T}{V}{V}</m> is a linear transformation, <m>\dimension{V}=n</m>, and <m>\lambda</m> is an eigenvalue of <m>T</m>.  Then <m>\geneigenspace{T}{\lambda}=\krn{\left(T-\lambda I_V\right)^n}</m>.</p>
+            </statement>
+
+    <todo>Cites below of powers of kernels, maybe to invariant subspaces, maybe here? (multiple)</todo>
+
+            <proof>
+                <p>To establish the set equality, first suppose that <m>\vect{x}\in\geneigenspace{T}{\lambda}</m>.  Then there is an integer <m>k</m> such that <m>\lteval{\left(T-\lambda I_V\right)^k}{\vect{x}}=\zerovector</m>.  This is equivalent to the statement that <m>\vect{x}\in\krn{\left(T-\lambda I_V\right)^k}</m>.  No matter what the value of <m>k</m> is, <xref provisional="theorem about nested powers of kernels"/> gives <me>\vect{x}\in\krn{\left(T-\lambda I_V\right)^k}\subseteq\krn{\left(T-\lambda I_V\right)^n}.</me> So, <m>\geneigenspace{T}{\lambda}\subseteq\krn{\left(T-\lambda I_V\right)^n}</m>.</p>
+
+                <p>For the opposite inclusion, suppose <m>\vect{y}\in\krn{\left(T-\lambda I_V\right)^n}</m>.  Then <m>\lteval{\left(T-\lambda I_V\right)^n}{\vect{y}}=\zerovector</m>, so <m>\vect{y}\in\geneigenspace{T}{\lambda}</m> and thus <m>\krn{\left(T-\lambda I_V\right)^n}\subseteq\geneigenspace{T}{\lambda}</m>.  So we have the desired equality of sets.</p>
+            </proof>
+        </theorem>
+
+        <p>Theorem<nbsp /><xref ref="theorem-generalized-eigenspace-kernel" /> allows us to compute generalized eigenspaces as a single kernel (or null space of a matrix representation) without considering all possible powers <m>k</m>. We can simply consider the case where <m>k=n</m>.  It is worth noting that the <q>regular</q> eigenspace is a subspace of the generalized eigenspace since <me>\eigenspace{T}{\lambda}=\krn{\left(T-\lambda I_V\right)^1}\subseteq\krn{\left(T-\lambda I_V\right)^n}=\geneigenspace{T}{\lambda}</me> where the subset inclusion is a consequence of Theorem<nbsp /><xref ref="theorem-kernels-of-powers" />.</p>
+
+        <p>Also, there is no such thing as a <q>generalized eigenvalue.</q> If <m>\lambda</m> is not an eigenvalue of <m>T</m>, then the kernel of <m>T-\lambda I_V</m> is trivial and therefore subsequent powers of <m>T-\lambda I_V</m> also have trivial kernels (Theorem<nbsp /><xref ref="theorem-kernels-of-powers" /> gives <m>m=0</m>).  So if we defined generalized eigenspaces for scalars that are not an eigenvalue, they would always be trivial.  Alright, we know enough now to compute some generalized eigenspaces.  We will record some information about algebraic and geometric multiplicities of eigenvalues (<acroref type="definition" acro="AME" />, <acroref type="definition" acro="GME" />) as we go, since these observations will be of interest in light of some future theorems.</p>
+
+        <example xml:id="example-linear-transformation-restriction-generalized-eigenspace"> <!-- was LTRGE -->
+            <title>Linear Transformation Restriction on Generalized Eigenspace</title>
+
+            <p>In order to gain some experience with generalized eigenspaces, we construct one and then also construct a matrix representation for the restriction to this invariant subspace.</p>
+
+            <p>Consider the linear transformation <m>\ltdefn{T}{\complex{5}}{\complex{5}}</m> defined by <m>\lteval{T}{\vect{x}}=A\vect{x}</m>, where <me>A=\begin{bmatrix}
+            <![CDATA[-22 & -24 & -24 & -24 & -46 \\
+             3 & 2 & 6 & 0 & 11 \\
+             -12 & -16 & -6 & -14 & -17 \\
+             6 & 8 & 4 & 10 & 8 \\
+             11 & 14 & 8 & 13 & 18]]>
+            \end{bmatrix}</me></p>
+
+            <p>One of the eigenvalues of <m>A</m> is <m>\lambda=2</m>, with geometric multiplicity <m>\geomult{T}{2}=1</m>, and algebraic multiplicity <m>\algmult{T}{2}=3</m>.  We get the generalized eigenspace according to Theorem<nbsp /><xref ref="theorem-generalized-eigenspace-kernel" />, <me>W=
+            \geneigenspace{T}{2}
+            =\krn{\left(T-2I_{\complex{5}}\right)^5}
+            =\spn{\set{
+            \colvector{-2\\1\\1\\0\\0},\,
+            \colvector{0\\-1\\0\\1\\0},\,
+            \colvector{-4\\2\\0\\0\\1}
+            }}
+            =\spn{\set{\vect{w}_1,\,\vect{w}_2,\,\vect{w}_3}}</me>  By Theorem<nbsp /><xref ref="theorem-generalized-eigenspace-invariant" />, we know <m>W</m> is invariant relative to <m>T</m>, so we can employ <acroref type="definition" acro="LTR" /> to form the restriction, <m>\ltdefn{\restrict{T}{W}}{W}{W}</m>.</p>
+
+            <p>We will from the restriction of <m>T</m> to <m>W</m>, <m>\restrict{T}{W}</m>, since we will do this frequently in subsequent examples.  For a basis of <m>W</m> we will use <m>C=\set{\vect{w}_1,\,\vect{w}_2,\,\vect{w}_3}</m>.  Notice that <m>\dimension{W}=3</m>, so our matrix representation will be a square matrix of size 3.  Applying <acroref type="definition" acro="MR" />, we compute <md>
+                <mrow>\vectrep{C}{\lteval{T}{\vect{w}_1}}
+                &amp;=\vectrep{C}{A\vect{w}_1}
+                =\vectrep{C}{\colvector{-4\\2\\2\\0\\0}}
+                =\vectrep{C}{
+                2\colvector{-2\\1\\1\\0\\0}+
+                0\colvector{0\\-1\\0\\1\\0}+
+                0\colvector{-4\\2\\0\\0\\1}
+                }
+                =\colvector{2\\0\\0}</mrow>
+                <mrow>\vectrep{C}{\lteval{T}{\vect{w}_2}}
+                &amp;=\vectrep{C}{A\vect{w}_2}
+                =\vectrep{C}{\colvector{0\\-2\\2\\2\\-1}}
+                =\vectrep{C}{
+                2\colvector{-2\\1\\1\\0\\0}+
+                2\colvector{0\\-1\\0\\1\\0}+
+                (-1)\colvector{-4\\2\\0\\0\\1}
+                }
+                =\colvector{2\\2\\-1}</mrow>
+                <mrow>\vectrep{C}{\lteval{T}{\vect{w}_3}}
+                &amp;=\vectrep{C}{A\vect{w}_3}
+                =\vectrep{C}{\colvector{-6\\3\\-1\\0\\2}}
+                =\vectrep{C}{
+                (-1)\colvector{-2\\1\\1\\0\\0}+
+                0\colvector{0\\-1\\0\\1\\0}+
+                2\colvector{-4\\2\\0\\0\\1}
+                }
+                =\colvector{-1\\0\\2}
+                </mrow>
+            </md> So the matrix representation of <m>\restrict{T}{W}</m> relative to <m>C</m> is
+            <me>\matrixrep{\restrict{T}{W}}{C}{C}=
+            \begin{bmatrix}
+            <![CDATA[2 & 2 & -1\\
+            0 & 2 & 0\\
+            0 & -1 & 2]]>
+            \end{bmatrix}</me></p>
+
+            <p>The question arises:  how do we use a <m>3\times 3</m> matrix to compute with vectors from <m>\complex{5}</m>?  To answer this question, consider the randomly chosen vector <me>\vect{w}=\colvector{-4\\4\\4\\-2\\-1}</me>  First check that <m>\vect{w}\in\geneigenspace{T}{2}</m>.  There are two ways to do this, first verify that<me>\lteval{\left(T-2I_{\complex{5}}\right)^5}{\vect{w}}=\left(A-2I_5\right)^5\vect{w}=\zerovector</me> meeting Definition<nbsp /><xref ref="definition-generalized-eigenvector" /> (with <m>k=5</m>).  Or, express <m>\vect{w}</m> as a linear combination of the basis <m>C</m> for <m>W</m>, to wit, <m>\vect{w}=4\vect{w}_1-2\vect{w}_2-\vect{w}_3</m>.</p>
+
+            <p>Now compute <m>\lteval{\restrict{T}{W}}{\vect{w}}</m> directly <me>\lteval{\restrict{T}{W}}{\vect{w}} =\lteval{T}{\vect{w}} =A\vect{w} =\colvector{-10\\9\\5\\-4\\0}</me> It was necessary to verify that <m>\vect{w}\in\geneigenspace{T}{2}</m>.  If we trust our work so far, then this output we just computed will also be an element of <m>W</m>, but it would be wise to check this anyway (using either of the methods we used for <m>\vect{w}</m>).  We'll wait.</p>
+
+            <p>Now we will repeat this sample computation, but instead using the matrix representation of <m>\restrict{T}{W}</m> relative to <m>C</m>. <md> 
+                <mrow>\lteval{\restrict{T}{W}}{\vect{w}}&amp;=\vectrepinv{C}{\matrixrep{\restrict{T}{W}}{C}{C}\vectrep{C}{\vect{w}}}</mrow>
+                <mrow>&amp;=\vectrepinv{C}{\matrixrep{\restrict{T}{W}}{C}{C}\vectrep{C}{4\vect{w}_1-2\vect{w}_2-\vect{w}_3}}</mrow>
+                <mrow>&amp;=\vectrepinv{C}{\begin{bmatrix}<![CDATA[2 & 2 & -1 \\ 0 & 2 & 0 \\ 0 & -1 & 2]]>\end{bmatrix} \colvector{4\\-2\\-1}} </mrow>
+                <mrow>&amp;=\vectrepinv{C}{\colvector{5\\-4\\0}}</mrow>
+                <mrow>&amp;=5\colvector{-2\\1\\1\\0\\0}+ (-4)\colvector{0\\-1\\0\\1\\0}+ 0\colvector{-4\\2\\0\\0\\1}</mrow> 
+                <mrow>&amp;=\colvector{-10\\9\\5\\-4\\0}</mrow>
+            </md> This matches the previous computation.  Notice how the <q>action</q> of <m>\restrict{T}{W}</m> is accomplished by a <m>3\times 3</m> matrix multiplying a column vector of size 3.</p>
+
+            <p>If you would like more practice with these sorts of computations, mimic the above using the other eigenvalue of <m>T</m>, which is <m>\lambda=-2</m>.  The generalized eigenspace has dimension 2, so the matrix representation of the restriction to the generalized eigenspace will be a <m>2\times 2</m> matrix.</p>
+        </example>
+
+        <p>Our next two examples compute a complete set of generalized eigenspaces for a linear transformation.</p>
+
+        <example xml:id="example-generalized-eigenspace-dimension-4"> <!-- was GE4 -->
+            <title>Generalized Eigenspaces, Dimension 4 Domain</title>
+
+            <p>In Example<nbsp /><xref ref="example-two-invariant-subspaces" /> we presented two invariant subspaces of <m>\complex{4}</m>.  There was some mystery about just how these were constructed, but we can now reveal that they are generalized eigenspaces.  Example<nbsp /><xref ref="example-two-invariant-subspaces" /> featured <m>\ltdefn{T}{\complex{4}}{\complex{4}}</m> defined by <m>\lteval{T}{\vect{x}}=A\vect{x}</m> with <m>A</m> given by <me>A=\begin{bmatrix}
+            <![CDATA[-8 & 6 & -15 & 9 \\ 
+            -8 & 14 & -10 & 18 \\
+            1 & 1 & 3 & 0 \\
+            3 & -8 & 2 & -11]]>
+            \end{bmatrix}</me> A matrix representation of <m>T</m> relative to the standard basis (<acroref type="definition" acro="SUV" />) will equal <m>A</m>.  So we can analyze <m>A</m> with the techniques of <acroref type="chapter" acro="E" />.  Doing so, we find two eigenvalues, <m>\lambda=1,\,-2</m>, with multiplicities, <md> 
+                <mrow> \algmult{T}{1}&amp;=2 &amp; \geomult{T}{1}&amp;=1 &amp;\algmult{T}{-2}&amp;=2 &amp; \geomult{T}{-2}&amp;=1</mrow>
+            </md>  To apply Theorem<nbsp /><xref ref="theorem-generalized-eigenspace-kernel" /> we subtract each eigenvalue from the diagonal entries of <m>A</m>, raise the result to the power <m>\dimension{\complex{4}}=4</m>, and compute a basis for the null space. <md> 
+                <mrow>\left(A-(-2)I_4\right)^4&amp;=\begin{bmatrix}
+                <![CDATA[648 & -1215 & 729 & -1215 \\
+                -324 & 486 & -486 & 486 \\
+                -405 & 729 & -486 & 729 \\
+                297 & -486 & 405 & -486 
+                \end{bmatrix}
+                \rref
+                \begin{bmatrix}
+                1 & 0 & 3 & 0 \\
+                0 & 1 & 1 & 1 \\
+                0 & 0 & 0 & 0 \\
+                0 & 0 & 0 & 0]]>\end{bmatrix}</mrow> 
+                <mrow>\geneigenspace{T}{-2}&amp;=\spn{\set{
+                \colvector{-3\\-1\\1\\0},\,
+                \colvector{0\\-1\\0\\1}}}</mrow> 
+                <mrow>\left(A-(1)I_4\right)^4&amp;= \begin{bmatrix}
+                <![CDATA[81 & -405 & -81 & -729 \\
+                -108 & -189 & -378 & -486 \\
+                -27 & 135 & 27 & 243 \\
+                135 & 54 & 351 & 243
+                \end{bmatrix}
+                \rref
+                \begin{bmatrix}
+                1 & 0 & 7/3 & 1 \\
+                0 & 1 & 2/3 & 2 \\
+                0 & 0 & 0 & 0 \\
+                0 & 0 & 0 & 0]]>\end{bmatrix}</mrow>
+                <mrow>\geneigenspace{T}{1}&amp;=\spn{\set{
+                \colvector{-7\\-2\\3\\0},\,
+                \colvector{-1\\-2\\0\\1}}}</mrow>
+            </md> In Example<nbsp /><xref ref="example-two-invariant-subspaces" /> we concluded that these two invariant subspaces formed a direct sum of <m>\complex{4}</m>, only at that time, they were called <m>X</m> and <m>W</m>.  Now we can write <me>\complex{4}=\geneigenspace{T}{1}\ds\geneigenspace{T}{-2}</me>  This is no accident.   Notice that the dimension of each of these invariant subspaces is equal to the algebraic multiplicity of the associated eigenvalue.  Not an accident either. (See the upcoming Theorem<nbsp /><xref ref="theorem-generalized-eigenspace-decomposition" />.)</p>
+        </example>
+
+
+        <example xml:id="example-generalized-eigenspace-dimension-6"> <!-- was GE6 -->
+            <title>Generalized Eigenspaces, Dimension 6 Domain</title>
+
+            <p>Define the linear transformation <m>\ltdefn{S}{\complex{6}}{\complex{6}}</m>  by <m>\lteval{S}{\vect{x}}=B\vect{x}</m> where <me>\begin{bmatrix}
+            <![CDATA[2 & -4 & 25 & -54 & 90 & -37 \\
+            2 & -3 & 4 & -16 & 26 & -8 \\
+            2 & -3 & 4 & -15 & 24 & -7 \\
+            10 & -18 & 6 & -36 & 51 & -2 \\
+            8 & -14 & 0 & -21 & 28 & 4 \\
+            5 & -7 & -6 & -7 & 8 & 7]]>\end{bmatrix}</me>  Then <m>B</m> will be the matrix representation of <m>S</m> relative to the standard basis and we can use the techniques of <acroref type="chapter" acro="E" /> applied to <m>B</m> in order to find the eigenvalues of <m>S</m>. <md>
+                <mrow>\algmult{S}{3}&amp;=2 &amp; \geomult{S}{3}&amp;=1 &amp; \algmult{S}{-1}&amp;=4 &amp; \geomult{S}{-1}&amp;=2</mrow>
+            </md> To find the generalized eigenspaces of <m>S</m> we need to subtract an eigenvalue from the diagonal elements of <m>B</m>, raise the result to the power <m>\dimension{\complex{6}}=6</m> and compute the null space.  Here are the results for the two eigenvalues of <m>S</m>, <md>
+                <mrow>\left(B-3I_6\right)^6&amp;=
+                \begin{bmatrix}
+                <![CDATA[64000 & -152576 & -59904 & 26112 & -95744 & 133632 \\
+                15872 & -39936 & -11776 & 8704 & -29184 & 36352 \\
+                12032 & -30208 & -9984 & 6400 & -20736 & 26368 \\
+                -1536 & 11264 & -23040 & 17920 & -17920 & -1536 \\
+                -9728 & 27648 & -6656 & 9728 & -1536 & -17920 \\
+                -7936 & 17920 & 5888 & 1792 & 4352 & -14080]]>
+                \end{bmatrix}</mrow>
+                <mrow>\rref&amp;
+                \begin{bmatrix}
+                <![CDATA[1 & 0 & 0 & 0 & -4 & 5 \\
+                 0 & 1 & 0 & 0 & -1 & 1 \\
+                 0 & 0 & 1 & 0 & -1 & 1 \\
+                 0 & 0 & 0 & 1 & -2 & 1 \\
+                 0 & 0 & 0 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0 & 0]]>
+                \end{bmatrix}</mrow>
+                <mrow>\geneigenspace{S}{3}&amp;=\spn{\set{
+                \colvector{4\\1\\1\\2\\1\\0},\,
+                \colvector{-5\\-1\\-1\\-1\\0\\1}}}</mrow> 
+                <mrow>\left(B-(-1)I_6\right)^6&amp;=
+                \begin{bmatrix}
+                 <![CDATA[6144 & -16384 & 18432 & -36864 & 57344 & -18432 \\
+                 4096 & -8192 & 4096 & -16384 & 24576 & -4096 \\
+                 4096 & -8192 & 4096 & -16384 & 24576 & -4096 \\
+                 18432 & -32768 & 6144 & -61440 & 90112 & -6144 \\
+                 14336 & -24576 & 2048 & -45056 & 65536 & -2048 \\
+                 10240 & -16384 & -2048 & -28672 & 40960 & 2048]]>
+                \end{bmatrix}</mrow>
+                <mrow>\rref&amp; \begin{bmatrix}
+                <![CDATA[ 1 & 0 & -5 & 2 & -4 & 5 \\
+                 0 & 1 & -3 & 3 & -5 & 3 \\
+                 0 & 0 & 0 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0 & 0]]>
+                \end{bmatrix}</mrow> 
+                <mrow>\geneigenspace{S}{-1}&amp;=\spn{\set{
+                \colvector{5\\3\\1\\0\\0\\0},\,
+                \colvector{-2\\-3\\0\\1\\0\\0},\,
+                \colvector{4\\5\\0\\0\\1\\0},\,
+                \colvector{-5\\-3\\0\\0\\0\\1}
+                }}</mrow>
+            </md></p>
+
+            <p>If we take the union of the two bases for these two invariant subspaces we obtain the set <me>C=\set{
+            \colvector{4\\1\\1\\2\\1\\0},\,
+            \colvector{-5\\-1\\-1\\-1\\0\\1},\,
+            \colvector{5\\3\\1\\0\\0\\0},\,
+            \colvector{-2\\-3\\0\\1\\0\\0},\,
+            \colvector{4\\5\\0\\0\\1\\0},\,
+            \colvector{-5\\-3\\0\\0\\0\\1}
+            }</me>  You can check that this set is linearly independent (right now we have no guarantee this will happen).  Once this is verified, we have a basis for <m>\complex{6}</m>.   This is enough for us to apply Theorem<nbsp /><xref ref="theorem-direct-sum-split-basis" /> and conclude that <me>\complex{6}=\geneigenspace{S}{3}\ds\geneigenspace{S}{-1}</me>  This is no accident.  Notice that the dimension of each of these invariant subspaces is equal to the algebraic multiplicity of the associated eigenvalue.  Not an accident either. (See Theorem<nbsp /><xref ref="theorem-generalized-eigenspace-decomposition" />.)</p>
+        </example>
+
+        <p>Our principal interest in generalized eigenspaces is the following important theorem, which has been presaged by the two previous examples.</p>
+
+
+        <theorem xml:id="theorem-generalized-eigenspace-decomposition">  <!-- was GESD -->
+            <title>Generalized Eigenspace Decomposition</title>
+            <statement>
+                <p>Suppose that <m>\ltdefn{T}{V}{V}</m> is a linear transformation with distinct eigenvalues <m>\scalarlist{\lambda}{m}</m>.  Then <me>V=
+                \geneigenspace{T}{\lambda_1}\ds
+                \geneigenspace{T}{\lambda_2}\ds
+                \geneigenspace{T}{\lambda_3}\ds
+                \cdots\ds
+                \geneigenspace{T}{\lambda_m}</me></p>
+            </statement>
+            <proof><p>Coming soon.</p></proof>
+
+        </theorem>
+
+        <p>Now, given any linear transformation, we can find a decomposition of the domain into a collection of invariant subspaces.  And, as we have seen, such a decomposition will provide a basis for the domain so that a matrix representation realtive to this basis will have a block diagonal form. Besides a decomposition into invariant subspaces, this proof has a bonus for us.</p>
+
+        <corollary xml:id="corollary-generalized-eigenspace-dimension"> <!-- was DGES -->
+            <title>Dimension of Generalized Eigenspaces</title>
+            <statement>
+                <p>Suppose <m>\ltdefn{T}{V}{V}</m> is a linear transformation with eigenvalue <m>\lambda</m>.  Then the dimension of the generalized eigenspace for <m>\lambda</m> is the algebraic multiplicity of <m>\lambda</m>, <m>\dimension{\geneigenspace{T}{\lambda}}=\algmult{T}{\lambda}</m>.</p>
+            </statement>
+
+            <proof><p>Coming soon: as a consequence of proof, or by counting dimensions with inequality on geometric dimension.</p></proof>
+        </corollary>
+
+        <p>We illustrate the use of this decomposition in building a block diagonal matrix representation.</p>
+
+        <example xml:id="example-generalized-eigenspace-representation-dimension-6">  <!-- was ISMR6 -->
+            <title>Matrix Representation with Generalized Eigenspaces, Dimension 6 Domain</title>
+
+            <p>In Example<nbsp /><xref ref="example-generalized-eigenspace-dimension-6" /> we computed the generalized eigenspaces of the linear transformation <m>\ltdefn{S}{\complex{6}}{\complex{6}}</m>  by <m>\lteval{S}{\vect{x}}=B\vect{x}</m> where <me>B=\begin{bmatrix}
+            <![CDATA[2 & -4 & 25 & -54 & 90 & -37 \\
+             2 & -3 & 4 & -16 & 26 & -8 \\
+             2 & -3 & 4 & -15 & 24 & -7 \\
+             10 & -18 & 6 & -36 & 51 & -2 \\
+             8 & -14 & 0 & -21 & 28 & 4 \\
+             5 & -7 & -6 & -7 & 8 & 7]]>\end{bmatrix}</me>  We also recognized that these generalized eigenspaces provided a vector space decomposition.</p>
+
+            <p>From these generalized eigenspaces, we found the basis <md> 
+                <mrow> C&amp;=\set{\vect{v}_1,\,\vect{v}_2,\,\vect{v}_3,\,\vect{v}_4,\,\vect{v}_5,\,\vect{v}_6}</mrow>
+                <mrow>&amp;=\set{\colvector{4\\1\\1\\2\\1\\0},\, \colvector{-5\\-1\\-1\\-1\\0\\1},\, \colvector{5\\3\\1\\0\\0\\0},\, \colvector{-2\\-3\\0\\1\\0\\0},\, \colvector{4\\5\\0\\0\\1\\0},\, \colvector{-5\\-3\\0\\0\\0\\1}}</mrow>
+            </md> of <m>\complex{6}</m> where <m>\set{\vect{v}_1,\,\vect{v}_2}</m> is a basis of <m>\geneigenspace{S}{3}</m> and <m>\set{\vect{v}_3,\,\vect{v}_4,\,\vect{v}_5,\,\vect{v}_6}</m> is a basis of <m>\geneigenspace{S}{-1}</m></p>
+
+            <p>We can employ <m>C</m> in the construction of a matrix representation of <m>S</m> (<acroref type="definition" acro="MR" />).  Here are the computations, <md>
+                <mrow>\vectrep{C}{\lteval{S}{\vect{v}_1}}
+                </mrow>
+                <mrow>&amp;=\vectrep{C}{\colvector{11\\3\\3\\7\\4\\1}}
+                =\vectrep{C}{4\vect{v}_1+1\vect{v}_2}
+                =\colvector{4\\1\\0\\0\\0\\0}</mrow>
+                <mrow>\vectrep{C}{\lteval{S}{\vect{v}_2}}
+                &amp;=\vectrep{C}{\colvector{-14\\-3\\-3\\-4\\-1\\2}}
+                =\vectrep{C}{(-1)\vect{v}_1+2\vect{v}_2}
+                =\colvector{-1\\2\\0\\0\\0\\0}</mrow>
+                <mrow>\vectrep{C}{\lteval{S}{\vect{v}_3}}
+                &amp;=\vectrep{C}{\colvector{23\\5\\5\\2\\-2\\-2}}
+                =\vectrep{C}{5\vect{v}_3+2\vect{v}_4+(-2)\vect{v}_5+(-2)\vect{v}_6}
+                =\colvector{0\\0\\5\\2\\-2\\-2}</mrow>
+                <mrow>\vectrep{C}{\lteval{S}{\vect{v}_4}}
+                &amp;=\vectrep{C}{\colvector{-46\\-11\\-10\\-2\\5\\4}}
+                =\vectrep{C}{(-10)\vect{v}_3+(-2)\vect{v}_4+5\vect{v}_5+4\vect{v}_6}
+                =\colvector{0\\0\\-10\\-2\\5\\4}</mrow>
+                <mrow>\vectrep{C}{\lteval{S}{\vect{v}_5}}
+                &amp;=\vectrep{C}{\colvector{78\\19\\17\\1\\-10\\-7}}
+                =\vectrep{C}{17\vect{v}_3+1\vect{v}_4+(-10)\vect{v}_5+(-7)\vect{v}_6}
+                =\colvector{0\\0\\17\\1\\-10\\-7}</mrow>
+                <mrow>\vectrep{C}{\lteval{S}{\vect{v}_6}}
+                &amp;=\vectrep{C}{\colvector{-35\\-9\\-8\\2\\6\\3}}
+                =\vectrep{C}{(-8)\vect{v}_3+2\vect{v}_4+6\vect{v}_5+3\vect{v}_6}
+                =\colvector{0\\0\\-8\\2\\6\\3}</mrow>
+            </md> These column vectors are the columns of the matrix representation, so we obtain
+            <me>\matrixrep{S}{C}{C}=\begin{bmatrix}<![CDATA[4 & -1 &  0 & 0& 0 & 0\\
+            1 & 2 &  0 & 0& 0 & 0\\
+            0 & 0 &  5 & -10& 17 & -8\\
+            0 & 0 &  2 &  -2& 1 & 2\\
+            0 & 0 & -2 &   5& -10 & 6\\
+            0 & 0 & -2 &   4& -7 & 3]]>\end{bmatrix}</me></p>
+
+            <p>As before, the key feature of this representation is the <m>2\times 2</m> and <m>4\times 4</m> blocks on the diagonal.  They arise from generalized eigenspaces and their sizes are equal to the algebraic multiplicities of the eigenvalues.</p>
+        </example>
+
+    </subsection>
+
+</section>

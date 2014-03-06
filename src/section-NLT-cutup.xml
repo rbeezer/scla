@@ -13,9 +13,7 @@
 {\sc\large This section is in draft form}\\
 {\sc\large Nearly complete}
 <p><p>\medskip
-We have seen that some matrices are diagonalizable and some are not.  Some authors refer to a non-diagonalizable matrix as <term>defective</term>, but we will study them carefully anyway.  Examples of such matrices include <acroref type="example" acro="EMMS4" />, <acroref type="example" acro="HMEM5" />, and <acroref type="example" acro="CEMS6" />.  Each of these matrices has at least one eigenvalue with geometric multiplicity strictly less than its algebraic multiplicity, and therefore <acroref type="theorem" acro="DMFE" /> tells us these matrices are not diagonalizable.<p><p>
-Given a square matrix <m>A</m>, it is likely similar to many, many other matrices.  Of all these possibilities, which is the best?  <q>Best</q> is a subjective term, but we might agree that a diagonal matrix is certainly a very nice choice.  Unfortunately, as we have seen, this will not always be possible.  What form of a matrix is <q>next-best</q>?  Our goal, which will take us several sections to reach, is to show that every matrix is similar to a matrix that is <q>nearly-diagonal</q> (<acroref type="section" acro="JCF" />). More precisely, every matrix is similar to a matrix with elements on the diagonal, and zeros and ones  on the diagonal just above the main diagonal (the <q>super diagonal</q>), with zeros everywhere else.  In the language of equivalence relations (see <acroref type="theorem" acro="SER" />), we are determining a systematic representative for each equivalence class.  Such a representative for a set of similar matrices is called a <term>canonical form</term>.<p><p>
-We have just discussed the determination of a canonical form as a question about matrices.  However, we know that every square matrix creates a natural linear transformation (<acroref type="theorem" acro="MBLT" />) and every linear transformation with identical domain and codomain has a square matrix representation for each choice of a basis, with a change of basis creating a similarity transformation (<acroref type="theorem" acro="SCB" />).  So we will state, and prove, theorems using the language of linear transformations on abstract vector spaces, while most of our examples will work with square matrices.  You can, and should, mentally translate between the two settings frequently and easily.<p><p>
+
 \subsect{NLT}{Nilpotent Linear Transformations}
 We will discover that nilpotent linear transformations are the essential obstacle in a non-diagonalizable linear transformation.  So we will study them carefully first, both as an object of inherent mathematical interest, but also as the object at the heart of the argument that leads to a pleasing canonical form for any linear transformation.  Once we understand these linear transformations thoroughly, we will be able to easily analyze the structure of any linear transformation.<p><p>
 <definition acro="NLT" index="nilpotent!linear transformation">
@@ -389,95 +387,7 @@ So <m>T</m> is identically zero on a basis for <m>B</m>, and since the action of
 </theorem>
 
 So, other than one trivial case (the zero matrix), every nilpotent linear transformation is not diagonalizable.  It remains to see what is so <q>essential</q> about this broad class of non-diagonalizable linear transformations.  For this we now turn to a discussion of kernels of powers of nilpotent linear transformations, beginning with a result about general linear transformations that may not necessarily be nilpotent.
-<theorem acro="KPLT" index="linear transformation!kernels of powers">
-<title>Kernels of Powers of Linear Transformations</title>
-<statement>
-Suppose <m>\ltdefn{T}{V}{V}</m> is a linear transformation, where <m>\dimension{V}=n</m>.  Then there is an integer <m>m</m>, <m>0\leq m\leq n</m>, such that
-<me><md>
-<mrow>
-\set{\zerovector}
-</mrow>
-<mrow>&amp;=\krn{T^0}]]>
-\subsetneq\krn{T^1}
-\subsetneq\krn{T^2}
-\subsetneq\cdots
-\subsetneq\krn{T^m}
-=\krn{T^{m+1}}
-=\krn{T^{m+2}}
-=\cdots
-</mrow>
-</md></me>
-</statement>
 
-<proof>
-There are several items to verify in the conclusion as stated.  First, we show that <m>\krn{T^k}\subseteq\krn{T^{k+1}}</m> for any <m>k</m>.    Choose <m>\vect{z}\in\krn{T^k}</m>.  Then
-<me><md>
-<mrow>
-\lt{T^{k+1}}{\vect{z}}
-</mrow>
-<mrow>&amp;=\lt{T}{\lt{T^k}{\vect{z}}}&amp;&amp;<acroref type="definition" acro="LTC" />
-</mrow>
-<mrow>&amp;=\lt{T}{\zerovector}&amp;&amp;<acroref type="definition" acro="KLT" />
-</mrow>
-<mrow>&amp;=\zerovector&amp;&amp;<acroref type="theorem" acro="LTTZZ" />
-</mrow>
-</md></me>
-So by <acroref type="definition" acro="KLT" />, <m>\vect{z}\in\krn{T^{k+1}}</m> and by <acroref type="definition" acro="SSET" /> we have <m>\krn{T^k}\subseteq\krn{T^{k+1}}</m>.<p><p>
-Second, we demonstrate the existence of a power <m>m</m> where consecutive powers result in equal kernels.  A by-product will be the condition that <m>m</m> can be chosen so that <m>m\leq n</m>.  To the contrary, suppose that
-<me><md>
-<mrow>
-\set{\zerovector}
-</mrow>
-<mrow>&amp;=\krn{T^0}]]>
-\subsetneq\krn{T^1}
-\subsetneq\krn{T^2}
-\subsetneq\cdots
-\subsetneq\krn{T^{n-1}}
-\subsetneq\krn{T^n}
-\subsetneq\krn{T^{n+1}}
-\subsetneq\cdots
-</mrow>
-</md></me>
-Since <m>\krn{T^k}\subsetneq\krn{T^{k+1}}</m>, <acroref type="theorem" acro="PSSD" /> implies that <m>\dimension{\krn{T^{k+1}}}\geq\dimension{\krn{T^k}}+1</m>.  Repeated application of this observation yields
-<me><md>
-<mrow>
-\dimension{\krn{T^{n+1}}}
-</mrow>
-<mrow>&amp;\geq\dimension{\krn{T^n}}+1\\]]>
-</mrow>
-<mrow>&amp;\geq\dimension{\krn{T^{n-1}}}+2\\]]>
-</mrow>
-<mrow>&amp;\quad\quad\vdots\\]]>
-</mrow>
-<mrow>&amp;\geq\dimension{\krn{T^{0}}}+(n+1)\\]]>
-</mrow>
-<mrow>&amp;=\dimension{\set{\zerovector}}+n+1\\]]>
-</mrow>
-<mrow>&amp;=n+1]]>
-</mrow>
-</md></me>
-Thus, <m>\krn{T^{n+1}}</m> has a basis of size at least <m>n+1</m>, which is a linearly independent set of size greater than <m>n</m> in the vector space <m>V</m> of dimension <m>n</m>.  This contradicts <acroref type="theorem" acro="G" />.<p><p>
-This contradiction yields the existence of an integer <m>k</m> such that <m>\krn{T^k}=\krn{T^{k+1}}</m>, so we can define <m>m</m> to be smallest such integer with this property.  From the argument above about dimensions resulting from a strictly increasing chain of subspaces, it should be clear that <m>m\leq n</m>.<p><p>
-It remains to show that once two consecutive kernels are equal, then all of the remaining kernels are equal.  More formally, if <m>\krn{T^m}=\krn{T^{m+1}}</m>, then <m>\krn{T^m}=\krn{T^{m+j}}</m> for all <m>j\geq 1</m>.  We will give a proof by induction on <m>j</m> (<acroref type="technique" acro="I" />).  The base case (<m>j=1</m>) is precisely our defining property for <m>m</m>.<p><p>
-In the induction step, we assume that <m>\krn{T^m}=\krn{T^{m+j}}</m> and endeavor to show that <m>\krn{T^m}=\krn{T^{m+j+1}}</m>.  At the outset of this proof we established that  <m>\krn{T^m}\subseteq\krn{T^{m+j+1}}</m>.  So <acroref type="definition" acro="SE" /> requires only that we establish the subset inclusion in the opposite direction.  To wit, choose <m>\vect{z}\in\krn{T^{m+j+1}}</m>.  Then
-<me><md>
-<mrow>
-\zerovector
-</mrow>
-<mrow>&amp;=\lt{T^{m+j+1}}{\vect{z}}&amp;&amp;<acroref type="definition" acro="KLT" />
-</mrow>
-<mrow>&amp;=\lt{T^{m+j}}{\lt{T}{\vect{z}}}&amp;&amp;<acroref type="definition" acro="LTC" />
-</mrow>
-<mrow>&amp;=\lt{T^{m}}{\lt{T}{\vect{z}}}&&\text{Induction Hypothesis}\\]]>
-</mrow>
-<mrow>&amp;=\lt{T^{m+1}}{\vect{z}}&amp;&amp;<acroref type="definition" acro="LTC" />
-</mrow>
-<mrow>&amp;=\lt{T^{m}}{\vect{z}}&&\text{Base Case}]]>
-</mrow>
-</md></me>
-So by <acroref type="definition" acro="KLT" />, <m>\vect{z}\in\krn{T^{m}}</m> as desired.
-</proof>
-</theorem>
 
 We now specialize <acroref type="theorem" acro="KPLT" /> to the case of nilpotent linear transformations, which buys us just a bit more precision in the conclusion.
 <theorem acro="KPNLT" index="linear transformation!nilpotent!kernels of powers">

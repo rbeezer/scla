@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- This file is part of the book                -->
+<!--                                              -->
+<!--      A Second Course in Linear Algebra       -->
+<!--                                              -->
+<!-- Copyright (C) 2004-2014  Robert A. Beezer    -->
+<!-- See the file COPYING for copying conditions. -->
+   
+<chapter xml:id="chapter-canonical-forms" filebase="canonical-forms" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>Canonical Forms</title>
+
+    <introduction>
+    	<p>You will know that some matrices are diagonalizable and some are not.  Some authors refer to a non-diagonalizable matrix as <term>defective</term>, but we will study them carefully anyway.  Examples of such matrices include <acroref type="example" acro="EMMS4" />, <acroref type="example" acro="HMEM5" />, and <acroref type="example" acro="CEMS6" />.  Each of these matrices has at least one eigenvalue with geometric multiplicity strictly less than its algebraic multiplicity, and therefore <acroref type="theorem" acro="DMFE" /> tells us these matrices are not diagonalizable.</p>
+
+    	<p> Given a square matrix <m>A</m>, it is likely similar to many, many other matrices.  Of all these possibilities, which is the best?  <q>Best</q> is a subjective term, but we might agree that a diagonal matrix is certainly a very nice choice.  Unfortunately, as we have seen, this will not always be possible.  What form of a matrix is <q>next-best</q>?  Our goal, which will take us several sections to reach, is to show that every matrix is similar to a matrix that is <q>nearly-diagonal</q> (Section<nbsp /><xref ref="section-jordan-canonical-form" />). More precisely, every matrix is similar to a matrix with elements on the diagonal, and zeros and ones on the diagonal just above the main diagonal (the <q>super diagonal</q>), with zeros everywhere else.  In the language of equivalence relations (see <acroref type="theorem" acro="SER" />), we are determining a systematic representative for each equivalence class, where the relation is similarity.  Such a representative for a set of similar matrices is called a <term>canonical form</term>.</p>
+
+		<p>We have just discussed the determination of a canonical form as a question about matrices.  However, we know that every square matrix creates a natural linear transformation (<acroref type="theorem" acro="MBLT" />) and every linear transformation with identical domain and codomain has a square matrix representation for each choice of a basis, with a change of basis creating a similarity transformation (<acroref type="theorem" acro="SCB" />).  So we will state, and prove, theorems using the language of linear transformations on abstract vector spaces, while most of our examples will work with square matrices.  You can, and should, mentally translate between the two settings frequently and easily.</p>
+	</introduction>
+    
+    <xi:include href="./generalized-eigenspaces.xml" />
+    
+</chapter>

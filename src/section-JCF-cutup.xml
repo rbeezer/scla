@@ -15,23 +15,25 @@
 <p><p>\medskip
 We have seen in <acroref type="section" acro="IS" /> that generalized eigenspaces are invariant subspaces that in every instance have led to a direct sum decomposition of the domain of the associated linear transformation.  This allows us to create a block diagonal matrix representation (<acroref type="example" acro="ISMR4" />, <acroref type="example" acro="ISMR6" />).     We also know from <acroref type="theorem" acro="RGEN" /> that the restriction of a linear transformation to a generalized eigenspace is almost a nilpotent linear transformation.  Of course, we understand nilpotent linear transformations very well from <acroref type="section" acro="NLT" /> and we have carefully determined a nice matrix representation for them.<p><p>
 So here is the game plan for the final push.  Prove that the domain of a linear transformation always decomposes into a direct sum of generalized eigenspaces.  We have unravelled <acroref type="theorem" acro="RGEN" /> at <acroref type="theorem" acro="MRRGE" /> so that we can formulate the matrix representations of the restrictions on the generalized eigenspaces using our storehouse of results about nilpotent linear transformations.  Arrive at a matrix representation of <em>any</em> linear transformation that is block diagonal with each block being a Jordan block.<p><p>
+
+
+
+
+
+
+
+
+
+
+
+
+
 \subsect{GESD}{Generalized Eigenspace Decomposition}
 In <acroref type="theorem" acro="UTMR" /> we were able to show that any linear transformation from <m>V</m> to <m>V</m> has an upper triangular matrix representation (<acroref type="definition" acro="UTM" />).  We will now show that we can improve on the basis yielding this representation by massaging the basis so that the matrix representation is also block diagonal.  The subspaces associated with each block will be generalized eigenspaces, so the most general result will be a decomposition of the domain of a linear transformation into a direct sum of generalized eigenspaces.
 <theorem acro="GESD" index="generalized eigenspace decomposition">
 <title>Generalized Eigenspace Decomposition</title>
-<statement>
-Suppose that <m>\ltdefn{T}{V}{V}</m> is a linear transformation with distinct eigenvalues <m>\scalarlist{\lambda}{m}</m>.  Then
-<me><md>
-<mrow>
-<![CDATA[V&=]]>
-\geneigenspace{T}{\lambda_1}\ds
-\geneigenspace{T}{\lambda_2}\ds
-\geneigenspace{T}{\lambda_3}\ds
-\cdots\ds
-\geneigenspace{T}{\lambda_m}
-</mrow>
-</md></me>
-</statement>
+
+<todo>Copy over proof, with edits</todo>
 
 <proof>
 Suppose that <m>\dimension{V}=n</m> and the <m>n</m> (not necessarily distinct) eigenvalues of <m>T</m> are <m>\scalarlist{\rho}{n}</m>.   We begin with a basis of <m>V</m> that yields an upper triangular matrix representation, as guaranteed by <acroref type="theorem" acro="UTMR" />, <m>B=\set{\vectorlist{x}{n}}</m>. Since the matrix representation is upper triangular, and the eigenvalues of the linear transformation are the diagonal elements we can choose this basis so that there are then scalars <m>a_{ij}</m>, <m>1\leq j\leq n</m>, <m>1\leq i\leq j-1</m> such that
@@ -399,9 +401,8 @@ Thus, <m>\dimension{\geneigenspace{T}{\lambda_i}}=\algmult{T}{\lambda_i}</m> and
 Besides a nice decomposition into invariant subspaces, this proof has a bonus for us.
 <theorem acro="DGES" index="generalized eigenspace!dimension">
 <title>Dimension of Generalized Eigenspaces</title>
-<statement>
-Suppose <m>\ltdefn{T}{V}{V}</m> is a linear transformation with eigenvalue <m>\lambda</m>.  Then the dimension of the generalized eigenspace for <m>\lambda</m> is the algebraic multiplicity of <m>\lambda</m>, <m>\dimension{\geneigenspace{T}{\lambda_i}}=\algmult{T}{\lambda_i}</m>.
-</statement>
+
+<todo>Cutover proof</todo>
 
 <proof>
 At the very end of the proof of <acroref type="theorem" acro="GESD" /> we obtain the inequalities
@@ -416,6 +417,21 @@ At the very end of the proof of <acroref type="theorem" acro="GESD" /> we obtain
 which establishes the desired equality.
 </proof>
 </theorem>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \subsect{JCF}{Jordan Canonical Form}
 Now we are in a position to define what we (and others) regard as an especially nice matrix representation.  The word <q>canonical</q> has at its root, the word <q>canon,</q> which has various meanings.  One is the set of laws established by a church council.  Another is a set of writings that are authentic, important or representative.  Here we take it to mean the accepted, or best, representative among a variety of choices.  Every linear transformation admits a variety of representations, and we will declare one as the best.  Hopefully you will agree.

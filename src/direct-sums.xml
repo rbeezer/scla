@@ -55,7 +55,7 @@
 
     <p><acroref type="example" acro="SDS" /> is easy to generalize into a theorem.</p>
 
-    <theorem xml:id="theorem-direct-sum-split-basis">
+    <theorem xml:id="theorem-direct-sum-split-basis"> <!--  was DSFB -->
         <title>Direct Sum From a Basis</title>
         <statement>
             <p>Suppose that <m>V</m> is a vector space with a basis
