@@ -305,7 +305,9 @@
                  <mrow>&amp;\ltdefn{\restrict{R}{V}}{V}{V} &amp; \lteval{\restrict{R}{V}}{\vect{x}}&amp;=B\vect{x}</mrow>
              </md>  It should not look like we have accomplished much.  Worse, it might appear that <m>R=\restrict{R}{U}=\restrict{R}{V}</m> since each is described by the same rule for computing the image of an input.  The difference is that the domains are all different: <m>\complex{5},U,V</m>.  Since <m>U</m> and <m>V</m> are invariant subspaces, we can then use these subspaces for the codomains of the restrictions.</p>
 
-             <p>We will frequently need the matrix representations of linear transformation restrictions, so let's compute those now for this example.  Let <me>C=\set{\vect{u}_1,\,\vect{u}_2,\,\vect{v}_1,\,\vect{v}_2,\,\vect{v}_3}</me> be the basis you verified in Exercise<nbsp /><xref ref="exercise-invariant-subspaces" />.</p>
+             <p>We will frequently need the matrix representations of linear transformation restrictions, so let's compute those now for this example.  Let <md>
+                <mrow>C&amp;=\set{\vect{u}_1,\,\vect{u}_2} &amp; D&amp;=\set{\vect{v}_1,\,\vect{v}_2,\,\vect{v}_3}</mrow>
+            </md> be the bases for <m>U</m> and <m>V</m>, respectively.</p>
 
             <p>For <m>U</m> <md>
                 <mrow>\vectrep{C}{\lteval{\restrict{R}{U}}{\vect{u}_1}}
@@ -324,27 +326,27 @@
             \end{bmatrix}</me></p>
 
             <p>For <m>V</m> <md>
-                <mrow>\vectrep{C}{\lteval{\restrict{R}{V}}{\vect{v}_1}}
-                &amp;=\vectrep{C}{\colvector{2, 7, -5, 8, 3}}
-                =\vectrep{C}{\vect{v}_1+\vect{u}_2+\vect{v}_3}
+                <mrow>\vectrep{D}{\lteval{\restrict{R}{V}}{\vect{v}_1}}
+                &amp;=\vectrep{D}{\colvector{2, 7, -5, 8, 3}}
+                =\vectrep{D}{\vect{v}_1+\vect{v}_2+\vect{v}_3}
                 =\colvector{1\\1\\1}</mrow> 
-                <mrow>\vectrep{C}{\lteval{\restrict{R}{V}}{\vect{v}_2}}
-                &amp;=\vectrep{C}{\colvector{3, -7, 5, -7, -2}}
-                =\vectrep{C}{-\vect{v}_1+2\vect{v}_3}
+                <mrow>\vectrep{D}{\lteval{\restrict{R}{V}}{\vect{v}_2}}
+                &amp;=\vectrep{D}{\colvector{3, -7, 5, -7, -2}}
+                =\vectrep{D}{-\vect{v}_1+2\vect{v}_3}
                 =\colvector{-1\\0\\2}</mrow> 
-                <mrow>\vectrep{C}{\lteval{\restrict{R}{V}}{\vect{v}_3}}
-                &amp;=\vectrep{C}{\colvector{9, -11, 8, -10, -2}}
-                =\vectrep{C}{-2\vect{v}_1+\vect{u}_2+4\vect{v}_3}
+                <mrow>\vectrep{D}{\lteval{\restrict{R}{V}}{\vect{v}_3}}
+                &amp;=\vectrep{D}{\colvector{9, -11, 8, -10, -2}}
+                =\vectrep{D}{-2\vect{v}_1+\vect{v}_2+4\vect{v}_3}
                 =\colvector{-2\\1\\4}</mrow> 
             </md>  Applying <acroref type="definition" acro="MR" />, we have <me>
-            \matrixrep{\restrict{R}{V}}{C}{C}=
+            \matrixrep{\restrict{R}{V}}{D}{D}=
             \begin{bmatrix}
             <![CDATA[1 & -1 & -2\\
             1 &  0 & 1\\
             1 &  2 & 4]]>
             \end{bmatrix}</me></p>
 
-            <p>It is no accident that these two square matrices are the diagonal blocks of the matrix representation you built for <m>R</m> relative to the basis <m>C</m> in Exercise<nbsp /><xref ref="exercise-invariant-subspaces" />.</p>
+            <p>It is no accident that these two square matrices are the diagonal blocks of the matrix representation you built for <m>R</m> relative to the basis <m>C\cup D</m> in Exercise<nbsp /><xref ref="exercise-invariant-subspaces" />.</p>
         </example>
 
         <p>The key observation of the previous example is worth stating very clearly:   A basis derived from a direct sum decomposition into subspaces that are invariant relative to a linear transformation will provide a matrix representation of the linear transformation with a block diagonal form.</p>
