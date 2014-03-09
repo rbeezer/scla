@@ -195,7 +195,7 @@
             </md></p>
 
             <p>And so
-            <me>\vect{x}=\colvector{4\\5\\1\\2}</me>
+            <me>\vect{x}=\colvector{2\\1\\5\\4}</me>
             is the solution to <m>\linearsystem{U}{\vect{y}}</m> and consequently is the unique solution to <m>\linearsystem{A}{\vect{b}}</m>, as you can easily verify.</p>
         </example>
 
