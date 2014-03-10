@@ -41,12 +41,7 @@
 
                 <p>It remains to show that once two consecutive kernels are equal, then all of the remaining kernels are equal.  More formally, if <m>\krn{T^m}=\krn{T^{m+1}}</m>, then <m>\krn{T^m}=\krn{T^{m+j}}</m> for all <m>j\geq 1</m>.  The proof is by induction on <m>j</m>.  The base case (<m>j=1</m>) is precisely our defining property for <m>m</m>.</p>
 
-                <p>For the induction step, our hypothesis is that <m>\krn{T^m}=\krn{T^{m+j}}</m>.  We want to establish that <m>\krn{T^m}=\krn{T^{m+j+1}}</m>.  At the outset of this proof we showed that  <m>\krn{T^m}\subseteq\krn{T^{m+j+1}}</m>.  So we need only show the subset inclusion in the opposite direction.  To wit, choose <m>\vect{z}\in\krn{T^{m+j+1}}</m>.  Then <me>\zerovector
-                =\lteval{T^{m+j+1}}{\vect{z}}
-                =\lteval{T^{m+j}}{\lteval{T}{\vect{z}}}
-                =\lteval{T^{m}}{\lteval{T}{\vect{z}}}
-                =\lteval{T^{m+1}}{\vect{z}}
-                =\lteval{T^{m}}{\vect{z}}</me>  So <m>\vect{z}\in\krn{T^{m}}</m> as desired.</p>
+                <p>For the induction step, our hypothesis is that <m>\krn{T^m}=\krn{T^{m+j}}</m>.  We want to establish that <m>\krn{T^m}=\krn{T^{m+j+1}}</m>.  At the outset of this proof we showed that  <m>\krn{T^m}\subseteq\krn{T^{m+j+1}}</m>.  So we need only show the subset inclusion in the opposite direction.  To wit, choose <m>\vect{z}\in\krn{T^{m+j+1}}</m>.  Then <me>\lteval{T^{m+j}}{\lteval{T}{\vect{z}}} =\lteval{T^{m+j+1}}{\vect{z}} =\zerovector</me> so <m>\lteval{T}{\vect{z}}\in\krn{T^{m+j}}=\krn{T^m}</m>.  Thus <me>\lteval{T^{m+1}}{\vect{z}}=\lteval{T^{m}}{\lteval{T}{\vect{z}}}=\zerovector</me> so <m>\vect{z}\in\krn{T^{m+1}}=\krn{T^m}</m>, as desired.</p>
             </proof>
         </theorem>
 
@@ -66,16 +61,18 @@
             -69 & 46 & -47 & 7 & 72 & 44 & 54 & -5 & 9 & -4]]>\end{bmatrix}</me></p>
 
             <sage><input>
-            A = matrix(QQ, [[-27, 17, -12, -1, 24, 16, 26, -2, -1, -3], 
-                            [-66, 45, -55, 11, 73, 44, 45, -6, 15, 1], 
-                            [-85, 58, -65, 13, 94, 56, 61, -6, 16, -4], 
-                            [-81, 58, -55, 4, 83, 52, 70, -7, 6, -6], 
-                            [-33, 21, -22, 6, 37, 21, 23, -1, 6, -4], 
-                            [-38, 28, -25, 1, 39, 25, 34, -3, 1, -4], 
-                            [20, -15, 23, -8, -28, -15, -8, 1, -9, 0], 
-                            [41, -30, 39, -12, -53, -29, -23, 2, -13, 3], 
-                            [58, -43, 43, -6, -64, -38, -47, 4, -6, 6], 
-                            [-69, 46, -47, 7, 72, 44, 54, -5, 9, -4]])
+            A = matrix(QQ, [
+                [-27, 17, -12, -1, 24, 16, 26, -2, -1, -3],
+                [-66, 45, -55, 11, 73, 44, 45, -6, 15, 1],
+                [-85, 58, -65, 13, 94, 56, 61, -6, 16, -4],
+                [-81, 58, -55, 4, 83, 52, 70, -7, 6, -6],
+                [-33, 21, -22, 6, 37, 21, 23, -1, 6, -4],
+                [-38, 28, -25, 1, 39, 25, 34, -3, 1, -4],
+                [20, -15, 23, -8, -28, -15, -8, 1, -9, 0],
+                [41, -30, 39, -12, -53, -29, -23, 2, -13, 3],
+                [58, -43, 43, -6, -64, -38, -47, 4, -6, 6],
+                [-69, 46, -47, 7, 72, 44, 54, -5, 9, -4]
+                ])
             </input></sage>
 
 
@@ -147,7 +144,7 @@
             </statement>
 
             <proof>
-                <p>First we establish that <m>\geneigenspace{T}{\lambda}</m> is a subspace of <m>V</m>.  First <m>\lteval{\left(T-\lambda I_V\right)^1}{\zerovector}=\zerovector</m> by <acroref type="theorem" acro="LTTZZ" />, so <m>\zerovector\in\geneigenspace{T}{\lambda}</m>.</p>
+                <p>First we establish that <m>\geneigenspace{T}{\lambda}</m> is a subspace of <m>V</m>.  Note that <m>\lteval{\left(T-\lambda I_V\right)^0}{\zerovector}=\zerovector</m>, so by <acroref type="theorem" acro="LTTZZ" /> we have <m>\zerovector\in\geneigenspace{T}{\lambda}</m>.</p>
 
                 <p>Suppose that <m>\vect{x},\,\vect{y}\in\geneigenspace{T}{\lambda}</m>.  Then there are integers <m>k,\,\ell</m> such that <m>\lteval{\left(T-\lambda I_V\right)^k}{\vect{x}}=\zerovector</m> and <m>\lteval{\left(T-\lambda I_V\right)^\ell}{\vect{y}}=\zerovector</m>.  Set <m>m=k+\ell</m>,<md> 
                     <mrow>\lteval{\left(T-\lambda I_V\right)^m}{\vect{x}+\vect{y}}&amp;=\lteval{\left(T-\lambda I_V\right)^m}{\vect{x}}+ \lteval{\left(T-\lambda I_V\right)^m}{\vect{y}}</mrow> 
@@ -158,10 +155,7 @@
                     <mrow>&amp;=\zerovector+\zerovector=\zerovector</mrow> 
                 </md>  So <m>\vect{x}+\vect{y}\in\geneigenspace{T}{\lambda}</m>.</p>
 
-                <p>Suppose that <m>\vect{x}\in\geneigenspace{T}{\lambda}</m> and <m>\alpha\in\complexes</m>.  Then there is an integer <m>k</m> such that <m>\lteval{\left(T-\lambda I_V\right)^k}{\vect{x}}=\zerovector</m>. <md>
-                    <mrow>\lteval{\left(T-\lambda I_V\right)^k}{\alpha\vect{x}}&amp;=\alpha\lteval{\left(T-\lambda I_V\right)^k}{\vect{x}}</mrow>
-                    <mrow>&amp;=\alpha\zerovector=\zerovector</mrow>
-                </md>  So <m>\alpha\vect{x}\in\geneigenspace{T}{\lambda}</m>.  By <acroref type="theorem" acro="TSS" />, <m>\geneigenspace{T}{\lambda}</m> is a subspace of <m>V</m>.</p>
+                <p>Suppose that <m>\vect{x}\in\geneigenspace{T}{\lambda}</m> and <m>\alpha\in\complexes</m>.  Then there is an integer <m>k</m> such that <m>\lteval{\left(T-\lambda I_V\right)^k}{\vect{x}}=\zerovector</m>. <me>\lteval{\left(T-\lambda I_V\right)^k}{\alpha\vect{x}}=\alpha\lteval{\left(T-\lambda I_V\right)^k}{\vect{x}}=\alpha\zerovector=\zerovector</me>.  So <m>\alpha\vect{x}\in\geneigenspace{T}{\lambda}</m>.  By <acroref type="theorem" acro="TSS" />, <m>\geneigenspace{T}{\lambda}</m> is a subspace of <m>V</m>.</p>
 
                 <p>Now we show that <m>\geneigenspace{T}{\lambda}</m> is invariant relative to <m>T</m>.  Suppose that <m>\vect{x}\in\geneigenspace{T}{\lambda}</m>.  Then by Definition<nbsp /><xref ref="definition-generalized-eigenspace" /> there is an integer <m>k</m> such that <m>\lteval{\left(T-\lambda I_V\right)^k}{\vect{x}}=\zerovector</m>.  The following argument is due to Zoltan Toth. <md> 
                     <mrow>\lteval{\left(T-\lambda I_V\right)^k}{\lteval{T}{\vect{x}}}&amp;=\lteval{\left(T-\lambda I_V\right)^k}{\lteval{T}{\vect{x}}} - \lambda\zerovector</mrow>
@@ -222,8 +216,8 @@
 
             <p>We will from the restriction of <m>T</m> to <m>W</m>, <m>\restrict{T}{W}</m>, since we will do this frequently in subsequent examples.  For a basis of <m>W</m> we will use <m>C=\set{\vect{w}_1,\,\vect{w}_2,\,\vect{w}_3}</m>.  Notice that <m>\dimension{W}=3</m>, so our matrix representation will be a square matrix of size 3.  Applying <acroref type="definition" acro="MR" />, we compute <md>
                 <mrow>\vectrep{C}{\lteval{T}{\vect{w}_1}}
-                &amp;=\vectrep{C}{A\vect{w}_1}
-                =\vectrep{C}{\colvector{-4\\2\\2\\0\\0}}
+                &amp;=\vectrep{C}{A\vect{w}_1}</mrow>
+                <mrow>&amp;=\vectrep{C}{\colvector{-4\\2\\2\\0\\0}}
                 =\vectrep{C}{
                 2\colvector{-2\\1\\1\\0\\0}+
                 0\colvector{0\\-1\\0\\1\\0}+
@@ -231,8 +225,8 @@
                 }
                 =\colvector{2\\0\\0}</mrow>
                 <mrow>\vectrep{C}{\lteval{T}{\vect{w}_2}}
-                &amp;=\vectrep{C}{A\vect{w}_2}
-                =\vectrep{C}{\colvector{0\\-2\\2\\2\\-1}}
+                &amp;=\vectrep{C}{A\vect{w}_2}</mrow>
+                <mrow>&amp;=\vectrep{C}{\colvector{0\\-2\\2\\2\\-1}}
                 =\vectrep{C}{
                 2\colvector{-2\\1\\1\\0\\0}+
                 2\colvector{0\\-1\\0\\1\\0}+
@@ -240,8 +234,8 @@
                 }
                 =\colvector{2\\2\\-1}</mrow>
                 <mrow>\vectrep{C}{\lteval{T}{\vect{w}_3}}
-                &amp;=\vectrep{C}{A\vect{w}_3}
-                =\vectrep{C}{\colvector{-6\\3\\-1\\0\\2}}
+                &amp;=\vectrep{C}{A\vect{w}_3}</mrow>
+                <mrow>&amp;=\vectrep{C}{\colvector{-6\\3\\-1\\0\\2}}
                 =\vectrep{C}{
                 (-1)\colvector{-2\\1\\1\\0\\0}+
                 0\colvector{0\\-1\\0\\1\\0}+
@@ -264,10 +258,8 @@
             <p>Now we will repeat this sample computation, but instead using the matrix representation of <m>\restrict{T}{W}</m> relative to <m>C</m>. <md> 
                 <mrow>\lteval{\restrict{T}{W}}{\vect{w}}&amp;=\vectrepinv{C}{\matrixrep{\restrict{T}{W}}{C}{C}\vectrep{C}{\vect{w}}}</mrow>
                 <mrow>&amp;=\vectrepinv{C}{\matrixrep{\restrict{T}{W}}{C}{C}\vectrep{C}{4\vect{w}_1-2\vect{w}_2-\vect{w}_3}}</mrow>
-                <mrow>&amp;=\vectrepinv{C}{\begin{bmatrix}<![CDATA[2 & 2 & -1 \\ 0 & 2 & 0 \\ 0 & -1 & 2]]>\end{bmatrix} \colvector{4\\-2\\-1}} </mrow>
-                <mrow>&amp;=\vectrepinv{C}{\colvector{5\\-4\\0}}</mrow>
-                <mrow>&amp;=5\colvector{-2\\1\\1\\0\\0}+ (-4)\colvector{0\\-1\\0\\1\\0}+ 0\colvector{-4\\2\\0\\0\\1}</mrow> 
-                <mrow>&amp;=\colvector{-10\\9\\5\\-4\\0}</mrow>
+                <mrow>&amp;=\vectrepinv{C}{\begin{bmatrix}<![CDATA[2 & 2 & -1 \\ 0 & 2 & 0 \\ 0 & -1 & 2]]>\end{bmatrix} \colvector{4\\-2\\-1}}=\vectrepinv{C}{\colvector{5\\-4\\0}}</mrow>
+                <mrow>&amp;=5\colvector{-2\\1\\1\\0\\0}+ (-4)\colvector{0\\-1\\0\\1\\0}+ 0\colvector{-4\\2\\0\\0\\1}=\colvector{-10\\9\\5\\-4\\0}</mrow>
             </md> This matches the previous computation.  Notice how the <q>action</q> of <m>\restrict{T}{W}</m> is accomplished by a <m>3\times 3</m> matrix multiplying a column vector of size 3.</p>
 
             <p>If you would like more practice with these sorts of computations, mimic the above using the other eigenvalue of <m>T</m>, which is <m>\lambda=-2</m>.  The generalized eigenspace has dimension 2, so the matrix representation of the restriction to the generalized eigenspace will be a <m>2\times 2</m> matrix.</p>
