@@ -1,0 +1,578 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- This file is part of the book                -->
+<!--                                              -->
+<!--      A Second Course in Linear Algebra       -->
+<!--                                              -->
+<!-- Copyright (C) 2004-2014  Robert A. Beezer    -->
+<!-- See the file COPYING for copying conditions. -->
+
+<section xml:id="section-nilpotent-linear-transformations" filebase="nilpotent-linear-transformations">
+    <title>Nilpotent Linear Transformations</title>
+
+    <introduction>
+        <p>We will discover that nilpotent linear transformations are the essential obstacle in a non-diagonalizable linear transformation.  So we will study them carefully, both as an object of inherent mathematical interest, but also as the object at the heart of the argument that leads to a pleasing canonical form for any linear transformation.  Once we understand these linear transformations thoroughly, we will be able to easily analyze the structure of any linear transformation.</p>
+    </introduction>
+
+    <subsection xml:id="subsection-nilpotent-linear-transformations">
+        <title>Nilpotent Linear Transformations</title>
+
+        <definition xml:id="definition-nilpotent-linear-transformation">  <!-- was NLT -->
+            <title>Nilpotent Linear Transformation</title>
+            <statement>
+                <p>Suppose that <m>\ltdefn{T}{V}{V}</m> is a linear transformation such that there is an integer <m>p\gt 0</m> such that <m>\lteval{T^p}{\vect{v}}=\zerovector</m> for every <m>\vect{v}\in V</m>.  The smallest <m>p</m> for which this condition is met is called the <m><term>index</term></m> of <m>T</m>.</p>
+            </statement>
+        </definition>
+
+        <p>Of course, the linear transformation <m>T</m> <em>defined</em> by <m>\lteval{T}{\vect{v}}=\zerovector</m> will qualify as nilpotent of index <m>1</m>.  But are there others?  Yes, of course.</p>
+
+        <example xml:id="example-nilpotent-matrix-size-6-index-4"> <!-- was NM64 -->
+            <title>Nilpotent Matrix, Size 6, Index 4</title>
+
+            <p>Recall that our definitions and theorems are being stated for linear transformations on abstract vector spaces, while our examples will work with square matrices (and use the same terms interchangeably).  In this case, to demonstrate the existence of nontrivial nilpotent linear transformations, we desire a matrix such that some power of the matrix is the zero matrix.  Consider powers of a <m>6\times 6</m> matrix <m>A</m>, <md>
+                <mrow>A&amp;=\begin{bmatrix}
+                <![CDATA[ -3 & 3 & -2 & 5 & 0 & -5 \\
+                 -3 & 5 & -3 & 4 & 3 & -9 \\
+                 -3 & 4 & -2 & 6 & -4 & -3 \\
+                 -3 & 3 & -2 & 5 & 0 & -5 \\
+                 -3 & 3 & -2 & 4 & 2 & -6 \\
+                 -2 & 3 & -2 & 2 & 4 & -7]]>
+                \end{bmatrix}</mrow>
+                <intertext>and compute powers of <m>A</m>,</intertext>
+                <mrow>A^2&amp;=\begin{bmatrix}
+                <![CDATA[ 1 & -2 & 1 & 0 & -3 & 4 \\
+                 0 & -2 & 1 & 1 & -3 & 4 \\
+                 3 & 0 & 0 & -3 & 0 & 0 \\
+                 1 & -2 & 1 & 0 & -3 & 4 \\
+                 0 & -2 & 1 & 1 & -3 & 4 \\
+                 -1 & -2 & 1 & 2 & -3 & 4]]>
+                \end{bmatrix}</mrow> 
+                <mrow>A^3&amp;=\begin{bmatrix}
+                <![CDATA[ 1 & 0 & 0 & -1 & 0 & 0 \\
+                 1 & 0 & 0 & -1 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0 & 0 \\
+                 1 & 0 & 0 & -1 & 0 & 0 \\
+                 1 & 0 & 0 & -1 & 0 & 0 \\
+                 1 & 0 & 0 & -1 & 0 & 0]]>
+                \end{bmatrix}</mrow>
+                <mrow>A^4&amp;=\begin{bmatrix}
+                <![CDATA[ 0 & 0 & 0 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0 & 0]]>
+                \end{bmatrix}</mrow>
+                </md> Thus we can say that <m>A</m> is nilpotent of index 4.</p>
+
+            <p>Because it will presage some upcoming theorems, we will record some extra information about the eigenvalues and eigenvectors of <m>A</m> here.  <m>A</m> has just one eigenvalue, <m>\lambda=0</m>, with algebraic multiplicity <m>6</m> and geometric multiplicity <m>2</m>.  The eigenspace for this eigenvalue is <me>\eigenspace{A}{0}=
+            \spn{
+            \colvector{2 \\ 2 \\ 5 \\ 2 \\ 1 \\ 0},\,
+            \colvector{-1 \\ -1 \\ -5 \\ -1 \\ 0 \\ 1}
+            }</me>  If there were degrees of singularity, we might say this matrix was <em>very</em> singular, since zero is an eigenvalue with maximum algebraic multiplicity (<acroref type="theorem" acro="SMZE" />, <acroref type="theorem" acro="ME" />).  Notice too that <m>A</m> is <q>far</q> from being diagonalizable (<acroref type="theorem" acro="DMFE" />).</p>
+        </example>
+
+        <p>With the existence of nontrivial nilpotent matrivces settled, let's look at another example.</p>
+
+        <example xml:id="example-nilpotent-matrix-size-6-index-2"> <!-- was NM62 -->
+            <title>Nilpotent Matrix, Size 6, Index 2</title>
+
+            <p>Consider the matrix <md>
+                <mrow>B&amp;= \begin{bmatrix}
+                <![CDATA[ -1 & 1 & -1 & 4 & -3 & -1 \\
+                 1 & 1 & -1 & 2 & -3 & -1 \\
+                 -9 & 10 & -5 & 9 & 5 & -15 \\
+                 -1 & 1 & -1 & 4 & -3 & -1 \\
+                 1 & -1 & 0 & 2 & -4 & 2 \\
+                 4 & -3 & 1 & -1 & -5 & 5]]>
+                \end{bmatrix}</mrow>
+                <intertext>and compute the second power of <m>B</m>,</intertext>
+                <mrow>B^2&amp;=\begin{bmatrix}
+                <![CDATA[ 0 & 0 & 0 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0 & 0]]>
+                \end{bmatrix}</mrow>
+            </md>So <m>B</m> is nilpotent of index 2.</p>
+
+            <p>Again, the only eigenvalue of <m>B</m> is zero, with algebraic multiplicity <m>6</m>.  The geometric multiplicity of the eigenvalue is <m>3</m>, as seen in the eigenspace,
+            <me>
+            \eigenspace{B}{0}=\spn{
+            \colvector{1 \\ 3 \\ 6 \\ 1 \\ 0 \\ 0},\,
+            \colvector{0 \\ -4 \\ -7 \\ 0 \\ 1 \\ 0},\,
+            \colvector{0 \\ 2 \\ 1 \\ 0 \\ 0 \\ 1}
+            }</me>  Again, <acroref type="theorem" acro="DMFE" /> tells us that <m>B</m> is far from being diagonalizable.</p>
+        </example>
+
+        <todo>Reference some FCLA theorem about zeros and complex numbers</todo>
+
+        <p>On a first encounter with the definition of a nilpotent matrix, you might wonder if such a thing was possible at all.  That a high power of a nonzero object could be zero is so very different from our experience with scalars that it seems very unnatural.  Hopefully the two previous examples were somewhat surprising.  But we have seen that matrix algebra does not always behave the way we expect (<acroref type="example" acro="MMNC" />), and we also now recognize matrix products not just as arithmetic, but as function composition (<acroref type="theorem" acro="MRCLT" />).  With a couple examples completed, we turn to some general properties.</p>
+
+        <theorem xml:id="theorem-nilpotent-linear-transformation-eigenvalues">  <!-- was ENLT -->
+            <title>Eigenvalues of Nilpotent Linear Transformations</title>
+            <statement>
+                <p>Suppose that <m>\ltdefn{T}{V}{V}</m> is a nilpotent linear transformation and <m>\lambda</m> is an eigenvalue of <m>T</m>.  Then <m>\lambda=0</m>.</p>
+            </statement>
+
+            <proof>
+                <p>Let <m>\vect{x}</m> be an eigenvector of <m>T</m> for the eigenvalue <m>\lambda</m>, and suppose that <m>T</m> is nilpotent with index <m>p</m>.  Then <me>\zerovector=\lteval{T^p}{\vect{x}}=\lambda^p\vect{x}</me> Because <m>\vect{x}</m> is an eigenvector, it is nonzero, and therefore <acroref type="theorem" acro="SMEZV" /> tells us that <m>\lambda^p=0</m> and so <m>\lambda=0</m>.</p>
+            </proof>
+        </theorem>
+
+        <p>Paraphrasing, all of the eigenvalues of a nilpotent linear transformation are zero.  So in particular, the characteristic polynomial of a nilpotent linear transformation, <m>T</m>, on a vector space of dimension <m>n</m>, is simply <m>\charpoly{T}{x}=x^n</m>.</p>
+
+        <todo>Later get the converse from JCF, Cayley-Hamilton, and reference it here</todo>
+
+        <p>The next theorem is not critical for what follows, but it will explain our interest in nilpotent linear transformations.  More specifically, it is the first step in backing up the assertion that nilpotent linear transformations are the essential obstacle in a non-diagonalizable linear transformation.  While it is not obvious from the statement of the theorem, it says that a nilpotent linear transformation is not diagonalizable, unless it is trivially so.</p>
+
+        <theorem xml:id="theorem-nilpotent-linear-transformation-diagonalizable">  <!-- was DNLT -->
+            <title>Diagonalizable Nilpotent Linear Transformations</title>
+            <statement>
+                <p>Suppose the linear transformation <m>\ltdefn{T}{V}{V}</m> is nilpotent.   Then <m>T</m> is diagonalizable if and only if <m>T</m> is the zero linear transformation.</p>
+            </statement>
+
+            <proof>
+                <p>(<implyreverse />) We start with the easy direction.  Let <m>n=\dimension{V}</m>.  The linear transformation <m>\ltdefn{Z}{V}{V}</m> defined by <m>\lteval{Z}{\vect{v}}=\zerovector</m> for all <m>\vect{v}\in V</m> is nilpotent of index <m>p=1</m> and a matrix representation relative to any basis of <m>V</m> is the <m>n\times n</m> zero matrix, <m>\zeromatrix</m>.  Quite obviously, the zero matrix is a diagonal matrix (<acroref type="definition" acro="DIM" />) and hence <m>Z</m> is diagonalizable (<acroref type="definition" acro="DZM" />).</p>
+
+                <p>(<implyforward />) Assume now that <m>T</m> is diagonalizable, so <m>\geomult{T}{\lambda}=\algmult{T}{\lambda}</m> for every eigenvalue <m>\lambda</m> (<acroref type="theorem" acro="DMFE" />).  By Theorem<nbsp /><xref ref="theorem-nilpotent-linear-transformation-eigenvalues" />, <m>T</m> has only one eigenvalue (zero), which therefore must have algebraic multiplicity <m>n</m>  (<acroref type="theorem" acro="NEM" />).  So the geometric multiplicity of zero will be <m>n</m> as well, <m>\geomult{T}{0}=n</m>.</p>
+
+                <p>Let <m>B</m> be a basis for the eigenspace <m>\eigenspace{T}{0}</m>.  Then <m>B</m> is a linearly independent subset of <m>V</m> of size <m>n</m>, and thus a basis of <m>V</m>.  For any <m>\vect{x}\in B</m> we have <me>\lteval{T}{\vect{x}}=0\vect{x}=\zerovector</me> So <m>T</m> is identically zero on a basis for <m>B</m>, and since the action of a linear transformation on a basis determines all of the values of the linear transformation (<acroref type="theorem" acro="LTDB" />), it is easy to see that <m>\lteval{T}{\vect{v}}=\zerovector</m> for every <m>\vect{v}\in V</m>.</p>
+            </proof>
+        </theorem>
+
+        <p>So, other than one trivial case (the zero linear transformation), every nilpotent linear transformation is not diagonalizable.  It remains to see what is so <q>essential</q> about this broad class of non-diagonalizable linear transformations.</p>
+    </subsection>
+
+    <subsection xml:id="subsection-nilpotent-linear-transformations-powers-of-kernels">
+        <title>Powers of Kernels of Nilpotent Linear Transformations</title>
+
+        <p>We return to our discussion of kernels of powers of linear transformations, now specializing to nilpotent linear transformations.  We reprise Theorem<nbsp /><xref ref="theorem-kernels-of-powers" />, gaining just a little more precision in the conclusion.</p>
+
+        <theorem xml:id="theorem-nilpotent-linear-transformation-kernels-of-powers"> <!-- was KPNLT -->
+            <title>Kernels of Powers of Nilpotent Linear Transformations</title>
+            <statement>
+                <p>Suppose <m>\ltdefn{T}{V}{V}</m> is a nilpotent linear transformation with index <m>p</m> and <m>\dimension{V}=n</m>.  Then <m>0\leq p\leq n</m> and <me>\set{\zerovector}
+                =\krn{T^0}
+                \subsetneq\krn{T^1}
+                \subsetneq\krn{T^2}
+                \subsetneq\cdots
+                \subsetneq\krn{T^{p}}
+                =\krn{T^{p+1}}
+                =\cdots
+                =V
+                </me></p>
+            </statement>
+
+            <proof>
+                <p>Since <m>T^p=0</m> it follows that <m>T^{p+j}=0</m> for all <m>j\geq 0</m> and thus <m>\krn{T^{p+j}}=V</m> for <m>j\geq 0</m>.  So the value of <m>m</m> guaranteed by <acroref type="theorem" acro="KPLT" /> is at most <m>p</m>.  The only remaining aspect of our conclusion that does not follow from Theorem<nbsp /><xref ref="theorem-kernels-of-powers" /> is that <m>m=p</m>.  To see this, we must show that <m>\krn{T^k} \subsetneq\krn{T^{k+1}}</m> for <m>0\leq k\leq p-1</m>.  If <m>\krn{T^k}=\krn{T^{k+1}}</m> for some <m>k\lt p</m>, then <m>\krn{T^k}=\krn{T^p}=V</m>.  This implies that <m>T^k=0</m>, violating the fact that <m>T</m> has index <m>p</m>.  So the smallest value of <m>m</m> is indeed <m>p</m>, and we learn that <m>p\lt n</m>.</p>
+            </proof>
+        </theorem>
+
+        <p>The structure of the kernels of powers of nilpotent linear transformations will be crucial to what follows.  But immediately we can see a practical benefit.  Suppose we are confronted with the question of whether or not an <m>n\times n</m> matrix, <m>A</m>, is nilpotent or not.  If we don't quickly find a low power that equals the zero matrix, when do we stop trying higher and higher powers?  Theorem<nbsp /><xref ref="theorem-nilpotent-linear-transformation-kernels-of-powers" /> gives us the answer: if we don't see a zero matrix by the time we finish computing <m>A^n</m>, then it is not going to ever happen.  We will now take a look at one example of Theorem<nbsp /><xref ref="theorem-nilpotent-linear-transformation-kernels-of-powers" /> in action.</p>
+
+        <example xml:id="example-nilpotent-linear-transformation-kernels"> <!-- was KPNLT -->
+            <title>Kernels of Powers of a Nilpotent Linear Transformation</title>
+
+            <p>We will recycle the nilpotent matrix <m>A</m> of index 4 from Example<nbsp /><xref ref="example-nilpotent-matrix-size-6-index-4" />.  We now know that would have only needed to look at the first 6 powers of <m>A</m> if the matrix had not been nilpotent and we wanted to discover that.  We list bases for the null spaces of the powers of <m>A</m>.  (Notice how we are using null spaces for matrices interchangeably with kernels of linear transformations, see <acroref type="theorem" acro="KNSI" /> for justification.) <md>
+                <mrow>\nsp{A}&amp;=\nsp{
+                \begin{bmatrix}
+                 <![CDATA[-3 & 3 & -2 & 5 & 0 & -5 \\
+                 -3 & 5 & -3 & 4 & 3 & -9 \\
+                 -3 & 4 & -2 & 6 & -4 & -3 \\
+                 -3 & 3 & -2 & 5 & 0 & -5 \\
+                 -3 & 3 & -2 & 4 & 2 & -6 \\
+                 -2 & 3 & -2 & 2 & 4 & -7]]>
+                \end{bmatrix}}
+                =\spn{\set{
+                \colvector{2 \\ 2 \\ 5 \\ 2 \\ 1 \\ 0},\,
+                \colvector{-1 \\ -1 \\ -5 \\ -1 \\ 0 \\ 1}
+                }}</mrow>
+                <mrow>\nsp{A^2}&amp;=\nsp{
+                \begin{bmatrix}
+                <![CDATA[ 1 & -2 & 1 & 0 & -3 & 4 \\
+                 0 & -2 & 1 & 1 & -3 & 4 \\
+                 3 & 0 & 0 & -3 & 0 & 0 \\
+                 1 & -2 & 1 & 0 & -3 & 4 \\
+                 0 & -2 & 1 & 1 & -3 & 4 \\
+                 -1 & -2 & 1 & 2 & -3 & 4]]>
+                \end{bmatrix}}
+                =\spn{\set{
+                \colvector{0 \\ 1 \\ 2 \\ 0 \\ 0 \\ 0},\,
+                \colvector{2 \\ 1 \\  0 \\ 2 \\ 0 \\ 0},\,
+                \colvector{0 \\ -3 \\ 0 \\ 0 \\ 2 \\ 0},\,
+                \colvector{0 \\ 2 \\ 0 \\ 0 \\ 0 \\ 1}
+                }}</mrow>
+                <mrow>\nsp{A^3}&amp;=
+                \nsp{
+                \begin{bmatrix}
+                <![CDATA[ 1 & 0 & 0 & -1 & 0 & 0 \\
+                 1 & 0 & 0 & -1 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0 & 0 \\
+                 1 & 0 & 0 & -1 & 0 & 0 \\
+                 1 & 0 & 0 & -1 & 0 & 0 \\
+                 1 & 0 & 0 & -1 & 0 & 0]]>
+                \end{bmatrix}}
+                =\spn{\set{
+                \colvector{0 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0},\,
+                \colvector{0 \\ 0 \\ 1 \\ 0 \\ 0 \\ 0},\,
+                \colvector{1 \\ 0 \\ 0 \\ 1 \\ 0 \\ 0},\,
+                \colvector{0 \\ 0 \\ 0 \\ 0 \\ 1 \\ 0},\,
+                \colvector{0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 1}
+                }}</mrow>
+                <mrow>\nsp{A^4}&amp;=
+                \nsp{
+                \begin{bmatrix}
+                <![CDATA[ 0 & 0 & 0 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0 & 0]]>
+                \end{bmatrix}}
+                =\spn{\set{
+                \colvector{1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0},\,
+                \colvector{0 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0},\,
+                \colvector{0 \\ 0 \\ 1 \\ 0 \\ 0 \\ 0},\,
+                \colvector{0 \\ 0 \\ 0 \\ 1 \\ 0 \\ 0},\,
+                \colvector{0 \\ 0 \\ 0 \\ 0 \\ 1 \\ 0},\,
+                \colvector{0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 1}
+                }}</mrow>
+            </md></p>
+
+            <p>With the exception of some convenience scaling of the basis vectors in <m>\nsp{A^2}</m> these are exactly the basis vectors described in <acroref type="theorem" acro="BNS" />.  We can see that the dimension of <m>\nsp{A}</m> equals the geometric multiplicity of the zero eigenvalue.  Why is this not an accident?  We can see the dimensions of the kernels consistently increasing, and we can see that <m>\nsp{A^4}=\complex{6}</m>.  But  Theorem<nbsp /><xref ref="theorem-nilpotent-linear-transformation-kernels-of-powers" /> says a little more.  Each successive kernel should be a superset of the previous one.  We ought to be able to begin with a basis of <m>\nsp{A}</m> and <em>extend</em>em> it to a basis of <m>\nsp{A^2}</m>.  Then we should be able to extend a basis of  <m>\nsp{A^2}</m> into a basis of <m>\nsp{A^3}</m>, all with repeated applications of <acroref type="theorem" acro="ELIS" />.  Verify the following, <md>
+                <mrow>\nsp{A}&amp;=
+                \spn{\set{
+                \colvector{2 \\ 2 \\ 5 \\ 2 \\ 1 \\ 0},\,
+                \colvector{-1 \\ -1 \\ -5 \\ -1 \\ 0 \\ 1}
+                }}</mrow>
+                <mrow>\nsp{A^2}&amp;=\spn{\set{
+                \colvector{2 \\ 2 \\ 5 \\ 2 \\ 1 \\ 0},\,
+                \colvector{-1 \\ -1 \\ -5 \\ -1 \\ 0 \\ 1},\,
+                \colvector{0 \\ -3 \\ 0 \\ 0 \\ 2 \\ 0},\,
+                \colvector{0 \\ 2 \\ 0 \\ 0 \\ 0 \\ 1}
+                }}</mrow>
+                <mrow>\nsp{A^3}&amp;=
+                \spn{\set{
+                \colvector{2 \\ 2 \\ 5 \\ 2 \\ 1 \\ 0},\,
+                \colvector{-1 \\ -1 \\ -5 \\ -1 \\ 0 \\ 1},\,
+                \colvector{0 \\ -3 \\ 0 \\ 0 \\ 2 \\ 0},\,
+                \colvector{0 \\ 2 \\ 0 \\ 0 \\ 0 \\ 1},\,
+                \colvector{0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 1}
+                }}</mrow>
+                <mrow>\nsp{A^4}&amp;=
+                \spn{\set{
+                \colvector{2 \\ 2 \\ 5 \\ 2 \\ 1 \\ 0},\,
+                \colvector{-1 \\ -1 \\ -5 \\ -1 \\ 0 \\ 1},\,
+                \colvector{0 \\ -3 \\ 0 \\ 0 \\ 2 \\ 0},\,
+                \colvector{0 \\ 2 \\ 0 \\ 0 \\ 0 \\ 1},\,
+                \colvector{0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 1},\,
+                \colvector{0 \\ 0 \\ 0 \\ 1 \\ 0 \\ 0}
+                }}</mrow>  
+            </md></p>
+
+            <p>Do not be concerned at the moment about how these bases were constructed since we are not describing the applications of <acroref type="theorem" acro="ELIS" /> here.  Do verify carefully for each alleged basis that, (1) it is a superset of the basis for the previous kernel, (2) the basis vectors really are members of the kernel of the associated power of <m>A</m>, (3) the basis is a linearly independent set, (4) the size of the basis is equal to the size of the basis found previously for each kernel.  With these verifications, you will know that we have successfully demonstrated what Theorem<nbsp /><xref ref="theorem-nilpotent-linear-transformation-kernels-of-powers" /> guarantees.</p>
+        </example>
+
+    </subsection>
+
+    <subsection xml:id="subsection-restriction-generalized-eigenspace-nilpotent" >
+        <title>Restrictions to Generalized Eigenspaces</title>
+
+        <p>We have seen that we can decompose the domain of a linear transformation into a direct sum of generalized eigenspaces (Theorem<nbsp /><xref ref="theorem-generalized-eigenspace-decomposition" />).  And we know that we can then easily obtain a basis that leads to a block diagonal matrix representation.  The blocks of this matrix representation are matrix representations of <em>restrictions</em> to the generalized eigenspaces (for example, Example<nbsp /><xref ref="example-generalized-eigenspace-representation-dimension-6" />).  And the next theorem tells us that these restrictions, adjusted slightly, provide us with a broad class of nilpotent linear transformations.</p>
+
+
+        <theorem xml:id="theorem-restriction-generalized-eigenspace-nilpotent"> <!-- was RGEN -->
+            <title>Restriction to Generalized Eigenspace is Nilpotent</title>
+            <statement>
+                <p>Suppose <m>\ltdefn{T}{V}{V}</m> is a linear transformation with eigenvalue <m>\lambda</m>.  Then the linear transformation <m>\restrict{T}{\geneigenspace{T}{\lambda}}-\lambda I_{\geneigenspace{T}{\lambda}}</m> is nilpotent.</p>
+            </statement>
+
+            <proof>
+                <p>Notice first that every subspace of <m>V</m> is invariant with respect to <m>I_V</m>, so <m>I_{\geneigenspace{T}{\lambda}}=\restrict{I_V}{\geneigenspace{T}{\lambda}}</m>.    Let <m>n=\dimension{V}</m> and choose <m>\vect{v}\in\geneigenspace{T}{\lambda}</m>.  Then with an application of Theorem<nbsp /><xref ref="theorem-generalized-eigenspace-kernel" />,
+                <me>\lteval{\left(\restrict{T}{\geneigenspace{T}{\lambda}}-\lambda I_{\geneigenspace{T}{\lambda}}\right)^n}{\vect{v}}
+                =\lteval{\left(T-\lambda I_V\right)^n}{\vect{v}}
+                =\zerovector</me> So by <acroref type="definition" acro="NLT" />, <m>\restrict{T}{\geneigenspace{T}{\lambda}}-\lambda I_{\geneigenspace{T}{\lambda}}</m> is nilpotent.</p>
+            </proof>
+        </theorem>
+
+        <p>The proof of Theorem<nbsp /><xref ref="theorem-restriction-generalized-eigenspace-nilpotent" /> shows that the index of the linear transformation <m>\restrict{T}{\geneigenspace{T}{\lambda}}-\lambda I_{\geneigenspace{T}{\lambda}}</m>is less than or equal to the dimension of <m>V</m>.  In practice, it must be less than or equal to the dimension of the domain, <m>\geneigenspace{T}{\lambda}</m>.  In any event, the exact value of this index will be of some interest, so we define it now.  Notice that this is a property of the eigenvalue <m>\lambda</m>.  In many ways it is similar to the algebraic and geometric multiplicities of an eigenvalue (<acroref type="definition" acro="AME" />, <acroref type="definition" acro="GME" />).</p>
+
+        <definition xml:id="definition-index-eigenvalue"> <!-- was IE -->
+            <title>Index of an Eigenvalue</title>
+            <statement>
+                <p>Suppose <m>\ltdefn{T}{V}{V}</m> is a linear transformation with eigenvalue <m>\lambda</m>.  Then the <term>index</term> of <m>\lambda</m>, <m>\indx{T}{\lambda}</m>, is the index of the nilpotent linear transformation <m>\restrict{T}{\geneigenspace{T}{\lambda}}-\lambda I_{\geneigenspace{T}{\lambda}}</m>.</p>
+            </statement>
+            <notation acro="IE" index="index!eigenvalue">
+                <title>Index of an Eigenvalue</title>
+                <usage><m>\indx{T}{\lambda}</m></usage>
+            </notation>
+        </definition>
+
+        <example acro="GENR6" index="generalized eigenspace!nilpotent restrictions, dimension 6 domain"> <!-- was GENR6 -->
+            <title>Generalized eigenspaces and nilpotent restrictions, dimension 6 domain</title>
+
+            <p>In Example<nbsp /><xref ref="example-generalized-eigenspace-dimension-6" /> we computed the generalized eigenspaces of the linear transformation <m>\ltdefn{S}{\complex{6}}{\complex{6}}</m>  defined by <m>\lteval{S}{\vect{x}}=B\vect{x}</m> where <me>B=\begin{bmatrix}
+            <![CDATA[ 2 & -4 & 25 & -54 & 90 & -37 \\
+             2 & -3 & 4 & -16 & 26 & -8 \\
+             2 & -3 & 4 & -15 & 24 & -7 \\
+             10 & -18 & 6 & -36 & 51 & -2 \\
+             8 & -14 & 0 & -21 & 28 & 4 \\
+             5 & -7 & -6 & -7 & 8 & 7]]>
+            \end{bmatrix}</me></p>
+
+            <p>The generalized eigenspace <m>\geneigenspace{S}{3}</m> has dimension <m>2</m>, while  <m>\geneigenspace{S}{-1}</m> has dimension <m>4</m>.  We will investigate each thoroughly in turn, with the intent being to illustrate Theorem<nbsp /><xref ref="theorem-restriction-generalized-eigenspace-nilpotent" />.  Many of our computations will be repeats of those done in Example<nbsp /><xref ref="example-generalized-eigenspace-representation-dimension-6" />.</p>
+
+            <p>For <m>U=\geneigenspace{S}{3}</m> we compute a matrix representation of <m>\restrict{S}{U}</m> using the basis found in Example<nbsp /><xref ref="example-generalized-eigenspace-dimension-6" />, <me>D=\set{\vect{u}_1,\,\vect{u}_2}=\set{\colvector{4\\1\\1\\2\\1\\0},\,\colvector{-5\\-1\\-1\\-1\\0\\1}}</me></p>
+
+            <p>Since <m>D</m> has size 2, we obtain a <m>2\times 2</m> matrix representation from<md>
+                <mrow>\vectrep{D}{\lteval{\restrict{S}{U}}{\vect{u}_1}}
+                &amp;=\vectrep{D}{\colvector{11\\3\\3\\7\\4\\1}}
+                =\vectrep{D}{4\vect{u}_1+\vect{u}_2}
+                =\colvector{4\\1}</mrow>
+                <mrow>\vectrep{D}{\lteval{\restrict{S}{U}}{\vect{u}_2}}
+                &amp;=\vectrep{D}{\colvector{-14\\-3\\-3\\-4\\-1\\2}}
+                =\vectrep{D}{(-1)\vect{u}_1+2\vect{u}_2}
+                =\colvector{-1\\2}
+                </mrow> 
+            </md> Thus <me>M=\matrixrep{\restrict{S}{U}}{U}{U}=\begin{bmatrix} <![CDATA[4 & -1 \\ 1 & 2]]> \end{bmatrix}</me></p>
+
+            <p>Now we can illustrate Theorem<nbsp /><xref ref="theorem-restriction-generalized-eigenspace-nilpotent" /> with powers of the matrix representation (rather than the restriction itself), <md>
+                <mrow>M-3I_2&amp;= \begin{bmatrix}<![CDATA[1 & -1 \\ 1 & -1]]>\end{bmatrix}</mrow>
+                <mrow>\left(M-3I_2\right)^2&amp;= \begin{bmatrix}<![CDATA[0 & 0 \\ 0 & 0]]>\end{bmatrix}</mrow>
+            </md> So <m>M-3I_2</m> is a nilpotent matrix of index 2 (meaning that <m>\restrict{S}{U}-3I_U</m> is a nilpotent linear transformation of index 2) and according to Definition<nbsp /><xref ref="definition-index-eigenvalue" /> we say <m>\indx{S}{3}=2</m>.</p>
+
+            <p>For <m>W=\geneigenspace{S}{-1}</m> we compute a matrix representation of <m>\restrict{S}{W}</m> using the basis found in Example<nbsp /><xref ref="example-generalized-eigenspace-dimension-6" />, <me>E=\set{\vect{w}_1,\,\vect{w}_2,\,\vect{w}_3,\,\vect{w}_4}
+            =\set{
+            \colvector{5\\3\\1\\0\\0\\0},\,
+            \colvector{-2\\-3\\0\\1\\0\\0},\,
+            \colvector{4\\5\\0\\0\\1\\0},\,
+            \colvector{-5\\-3\\0\\0\\0\\1}
+            }</me></p>
+
+            <p>Since <m>E</m> has size 4, we obtain a <m>4\times 4</m> matrix representation (<acroref type="definition" acro="MR" />) from <md>
+                <mrow>\vectrep{E}{\lteval{\restrict{S}{W}}{\vect{w}_1}}
+                &amp;=\vectrep{E}{\colvector{23\\5\\5\\2\\-2\\-2}}
+                =\vectrep{E}{
+                5\vect{w}_1+
+                2\vect{w}_2+
+                (-2)\vect{w}_3+
+                (-2)\vect{w}_4
+                }
+                =\colvector{5\\2\\-2\\-2}</mrow>
+                <mrow>\vectrep{E}{\lteval{\restrict{S}{W}}{\vect{w}_2}}
+                &amp;=\vectrep{E}{\colvector{-46\\-11\\-10\\-2\\5\\4}}
+                =\vectrep{E}{
+                (-10)\vect{w}_1+
+                (-2)\vect{w}_2+
+                5\vect{w}_3+
+                4\vect{w}_4
+                }
+                =\colvector{-10\\-2\\5\\4}</mrow>
+                <mrow>\vectrep{E}{\lteval{\restrict{S}{W}}{\vect{w}_3}}
+                &amp;=\vectrep{E}{\colvector{78\\19\\17\\1\\-10\\-7}}
+                =\vectrep{E}{
+                17\vect{w}_1+
+                \vect{w}_2+
+                (-10)\vect{w}_3+
+                (-7)\vect{w}_4
+                }
+                =\colvector{17\\1\\-10\\-7}</mrow>
+                <mrow>\vectrep{E}{\lteval{\restrict{S}{W}}{\vect{w}_4}}
+                &amp;=\vectrep{E}{\colvector{-35\\-9\\-8\\2\\6\\3}}
+                =\vectrep{E}{
+                (-8)\vect{w}_1+
+                2\vect{w}_2+
+                6\vect{w}_3+
+                3\vect{w}_4
+                }
+                =\colvector{-8\\2\\6\\3}</mrow>
+            </md> Thus <me>N=\matrixrep{\restrict{S}{W}}{W}{W} = \begin{bmatrix}
+            <![CDATA[ 5 & -10 & 17 & -8 \\
+             2 & -2 & 1 & 2 \\
+             -2 & 5 & -10 & 6 \\
+             -2 & 4 & -7 & 3]]>
+            \end{bmatrix}</me></p>
+
+            <p>Now we can illustrate Theorem<nbsp /><xref ref="theorem-restriction-generalized-eigenspace-nilpotent" /> with powers of the matrix representation (rather than the restriction itself), <md>
+                <mrow>N-(-1)I_4&amp;=\begin{bmatrix}
+                <![CDATA[ 6 & -10 & 17 & -8 \\
+                 2 & -1 & 1 & 2 \\
+                 -2 & 5 & -9 & 6 \\
+                 -2 & 4 & -7 & 4]]>
+                \end{bmatrix}</mrow>
+                <mrow>\left(N-(-1)I_4\right)^2&amp;=\begin{bmatrix}
+                <![CDATA[ -2 & 3 & -5 & 2 \\
+                 4 & -6 & 10 & -4 \\
+                 4 & -6 & 10 & -4 \\
+                 2 & -3 & 5 & -2]]>
+                \end{bmatrix}</mrow>
+                <mrow>\left(N-(-1)I_4\right)^3&amp;=\begin{bmatrix}
+                <![CDATA[ 0 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0]]>
+                \end{bmatrix}</mrow>
+            </md> So <m>N-(-1)I_4</m> is a nilpotent matrix of index 3 (meaning that <m>\restrict{S}{W}-(-1)I_W</m> is a nilpotent linear transformation of index 3) and according to Definition<nbsp /><xref ref="definition-index-eigenvalue" /> we say <m>\indx{S}{-1}=3</m>.</p>
+
+            <p>Notice that if we were to take the union of the two bases of the generalized eigenspaces, we would have a basis for <m>\complex{6}</m>.  Then a matrix representation of <m>S</m> relative to this basis would be the same block diagonal matrix we found in Example<nbsp /><xref ref="example-generalized-eigenspace-representation-dimension-6" />, only we now understand each of these blocks as being very close to being a nilpotent matrix.</p>
+        </example>
+
+    </subsection>
+
+    <subsection xml:id="subsection-jordan-blocks">
+        <title>Jordan Blocks</title>
+
+        <p>We conclude this section about nilpotent linear transformations with an infinte family of nilpotent matrices and a doubly-infinite family of nearly nilpotent matrices.</p>
+
+        <definition xml:id="definition-jordan-block"> <!-- was JB -->
+            <title>Jordan Block</title>
+            <statement>
+                <p>Given the scalar <m>\lambda\in\complexes</m>, the Jordan block <m>\jordan{n}{\lambda}</m> is the <m>n\times n</m> matrix defined by <me>\matrixentry{\jordan{n}{\lambda}}{ij}=\begin{cases}
+                \lambda &amp; i=j\\
+                1 &amp; j=i+1\\
+                0 &amp; \text{otherwise}
+                \end{cases}</me></p>
+            </statement>
+            <notation acro="JB" index="Jordan block">
+            <title>Jordan Block</title>
+            <usage><m>\jordan{n}{\lambda}</m></usage>
+            </notation>
+        </definition>
+
+        <example xml:id="example-jordan-block-size-4"> <!-- was JB4 -->
+            <title>Jordan Block, Size 4</title>
+
+            <p>A simple example of a Jordan block, <me>\jordan{4}{5}=\begin{bmatrix}
+            <![CDATA[5 & 1 & 0 & 0\\
+            0 & 5 & 1 & 0\\
+            0 & 0 & 5 & 1\\
+            0 & 0 & 0 & 5]]>
+            \end{bmatrix}</me></p>
+        </example>
+
+        <p>We will return to general Jordan blocks later, but in this section we are only interested in Jordan blocks where <m>\lambda=0</m>.  (But notice that <m>\jordan{n}{\lambda}-\lambda I_n=\jordan{n}{0}</m>.)  Here is an example of why we are specializing in the <m>\lambda=0</m> case now.</p>
+
+        <example xml:id="example-nilpotent-jordan-block-size-5"> <!-- was NJB5 -->
+            <title>Nilpotent Jordan block, Size 5</title>
+
+            <p>Consider <md>
+                <mrow>\jordan{5}{0}&amp;=\begin{bmatrix}
+                <![CDATA[0 & 1 & 0 & 0 & 0\\
+                0 & 0 & 1 & 0 & 0\\
+                0 & 0 & 0 & 1 & 0\\
+                0 & 0 & 0 & 0 & 1\\
+                0 & 0 & 0 & 0 & 0]]>
+                \end{bmatrix}</mrow>
+                <intertext>and compute powers,</intertext>
+                <mrow>\left(\jordan{5}{0}\right)^2&amp;\begin{bmatrix}
+                <![CDATA[ 0 & 0 & 1 & 0 & 0 \\
+                 0 & 0 & 0 & 1 & 0 \\
+                 0 & 0 & 0 & 0 & 1 \\
+                 0 & 0 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0]]>
+                \end{bmatrix}</mrow>
+                <mrow>\left(\jordan{5}{0}\right)^3&amp;=\begin{bmatrix}
+                <![CDATA[ 0 & 0 & 0 & 1 & 0 \\
+                 0 & 0 & 0 & 0 & 1 \\
+                 0 & 0 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0]]>
+                \end{bmatrix}</mrow>
+                <mrow>\left(\jordan{5}{0}\right)^4&amp;=\begin{bmatrix}
+                <![CDATA[ 0 & 0 & 0 & 0 & 1 \\
+                 0 & 0 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0]]>
+                \end{bmatrix}</mrow>
+                <mrow>\left(\jordan{5}{0}\right)^5&amp;=\begin{bmatrix}
+                <![CDATA[ 0 & 0 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0]]>
+                \end{bmatrix}</mrow>
+            </md></p>
+
+            <p>So <m>\jordan{5}{0}</m> is nilpotent of index <m>5</m>.  As before, we record some information about the eigenvalues and eigenvectors of this matrix.  The only eigenvalue is zero, with algebraic multiplicity 5, the maximum possible (<acroref type="theorem" acro="ME" />).  The geometric multiplicity of this eigenvalue is just 1, the minimum possible (<acroref type="theorem" acro="ME" />), as seen in the eigenspace, <me>\eigenspace{\jordan{5}{0}}{0}=\spn{\colvector{1 \\ 0 \\ 0 \\ 0 \\ 0}}</me></p>
+
+            <p>There should not be any real surprises in this example.  We can watch the ones in the powers of <m>\jordan{5}{0}</m> slowly march off to the upper-right hand corner of the powers.  Or we can watch the columns of the identity matrix march right, falling off the edge as they go.  In some vague way, the eigenvalues and eigenvectors of this matrix are equally extreme.</p>
+        </example>
+
+        <p>We can form combinations of Jordan blocks to build a variety of nilpotent matrices.  Simply create a block diagonal matrix, where each block is a Jordan block.</p>
+
+        <example xml:id="example-nilpotent-matrix-size-8-index-3"> <!-- was NM83 -->
+            <title>Nilpotent Matrix, Size 8, Index 3</title>
+
+            <p>Consider the matrix <md>
+                <mrow>C&amp;=\begin{bmatrix}
+                <![CDATA[\jordan{3}{0} & \zeromatrix & \zeromatrix \\
+                \zeromatrix & \jordan{3}{0} & \zeromatrix \\
+                \zeromatrix & \zeromatrix & \jordan{2}{0}]]>
+                \end{bmatrix}
+                =
+                \begin{bmatrix}
+                <![CDATA[ 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\
+                 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\
+                 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0]]>
+                \end{bmatrix}</mrow>
+                <intertext>and compute powers,</intertext>
+                <mrow>C^2&amp;=\begin{bmatrix}
+                <![CDATA[ 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0]]>
+                \end{bmatrix}</mrow>
+                <mrow>C^3&amp;=\begin{bmatrix}
+                 <![CDATA[0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0]]>
+                \end{bmatrix}</mrow>
+            </md></p>
+            <p>So <m>C</m> is nilpotent of index 3.  You should notice how block diagonal matrices behave in products (much like diagonal matrices) and that it was the largest Jordan block that determined the index of this combination.  All eight eigenvalues are zero, and each of the three Jordan blocks contributes one eigenvector to a basis for the eigenspace, resulting in zero having a geometric multiplicity of 3.</p>
+        </example>
+
+        <p>Since nilpotent matrices only have zero as an eigenvalue (Theorem<nbsp /><xref ref="theorem-nilpotent-linear-transformation-eigenvalues" />), the algebraic multiplicity will be the maximum possible.  However, by creating block diagonal matrices with Jordan blocks on the diagonal you should be able to attain any desired geometric multiplicity for this lone eigenvalue.  Likewise, the size of the largest Jordan block employed will determine the index of the matrix. So nilpotent matrices with various combinations of index, geometric multiplicity and algebraic multiplicity are easy to manufacture.  The predictable properties of block diagonal matrices in matrix products and eigenvector computations, along with the next theorem, make this possible.  You might find <acroref type="example" acro="NJB5" /> a useful companion to this proof.</p>
+
+        <theorem xml:id="theorem-jordan-block-nilpotent">  <!-- was NJB -->
+            <title>Nilpotent Jordan Blocks</title>
+            <statement>
+                <p>The Jordan block <m>\jordan{n}{0}</m> is nilpotent of index <m>n</m>.</p>
+            </statement>
+
+            <proof>
+                <p>We need to establish a specific matrix is nilpotent of a specified index.  The first column of <m>\jordan{n}{0}</m> is the zero vector, and the remaining <m>n-1</m> columns are the standard unit vectors <m>\vect{e}_i</m>, <m>1\leq i\leq n-1</m> (<acroref type="definition" acro="SUV" />), which are also the first <m>n-1</m> columns of the size <m>n</m> identity matrix <m>I_n</m>.  As shorthand, write <m>J=\jordan{n}{0}</m>. 
+                <me>J=\left[\zerovector\left|\vect{e}_1\right.\left|\vect{e}_2\right.\left|\vect{e}_3\right.\left|\dots\right.\left|\vect{e}_{n-1}\right.\right]</me> 
+                We will use the definition of matrix multiplication (<acroref type="definition" acro="MM" />), together with a proof by induction, to study the powers of <m>J</m>.    Our claim is that 
+                <me>J^k= \left[\zerovector\left|\zerovector\right.\left|\dots\right.\left|\zerovector\right.\left|\vect{e}_1\right.\left|\vect{e}_2\right.\left|\dots\right.\left|\vect{e}_{n-k}\right.\right]\text{ for }0\leq k\leq n</me>  For the base case, <m>k=0</m>, and the definition of <m>J^0=I_n</m> establishes the claim.</p>
+
+                <p>For the induction step, first note that <m>J\vect{e_1}=\zerovector</m> and <m>J\vect{e}_i=\vect{e}_{i-1}</m> for <m>2\leq i\leq n</m>.  Then, assuming the claim is true for <m>k</m>, we examine the <m>k+1</m> case, <md>
+                    <mrow>J^{k+1}&amp;=JJ^k</mrow>
+                    <mrow>&amp;=J\left[\zerovector\left|\zerovector\right.\left|\dots\right.\left|\zerovector\right.\left|\vect{e}_1\right.\left|\vect{e}_2\right.\left|\dots\right.\left|\vect{e}_{n-k}\right.\right]</mrow>
+                    <mrow>&amp;=\left[J\zerovector\left|J\zerovector\right.\left|\dots\right.\left|J\zerovector\right.\left|J\vect{e}_1\right.\left|J\vect{e}_2\right.\left|\dots\right.\left|J\vect{e}_{n-k}\right.\right]</mrow>
+                    <mrow>&amp;=\left[\zerovector\left|\zerovector\right.\left|\dots\right.\left|\zerovector\right.\left|\zerovector\right.\left|\vect{e}_1\right.\left|\vect{e}_2\right.\left|\dots\right.\left|\vect{e}_{n-k-1}\right.\right]</mrow>
+                    <mrow>&amp;=\left[\zerovector\left|\zerovector\right.\left|\dots\right.\left|\zerovector\right.\left|\vect{e}_1\right.\left|\vect{e}_2\right.\left|\dots\right.\left|\vect{e}_{n-(k+1)}\right.\right]</mrow> 
+                </md> This concludes the induction.</p>
+
+                <p>So <m>J^k</m> has a nonzero entry (a one) in row <m>n-k</m> and column <m>n</m>, for <m>0\leq k\leq n-1</m>, and is therefore a nonzero matrix.  However, <me>J^n=\left[\zerovector\left|\zerovector\right.\left|\dots\right.\left|\zerovector\right.\right]=\zeromatrix</me>  Thus, by <xref ref="definition-nilpotent-linear-transformation" />, <m>J</m> is nilpotent of index <m>n</m>.</p>
+            </proof>
+        </theorem>
+
+    </subsection>
+</section>

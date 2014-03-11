@@ -19,5 +19,6 @@
 	</introduction>
     
     <xi:include href="./generalized-eigenspaces.xml" />
+    <xi:include href="./nilpotent-linear-transformations.xml" />
     
 </chapter>
