@@ -20,5 +20,6 @@
     
     <xi:include href="./generalized-eigenspaces.xml" />
     <xi:include href="./nilpotent-linear-transformations.xml" />
+    <xi:include href="./jordan-canonical-form.xml" />
     
 </chapter>
