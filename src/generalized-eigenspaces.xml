@@ -393,7 +393,29 @@
                 \cdots\ds
                 \geneigenspace{T}{\lambda_m}</me></p>
             </statement>
-            <proof><p>Coming soon.</p></proof>
+            <proof>
+                <p>We will provide a complete proof soon.  For now, we give an outline.</p>
+
+                <p>We now that a decomposition of the domain of a linear transformation into invariant subspaces will give a block diagonal matrix representation.  But it cuts both ways.  If there is a similarity transformation to a block diagonal matrix, then the columns of the nonsingular matrix used for similarity will be a basis that can be partitioned into bases of invariant subspaces that are a direct sum decomposition of the domain (<acroref type="theorem" acro="SCB" />).  So we outline a sequence of similarity transformations that converts <em>any</em> square matrix to the appropriate block diagonal form.</p>
+
+                <ol>
+                    <li><p>Begin with the eigenvalues of the matrix, ordered so that equal eigenvalues are adjacent.</p></li>
+
+                    <li><p>Determine the upper triangular matrix with these eigenvalues on the diagonal and similar to the original matrix as guaranteed by <acroref type="theorem" acro="UTMR" />.</p></li>
+
+                    <li><p>Suppose that the entry in row <m>i</m> and column <m>j</m> in the <q>upper half</q> (so <m>j\gt i</m>) has the value <m>a</m>.  Suppose further that the diagonal entries (eigenvalues) <m>\lambda_i</m> and <m>\lambda_j</m> are different.</p>
+
+                    <p>Define <m>S</m> to be the identity matrix, with the addition of the entry <m>\frac{a}{\lambda_j-\lambda_i}</m> in row <m>i</m> and column <m>j</m>.  Then a similarity transformation by <m>S</m> will place a zero in row <m>i</m> and column <m>j</m>.  Here is where we begin to understand being careful about equal and different eigenvalues.</p></li>
+
+                    <li><p>The similarity transformation of the previous step will change other entries of the matrix, <em>but only</em> in row <m>i</m> to the <em>right</em> of the entry of interest and column <m>j</m> <em>above</em> the entry of interest.</p></li>
+
+                    <li><p>Begin in the bottom row, going only as far right as needed to get different eigenvalues, and <q>zero out</q> the rest of the row.  Move up a row, work left to right, <q>zeroing out</q> as much of the row as possible.  Continue moving up a row at a time, then move left to right in the row.  The restriction to using different eigenvalues will cut a staircase pattern.</p></li>
+
+                    <li><p>You should understand that the blocks left on the diagonal correspond to runs of equal eigenvalues on the diagonal.  So each block has a size equal to the algebraic multiplicity of the eigenvalue.</p></li>
+
+                </ol>
+
+            </proof>
 
         </theorem>
 
