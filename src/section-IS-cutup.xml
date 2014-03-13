@@ -70,53 +70,8 @@ So in a very real sense, we obtain a decomposition of the linear transformation 
 Our real interest is in the matrix representation of a linear transformation when the domain decomposes as a direct sum of invariant subspaces.  Consider forming a basis <m>B</m> of <m>V</m> as the union of bases <m>B_i</m> from the individual <m>U_i</m>, <ie /> <m>B=\cup_{i=1}^m\,B_i</m>.  Now form the matrix representation of <m>T</m> relative to <m>B</m>.  The result will be block diagonal, where each block is the matrix representation of a restriction <m>\restrict{T}{U_i}</m> relative to a basis <m>B_i</m>, <m>\matrixrep{\restrict{T}{U_i}}{B_i}{B_i}</m>.  Though we did not have the definitions to describe it then, this is exactly what was going on in the latter portion of the proof of  <acroref type="theorem" acro="CFNLT" />.   Two examples should help to clarify these ideas.<p><p>
 
 
-
-
-
 Invariant subspaces, and restrictions of linear transformations, are topics you will see again and again if you continue with further study of linear algebra.  Our reasons for discussing them now is to arrive at a nice matrix representation of the restriction of a linear transformation to one of its generalized eigenspaces.  Here's the theorem.
-<theorem acro="MRRGE" index="matrix representation!restriction to generalized eigenspace">
-<title>Matrix Representation of a Restriction to a Generalized Eigenspace</title>
-<statement>
-Suppose that <m>\ltdefn{T}{V}{V}</m> is a linear transformation with eigenvalue <m>\lambda</m>.  Then there is a basis of the the generalized eigenspace <m>\geneigenspace{T}{\lambda}</m> such that the restriction <m>\ltdefn{\restrict{T}{\geneigenspace{T}{\lambda}}}{\geneigenspace{T}{\lambda}}{\geneigenspace{T}{\lambda}}</m> has a matrix representation that is block diagonal where each block is a Jordan block of the form <m>\jordan{n}{\lambda}</m>.
-</statement>
 
-<proof>
-<acroref type="theorem" acro="RGEN" /> tells us that <m>\restrict{T}{\geneigenspace{T}{\lambda}}-\lambda I_{\geneigenspace{T}{\lambda}}</m> is a nilpotent linear transformation.  <acroref type="theorem" acro="CFNLT" /> tells us that a nilpotent linear transformation has a basis for its domain that yields a matrix representation that is block diagonal where the blocks are Jordan blocks of the form <m>\jordan{n}{0}</m>.  Let <m>B</m> be a basis of <m>\geneigenspace{T}{\lambda}</m> that yields such a matrix representation for <m>\restrict{T}{\geneigenspace{T}{\lambda}}-\lambda I_{\geneigenspace{T}{\lambda}}</m>.<p><p>
-By <acroref type="definition" acro="LTA" />, we can write
-<me><md>
-<mrow>
-\restrict{T}{\geneigenspace{T}{\lambda}}
-</mrow>
-<mrow>&amp;=\left(]]>
-\restrict{T}{\geneigenspace{T}{\lambda}}-\lambda I_{\geneigenspace{T}{\lambda}}
-\right)
-+\lambda I_{\geneigenspace{T}{\lambda}}
-</mrow>
-</md></me>
-The matrix representation of <m>\lambda I_{\geneigenspace{T}{\lambda}}</m> relative to the basis <m>B</m> is then simply the diagonal matrix <m>\lambda I_m</m>, where <m>m=\dimension{\geneigenspace{T}{\lambda}}</m>.  By <acroref type="theorem" acro="MRSLT" /> we have the rather unwieldy expression,
-<me><md>
-<mrow>
-\matrixrep{\restrict{T}{\geneigenspace{T}{\lambda}}}{B}{B}
-</mrow>
-<mrow>&amp;=]]>
-\matrixrep{\left(
-\restrict{T}{\geneigenspace{T}{\lambda}}-\lambda I_{\geneigenspace{T}{\lambda}}
-\right)
-+\lambda I_{\geneigenspace{T}{\lambda}}}{B}{B}\\
-</mrow>
-<mrow>&amp;=]]>
-\matrixrep{
-\restrict{T}{\geneigenspace{T}{\lambda}}-\lambda I_{\geneigenspace{T}{\lambda}}
-}{B}{B}
-+
-\matrixrep{I_{\geneigenspace{T}{\lambda}}}{B}{B}
-</mrow>
-</md></me>
-The first of these matrix representations has Jordan blocks with zero in every diagonal entry, while the second matrix representation has <m>\lambda</m> in every diagonal entry.  The result of adding the two representations is to convert the Jordan blocks from the form <m>\jordan{n}{0}</m> to the form <m>\jordan{n}{\lambda}</m>.
-</proof>
-</theorem>
-
-Of course, <acroref type="theorem" acro="CFNLT" /> provides some extra information on the sizes of the Jordan blocks in a representation and we could carry over this information to <acroref type="theorem" acro="MRRGE" />, but will save that for a subsequent application of this result.
 <!--   End  IS.tex -->
 </subsection>
 </section>

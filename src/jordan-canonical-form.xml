@@ -17,12 +17,12 @@
     <subsection xml:id="subsection-canonical-form-nilpotent">
         <title>Canonical Form for Nilpotent Linear Transformations</title>
 
-        <p>Our main purpose in this section is to find a basis so that a nilpotent linear transformation will have a pleasing, nearly-diagonal matrix representation.  Of course, we will not have a definition for <q>pleasing,</q> nor for <q>nearly-diagonal.</q>  But the short answer is that our preferred matrix representation will be built up from Jordan blocks, <m>\jordan{n}{0}</m>.  Here's the theorem.  You will find Example<nbsp /><xref provisional="example-canonical-form-nilpotent-size-6-index-4" />, just following,  helpful as you study this proof, since it uses the same notation, and is large enough to (barely) illustrate the full generality of the theorem.</p>
+        <p>Our main purpose in this section is to find a basis so that a nilpotent linear transformation will have a pleasing, nearly-diagonal matrix representation.  Of course, we will not have a definition for <q>pleasing,</q> nor for <q>nearly-diagonal.</q>  But the short answer is that our preferred matrix representation will be built up from Jordan blocks, <m>\jordan{k}{0}</m>.  Here's the theorem.  You will find Example<nbsp /><xref provisional="example-canonical-form-nilpotent-size-6-index-4" />, just following,  helpful as you study this proof, since it uses the same notation, and is large enough to (barely) illustrate the full generality of the theorem.</p>
 
         <theorem xml:id="theorem-canonical-form-nilpotent-linear-transformation"> <!-- was CFNLT -->
             <title>Canonical Form for Nilpotent Linear Transformations</title>
             <statement>
-                <p>Suppose that <m>\ltdefn{T}{V}{V}</m> is a nilpotent linear transformation of index <m>p</m>.  Then there is a basis for <m>V</m> so that the matrix representation, <m>\matrixrep{T}{B}{B}</m>, is block diagonal with each block being a Jordan block, <m>\jordan{n}{0}</m>.  The size of the largest block is the index <m>p</m>, and the total number of blocks is the nullity of <m>T</m>, <m>\nullity{T}</m>.</p>
+                <p>Suppose that <m>\ltdefn{T}{V}{V}</m> is a nilpotent linear transformation of index <m>p</m>.  Then there is a basis for <m>V</m> so that the matrix representation, <m>\matrixrep{T}{B}{B}</m>, is block diagonal with each block being a Jordan block, <m>\jordan{k}{0}</m>.  The size of the largest block is the index <m>p</m>, and the total number of blocks is the nullity of <m>T</m>, <m>\nullity{T}</m>.</p>
             </statement>
 
             <proof>
@@ -234,6 +234,37 @@
         <todo>A more complicated nilpotent matrix canonical form</todo>
 
         <p>Notice that constructing interesting examples of matrix representations requires domains with dimensions bigger than just two or three.  Going forward our examples will get even bigger.</p>
+
+    </subsection>
+
+    <subsection>
+        <title>Restrictions to Generalized Eigenspaces</title>
+
+        <p>We now know how to make canonical matrix representations of a what seems to be a narrow class of linear transformations<mdash />the nilpotent ones (Theorem<nbsp /><xref ref="theorem-canonical-form-nilpotent-linear-transformation" />).  However, since the restriction of any linear transformation to one of its generalized eigenspace is only a small adjustment away from being a nilpotent linear transformation  (Theorem<nbsp /><xref ref="theorem-restriction-generalized-eigenspace-nilpotent" />) we can extend the utility of our previous representation easily.</p>
+
+        <theorem xml:id="theorem-matrix-representation-restriction-generalized-eigenspace"> <!-- was MRRGE -->
+            <title>Matrix Representation of a Restriction to a Generalized Eigenspace</title>
+            <statement>
+                <p>Suppose that <m>\ltdefn{T}{V}{V}</m> is a linear transformation with eigenvalue <m>\lambda</m>.  Then there is a basis of the the generalized eigenspace <m>\geneigenspace{T}{\lambda}</m> such that the restriction <m>\ltdefn{\restrict{T}{\geneigenspace{T}{\lambda}}}{\geneigenspace{T}{\lambda}}{\geneigenspace{T}{\lambda}}</m> has a matrix representation that is block diagonal where each block is a Jordan block of the form <m>\jordan{k}{\lambda}</m> (with varying values of <m>k</m>).</p>
+            </statement>
+
+            <proof>
+                <p>Theorem<nbsp /><xref ref="theorem-restriction-generalized-eigenspace-nilpotent" /> tells us that <m>\restrict{T}{\geneigenspace{T}{\lambda}}-\lambda I_{\geneigenspace{T}{\lambda}}</m> is a nilpotent linear transformation.  Theorem<nbsp /><xref ref="theorem-canonical-form-nilpotent-linear-transformation" /> tells us that a nilpotent linear transformation has a basis for its domain that yields a matrix representation that is block diagonal where the blocks are Jordan blocks of the form <m>\jordan{k}{0}</m>.  So let <m>B</m> be a basis of <m>\geneigenspace{T}{\lambda}</m> that yields such a matrix representation for <m>\restrict{T}{\geneigenspace{T}{\lambda}}-\lambda I_{\geneigenspace{T}{\lambda}}</m>.</p>
+
+                <p>We can write <me>\restrict{T}{\geneigenspace{T}{\lambda}}
+                =\left(\restrict{T}{\geneigenspace{T}{\lambda}}-\lambda I_{\geneigenspace{T}{\lambda}}\right)+
+                \lambda I_{\geneigenspace{T}{\lambda}}</me> Then the matrix representation of <m>\lambda I_{\geneigenspace{T}{\lambda}}</m> relative to the basis <m>B</m> is then simply the diagonal matrix <m>\lambda I_m</m>, where <m>m=\dimension{\geneigenspace{T}{\lambda}}</m>.  So we have the rather unwieldy expression,<me>\matrixrep{\restrict{T}{\geneigenspace{T}{\lambda}}}{B}{B}
+                =\matrixrep{\left(\restrict{T}{\geneigenspace{T}{\lambda}}-\lambda I_{\geneigenspace{T}{\lambda}}\right)+
+                \lambda I_{\geneigenspace{T}{\lambda}}}{B}{B}
+                =\matrixrep{\restrict{T}{\geneigenspace{T}{\lambda}}-\lambda I_{\geneigenspace{T}{\lambda}}}{B}{B}
+                +
+                \lambda\matrixrep{I_{\geneigenspace{T}{\lambda}}}{B}{B}</me>  The first representation in the final experssion has Jordan blocks with zero in every diagonal entry by Theorem<nbsp /><xref ref="theorem-canonical-form-nilpotent-linear-transformation" />, while the second representation has <m>\lambda</m> in every diagonal entry of the matrix.  The result of adding the two representations is to convert the Jordan blocks from the form <m>\jordan{k}{0}</m> to the form <m>\jordan{k}{\lambda}</m>.</p>
+            </proof>
+        </theorem>
+
+        <todo>Do we need an example of Jordan blocks from generalized eigenspaces, maybe original size 4?</todo>
+
+        <p>Of course, Theorem<nbsp /><xref ref="theorem-canonical-form-nilpotent-linear-transformation" /> provides some extra information on the sizes of the Jordan blocks in a representation and we could carry over this information to Theorem<nbsp /><xref ref="theorem-restriction-generalized-eigenspace-nilpotent" />, but we will save this description and incorporate it into our final major result in the next section.</p>
 
     </subsection>
 
