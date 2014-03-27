@@ -268,4 +268,462 @@
 
     </subsection>
 
+    <subsection xml:id="subsection-jordan-canonical-form">
+        <title>Jordan Canonical Form</title>
+
+        <p>Begin with any linear transformation that has an identical domain and codomain.  Build a block diagonal representation from a direct sum decomposition into (invariant) generalized eigenspaces.  For each generalized eigenspace, further refine the block into a sequence of Jordan blocks (with common diagonal elements) from the restriction to the generalized eigenspace, which is very nearly nilpotent.  Then you have Jordan canonical form.  Other than cosmetic reorderings, it is a unique representative of the equivalence class of similar matrices.</p>
+
+        <p>We remove the ambiguity from trivial reorderings of eigenvalues and Jordan blocks with a careful definition.</p>
+
+        <definition xml:id="definition-jordan-canonical-form">  <!-- was JCF -->
+            <title>Jordan Canonical Form</title>
+            <statement>
+                <p>A square matrix is in <term>Jordan canonical form</term> if it meets the following requirements:
+                <ol>
+                    <li>The matrix is block diagonal.</li>
+                    <li>Each block is a Jordan block.</li>
+                    <li>If <m>\rho\lt\lambda</m> then the block <m>\jordan{k}{\rho}</m> occupies rows with indices greater than the indices of the rows occupied by <m>\jordan{\ell}{\lambda}</m>.</li>
+                    <li>If <m>\rho=\lambda</m> and <m>\ell\lt k</m>, then the block <m>\jordan{\ell}{\lambda}</m> occupies rows with indices greater than the indices of the rows occupied by <m>\jordan{k}{\lambda}</m>.</li>
+                </ol></p>
+            </statement>
+        </definition>
+
+        <theorem xml:id="theorem-jordan-canonical-form"> <!-- was JCFLT -->
+            <title>Jordan Canonical Form for a Linear Transformation</title>
+            <statement>
+                <p>Suppose <m>\ltdefn{T}{V}{V}</m> is a linear transformation.  Then there is a basis <m>B</m> for <m>V</m> such that the matrix representation of <m>T</m> with the following properties:
+                <ol>
+                    <li>The matrix representation is in Jordan canonical form. </li>
+                    <li>If <m>\jordan{k}{\lambda}</m> is one of the Jordan blocks, then <m>\lambda</m> is an eigenvalue of <m>T</m>.</li>
+                    <li>For each eigenvalue <m>\lambda</m>, the largest block of the form <m>\jordan{k}{\lambda}</m> has size equal to the index of <m>\lambda</m>, <m>\indx{T}{\lambda}</m>.</li>
+                    <li>For each eigenvalue <m>\lambda</m>, the number of blocks of the form <m>\jordan{k}{\lambda}</m> is the geometric multiplicity of <m>\lambda</m>, <m>\geomult{T}{\lambda}</m>.</li>
+                    <li>For each eigenvalue <m>\lambda</m>, the number of rows occupied by blocks of the form <m>\jordan{k}{\lambda}</m> is the algebraic multiplicity of <m>\lambda</m>, <m>\algmult{T}{\lambda}</m>.</li>
+                </ol></p>
+            </statement>
+
+            <proof>
+                <p>This theorem is really just the consequence of applying to <m>T</m>, consecutively, Theorem<nbsp /><xref ref="theorem-generalized-eigenspace-decomposition" />, Theorem<nbsp /><xref ref="theorem-matrix-representation-restriction-generalized-eigenspace" /> and Theorem<nbsp /><xref ref="theorem-canonical-form-nilpotent-linear-transformation" />.</p>
+
+                <p>Theorem<nbsp /><xref ref="theorem-generalized-eigenspace-decomposition" /> gives us a decomposition of <m>V</m> into generalized eigenspaces, one for each distinct eigenvalue.  Since these generalized eigenspaces are invariant relative to <m>T</m>, this provides a block diagonal matrix representation where each block is the matrix representation of the restriction of <m>T</m> to the generalized eigenspace.</p>
+
+                <p>Restricting <m>T</m> to a generalized eigenspace results in a <q>nearly nilpotent</q> linear transformation, as stated more precisely in Theorem<nbsp /><xref ref="theorem" acro="RGEN" />.  We unravel Theorem<nbsp /><xref ref="theorem" acro="RGEN" /> in the proof of Theorem<nbsp /><xref ref="theorem-matrix-representation-restriction-generalized-eigenspace" /> so that we can apply Theorem<nbsp /><xref ref="theorem-canonical-form-nilpotent-linear-transformation" /> about representations of nilpotent linear transformation.</p>
+
+                <p>We know the dimension of a generalized eigenspace is the algebraic multiplicity of the eigenvalue (Corollary<nbsp /><xref ref="corollary-generalized-eigenspace-dimension" />), so the blocks associated with the generalized eigenspaces are square with a size equal to the algebraic multiplicity.  In refining the basis for a block associatred with a single eigenvalue, and producing Jordan blocks, the results of Theorem<nbsp /><xref ref="theorem-canonical-form-nilpotent-linear-transformation" /> apply.  The total number of blocks will be the nullity of <m>\restrict{T}{\geneigenspace{T}{\lambda}}-\lambda I_{\geneigenspace{T}{\lambda}}</m>, which is the geometric multiplicity of <m>\lambda</m> as an eigenvalue of <m>T</m> (<acroref type="definition" acro="GME" />).  The largest of the Jordan blocks will have size equal to the index of the nilpotent linear transformation <m>\restrict{T}{\geneigenspace{T}{\lambda}}-\lambda I_{\geneigenspace{T}{\lambda}}</m>, which is exactly the definition of the index of the eigenvalue <m>\lambda</m> (Definition<nbsp /><xref ref="definition-index-eigenvalue" />).</p>
+            </proof>
+        </theorem>
+
+        <p>Before we do some examples of this result, notice how close Jordan canonical form is to a diagonal matrix.  Or, equivalently, notice how close we have come to diagonalizing a matrix (<acroref type="definition" acro="DZM" />).  We have a matrix representation which has diagonal entries that are the eigenvalues of a matrix.  Each occurs on the diagonal as many times as the algebraic multiplicity.  However, when the geometric multiplicity is strictly less than the algebraic multiplicity, we have some entries in the representation just above the diagonal (the <q>superdiagonal</q>).  Furthermore, we have some idea how often this happens if we know the geometric multiplicity and the index of the eigenvalue.</p>
+
+        <p>We now recognize just how plain a diagonalizable linear transformation really is.  For each eigenvalue, the generalized eigenspace is just the regular eigenspace, and it decomposes into a direct sum of one-dimensional subspaces, each spanned by a different eigenvector chosen from a basis of eigenvectors for the eigenspace.</p>
+
+        <p>Some authors create matrix representations of nilpotent linear transformations where the Jordan block has the ones just below the diagonal (the <q>subdiagonal</q>).  No matter, it is really the same, just different.  We have also defined Jordan canonical form to place blocks for the larger eigenvalues earlier, and for blocks with the same eigenvalue, we place the larger sized blocks earlier.  This is fairly standard, but there is no reason we could not order the blocks differently.  It would be the same, just different.  The reason for choosing <em>some</em> ordering is to be assured that there is just <em>one</em> canonical matrix representation for each linear transformation.</p>
+
+        <example xml:id="example-jordan-canonicalform-size-10"> <!-- was JCF10 -->
+            <title>Jordan Canonical Form, Size 10</title>
+
+            <p>Suppose that <m>\ltdefn{T}{\complex{10}}{\complex{10}}</m> is the linear transformation defined by <m>\lteval{T}{\vect{x}}=A\vect{x}</m> where <me>A=\begin{bmatrix}
+             <![CDATA[-6 & 9 & -7 & -5 & 5 & 12 & -22 & 14 & 8 & 21 \\
+             -3 & 5 & -3 & -1 & 2 & 7 & -12 & 9 & 1 & 12 \\
+             8 & -9 & 8 & 6 & 0 & -14 & 25 & -13 & -4 & -26 \\
+             -7 & 9 & -7 & -5 & 0 & 13 & -23 & 13 & 2 & 24 \\
+             0 & -1 & 0 & -1 & -3 & -2 & 3 & -4 & -2 & -3 \\
+             3 & 2 & 1 & 2 & 9 & -1 & 1 & 5 & 5 & -5 \\
+             -1 & 3 & -3 & -2 & 4 & 3 & -6 & 4 & 4 & 3 \\
+             3 & -4 & 3 & 2 & 1 & -5 & 9 & -5 & 1 & -9 \\
+             0 & 2 & 0 & 0 & 2 & 2 & -4 & 4 & 2 & 4 \\
+             -4 & 4 & -5 & -4 & -1 & 6 & -11 & 4 & 1 & 10]]>
+            \end{bmatrix}</me></p>
+
+            <p>We will find a basis for <m>\complex{10}</m> that will yield a matrix representation of <m>T</m> in Jordan canonical form.  First we find the eigenvalues, and their multiplicities, with the techniques of <acroref type="chapter" acro="E" />. <md>
+                <mrow>\lambda&amp;=2  &amp; \algmult{T}{2}&amp;=2  &amp; \geomult{T}{2}&amp;=2</mrow>
+                <mrow>\lambda&amp;=0  &amp; \algmult{T}{0}&amp;=3  &amp; \geomult{T}{-1}&amp;=2</mrow>
+                <mrow>\lambda&amp;=-1 &amp; \algmult{T}{-1}&amp;=5 &amp; \geomult{T}{-1}&amp;=2</mrow>
+            </md></p>
+
+            <p>For each eigenvalue, we can compute a generalized eigenspace.  By Theorem<nbsp /><xref ref="theorem-generalized-eigenspace-decomposition" /> we know that <m>\complex{10}</m> will decompose into a direct sum of these invariant eigenspaces, and we can restrict <m>T</m> to each part of this decomposition.  At this stage we know that the Jordan canonical form will be block diagonal with blocks of size <m>2</m>, <m>3</m> and <m>5</m>, since the dimensions of the generalized eigenspaces are equal to the algebraic multiplicities of the eigenvalues (Theorem<nbsp /><xref ref="corollary-generalized-eigenspace-dimension" />).  The geometric multiplicities tell us how many Jordan blocks occupy each of the three larger blocks, but we will discuss this as we analyze each eigenvalue.  We do not yet know the index of each eigenvalue (though we can easily infer it for <m>\lambda=2</m>) and even if we did have this information, it only determines the size of the largest Jordan block (per eigenvalue).  We will press ahead, considering each eigenvalue one at a time.</p>
+
+            <p>The eigenvalue <m>\lambda=2</m> has <q>full</q> geometric multiplicity, and is not an impediment to diagonalizing <m>T</m>.  We will treat it in full generality anyway.  First we compute the generalized eigenspace.  Since Theorem<nbsp /><xref ref="theorem-generalized-eigenspace-kernel" /> says that <m>\geneigenspace{T}{2}=\krn{\left(T-2I_{\complex{10}}\right)^{10}}</m> we can compute this generalized eigenspace as a null space derived from the matrix <m>A</m>, <md>
+                <mrow>\left(A-2I_{10}\right)^{10}&amp;\rref
+                \begin{bmatrix}
+                <![CDATA[ 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & -2 & -1 \\
+                 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & -1 & -1 \\
+                 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 1 & 2 \\
+                 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & -1 & -2 \\
+                 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 1 & 0 \\
+                 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & -2 & 1 \\
+                 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & -1 & 0 \\
+                 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 1 \\
+                 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0]]>
+                \end{bmatrix}</mrow>
+                <mrow>\geneigenspace{T}{2}&amp;=\krn{\left(A-2I_{10}\right)^{10}}=
+                \spn{\set{
+                \colvector{2 \\ 1 \\ -1 \\ 1 \\ -1 \\ 2 \\ 1 \\ 0 \\ 1 \\ 0},\,
+                \colvector{1 \\ 1 \\ -2 \\ 2 \\ 0 \\ -1 \\ 0 \\ -1 \\ 0 \\ 1}
+                }}</mrow>
+            </md>  The restriction of <m>T</m> to <m>\geneigenspace{T}{2}</m> relative to the two basis vectors above has a matrix representation that is a <m>2\times 2</m> diagonal matrix with the eigenvalue <m>\lambda=2</m> as the diagonal entries.  So these two vectors will be the first two vectors in our basis for <m>\complex{10}</m>, <md>
+                <mrow>\vect{v}_1&amp;=\colvector{2 \\ 1 \\ -1 \\ 1 \\ -1 \\ 2 \\ 1 \\ 0 \\ 1 \\ 0}
+                &amp;
+                \vect{v}_2&amp;=\colvector{1 \\ 1 \\ -2 \\ 2 \\ 0 \\ -1 \\ 0 \\ -1 \\ 0 \\ 1}</mrow>
+            </md></p>
+
+            <p>Notice that it was not strictly necessary to compute the 10-th power of <m>A-2I_{10}</m>.  With <m>\algmult{T}{2}=\geomult{T}{2}</m> the null space of the matrix <m>A-2I_{10}</m> contains <em>all</em> of the generalized eigenvectors of <m>T</m> for the eigenvalue <m>\lambda=2</m>.  But there was no harm in computing the 10-th power either.  This discussion is equivalent to the observation that the linear transformation <m>\ltdefn{\restrict{T}{\geneigenspace{T}{2}}}{\geneigenspace{T}{2}}{\geneigenspace{T}{2}}</m> is nilpotent of index <m>1</m>.  In other words, <m>\indx{T}{2}=1</m>.</p>
+
+            <p>The eigenvalue <m>\lambda=0</m> will not be quite as simple, since the geometric multiplicity is strictly less than the geometric multiplicity.  As before, we first compute the generalized eigenspace.  Since Theorem<nbsp /><xref ref="theorem-generalized-eigenspace-kernel" /> says that <m>\geneigenspace{T}{0}=\krn{\left(T-0I_{\complex{10}}\right)^{10}}</m> we can compute this generalized eigenspace as a null space derived from the matrix <m>A</m>, <md>
+                <mrow>\left(A-0I_{10}\right)^{10}&amp;\rref
+                \begin{bmatrix}
+                <![CDATA[ 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & -1 & -1 \\
+                 0 & 1 & 0 & 0 & 0 & 0 & -1 & 0 & -1 & 0 \\
+                 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 1 & 2 \\
+                 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & -2 & -1 \\
+                 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 1 & 0 \\
+                 0 & 0 & 0 & 0 & 0 & 1 & -1 & 0 & -1 & 2 \\
+                 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 1 & 0 \\
+                 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0]]>
+                \end{bmatrix}</mrow>
+                <mrow>\geneigenspace{T}{0}&amp;=\krn{\left(A-0I_{10}\right)^{10}}=
+                \spn{\set{
+                \colvector{0 \\ 1 \\ 0 \\ 0 \\ 0 \\ 1 \\ 1 \\ 0 \\ 0 \\ 0},\,
+                \colvector{1 \\ 1 \\ -1 \\ 2 \\ -1 \\ 1 \\ 0 \\ -1 \\ 1 \\ 0},\,
+                \colvector{1 \\ 0 \\ -2 \\ 1 \\ 0 \\ -2 \\ 0 \\ 0 \\ 0 \\ 1}
+                }}
+                =\spn{F}</mrow>
+            </md>  So <m>\dimension{\geneigenspace{T}{0}}=3=\algmult{T}{0}</m>, as expected.  We will use these three basis vectors for the generalized eigenspace to construct a matrix representation of <m>\restrict{T}{\geneigenspace{T}{0}}</m>, where <m>F</m> is being defined implicitly as the basis of <m>\geneigenspace{T}{0}</m>.  We construct this representation as usual, applying <acroref type="definition" acro="MR" />, <md>
+                <mrow>\vectrep{F}{\lteval{\restrict{T}{\geneigenspace{T}{0}}}
+                {\colvector{0 \\ 1 \\ 0 \\ 0 \\ 0 \\ 1 \\ 1 \\ 0 \\ 0 \\ 0}}}&amp;=
+                \vectrep{F}{\colvector{-1 \\ 0 \\ 2 \\ -1 \\ 0 \\ 2 \\ 0 \\ 0 \\ 0 \\ -1}}
+                =
+                \vectrep{F}{(-1)\colvector{1 \\ 0 \\ -2 \\ 1 \\ 0 \\ -2 \\ 0 \\ 0 \\ 0 \\ 1}}
+                =\colvector{0\\0\\-1}</mrow>
+                <mrow>\vectrep{F}{\lteval{\restrict{T}{\geneigenspace{T}{0}}}
+                {\colvector{1 \\ 1 \\ -1 \\ 2 \\ -1 \\ 1 \\ 0 \\ -1 \\ 1 \\ 0}}}&amp;=
+                \vectrep{F}{\colvector{1 \\ 0 \\ -2 \\ 1 \\ 0 \\ -2 \\ 0 \\ 0 \\ 0 \\ 1}}
+                =
+                \vectrep{F}{(1)\colvector{1 \\ 0 \\ -2 \\ 1 \\ 0 \\ -2 \\ 0 \\ 0 \\ 0 \\ 1}}
+                =\colvector{0\\0\\1}</mrow>
+                <mrow>\vectrep{F}{\lteval{\restrict{T}{\geneigenspace{T}{0}}}
+                {\colvector{1 \\ 0 \\ -2 \\ 1 \\ 0 \\ -2 \\ 0 \\ 0 \\ 0 \\ 1}}}&amp;=
+                \vectrep{F}{\colvector{0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0}}
+                =\colvector{0\\0\\0}</mrow>
+            </md>  So we have the matrix representation <me>M=\matrixrep{\restrict{T}{\geneigenspace{T}{0}}}{F}{F}=
+            \begin{bmatrix}
+            <![CDATA[0 & 0 & 0 \\
+            0 & 0 & 0 \\
+            -1 & 1 & 0]]>
+            \end{bmatrix}</me></p>
+
+            <p>By Theorem<nbsp /><xref ref="theorem-restriction-generalized-eigenspace-nilpotent" /> we can obtain a nilpotent matrix from this matrix representation by subtracting the eigenvalue from the diagonal elements, and then we can apply Theorem<nbsp /><xref ref="theorem-canonical-form-nilpotent-linear-transformation" /> to <m>M-(0)I_3</m>.  First check that <m>\left(M-(0)I_3\right)^2=\zeromatrix</m>, so we know that the index of <m>M-(0)I_3</m> as a nilpotent matrix, and that therefore <m>\lambda=0</m> is an eigenvalue of <m>T</m> with index <m>2</m>, <m>\indx{T}{0}=2</m>.  To determine a basis of <m>\complex{3}</m> that converts <m>M-(0)I_3</m> to canonical form, we need the null spaces of the powers of <m>M-(0)I_3</m>.  For convenience, set <m>N=M-(0)I_3</m>. <md>
+                <mrow>\nsp{N^1}&amp;=\spn{\set{
+                \colvector{1\\1\\0},\,\colvector{0\\0\\1}
+                }}</mrow>
+                <mrow>\nsp{N^2}&amp;=\spn{\set{
+                \colvector{1\\0\\0},\,\colvector{0\\1\\0},\,\colvector{0\\0\\1}
+                }}
+                =\complex{3}</mrow>
+            </md> Then we choose a vector from <m>\nsp{N^2}</m> that is not an element of <m>\nsp{N^1}</m>.  Any vector with unequal first two entries will fit the bill, say <me>\vect{z}_{2,1}=\colvector{1\\0\\0}</me> where we are employing the notation in Theorem<nbsp /><xref ref="theorem-canonical-form-nilpotent-linear-transformation" />.  The next step is to multiply this vector by <m>N</m> to get part of the basis for <m>\nsp{N^1}</m>,<me>\vect{z}_{1,1}=N\vect{z}_{2,1}=
+            \begin{bmatrix}
+            <![CDATA[0 & 0 & 0 \\
+            0 & 0 & 0 \\
+            -1 & 1 & 0]]>
+            \end{bmatrix}
+            \colvector{1\\0\\0}=\colvector{0\\0\\-1}</me>  We need a vector to pair with <m>\vect{z}_{1,1}</m> that will make a basis for the two-dimensional subspace <m>\nsp{N^1}</m>.  Examining the basis for <m>\nsp{N^1}</m> we see that a vector with its first two entries equal will do the job. <me>\vect{z}_{1,2}=\colvector{1\\1\\0}</me> Reordering, we find the basis,<me>C=\set{\vect{z}_{1,1},\,\vect{z}_{2,1},\,\vect{z}_{1,2}}=\set{\colvector{0\\0\\-1},\,\colvector{1\\0\\0},\,\colvector{1\\1\\0}}</me></p>
+
+            <p>From this basis, we can get a matrix representation of <m>N</m> (when viewed as a linear transformation) relative to the basis <m>C</m> for <m>\complex{3}</m>, <me>\begin{bmatrix}
+            <![CDATA[0 & 1 & 0 \\
+            0 & 0 & 0 \\
+            0 & 0 & 0]]>
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+            <![CDATA[\jordan{2}{0} & \zeromatrix\\
+            \zeromatrix & \jordan{1}{0}]]>
+            \end{bmatrix}</me>  Now we add back the eigenvalue <m>\lambda=0</m> to the representation of <m>N</m> to obtain a representation for <m>M</m>.  Of course, with an eigenvalue of zero, the change is not apparent, so we will not display the same matrix again.  This is the second block of the Jordan canonical form for <m>T</m>.  However, the three vectors in <m>C</m> will not suffice as basis vectors for the domain of <m>T</m> <mdash /> they have the wrong size!  The vectors in <m>C</m> are vectors in the domain of a linear transformation defined by the matrix <m>M</m>.  But <m>M</m> was a matrix representation of <m>\restrict{T}{\geneigenspace{T}{0}}-0I_{\geneigenspace{T}{0}}</m> relative to the basis <m>F</m> for <m>\geneigenspace{T}{0}</m>.  We need to <q>uncoordinatize</q> each of the basis vectors in <m>C</m> to produce a linear combination of vectors in <m>F</m> that will be an element of the generalized eigenspace <m>\geneigenspace{T}{0}</m>.  These will be the next three vectors of our final answer, a basis for <m>\complex{10}</m> that has a pleasing matrix representation. <md>
+                <mrow>\vect{v}_3&amp;=\vectrepinv{F}{\colvector{0\\0\\-1}}=
+                0\colvector{0 \\ 1 \\ 0 \\ 0 \\ 0 \\ 1 \\ 1 \\ 0 \\ 0 \\ 0}+
+                0\colvector{1 \\ 1 \\ -1 \\ 2 \\ -1 \\ 1 \\ 0 \\ -1 \\ 1 \\ 0}+
+                (-1)\colvector{1 \\ 0 \\ -2 \\ 1 \\ 0 \\ -2 \\ 0 \\ 0 \\ 0 \\ 1}
+                =
+                \colvector{-1 \\ 0 \\ 2 \\ -1 \\ 0 \\ 2 \\ 0 \\ 0 \\ 0 \\ -1}</mrow>
+                <mrow>\vect{v}_4&amp;=\vectrepinv{F}{\colvector{1\\0\\0}}=
+                1\colvector{0 \\ 1 \\ 0 \\ 0 \\ 0 \\ 1 \\ 1 \\ 0 \\ 0 \\ 0}+
+                0\colvector{1 \\ 1 \\ -1 \\ 2 \\ -1 \\ 1 \\ 0 \\ -1 \\ 1 \\ 0}+
+                0\colvector{1 \\ 0 \\ -2 \\ 1 \\ 0 \\ -2 \\ 0 \\ 0 \\ 0 \\ 1}
+                =
+                \colvector{0 \\ 1 \\ 0 \\ 0 \\ 0 \\ 1 \\ 1 \\ 0 \\ 0 \\ 0}</mrow>
+                <mrow>\vect{v}_5&amp;=\vectrepinv{F}{\colvector{1\\1\\0}}=
+                1\colvector{0 \\ 1 \\ 0 \\ 0 \\ 0 \\ 1 \\ 1 \\ 0 \\ 0 \\ 0}+
+                1\colvector{1 \\ 1 \\ -1 \\ 2 \\ -1 \\ 1 \\ 0 \\ -1 \\ 1 \\ 0}+
+                0\colvector{1 \\ 0 \\ -2 \\ 1 \\ 0 \\ -2 \\ 0 \\ 0 \\ 0 \\ 1}
+                =
+                \colvector{1 \\ 2 \\ -1 \\ 2 \\ -1 \\ 2 \\ 1 \\ -1 \\ 1 \\ 0}
+                </mrow>
+            </md></p>
+
+            <p>Five down, five to go.  Basis vectors, that is.  <m>\lambda=-1</m> is the smallest eigenvalue, but it will require the most computation.  First we compute the generalized eigenspace.  Since Theorem<nbsp /><xref ref="theorem-generalized-eigenspace-kernel" /> says that <m>\geneigenspace{T}{-1}=\krn{\left(T-(-1)I_{\complex{10}}\right)^{10}}</m> we can compute this generalized eigenspace as a null space derived from the matrix <m>A</m>, <md>
+                <mrow>\left(A-(-1)I_{10}\right)^{10}&amp;\rref
+                \begin{bmatrix}
+                 <![CDATA[1 & 0 & 1 & 0 & 1 & 0 & -1 & 1 & 0 & 1 \\
+                 0 & 1 & 0 & 0 & 1 & 0 & 0 & 1 & 0 & 0 \\
+                 0 & 0 & 0 & 1 & 1 & 0 & 1 & 0 & 0 & -2 \\
+                 0 & 0 & 0 & 0 & 0 & 1 & -2 & 1 & 0 & 2 \\
+                 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \\
+                 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+                 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0]]>
+                \end{bmatrix}</mrow>
+                <mrow>\geneigenspace{T}{-1}&amp;=\krn{\left(A-(-1)I_{10}\right)^{10}}=
+                \spn{\set{
+                \colvector{-1 \\ 0 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0},\,
+                \colvector{-1 \\ -1 \\ 0 \\ -1 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0},\,
+                \colvector{1 \\ 0 \\ 0 \\ -1 \\ 0 \\ 2 \\ 1 \\ 0 \\ 0 \\ 0},\,
+                \colvector{-1 \\ -1 \\ 0 \\ 0 \\ 0 \\ -1 \\ 0 \\ 1 \\ 0 \\ 0},\,
+                \colvector{-1 \\ 0 \\ 0 \\ 2 \\ 0 \\ -2 \\ 0 \\ 0 \\ 0 \\ 1}
+                }}
+                =\spn{F}</mrow>
+            </md>So <m>\dimension{\geneigenspace{T}{-1}}=5=\algmult{T}{-1}</m>, as expected.  We will use these five basis vectors for the generalized eigenspace to construct a matrix representation of <m>\restrict{T}{\geneigenspace{T}{-1}}</m>, where <m>F</m> is being recycled and defined now implicitly as the basis of <m>\geneigenspace{T}{-1}</m>.</p>
+
+            <p>We construct this representation as usual, applying <acroref type="definition" acro="MR" />, <md>
+                <mrow>&amp;\vectrep{F}{
+                \lteval{\restrict{T}{\geneigenspace{T}{-1}}}
+                {\colvector{-1 \\ 0 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0}}
+                }
+                =\vectrep{F}{\colvector{-1 \\ 0 \\ 0 \\ 0 \\ 0 \\ -2 \\ -2 \\ 0 \\ 0 \\ -1}}\\
+                </mrow>
+                <mrow>&amp;=
+                \vectrep{F}{
+                0\colvector{-1 \\ 0 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0}+
+                0\colvector{-1 \\ -1 \\ 0 \\ -1 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0}+
+                (-2)\colvector{1 \\ 0 \\ 0 \\ -1 \\ 0 \\ 2 \\ 1 \\ 0 \\ 0 \\ 0}+
+                0\colvector{-1 \\ -1 \\ 0 \\ 0 \\ 0 \\ -1 \\ 0 \\ 1 \\ 0 \\ 0}+
+                (-1)\colvector{-1 \\ 0 \\ 0 \\ 2 \\ 0 \\ -2 \\ 0 \\ 0 \\ 0 \\ 1}
+                }
+                =\colvector{0\\0\\-2\\0\\-1}
+                </mrow>
+                <mrow>&amp;\vectrep{F}{
+                \lteval{\restrict{T}{\geneigenspace{T}{-1}}}
+                {\colvector{-1 \\ -1 \\ 0 \\ -1 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0}}
+                }
+                =\vectrep{F}{\colvector{7 \\ 1 \\ -5 \\ 3 \\ -1 \\ 2 \\ 4 \\ 0 \\ 0 \\ 3}}\\
+                </mrow>
+                <mrow>&amp;=
+                \vectrep{F}{
+                (-5)\colvector{-1 \\ 0 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0}+
+                (-1)\colvector{-1 \\ -1 \\ 0 \\ -1 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0}+
+                4\colvector{1 \\ 0 \\ 0 \\ -1 \\ 0 \\ 2 \\ 1 \\ 0 \\ 0 \\ 0}+
+                0\colvector{-1 \\ -1 \\ 0 \\ 0 \\ 0 \\ -1 \\ 0 \\ 1 \\ 0 \\ 0}+
+                3\colvector{-1 \\ 0 \\ 0 \\ 2 \\ 0 \\ -2 \\ 0 \\ 0 \\ 0 \\ 1}
+                }
+                =\colvector{-5\\-1\\4\\0\\3}\\
+                </mrow>
+                <mrow>&amp;\vectrep{F}{
+                \lteval{\restrict{T}{\geneigenspace{T}{-1}}}
+                {\colvector{1 \\ 0 \\ 0 \\ -1 \\ 0 \\ 2 \\ 1 \\ 0 \\ 0 \\ 0}}
+                }
+                =\vectrep{F}{\colvector{1 \\ 0 \\ -1 \\ 1 \\ 0 \\ 0 \\ 1 \\ 0 \\ 0 \\ 1}}\\
+                </mrow>
+                <mrow>&amp;=
+                \vectrep{F}{
+                (-1)\colvector{-1 \\ 0 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0}+
+                0\colvector{-1 \\ -1 \\ 0 \\ -1 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0}+
+                1\colvector{1 \\ 0 \\ 0 \\ -1 \\ 0 \\ 2 \\ 1 \\ 0 \\ 0 \\ 0}+
+                0\colvector{-1 \\ -1 \\ 0 \\ 0 \\ 0 \\ -1 \\ 0 \\ 1 \\ 0 \\ 0}+
+                1\colvector{-1 \\ 0 \\ 0 \\ 2 \\ 0 \\ -2 \\ 0 \\ 0 \\ 0 \\ 1}
+                }
+                =\colvector{-1\\0\\1\\0\\1}\\
+                </mrow>
+                <mrow>&amp;\vectrep{F}{
+                \lteval{\restrict{T}{\geneigenspace{T}{-1}}}
+                {\colvector{-1 \\ -1 \\ 0 \\ 0 \\ 0 \\ -1 \\ 0 \\ 1 \\ 0 \\ 0}}
+                }
+                =\vectrep{F}{\colvector{-1 \\ 0 \\ 2 \\ -2 \\ -1 \\ 1 \\ -1 \\ 1 \\ 0 \\ -2}}\\
+                </mrow>
+                <mrow>&amp;=
+                \vectrep{F}{
+                2\colvector{-1 \\ 0 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0}+
+                (-1)\colvector{-1 \\ -1 \\ 0 \\ -1 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0}+
+                (-1)\colvector{1 \\ 0 \\ 0 \\ -1 \\ 0 \\ 2 \\ 1 \\ 0 \\ 0 \\ 0}+
+                1\colvector{-1 \\ -1 \\ 0 \\ 0 \\ 0 \\ -1 \\ 0 \\ 1 \\ 0 \\ 0}+
+                (-2)\colvector{-1 \\ 0 \\ 0 \\ 2 \\ 0 \\ -2 \\ 0 \\ 0 \\ 0 \\ 1}
+                }
+                =\colvector{2\\-1\\-1\\1\\-2}\\
+                </mrow>
+                <mrow>&amp;\vectrep{F}{
+                \lteval{\restrict{T}{\geneigenspace{T}{-1}}}
+                {\colvector{-1 \\ 0 \\ 0 \\ 2 \\ 0 \\ -2 \\ 0 \\ 0 \\ 0 \\ 1}}
+                }
+                =\vectrep{F}{\colvector{-7 \\ -1 \\ 6 \\ -5 \\ -1 \\ -2 \\ -6 \\ 2 \\ 0 \\ -6}}\\
+                </mrow>
+                <mrow>&amp;=
+                \vectrep{F}{
+                6\colvector{-1 \\ 0 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0}+
+                (-1)\colvector{-1 \\ -1 \\ 0 \\ -1 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0}+
+                (-6)\colvector{1 \\ 0 \\ 0 \\ -1 \\ 0 \\ 2 \\ 1 \\ 0 \\ 0 \\ 0}+
+                2\colvector{-1 \\ -1 \\ 0 \\ 0 \\ 0 \\ -1 \\ 0 \\ 1 \\ 0 \\ 0}+
+                (-6)\colvector{-1 \\ 0 \\ 0 \\ 2 \\ 0 \\ -2 \\ 0 \\ 0 \\ 0 \\ 1}
+                }
+                =\colvector{6\\-1\\-6\\2\\-6}\\
+                </mrow>
+            </md></p>
+
+
+            <p>So we have the matrix representation of the restriction of <m>T</m> (again recycling and redefining the matrix <m>M</m>) <me>M=\matrixrep{\restrict{T}{\geneigenspace{T}{-1}}}{F}{F}=\begin{bmatrix}
+            <![CDATA[ 0 & -5 & -1 & 2 & 6 \\
+             0 & -1 & 0 & -1 & -1 \\
+             -2 & 4 & 1 & -1 & -6 \\
+             0 & 0 & 0 & 1 & 2 \\
+             -1 & 3 & 1 & -2 & -6]]>
+            \end{bmatrix}</me></p>
+
+            <p>Theorem<nbsp /><xref ref="theorem-restriction-generalized-eigenspace-nilpotent" /> says we can obtain a nilpotent matrix from this matrix representation by subtracting the eigenvalue from the diagonal elements, and then we can apply Theorem<nbsp /><xref ref="theorem-canonical-form-nilpotent-linear-transformation" /> to <m>M-(-1)I_5</m>.  First check that <m>\left(M-(-1)I_5\right)^3=\zeromatrix</m>, so we know that the index of <m>M-(-1)I_5</m> as a nilpotent matrix, and that therefore <m>\lambda=-1</m> is an eigenvalue of <m>T</m> with index <m>3</m>, <m>\indx{T}{-1}=3</m>.  To determine a basis of <m>\complex{5}</m> that converts <m>M-(-1)I_5</m> to canonical form, we need the null spaces of the powers of <m>M-(-1)I_5</m>.  Again, for convenience, set <m>N=M-(-1)I_5</m>. <md>
+                <mrow>\nsp{N^1}&amp;=\spn{\set{
+                \colvector{1 \\ 0 \\ 1 \\ 0 \\ 0},\,
+                \colvector{-3 \\ 1 \\ 0 \\ -2 \\ 2}
+                }}</mrow>
+                <mrow>\nsp{N^2}&amp;=\spn{\set{
+                \colvector{3 \\ 1 \\ 0 \\ 0 \\ 0},\,
+                \colvector{1 \\ 0 \\ 1 \\ 0 \\ 0},\,
+                \colvector{0 \\ 0 \\ 0 \\ 1 \\ 0},\,
+                \colvector{-3 \\ 0 \\ 0 \\ 0 \\ 1}
+                }}</mrow>
+                <mrow>\nsp{N^3}&amp;=\spn{\set{
+                \colvector{1 \\ 0 \\ 0 \\ 0 \\ 0},\,
+                \colvector{0 \\ 1 \\ 0 \\ 0 \\ 0},\,
+                \colvector{0 \\ 0 \\ 1 \\ 0 \\ 0},\,
+                \colvector{0 \\ 0 \\ 0 \\ 1 \\ 0},\,
+                \colvector{0 \\ 0 \\ 0 \\ 0 \\ 1}
+                }}
+                =\complex{5}</mrow>
+            </md> Then we choose a vector from <m>\nsp{N^3}</m> that is not an element of <m>\nsp{N^2}</m>.  The sum of the four basis vectors for <m>\nsp{N^2}</m> sum to a vector with all five entries equal to <m>1</m>.  We will adjust with the first entry to create a vector not in <m>\nsp{N^2}</m>, <me>\vect{z}_{3,1}=\colvector{0\\1\\1\\1\\1}</me> where we are employing the notation in Theorem<nbsp /><xref ref="theorem-canonical-form-nilpotent-linear-transformation" />.  The next step is to multiply this vector by <m>N</m> to get a portion of the basis for <m>\nsp{N^2}</m>, <me>\vect{z}_{2,1}=N\vect{z}_{3,1}=\begin{bmatrix}
+            <![CDATA[ 1 & -5 & -1 & 2 & 6 \\
+             0 & 0 & 0 & -1 & -1 \\
+             -2 & 4 & 2 & -1 & -6 \\
+             0 & 0 & 0 & 2 & 2 \\
+             -1 & 3 & 1 & -2 & -5]]>
+            \end{bmatrix} \colvector{0\\1\\1\\1\\1}
+            = \colvector{2 \\ -2 \\ -1 \\ 4 \\ -3}</me></p>
+
+
+            <p>We have a basis for the two-dimensional subspace <m>\nsp{N^1}</m> and we can add to that the vector <m>\vect{z}_{2,1}</m> and we have three of four basis vectors for <m>\nsp{N^2}</m>.  These three vectors span the subspace we call <m>Q_2</m>.  We need a fourth vector outside of <m>Q_2</m> to complete a basis of the four-dimensional subspace <m>\nsp{N^2}</m>.  Check that the vector <me>\vect{z}_{2,2}=\colvector{3\\1\\3\\1\\1}</me> is an element of <m>\nsp{N^2}</m> that lies outside of the subspace <m>Q_2</m>.  This vector was constructed by getting a nice basis for <m>Q_2</m> and forming a linear combination of this basis that specifies three of the five entries of the result.  Of the remaining two entries, one was changed to move the vector outside of <m>Q_2</m> and this was followed by a change to the remaining entry to place the vector into  <m>\nsp{N^2}</m>.  The vector <m>\vect{z}_{2,2}</m> is the lone basis vector for the subspace we call <m>R_2</m>.</p>
+
+            <p>The remaining two basis vectors are easy to come by.  They are the result of applying <m>N</m> to each of the two most recently determined basis vectors, <md>
+                <mrow>\vect{z}_{1,1}&amp;=N\vect{z}_{2,1}=\colvector{3 \\ -1 \\ 0 \\ 2 \\ -2}
+                &amp;
+                \vect{z}_{1,2}&amp;=N\vect{z}_{2,2}=\colvector{3 \\ -2 \\ -3 \\ 4 \\ -4}</mrow>
+            </md> Now we reorder these basis vectors, to arrive at the basis <me>C=\set{\vect{z}_{1,1},\,\vect{z}_{2,1},\,\vect{z}_{3,1},\,\vect{z}_{1,2},\,\vect{z}_{2,2}}
+            =\set{
+            \colvector{3 \\ -1 \\ 0 \\ 2 \\ -2},\,
+            \colvector{2 \\ -2 \\ -1 \\ 4 \\ -3},\,
+            \colvector{0 \\ 1 \\ 1 \\ 1 \\ 1},\,
+            \colvector{3 \\ -2 \\ -3 \\ 4 \\ -4},\,
+            \colvector{3 \\ 1 \\ 3 \\ 1 \\ 1}
+            }</me>  A matrix representation of <m>N</m> relative to <m>C</m> is<me>\begin{bmatrix}
+            <![CDATA[0 & 1 & 0 & 0 & 0 \\
+            0 & 0 & 1 & 0 & 0 \\
+            0 & 0 & 0 & 0 & 0 \\
+            0 & 0 & 0 & 0 & 1 \\
+            0 & 0 & 0 & 0 & 0]]>
+            \end{bmatrix}=
+            \begin{bmatrix}
+            <![CDATA[\jordan{3}{0} & \zeromatrix \\
+            \zeromatrix & \jordan{2}{0}]]>
+            \end{bmatrix}</me>  To obtain a matrix representation of <m>M</m>, we add back in the matrix <m>(-1)I_5</m>, placing the eigenvalue back along the diagonal, and slightly modifying the Jordan blocks,<me>\begin{bmatrix}
+            <![CDATA[-1 & 1 & 0 & 0 & 0 \\
+            0 & -1 & 1 & 0 & 0 \\
+            0 & 0 & -1 & 0 & 0 \\
+            0 & 0 & 0 & -1 & 1 \\
+            0 & 0 & 0 & 0 & -1]]>
+            \end{bmatrix}
+            =
+            <![CDATA[\begin{bmatrix}
+            \jordan{3}{-1} & \zeromatrix \\
+            \zeromatrix & \jordan{2}{-1}]]>
+            \end{bmatrix}</me>  The basis <m>C</m> yields a pleasant matrix representation for the <em>restriction</em> of the linear transformation <m>T-(-1)I</m> to the generalized eigenspace <m>\geneigenspace{T}{-1}</m>.  However, we must remember that these vectors in <m>\complex{5}</m> are representations of vectors in <m>\complex{10}</m> relative to the basis <m>F</m>.  Each needs to be <q>un-coordinatized</q> before joining our final basis.  Here we go, <md>
+                <mrow>\vect{v}_6&amp;=\vectrepinv{F}{\colvector{3 \\ -1 \\ 0 \\ 2 \\ -2}}=
+                3\colvector{-1 \\ 0 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0}+
+                (-1)\colvector{-1 \\ -1 \\ 0 \\ -1 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0}+
+                0\colvector{1 \\ 0 \\ 0 \\ -1 \\ 0 \\ 2 \\ 1 \\ 0 \\ 0 \\ 0}+
+                2\colvector{-1 \\ -1 \\ 0 \\ 0 \\ 0 \\ -1 \\ 0 \\ 1 \\ 0 \\ 0}+
+                (-2)\colvector{-1 \\ 0 \\ 0 \\ 2 \\ 0 \\ -2 \\ 0 \\ 0 \\ 0 \\ 1}
+                =
+                \colvector{-2 \\ -1 \\ 3 \\ -3 \\ -1 \\ 2 \\ 0 \\ 2 \\ 0 \\ -2}</mrow>
+                <mrow>\vect{v}_7&amp;=\vectrepinv{F}{\colvector{2 \\ -2 \\ -1 \\ 4 \\ -3}}=
+                2\colvector{-1 \\ 0 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0}+
+                (-2)\colvector{-1 \\ -1 \\ 0 \\ -1 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0}+
+                (-1)\colvector{1 \\ 0 \\ 0 \\ -1 \\ 0 \\ 2 \\ 1 \\ 0 \\ 0 \\ 0}+
+                4\colvector{-1 \\ -1 \\ 0 \\ 0 \\ 0 \\ -1 \\ 0 \\ 1 \\ 0 \\ 0}+
+                (-3)\colvector{-1 \\ 0 \\ 0 \\ 2 \\ 0 \\ -2 \\ 0 \\ 0 \\ 0 \\ 1}
+                =
+                \colvector{-2 \\ -2 \\ 2 \\ -3 \\ -2 \\ 0 \\ -1 \\ 4 \\ 0 \\ -3}</mrow>
+                <mrow>\vect{v}_8&amp;=\vectrepinv{F}{\colvector{0 \\ 1 \\ 1 \\ 1 \\ 1}}=
+                0\colvector{-1 \\ 0 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0}+
+                1\colvector{-1 \\ -1 \\ 0 \\ -1 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0}+
+                1\colvector{1 \\ 0 \\ 0 \\ -1 \\ 0 \\ 2 \\ 1 \\ 0 \\ 0 \\ 0}+
+                1\colvector{-1 \\ -1 \\ 0 \\ 0 \\ 0 \\ -1 \\ 0 \\ 1 \\ 0 \\ 0}+
+                1\colvector{-1 \\ 0 \\ 0 \\ 2 \\ 0 \\ -2 \\ 0 \\ 0 \\ 0 \\ 1}
+                =
+                \colvector{-2 \\ -2 \\ 0 \\ 0 \\ 1 \\ -1 \\ 1 \\ 1 \\ 0 \\ 1}</mrow>
+                <mrow>\vect{v}_9&amp;=\vectrepinv{F}{\colvector{3 \\ -2 \\ -3 \\ 4 \\ -4}}=
+                3\colvector{-1 \\ 0 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0}+
+                (-2)\colvector{-1 \\ -1 \\ 0 \\ -1 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0}+
+                (-3)\colvector{1 \\ 0 \\ 0 \\ -1 \\ 0 \\ 2 \\ 1 \\ 0 \\ 0 \\ 0}+
+                4\colvector{-1 \\ -1 \\ 0 \\ 0 \\ 0 \\ -1 \\ 0 \\ 1 \\ 0 \\ 0}+
+                (-4)\colvector{-1 \\ 0 \\ 0 \\ 2 \\ 0 \\ -2 \\ 0 \\ 0 \\ 0 \\ 1}
+                =
+                \colvector{-4 \\ -2 \\ 3 \\ -3 \\ -2 \\ -2 \\ -3 \\ 4 \\ 0 \\ -4}</mrow>
+                <mrow>\vect{v}_{10}&amp;=\vectrepinv{F}{\colvector{3 \\ 1 \\ 3 \\ 1 \\ 1}}=
+                3\colvector{-1 \\ 0 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0}+
+                1\colvector{-1 \\ -1 \\ 0 \\ -1 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0}+
+                3\colvector{1 \\ 0 \\ 0 \\ -1 \\ 0 \\ 2 \\ 1 \\ 0 \\ 0 \\ 0}+
+                1\colvector{-1 \\ -1 \\ 0 \\ 0 \\ 0 \\ -1 \\ 0 \\ 1 \\ 0 \\ 0}+
+                1\colvector{-1 \\ 0 \\ 0 \\ 2 \\ 0 \\ -2 \\ 0 \\ 0 \\ 0 \\ 1}
+                =
+                \colvector{-3 \\ -2 \\ 3 \\ -2 \\ 1 \\ 3 \\ 3 \\ 1 \\ 0 \\ 1}
+                </mrow>
+            </md>  To summarize, we list the entire basis <m>B=\set{\vectorlist{v}{10}}</m>, <md>
+                <mrow>\vect{v}_1&amp;\colvector{2 \\ 1 \\ -1 \\ 1 \\ -1 \\ 2 \\ 1 \\ 0 \\ 1 \\ 0}
+                &amp;
+                \vect{v}_2&amp;\colvector{1 \\ 1 \\ -2 \\ 2 \\ 0 \\ -1 \\ 0 \\ -1 \\ 0 \\ 1}
+                &amp;
+                \vect{v}_3&amp;\colvector{-1 \\ 0 \\ 2 \\ -1 \\ 0 \\ 2 \\ 0 \\ 0 \\ 0 \\ -1}
+                &amp;
+                \vect{v}_4&amp;\colvector{0 \\ 1 \\ 0 \\ 0 \\ 0 \\ 1 \\ 1 \\ 0 \\ 0 \\ 0}
+                &amp;
+                \vect{v}_5&amp;\colvector{1 \\ 2 \\ -1 \\ 2 \\ -1 \\ 2 \\ 1 \\ -1 \\ 1 \\ 0}</mrow>
+
+                <mrow>\vect{v}_6&amp;\colvector{-2 \\ -1 \\ 3 \\ -3 \\ -1 \\ 2 \\ 0 \\ 2 \\ 0 \\ -2}
+                &amp;
+                \vect{v}_7&amp;\colvector{-2 \\ -2 \\ 2 \\ -3 \\ -2 \\ 0 \\ -1 \\ 4 \\ 0 \\ -3}
+                &amp;
+                \vect{v}_8&amp;\colvector{-2 \\ -2 \\ 0 \\ 0 \\ 1 \\ -1 \\ 1 \\ 1 \\ 0 \\ 1}
+                &amp;
+                \vect{v}_9&amp;\colvector{-4 \\ -2 \\ 3 \\ -3 \\ -2 \\ -2 \\ -3 \\ 4 \\ 0 \\ -4}
+                &amp;
+                \vect{v}_{10}&amp;\colvector{-3 \\ -2 \\ 3 \\ -2 \\ 1 \\ 3 \\ 3 \\ 1 \\ 0 \\ 1}</mrow>
+            </md>   The resulting matrix representation is <me>\matrixrep{T}{B}{B}=\begin{bmatrix}
+            <![CDATA[ 2 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+             0 & 2 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+             0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\
+             0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+             0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+             0 & 0 & 0 & 0 & 0 & -1 & 1 & 0 & 0 & 0 \\
+             0 & 0 & 0 & 0 & 0 & 0 & -1 & 1 & 0 & 0 \\
+             0 & 0 & 0 & 0 & 0 & 0 & 0 & -1 & 0 & 0 \\
+             0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & -1 & 1 \\
+             0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & -1]]>
+            \end{bmatrix} </me></p>
+
+            <p>If you are not inclined to check all of these computations, here are a few that should convince you of the amazing properties of the basis <m>B</m>.  Compute the matrix-vector products <m>A\vect{v}_i</m>, <m>1\leq i\leq 10</m>.  In each case the result will be a vector of the form <m>\lambda\vect{v}_i+\delta\vect{v}_{i-1}</m>, where <m>\lambda</m> is one of the eigenvalues (you should be able to predict ahead of time <em>which</em> one) and <m>\delta\in\set{0,1}</m>.</p>
+
+            <p>Alternatively, if we can write inputs to the linear transformation <m>T</m> as linear combinations of the vectors in <m>B</m>, then the <q>action</q> of <m>T</m> is reduced to a matrix-vector product  with the exceedingly simple matrix that is the Jordan canonical form.  Wow!</p>
+
+        </example>
+
+        <todo>Maybe JCF needs another big example, or rather a combinatorial example?</todo>
+
+    </subsection>
+
 </section>
