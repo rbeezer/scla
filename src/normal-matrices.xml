@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- This file is part of the book                -->
+<!--                                              -->
+<!--      A Second Course in Linear Algebra       -->
+<!--                                              -->
+<!-- Copyright (C) 2004-2014  Robert A. Beezer    -->
+<!-- See the file COPYING for copying conditions. -->
+
+<section xml:id="section-normal-matrices" filebase="normal-matrices">
+	<title>Normal Matrices</title>
+
+	<p>Normal matrices comprise a broad class of interesting matrices, many of which you probably already know by other names.  But they are most interesting since they define exactly which matrices we can diagonalize via a unitary matrix.  This is the upcoming Theorem<nbsp /><xref provisional="orthonormal diagonalization" />.</p>
+
+	<definition xml:id="definition-normal-matrix">  <!-- was NRML -->
+		<title>Normal Matrix</title>
+		<statement>
+			<p>The square matrix <m>A</m> is normal if <m>\adjoint{A}A=A\adjoint{A}</m>.</p>
+		</statement>
+	</definition>
+
+	<p>So a normal matrix commutes with its adjoint.  Part of the beauty of this definition is that it includes many other types of matrices.  A diagonal matrix will commute with its adjoint, since the adjoint is again diagonal and the entries are just conjugates of the entries of the original diagonal matrix.  A Hermitian (self-adjoint) matrix (<acroref type="definition" acro="HM" />) will trivially commute with its adjoint, since the two matrices are the same.  A real, symmetric matrix is Hermitian, so these matrices are also normal.  A unitary matrix (<acroref type="definition" acro="UM" />) has its adjoint as its inverse, and inverses commute (<acroref type="theorem" acro="OSIS" />), so unitary matrices are normal.  Another class of normal matrices is the skew-symmetric matrices.  However, these broad classes of matrices do not capture all of the normal matrices, as the next example shows.</p>
+
+	<example xml:id="example-a-normal-matrix"> <!-- was ANM -->
+		<title>A normal matrix</title>
+
+		<p>Consider the matrix <m>\begin{bmatrix}<![CDATA[1 & -1\\1 & 1]]>\end{bmatrix}</m>.  Then <me>\begin{bmatrix}<![CDATA[1 & -1\\1 & 1]]>\end{bmatrix}\begin{bmatrix}<![CDATA[1 & 1\\-1 & 1]]>\end{bmatrix} = \begin{bmatrix}<![CDATA[2 & 0\\0 & 2]]>\end{bmatrix}=\begin{bmatrix}<![CDATA[1 & 1\\-1 & 1]]>\end{bmatrix}\begin{bmatrix}<![CDATA[1 & -1\\1 & 1]]>\end{bmatrix}</me> so we see by Definition<nbsp /><xref ref="definition-normal-matrix" /> that <m>A</m> is normal.  However, notice that <m>A</m> is not symmetric (hence, as a real matrix, not Hermitian), not unitary, and not skew-symmetric.</p>
+	</example>
+</section>

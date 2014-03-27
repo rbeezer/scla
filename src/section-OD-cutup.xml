@@ -301,58 +301,6 @@ The inverse of an upper triangular matrix is upper triangular (<acroref type="th
 
 </subsection>
 
-<subsection acro="NM">
-<title>Normal Matrices</title>
-
-<p>Normal matrices comprise a broad class of interesting matrices, many of which we have met already.  But they are most interesting since they define exactly which matrices we can diagonalize via a unitary matrix.  This is the upcoming <acroref type="theorem" acro="OD" />.  Here's the definition.</p>
-
-<definition acro="NRML" index="normal matrix">
-<title>Normal Matrix</title>
-<p>The square matrix <m>A</m> is normal if <m>\adjoint{A}A=A\adjoint{A}</m>.</p>
-
-</definition>
-
-<p>So a normal matrix commutes with its adjoint.  Part of the beauty of this definition is that it includes many other types of matrices.  A diagonal matrix will commute with its adjoint, since the adjoint is again diagonal and the entries are just conjugates of the entries of the original diagonal matrix.  A Hermitian (self-adjoint) matrix (<acroref type="definition" acro="HM" />) will trivially commute with its adjoint, since the two matrices are the same.  A real, symmetric matrix is Hermitian, so these matrices are also normal.  A unitary matrix (<acroref type="definition" acro="UM" />) has its adjoint as its inverse, and inverses commute (<acroref type="theorem" acro="OSIS" />), so unitary matrices are normal.  Another class of normal matrices is the skew-symmetric matrices.  However, these broad descriptions still do not capture all of the normal matrices, as the next example shows.</p>
-
-<example acro="ANM" index="normal matrix">
-<title>A normal matrix</title>
-
-<p>Let
-<alignmath>
-<![CDATA[A&=]]>
-\begin{bmatrix}
-<![CDATA[1 & -1\\1 & 1]]>
-\end{bmatrix}
-</alignmath>
-</p>
-
-<p>Then
-<alignmath>
-\begin{bmatrix}
-<![CDATA[1 & -1\\1 & 1]]>
-\end{bmatrix}
-\begin{bmatrix}
-<![CDATA[1 & 1\\-1 & 1]]>
-\end{bmatrix}
-</mrow>
-<mrow>&amp;=]]>
-\begin{bmatrix}
-<![CDATA[2 & 0\\0 & 2]]>
-\end{bmatrix}
-=
-\begin{bmatrix}
-<![CDATA[1 & 1\\-1 & 1]]>
-\end{bmatrix}
-\begin{bmatrix}
-<![CDATA[1 & -1\\1 & 1]]>
-\end{bmatrix}
-</alignmath>
-so we see by <acroref type="definition" acro="NRML" /> that <m>A</m> is normal.  However, <m>A</m> is not symmetric (hence, as a real matrix, not Hermitian), not unitary, and not skew-symmetric.</p>
-
-</example>
-
-</subsection>
-
 <subsection acro="OD">
 <title>Orthonormal Diagonalization</title>
 

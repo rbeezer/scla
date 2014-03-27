@@ -16,6 +16,7 @@
     <xi:include href="./invariant-subspaces.xml" />
     <xi:include href="./reflectors.xml" />
     <xi:include href="./projectors.xml" />
+    <xi:include href="./normal-matrices.xml" />
     <xi:include href="./positive-semidefinite.xml" />
     
 </chapter>
