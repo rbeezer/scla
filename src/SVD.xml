@@ -126,8 +126,38 @@
                 </md></p>
 
                 <p>So by <acroref type="theorem" acro="ME" />, <m>AV</m> and <m>UD</m> are equal matrices, <m>AV=UD</m>.  <m>V</m> is unitary, so applying its inverse yields the decomposition <m>A=UD\adjoint{V}</m>.</p>
-        </proof>
-    </theorem>
+            </proof>
+        </theorem>
 
-</subsection>
+        <p>Typically, the singular values of a matrix are ordered from largest to smallest, so this convention is used for the diagonal elements of the matrix <m>S</m> in the decomposition, and then the columns of <m>U</m> and <m>V</m> will be ordered similarly.</p>
+    </subsection>
+
+    <subsection xml:id="subsection-properties-of-SVD">
+        <title>Properties of the SVD</title>
+
+        <p>The appeal of the singular value decomposition is two-fold.  First it is applicable to <em>any</em> matrix.  That should be obvious enough.  Second, components of the SVD provide a wealth of information about a matrix, and in the case of numerical matrices, they are well-behaved.  In this subsection we collect various theorems about the SVD, and explore the consequences in a section about applications, Section<nbsp /><xref provisional="section-applications-of-SVD" />.</p>
+
+        <p>The SVD gives a decomposition of a matrix of a sum of rank one matrices, and the magnitude of the singular values tells us which of these rank one matrices is the most <q>important</q>.</p>
+
+        <theorem xml:id="theorem-svd-rank-one-decomposition">
+            <title>SVD Rank One Decomposition</title>
+
+            <statement>
+                <p>Suppose the singular value decomposition of an <m>m\times n</m> matrix <m>A</m> is given by <m>A=US\adjoint{V}</m>, where the nonzero singular values in the first <m>r</m> entries of the diagonal of <m>S</m> are <m>\scalarlist{s}{r}</m>, and the columns of <m>U</m> and <m>V</m> are, respectively, <m>\vectorlist{x}{n}</m> and <m>\vectorlist{y}{m}</m>.  Then <me>A=\sum_{i=1}^r\,s_i\,\vect{x}_i\adjoint{\vect{y}_i}</me></p>
+            </statement>
+
+            <proof>
+                <p>As usual, let <m>\vect{e}_i</m> be column <m>i</m> of the identity matrix <m>I_m</m>.  Define <m>S_i</m>, for <m>1\leq i\leq r</m> to be the <m>m\times n</m> matrix where every entry is zero, except column <m>i</m> is <m>s_i\vect{e}_i</m>.  Then, by design, <m>S=\sum_{i=1}^r\,S_i</m>.  We have, <md>
+                    <mrow>A&amp;=US\adjoint{V}=U\,\sum_{i=1}^r\,S_i\,\adjoint{V}=\sum_{i=1}^rUS_i\adjoint{V}</mrow>
+                    <mrow>&amp;=\sum_{i=1}^r\,U\left\lbrack\zerovector|\dots|s_i\vect{e}_i|\dots|\zerovector\right\rbrack\adjoint{V}=\sum_{i=1}^r\,s_i\left\lbrack\zerovector|\dots|U\vect{e}_i|\dots|\zerovector\right\rbrack\adjoint{V}</mrow>
+                    <mrow>&amp;=\sum_{i=1}^r\,s_i\left\lbrack\zerovector|\dots|\vect{x}_i|\dots|\zerovector\right\rbrack\adjoint{V}=\sum_{i=1}^r\,s_i\vect{x}_i\adjoint{\vect{y}_i}</mrow>
+                </md>
+                </p>
+            </proof>
+        </theorem>
+
+        <p>Be sure to recognize <m>\vect{x}_i\adjoint{\vect{y}_i}</m> as the outer product, an <m>m\times n</m> matrix of rank one (every row is a multiple of every other row, and similarly for columns).  See Subsection<nbsp /><xref ref="subsection-SVD-image-compression" /> for a good example of the utility of this result.</p>
+
+    </subsection>
+
 </section>
