@@ -110,22 +110,22 @@
         <theorem xml:id="theorem-singular-value-decomposition">   <!-- was SVD -->
             <title>Singular Value Decomposition</title>
             <statement>
-                <p>Suppose <m>A</m> is an <m>m\times n</m> matrix of rank <m>r</m> with nonzero singular values <m>\scalarlist{s}{r}</m>.  Then <m>A=UD\adjoint{V}</m> where <m>U</m> is a unitary matrix of size <m>m</m>, <m>V</m> is a unitary matrix of size <m>n</m> and <m>D</m> is an <m>m\times n</m> matrix given by <me>\matrixentry{D}{ij}=
+                <p>Suppose <m>A</m> is an <m>m\times n</m> matrix of rank <m>r</m> with nonzero singular values <m>\scalarlist{s}{r}</m>.  Then <m>A=US\adjoint{V}</m> where <m>U</m> is a unitary matrix of size <m>m</m>, <m>V</m> is a unitary matrix of size <m>n</m> and <m>S</m> is an <m>m\times n</m> matrix given by <me>\matrixentry{S}{ij}=
                 \begin{cases}
                 s_i&amp;\text{if }1\leq i=j\leq r\\
                 0&amp;\text{otherwise} \end{cases}</me></p>
             </statement>
 
             <proof>
-                <p>Let <m>\vectorlist{x}{n}</m> and <m>\vectorlist{y}{m}</m> be the orthonormal bases described by the conclusion of Theorem<nbsp /><xref ref="eigenvalues-matrix-adjoint-product" />.  Define <m>U</m> to be the <m>m\times m</m> matrix whose columns are <m>\vect{y}_i</m>, <m>1\leq i\leq m</m>, and define <m>V</m> to be the <m>n\times n</m> matrix whose columns are <m>\vect{x}_i</m>, <m>1\leq i\leq n</m>.  With orthonormal sets of columns both <m>U</m> and <m>V</m> are unitary matrices by <acroref type="theorem" acro="CUMOS" />.</p>
+                <p>Let <m>\vectorlist{x}{n}</m> and <m>\vectorlist{y}{m}</m> be the orthonormal bases described by the conclusion of Theorem<nbsp /><xref ref="eigenvalues-matrix-adjoint-product" />.  Define <m>U</m> to be the <m>m\times m</m> matrix whose columns are <m>\vect{y}_i</m>, <m>1\leq i\leq m</m>, and define <m>V</m> to be the <m>n\times n</m> matrix whose columns are <m>\vect{x}_i</m>, <m>1\leq i\leq n</m>.  With orthonormal sets of columns, both <m>U</m> and <m>V</m> are unitary matrices by <acroref type="theorem" acro="CUMOS" />.</p>
 
                 <p>Then for <m>1\leq i\leq m</m>, <m>1\leq j\leq n</m>,
                 <md>
                     <mrow>\matrixentry{AV}{ij}&amp;=\vectorentry{A\vect{x}_j}{i}=\vectorentry{\sqrt{\delta_j}\vect{y}_j}{i}=s_j\vectorentry{\vect{y}_j}{i}</mrow>
-                    <mrow>&amp;=\matrixentry{U}{ij}\matrixentry{D}{jj}=\sum_{k=1}^{m}\matrixentry{U}{ik}\matrixentry{D}{kj}=\matrixentry{UD}{ij}</mrow>
+                    <mrow>&amp;=\matrixentry{U}{ij}\matrixentry{S}{jj}=\sum_{k=1}^{m}\matrixentry{U}{ik}\matrixentry{S}{kj}=\matrixentry{US}{ij}</mrow>
                 </md></p>
 
-                <p>So by <acroref type="theorem" acro="ME" />, <m>AV</m> and <m>UD</m> are equal matrices, <m>AV=UD</m>.  <m>V</m> is unitary, so applying its inverse yields the decomposition <m>A=UD\adjoint{V}</m>.</p>
+                <p>So by <acroref type="theorem" acro="ME" />, <m>AV</m> and <m>US</m> are equal matrices, <m>AV=US</m>.  <m>V</m> is unitary, so applying its inverse yields the decomposition <m>A=US\adjoint{V}</m>.</p>
             </proof>
         </theorem>
 
