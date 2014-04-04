@@ -132,6 +132,24 @@
         <p>Typically, the singular values of a matrix are ordered from largest to smallest, so this convention is used for the diagonal elements of the matrix <m>S</m> in the decomposition, and then the columns of <m>U</m> and <m>V</m> will be ordered similarly.</p>
     </subsection>
 
+    <subsection xml:id="subsection-visualizing-SVD">
+        <title>Visualizing the SVD</title>
+
+        <p>It is helpful to think of the orthonormal bases that are the columns of <m>U</m> and <m>V</m> as <q>coordinate systems,</q> since they are pairwise <q>perpendicular</q> unit vectors, like the <m>\vec{i},\,\vec{j},\,\vec{k}</m> often used in describing the geometry of space.  We would then call each basis vector an <q>axis</q>.</p>
+
+        <p>Now think of an <m>m\times n</m> matrix as a function from <m>\complex{n}</m> to <m>\complex{m}</m>.  For an input vector <m>\vect{w}\in\complex{n}</m>, we have the output vector <m>\vect{y}=A\vect{w}\in\complex{m}</m>.  If we write the output vector using the SVD decomposition of <m>A</m> as <m>A\vect{w}=US\adjoint{V}\vect{w}</m> we can consider the output as a three-step process that is more formally a composition of three linear transformations.  Recall that unitary matrices preserve inner products, and thus preserve norms (length) and relative positions of two vectors (the <q>angle</q> between vectors), which is why unitary matrices are sometimes called <q>isometries</q> (<acroref type="theorem" acro="UMPIP" />). <ol>
+            <li><m>\adjoint{V}</m> is the inverse of <m>V</m> so it will take any basis vector <m>\vect{x}_i</m> to a column of the identity matrix <m>\vect{e}_i</m>, an element of the standard basis of <m>\complex{n}</m>, or and axis of the <q>usual</q> coordinate system.  Any other vector, such as our <m>\vect{w}</m>, will have its length preserved, but changing its position, though its position relative to the axes is unchanged.</li>
+
+            <li><m>S</m> converts the <q>rotated</q> <m>\vect{w}</m> from <m>\complex{n}</m> to <m>\complex{m}</m>.  But it does so in a very simple way.  It simply scales each entry of the vector by a positive amount using a different singular value for each entry.  If <m>m\gt n</m>, then the extra entries are simply new zeros.  If <m>m\lt n</m>, then some entries get discarded.</li>
+
+            <li><m>U</m> will convert the standard basis vectors (the usual axes) to the new orthonormal basis given by the <m>\vect{y}_i</m>.  The twice-transformed version of <m>\vect{w}</m> will have its length preserved, but change position, though its position relative to the axes is unchanged.</li>
+        </ol>  So, <em>every</em> matrix is a rotation, a stretch, and a rotation.  That is a simple, but accurate, understanding of what the SVD tells us.</p>
+
+        <p>Here is another look at the same idea.  Consider the columns of <m>U</m> and <m>V</m> again as the axes of new coordinate systems.  Then their adjoints are their inverses and each take the new axes to the standard unit vectors (columns of the identity matrix), the axes of the usual coordinate system.  Consider an input vector <m>\vect{w}</m>, and its output <m>\vect{y}=A\vect{w}</m>, relative to these new bases and convert each to the standard coordinate system, <m>\vect{w}\prime=\adjoint{V}\vect{w}</m> and <m>\vect{y}\prime=\adjoint{U}\vect{y}</m>.  Then <me>\vect{y}\prime=\adjoint{U}\vect{y}=\adjoint{U}A\vect{y}=\adjoint{U}US\adjoint{V}\vect{y}=S\vect{y}\prime</me>
+        In the <q>primed</q> spaces, the action of <m>A</m> is very simple.  Or in other words, every linear transformation has a matrix representation that is basically diagonal, if only we pick the right bases for the domain and codomain.</p>
+
+    </subsection>
+
     <subsection xml:id="subsection-properties-of-SVD">
         <title>Properties of the SVD</title>
 
