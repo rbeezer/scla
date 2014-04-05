@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- This file is part of the book                -->
+<!--                                              -->
+<!--      A Second Course in Linear Algebra       -->
+<!--                                              -->
+<!-- Copyright (C) 2004-2014  Robert A. Beezer    -->
+<!-- See the file COPYING for copying conditions. -->
+
+<section xml:id="section-cholesky" filebase="cholesky">
+    <title>Cholesky Decomposition</title>
+
+    <intoduction>
+        <p>An LU decomposition of a matrix is obtained by repeated row operations and produces a result with some symmetry of sorts.  The <q>L</q> matrix is lower triangular and the <q>U</q> matrix is upper triangular, so <m>\matrixentry{L}{ij}=0=\conjugate{\matrixentry{U}{ji}}</m> for <m>i\lt j</m>, which should be reminiscent of the definition of the adjoint of a matrix (<acroref type="definition" acro="AM" />).  If we begin with a positive definite matrix, then we can do better.  By beginning with a Hermitian matrix, we can do row operations, <em>and</em> identical column operations and maintain the symmetry of the entries.  We arrive at a decomposition of the form <m>\adjoint{U}U</m>, where <m>U</m> is upper-triangular.</p>
+    </intoduction>
+
+
+    <subsection xml:id="subsection-cholesky-decomposition">
+        <title>The Cholesky Decomposition</title>
+
+        <p>Recall that a Hermitian matrix <m>A</m> is positive definite if <m>\innerproduct{\vect{x}}{A\vect{x}}\gt 0</m> for all <m>\vect{x}\neq\zerovector</m>.  This is just the variant of positive semi-definiteness (Definition<nbsp /><xref ref="definition-positive-semidefinite" />) where we replace the inequality by a strict inequality.</p>
+
+        <theorem xml:id="theorem-cholesky-decomposition" >
+            <title>Cholesky Decomposition</title>
+
+            <statement>
+                <p>Suppose that <m>A</m> is a positive definite matrix.  Then there exists a unique upper triangular matrix, <m>U</m>, with positive diagonal matrices such that <m>A=\adjoint{U}U</m>.</p>
+            </statement>
+
+            <proof>Coming soon.  Algorithm below contains the essential ideas.  Uniqueness is an exercise.</proof>
+        </theorem>
+
+        <exercise xml:id="exercise-cholesky-unique">
+            <statement>
+                <p>Prove that the upper triangular matrix <m>U</m> in the conclusion of Theorem<nbsp /><xref ref="theorem-cholesky-decomposition" /> is unique.</p>
+            </statement>
+            <hint>
+                <p>Look at the technique used to establish uniqueness for the <m>LU</m> decomposition.  How does the requirement that the entries of <m>U</m> be positive play a role in the proof?</p>
+            </hint>
+        </exercise>
+
+    </subsection>
+
+    <subsection xml:id="subsection-cholesky-computation">
+        <title>Computing a Cholesky Decomposition</title>
+
+        <p>To create an LU decomposition, we used row operations to <q>zero out</q> entries below the diagonal of a matrix <m>A</m>.  If we represented these row operations as elementary matrices, we could accumulate their net effect in a lower triangular matrix that operates on the left of the matrix.  For a Cholesky decomposition, we do the same thing, but also perform the analogous column operation, which can be represented as the adjoint of the same elementary matrix, and then applied from the right.</p>
+
+        <p>Here is the same idea, but expressed as intermediate steps leading to the eventual Cholesky decomposition.  Recall that Hermitian matrices necessarily have real diagonal entries.  Suppose that <m>A</m> is an <m>n\times n</m> positive definite matrix. <md>
+            <mrow>A&amp;=\left[\begin{array}{c|c}a&amp;\adjoint{\vect{y}}\\\hline\vect{y}&amp;B\end{array}\right]</mrow>
+            <mrow>&amp;=\left[\begin{array}{c|c}\sqrt{a}&amp;\adjoint{\zerovector}\\\hline\frac{1}{\sqrt{a}}\vect{y}&amp;I\end{array}\right]
+            \left[\begin{array}{c|c}1&amp;\adjoint{\zerovector}\\\hline\zerovector&amp;B-\frac{1}{a}\vect{y}\adjoint{\vect{y}}\end{array}\right]
+            \left[\begin{array}{c|c}\sqrt{a}&amp;\frac{1}{\sqrt{a}}\adjoint{\vect{y}}\\\hline\zerovector&amp;I\end{array}\right]</mrow>
+            <mrow>&amp;=\adjoint{U_1}A_1U_1</mrow>
+        </md>  The only obstacle to this computation is the square root of the entry in the top left corner of <m>A</m>, and the result should be positive.  If we apply the positive definite condition, with <m>\vect{x}=\vect{e}_1</m> (the first column of the identity matrix) then we have <me>a=\innerproduct{\vect{e}_1}{A\vect{e}_1}\gt 0</me>.</p>
+
+        <p>Can we repeat this decomposition on the <m>(n-1)\times(n-1)</m> matrix <m>B-\frac{1}{a}\vect{y}\adjoint{\vect{y}}</m>?  As before we just need a strictly positive entry in the upper left corner of this slightly smaller matrix.  Similar to before, employ the positive definite condition for <m>A</m> using <m>\vect{x}=\inverse{U_1}\vect{e}_2</m> and employ the version of <m>A</m> defining <m>A_1</m> (see Exercise<nbsp /><xref ref="exercise-compute-cholesky-positive-definite" />).  What is the result after <m>n</m> iterations?  <me>A=\adjoint{U_n}\dots\adjoint{U_2}\adjoint{U_1}IU_1U_2\dots U_n=\adjoint{U}U</me>  Here we have used the observation that a product of upper triangular matrices is again upper triangular, and you should notice the appearance of the positive diagonal entries.   So we have our desired factorization.</p>
+
+        <exercise xml:id="exercise-compute-cholesky-positive-definite">
+            <statement>
+                <p>In the discussion of a recursive algorithm for computing a Cholesky decomposition in Section<nbsp /><xref ref="subsection-cholesky-computation" />, verify that the matrix <m>A_1</m> has a strictly positive value in the second diagonal entry.</p>
+            </statement>
+            <hint>
+                <p>See the suggestion in the discussion, but comment on how we know <m>U_1</m> is invertible.</p>
+            </hint>
+        </exercise>
+
+    </subsection>
+</section>
