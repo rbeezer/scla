@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- This file is part of the book                -->
+<!--                                              -->
+<!--      A Second Course in Linear Algebra       -->
+<!--                                              -->
+<!-- Copyright (C) 2004-2014  Robert A. Beezer    -->
+<!-- See the file COPYING for copying conditions. -->
+
+<section xml:id="section-determinants" filebase="determinants">
+    <title>Determinants</title>
+
+    <introduction>
+        <p>Typically, the first definition one sees of a determinant is given by expansion about the first row, with the a recursive application to the submatrices that have size one smaller.  In the extreme, a <m>1\times 1</m> matrix has a determinant that is just the lone entry.  In this section, we show two different approaches that could be taken as the definition of a determinant, providing more insight on the nature of this enigmatic function.</p>
+
+        <p>THIS SECTION IS IN-PROGRESS</p>
+
+    </introduction>
+
+    <subsection>
+        <title>Permutations and Determinants</title>
+
+        <p>A <term>permutation</term> is an injective and surjective (<q>one-to-one</q> and <q>onto</q>) function from a finite set to itself.  The permutations we will be interested in presently are permutations of the row or column indices of an <m>n\times n</m> matrix, <m>\set{1,\,2,\,3\,\dots,\,n}</m>.  Informally, think of a permutation as a <q>rearrangement</q>, much as you might think of the verb <q>permute</q> to mean the same thing.  There are <m>n!</m> possible permutations of an <m>n</m>-element set, and the complete set of all such permutations is denoted <m>S_n</m>.</p>
+
+        <p>Any permutation of set can be achieved by a sequence of interchanges of two elements of the set.  A simple version of the Bubble Sort algorithm might convince you of this.  Begin with the elements of the set in their natural order.  Pass through the set examining adjacent elements.  If two adjacent elements are not in the relative order they appear in the permuted version of the list (the list of images of the function), then interchange them.  At the conclusion of the pass, go back to the start of thodoe list and make another pass.  Keep making passes through the list, until a pass makes no interchanges.  Then the list is in the desired order.</p>
+
+        <todo>Finish introduction to permutations for determinants</todo>
+    </subsection>
+
+    <todo>Derive permutation version of determinants from properties, until get permuted identity matrices, see research notebook ~2014/04/10</todo>
+
+    <todo>"Volumes" of parallelograms in 2D to motivate upcoming axioms, see course notes, and Ajit's supervisor's book</todo>
+
+    <todo>Axiomatic definition of determinant, derive remainder of properties, follow Curtis 3e</todo>
+
+</section>

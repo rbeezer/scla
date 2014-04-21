@@ -13,5 +13,6 @@
     <p>In this chapter we collect a variety of useful topics that are independent of much of trhe other material, though not exclusively so.</p>
     
     <xi:include href="./vandermonde.xml" />
+    <xi:include href="./determinants.xml" />
     
 </chapter>
