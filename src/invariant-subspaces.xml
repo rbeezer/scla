@@ -48,7 +48,7 @@
                 <mrow>&amp;=(-b_1-b_2)\vect{x}_1+(b_1-3b_2)\vect{x}_2\in X</mrow>
             </md> So, by <acroref type="definition" acro="IS" />, <m>X</m> is an invariant subspace of <m>\complex{4}</m> relative to <m>T</m>.</p>
 
-            <p>There is a bit of magic in each of these verifications where the two outputs of <m>T</m> happen to equal linear combinations of the two inputs.  But this is the essential nature of an invariant subspace.  We'll have a peek under the hood later in Example<nbsp /><xref="example-generalized-eigenspace-dimension-4" />, and it will not look so magical after all.</p>
+            <p>There is a bit of magic in each of these verifications where the two outputs of <m>T</m> happen to equal linear combinations of the two inputs.  But this is the essential nature of an invariant subspace.  We'll have a peek under the hood later in Example<nbsp /><xref ref="example-generalized-eigenspace-dimension-4" />, and it will not look so magical after all.</p>
 
             <p>Verify that <m>B=\set{\vect{w}_1,\,\vect{w}_2,\,\vect{x}_1,\,\vect{x}_2}</m> is linearly independent, and hence a basis of <m>\complex{4}</m>.  Splitting this basis in half, Theorem<nbsp /><xref ref="theorem-direct-sum-split-basis" /> tells us that <m>\complex{4}=W\ds X</m>.  To see exactly why a decomposition of a vector space into a direct sum of invariant subspaces might be interesting work Exercise<nbsp /><xref ref="exercise-block-matrix-representation" /> now.</p> 
         </example>
