@@ -120,16 +120,13 @@
     <subsection xml:id="subsection-least-squares-computations">
         <title>Computing Least-Squares Solutions</title>
 
-        <p>In Exercise<nbsp /><xref ref="exercise-three-parameter-linear-regression" /> we suggest formulating general expressions for least-squares estimates of three parameters of a model.  This begins to get a bit absurd when you invert a matrix larger than size <m>2</m>.  Instead it makes sense to formulate from the data the matrix <m>\adjoint{A}A</m> and the vector <m>\adjoint{A}\vect{b}</m>, and then proceed to a numerical solution.  As <m>\adjoint{A}A</m> is a Hermitian positive definite matrix (<xref provisional="theorem/lemma on positive definite" />, it can be decomposed into a Cholesky factorization twice as fast as we can decompose an arbitrary matrix into an LU factorization <xref provisional="cost to form Cholesky" />.  The Cholesky factorization allows a round of forward-solving followed by a round of back-solving to find a solution to the normal equations.</p>
+        <p>In Exercise<nbsp /><xref ref="exercise-three-parameter-linear-regression" /> we suggest formulating general expressions for least-squares estimates of three parameters of a model.  This begins to get a bit absurd when you invert a matrix larger than size <m>2</m>.  Instead it makes sense to formulate from the data the matrix <m>\adjoint{A}A</m> and the vector <m>\adjoint{A}\vect{b}</m>, and then proceed to a numerical solution.  As <m>\adjoint{A}A</m> is a Hermitian positive definite matrix (<xref ref="theorem-matrix-adjoint-positive-definite" />, it can be decomposed into a Cholesky factorization twice as fast as we can decompose an arbitrary matrix into an LU factorization <xref provisional="cost to form Cholesky" />.  The Cholesky factorization allows a round of forward-solving followed by a round of back-solving to find a solution to the normal equations.</p>
 
-        <p>But it gets better.  Suppose <m>A</m> has rank <m>n</m> and we have a thin QR decomposition of <m>A</m>, <m>A=QR</m> where <m>Q</m> has orthogonal columns and <m>R</m> is upper triangular with positive diagonal entries.  Notice in particular that <m>R</m> is invertible.  Then<md>
+        <p>But it gets better.  Consider solving the system <m>A\vect{x}=\vect{b}</m>.  Suppose <m>A</m> has rank <m>n</m> and we have a thin QR decomposition of <m>A</m>, <m>A=QR</m> where <m>Q</m> has orthogonal columns and <m>R</m> is upper triangular with positive diagonal entries.  Notice in particular that <m>R</m> is invertible.  Then<md>
         <mrow>\adjoint{Q}\vect{b}
-              &amp;=\inverse{\left(\adjoint{R}\right)}\adjoint{R}\adjoint{Q}\vect{b}</mrow>
-        <mrow>&amp;=\inverse{\left(\adjoint{R}\right)}\adjoint{A}\vect{b}</mrow>
-        <mrow>&amp;=\inverse{\left(\adjoint{R}\right)}\adjoint{A}A\vect{x}</mrow>
-        <mrow>&amp;=\inverse{\left(\adjoint{R}\right)}\adjoint{R}\adjoint{Q}A\vect{x}</mrow>
-        <mrow>&amp;=\adjoint{Q}QR\vect{x}</mrow>
-        <mrow>&amp;=R\vect{x}</mrow>
+              &amp;=\inverse{\left(\adjoint{R}\right)}\adjoint{R}\adjoint{Q}\vect{b}=\inverse{\left(\adjoint{R}\right)}\adjoint{A}\vect{b}</mrow>
+        <mrow>&amp;=\inverse{\left(\adjoint{R}\right)}\adjoint{A}A\vect{x}=\inverse{\left(\adjoint{R}\right)}\adjoint{R}\adjoint{Q}A\vect{x}</mrow>
+        <mrow>&amp;=\adjoint{Q}QR\vect{x}=R\vect{x}</mrow>
         </md>  This system has an upper triangular coefficient matrix, so one round of back-solving will provide a solution for <m>\vect{x}</m>.  And the product <m>\adjoint{Q}\vect{b}</m> will be reasonably well-behaved due to the orthogonal columns of <m>Q</m>.  Notice that in the case of a square matrix <m>A</m>, the matrix <m>Q</m> will be invertible, and the same system that in general leads to the least-squares solution will also provide the exact solution in this special case.</p>
 
     </subsection>

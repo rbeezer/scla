@@ -26,7 +26,7 @@
 
 	<p>Our first theorem in this section gives us an easy way to build positive semi-definite matrices.</p>
 
-	<theorem acro="CPSM" index="positive semi-definite!creating"> <!-- was CPSM -->
+	<theorem xml:id="theorem-matrix-adjoint-positive-definite"> <!-- was CPSM -->
 		<title>Creating Positive Semi-Definite Matrices</title>
 		<statement>
 			<p>Suppose that <m>A</m> is any <m>m\times n</m> matrix.  Then the matrices <m>\adjoint{A}A</m> and <m>A\adjoint{A}</m> are positive semi-definite matrices.</p>
