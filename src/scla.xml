@@ -22,6 +22,8 @@
         <xi:include href="./applications.xml" />
         <xi:include href="./topics.xml" />
         <xi:include href="./gfdl-mathbook.xml" />
+
+        <todo>Cruise Math 420, Spring 2014 exercise list for new problems</todo>
    </book>
 
 </mathbook>

@@ -264,6 +264,8 @@
             </md> This matches the previous computation.  Notice how the <q>action</q> of <m>\restrict{T}{W}</m> is accomplished by a <m>3\times 3</m> matrix multiplying a column vector of size 3.</p>
 
             <p>If you would like more practice with these sorts of computations, mimic the above using the other eigenvalue of <m>T</m>, which is <m>\lambda=-2</m>.  The generalized eigenspace has dimension 2, so the matrix representation of the restriction to the generalized eigenspace will be a <m>2\times 2</m> matrix.</p>
+
+            <todo>Make exercise of suggestion for generalized eigenspace with other eigenvalue</todo>
         </example>
 
         <p>Our next two examples compute a complete set of generalized eigenspaces for a linear transformation.</p>

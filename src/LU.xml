@@ -380,4 +380,7 @@
 
     </subsection>
 
+    <todo>Mention LU uses only field operations</todo>
+    <todo>Perhaps the LDV decomposition (units on L and V, D diagonal)</todo>
+
 </section>

@@ -21,8 +21,8 @@
 
 	<p>For a definition of <term>positive definite</term> replace the inequality in the definition with a strict inequality, and exclude the zero vector from the vectors <m>\vect{x}</m> required to meet the condition.  Similar variations allow definitions of <term>negative definite</term> and <term>negative semi-definite</term>.</p>
 
-	<todo>Characterization of positive semi-definite with positive determinants? --></todo>
-	<todo>Example:  Build positive semidefinite as a quadratic form, massage to get factorization into positive stuff</todo>
+	<todo>Characterization of positive semi-definite with positive determinants?</todo>
+	<todo>Example:  Build positive semidefinite as a quadratic form, massage to get factorization into positive stuff, begin with A*A-adjoint and decompose</todo>
 
 	<p>Our first theorem in this section gives us an easy way to build positive semi-definite matrices.</p>
 

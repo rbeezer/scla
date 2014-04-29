@@ -19,6 +19,8 @@
 
         <p>Our main purpose in this section is to find a basis so that a nilpotent linear transformation will have a pleasing, nearly-diagonal matrix representation.  Of course, we will not have a definition for <q>pleasing,</q> nor for <q>nearly-diagonal.</q>  But the short answer is that our preferred matrix representation will be built up from Jordan blocks, <m>\jordan{k}{0}</m>.  Here's the theorem.  You will find Example<nbsp /><xref provisional="example-canonical-form-nilpotent-size-6-index-4" />, just following,  helpful as you study this proof, since it uses the same notation, and is large enough to (barely) illustrate the full generality of the theorem.</p>
 
+        <todo>Corollary: s_i decrease (?)</todo>
+
         <theorem xml:id="theorem-canonical-form-nilpotent-linear-transformation"> <!-- was CFNLT -->
             <title>Canonical Form for Nilpotent Linear Transformations</title>
             <statement>

@@ -28,6 +28,8 @@
             </statement>
 
             <proof>Coming soon.  Algorithm below contains the essential ideas.  Uniqueness is an exercise.</proof>
+
+            <todo>Need proof of existence of Cholesky decomposition</todo>
         </theorem>
 
         <exercise xml:id="exercise-cholesky-unique">

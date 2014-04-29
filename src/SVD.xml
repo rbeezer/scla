@@ -125,6 +125,8 @@
                     <mrow>&amp;=\matrixentry{U}{ij}\matrixentry{S}{jj}=\sum_{k=1}^{m}\matrixentry{U}{ik}\matrixentry{S}{kj}=\matrixentry{US}{ij}</mrow>
                 </md></p>
 
+                <todo>SVD proof may need more care with zero columns?</todo>
+
                 <p>So by <acroref type="theorem" acro="ME" />, <m>AV</m> and <m>US</m> are equal matrices, <m>AV=US</m>.  <m>V</m> is unitary, so applying its inverse yields the decomposition <me>A=US\adjoint{V}</me></p>
             </proof>
         </theorem>
@@ -175,6 +177,8 @@
         </theorem>
 
         <p>Be sure to recognize <m>\vect{x}_i\adjoint{\vect{y}_i}</m> as the outer product, an <m>m\times n</m> matrix of rank one (every row is a multiple of every other row, and similarly for columns).  See Subsection<nbsp /><xref ref="subsection-SVD-image-compression" /> for a good example of the utility of this result.</p>
+
+        <todo>Properties of SVD needs range and kernel theorem (as spans of x, y vectors)</todo>
 
     </subsection>
 

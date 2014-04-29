@@ -9,6 +9,8 @@
 
 <chapter xml:id="chapter-applications" filebase="applications" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Applications</title>
+
+    <todo>Reformat: Secret sharing</todo>
     
     <xi:include href="./least-squares.xml" />
     <xi:include href="./curve-fitting.xml" />

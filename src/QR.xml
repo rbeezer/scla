@@ -47,6 +47,8 @@
             </proof>
         </theorem>
 
+        <todo>Revisit thick/thin, reduced nomenclature</todo>
+
         <p>The decomposition of Theorem<nbsp /><xref ref="theorem-thin-QR" /> is referred to as a <term>thin</term> decomposition, while the decomposition of Theorem<nbsp /><xref ref="theorem-full-QR" /> is referred to as a <term>full</term> decomposition.</p>
 
         <p>What happens if <m>A</m> does not have full rank?  Then there will be some relation of linear dependence on the columns of the matrix.  In the course of working the Gram-Schmidt procedure, as in the construction given for the proof of Theorem<nbsp /><xref ref="theorem-thin-QR" />, this will be discovered when the newly created vector is the zero vector.  No matter, we simply add any vector as the next column of <m>Q</m> which will preserve the columns as an orthonormal set.  This vector can be determined in a fashion entirely similar to the device used in the proof of Theorem<nbsp /><xref ref="theorem-full-QR" />.  However, this nearly arbitrary choice outside the span of the current set of columns, requires that we add a row of zeros in <m>R</m> and lose our positive diagonal entry.  The ultimate price for this is that certain uniqueness results <xref provisional="uniqueness of QR" /> no longer hold.</p>
