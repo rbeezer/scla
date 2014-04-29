@@ -164,16 +164,17 @@
                 <p>Now assume we repeat this procedure until we decompose <m>\krn{T^{2}}</m> into subspaces <m>\krn{T}</m> and <m>Z_2</m>.  Finally, decompose <m>\krn{T}</m> into subspaces <m>\krn{T^0}=\krn{I_n}=\set{\zerovector}</m> and <m>Z_1</m>, so that we recognize the vectors <m>\vect{z}_{1,j}</m>, <m>1\leq j\leq s_1=n_1</m> as elements of <m>\krn{T}</m>.  The set <me>B=B_1\cup B_2\cup B_3\cup\cdots\cup B_p=\setparts{\vect{z}_{i,j}}{1\leq i\leq p,\ 1\leq j\leq s_i}</me> is linearly independent by Theorem<nbsp /><xref ref="theorem-direct-sums-linear-independence" /> and has size <me>\sum_{i=1}^{p}s_i=\sum_{i=1}^{p}n_i-n_{i-1}=n_p-n_0=\dimension{V}</me>  So <m>B</m> is a basis of <m>V</m>.</p>
 
                 <p>We desire a matrix representation of <m>T</m> relative to <m>B</m>, but first we will reorder the elements of <m>B</m>.  The following display lists the elements of <m>B</m> in the desired order, when read across the rows left-to-right in the usual way.  Notice that we established the existence of these vectors column-by-column, and beginning on the right.<md>
-                    <mrow><![CDATA[&\vect{z}_{1,1}    &&\vect{z}_{2,1}    &&\vect{z}_{3,1}    &&\cdots&&\vect{z}_{p,1}  ]]></mrow>
-                    <mrow><![CDATA[&\vect{z}_{1,2}    &&\vect{z}_{2,2}    &&\vect{z}_{3,2}    &&\cdots&&\vect{z}_{p,2}  ]]></mrow>
-                    <mrow><![CDATA[&                  &&\vdots            &&                  &&\vdots&&]]></mrow>
+                    <mrow><![CDATA[&\krn{T}           &&\krn{T^2}         &&\krn{T^3}         &&\cdots&&\krn{T^p}]]></mrow>
+                    <mrow><![CDATA[&\vect{z}_{1,1}    &&\vect{z}_{2,1}    &&\vect{z}_{3,1}    &&\cdots&&\vect{z}_{p,1}]]></mrow>
+                    <mrow><![CDATA[&\vect{z}_{1,2}    &&\vect{z}_{2,2}    &&\vect{z}_{3,2}    &&\cdots&&\vect{z}_{p,2}]]></mrow>
+                    <mrow><![CDATA[&\vdots            &&\vdots            &&\vdots            &&\vdots&&\vdots]]></mrow>
                     <mrow><![CDATA[&\vect{z}_{1,s_p}  &&\vect{z}_{2,s_p}  &&\vect{z}_{3,s_p}  &&\cdots&&\vect{z}_{p,s_p}]]></mrow>
                     <mrow><![CDATA[&\vect{z}_{1,s_p+1}&&\vect{z}_{2,s_p+1}&&\vect{z}_{3,s_p+1}&&\cdots&&]]></mrow>
-                    <mrow><![CDATA[&                  &&\vdots            &&                  &&\vdots&&]]></mrow>
+                    <mrow><![CDATA[&\vdots            &&\vdots            &&\vdots            &&\vdots&&]]></mrow>
                     <mrow><![CDATA[&\vect{z}_{1,s_3}  &&\vect{z}_{2,s_3}  &&\vect{z}_{3,s_3}  &&      &&]]></mrow>
-                    <mrow><![CDATA[&                  &&\vdots            &&                  &&      &&]]></mrow>
+                    <mrow><![CDATA[&\vdots            &&\vdots            &&                  &&      &&]]></mrow>
                     <mrow><![CDATA[&\vect{z}_{1,s_2}  &&\vect{z}_{2,s_2}  &&                  &&      &&]]></mrow>
-                    <mrow><![CDATA[&                  &&\vdots            &&                  &&      &&]]></mrow>
+                    <mrow><![CDATA[&\vdots            &&                  &&                  &&      &&]]></mrow>
                     <mrow><![CDATA[&\vect{z}_{1,s_1}  &&                  &&                  &&      && ]]></mrow> 
                 </md> It is difficult to layout this table with the notation we have been using, but it would not be especially useful to invent some notation to overcome the difficulty. (One approach would be to define something like the inverse of the nonincreasing function, <m>i\rightarrow s_i</m>.)  Do notice that there are <m>s_1=n_1</m> rows, and <m>p</m> columns.  Column <m>i</m> is the basis <m>B_i</m>.  The vectors in the first column are elements of <m>\krn{T}</m>.  Each row is the same length, or shorter, than the one above it.  If we apply <m>T</m> to any vector in the table, other than those in the first column, the output is the preceding vector in the row.</p>
 
