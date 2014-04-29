@@ -72,7 +72,7 @@
             }</me>  If there were degrees of singularity, we might say this matrix was <em>very</em> singular, since zero is an eigenvalue with maximum algebraic multiplicity (<acroref type="theorem" acro="SMZE" />, <acroref type="theorem" acro="ME" />).  Notice too that <m>A</m> is <q>far</q> from being diagonalizable (<acroref type="theorem" acro="DMFE" />).</p>
         </example>
 
-        <p>With the existence of nontrivial nilpotent matrivces settled, let's look at another example.</p>
+        <p>With the existence of nontrivial nilpotent matrices settled, let's look at another example.</p>
 
         <example xml:id="example-nilpotent-matrix-size-6-index-2"> <!-- was NM62 -->
             <title>Nilpotent Matrix, Size 6, Index 2</title>
@@ -121,7 +121,7 @@
             </proof>
         </theorem>
 
-        <p>Paraphrasing, all of the eigenvalues of a nilpotent linear transformation are zero.  So in particular, the characteristic polynomial of a nilpotent linear transformation, <m>T</m>, on a vector space of dimension <m>n</m>, is simply <m>\charpoly{T}{x}=x^n</m>.</p>
+        <p>Paraphrasing, all of the eigenvalues of a nilpotent linear transformation are zero.  So in particular, the characteristic polynomial of a nilpotent linear transformation, <m>T</m>, on a vector space of dimension <m>n</m>, is simply <m>\charpoly{T}{x}=(x-0)^n=x^n</m>.</p>
 
         <todo>Later get the converse from JCF, Cayley-Hamilton, and reference it here</todo>
 
@@ -136,7 +136,7 @@
             <proof>
                 <p>(<implyreverse />) We start with the easy direction.  Let <m>n=\dimension{V}</m>.  The linear transformation <m>\ltdefn{Z}{V}{V}</m> defined by <m>\lteval{Z}{\vect{v}}=\zerovector</m> for all <m>\vect{v}\in V</m> is nilpotent of index <m>p=1</m> and a matrix representation relative to any basis of <m>V</m> is the <m>n\times n</m> zero matrix, <m>\zeromatrix</m>.  Quite obviously, the zero matrix is a diagonal matrix (<acroref type="definition" acro="DIM" />) and hence <m>Z</m> is diagonalizable (<acroref type="definition" acro="DZM" />).</p>
 
-                <p>(<implyforward />) Assume now that <m>T</m> is diagonalizable, so <m>\geomult{T}{\lambda}=\algmult{T}{\lambda}</m> for every eigenvalue <m>\lambda</m> (<acroref type="theorem" acro="DMFE" />).  By Theorem<nbsp /><xref ref="theorem-nilpotent-linear-transformation-eigenvalues" />, <m>T</m> has only one eigenvalue (zero), which therefore must have algebraic multiplicity <m>n</m>  (<acroref type="theorem" acro="NEM" />).  So the geometric multiplicity of zero will be <m>n</m> as well, <m>\geomult{T}{0}=n</m>.</p>
+                <p>(<imply />) Assume now that <m>T</m> is diagonalizable, so <m>\geomult{T}{\lambda}=\algmult{T}{\lambda}</m> for every eigenvalue <m>\lambda</m> (<acroref type="theorem" acro="DMFE" />).  By Theorem<nbsp /><xref ref="theorem-nilpotent-linear-transformation-eigenvalues" />, <m>T</m> has only one eigenvalue (zero), which therefore must have algebraic multiplicity <m>n</m>  (<acroref type="theorem" acro="NEM" />).  So the geometric multiplicity of zero will be <m>n</m> as well, <m>\geomult{T}{0}=n</m>.</p>
 
                 <p>Let <m>B</m> be a basis for the eigenspace <m>\eigenspace{T}{0}</m>.  Then <m>B</m> is a linearly independent subset of <m>V</m> of size <m>n</m>, and thus a basis of <m>V</m>.  For any <m>\vect{x}\in B</m> we have <me>\lteval{T}{\vect{x}}=0\vect{x}=\zerovector</me> So <m>T</m> is identically zero on a basis for <m>B</m>, and since the action of a linear transformation on a basis determines all of the values of the linear transformation (<acroref type="theorem" acro="LTDB" />), it is easy to see that <m>\lteval{T}{\vect{v}}=\zerovector</m> for every <m>\vect{v}\in V</m>.</p>
             </proof>
@@ -241,7 +241,7 @@
                 }}</mrow>
             </md></p>
 
-            <p>With the exception of some convenience scaling of the basis vectors in <m>\nsp{A^2}</m> these are exactly the basis vectors described in <acroref type="theorem" acro="BNS" />.  We can see that the dimension of <m>\nsp{A}</m> equals the geometric multiplicity of the zero eigenvalue.  Why is this not an accident?  We can see the dimensions of the kernels consistently increasing, and we can see that <m>\nsp{A^4}=\complex{6}</m>.  But  Theorem<nbsp /><xref ref="theorem-nilpotent-linear-transformation-kernels-of-powers" /> says a little more.  Each successive kernel should be a superset of the previous one.  We ought to be able to begin with a basis of <m>\nsp{A}</m> and <em>extend</em>em> it to a basis of <m>\nsp{A^2}</m>.  Then we should be able to extend a basis of  <m>\nsp{A^2}</m> into a basis of <m>\nsp{A^3}</m>, all with repeated applications of <acroref type="theorem" acro="ELIS" />.  Verify the following, <md>
+            <p>With the exception of some convenience scaling of the basis vectors in <m>\nsp{A^2}</m> these are exactly the basis vectors described in <acroref type="theorem" acro="BNS" />.  We can see that the dimension of <m>\nsp{A}</m> equals the geometric multiplicity of the zero eigenvalue.  Why is this not an accident?  We can see the dimensions of the kernels consistently increasing, and we can see that <m>\nsp{A^4}=\complex{6}</m>.  But  Theorem<nbsp /><xref ref="theorem-nilpotent-linear-transformation-kernels-of-powers" /> says a little more.  Each successive kernel should be a superset of the previous one.  We ought to be able to begin with a basis of <m>\nsp{A}</m> and <em>extend</em> it to a basis of <m>\nsp{A^2}</m>.  Then we should be able to extend a basis of  <m>\nsp{A^2}</m> into a basis of <m>\nsp{A^3}</m>, all with repeated applications of <acroref type="theorem" acro="ELIS" />.  Verify the following, <md>
                 <mrow>\nsp{A}&amp;=
                 \spn{\set{
                 \colvector{2 \\ 2 \\ 5 \\ 2 \\ 1 \\ 0},\,
@@ -424,7 +424,7 @@
     <subsection xml:id="subsection-jordan-blocks">
         <title>Jordan Blocks</title>
 
-        <p>We conclude this section about nilpotent linear transformations with an infinte family of nilpotent matrices and a doubly-infinite family of nearly nilpotent matrices.</p>
+        <p>We conclude this section about nilpotent linear transformations with an infinite family of nilpotent matrices and a doubly-infinite family of nearly nilpotent matrices.</p>
 
         <definition xml:id="definition-jordan-block"> <!-- was JB -->
             <title>Jordan Block</title>
