@@ -125,7 +125,7 @@
                     <mrow>&amp;=\matrixentry{U}{ij}\matrixentry{S}{jj}=\sum_{k=1}^{m}\matrixentry{U}{ik}\matrixentry{S}{kj}=\matrixentry{US}{ij}</mrow>
                 </md></p>
 
-                <p>So by <acroref type="theorem" acro="ME" />, <m>AV</m> and <m>US</m> are equal matrices, <m>AV=US</m>.  <m>V</m> is unitary, so applying its inverse yields the decomposition <m>A=US\adjoint{V}</m>.</p>
+                <p>So by <acroref type="theorem" acro="ME" />, <m>AV</m> and <m>US</m> are equal matrices, <m>AV=US</m>.  <m>V</m> is unitary, so applying its inverse yields the decomposition <me>A=US\adjoint{V}</me></p>
             </proof>
         </theorem>
 
@@ -145,7 +145,7 @@
             <li><m>U</m> will convert the standard basis vectors (the usual axes) to the new orthonormal basis given by the <m>\vect{y}_i</m>.  The twice-transformed version of <m>\vect{w}</m> will have its length preserved, but change position, though its position relative to the axes is unchanged.</li>
         </ol>  So, <em>every</em> matrix is a rotation, a stretch, and a rotation.  That is a simple, but accurate, understanding of what the SVD tells us.</p>
 
-        <p>Here is another look at the same idea.  Consider the columns of <m>U</m> and <m>V</m> again as the axes of new coordinate systems.  Then their adjoints are their inverses and each take the new axes to the standard unit vectors (columns of the identity matrix), the axes of the usual coordinate system.  Consider an input vector <m>\vect{w}</m>, and its output <m>\vect{y}=A\vect{w}</m>, relative to these new bases and convert each to the standard coordinate system, <m>\vect{w}\prime=\adjoint{V}\vect{w}</m> and <m>\vect{y}\prime=\adjoint{U}\vect{y}</m>.  Then <me>\vect{y}\prime=\adjoint{U}\vect{y}=\adjoint{U}A\vect{y}=\adjoint{U}US\adjoint{V}\vect{y}=S\vect{y}\prime</me>
+        <p>Here is another look at the same idea.  Consider the columns of <m>U</m> and <m>V</m> again as the axes of new coordinate systems.  Then their adjoints are their inverses and each take the new axes to the standard unit vectors (columns of the identity matrix), the axes of the usual coordinate system.  Consider an input vector <m>\vect{w}</m>, and its output <m>\vect{y}=A\vect{w}</m>, relative to these new bases and convert each to the standard coordinate system, <m>\vect{w}^\prime=\adjoint{V}\vect{w}</m> and <m>\vect{y}^\prime=\adjoint{U}\vect{y}</m>.  Then <me>\vect{y}^\prime=\adjoint{U}\vect{y}=\adjoint{U}A\vect{w}=\adjoint{U}US\adjoint{V}\vect{w}=S\vect{w}^\prime</me>
         In the <q>primed</q> spaces, the action of <m>A</m> is very simple.  Or in other words, every linear transformation has a matrix representation that is basically diagonal, if only we pick the right bases for the domain and codomain.</p>
 
     </subsection>
