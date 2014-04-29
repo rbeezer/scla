@@ -15,32 +15,19 @@
 
         <p>As is our habit, we begin with an example that demonstrates the existence of invariant subspaces, while leaving other questions unanswered for the moment.  We will return later to understand how this example was constructed, but for now, just understand how we check the existence of the invariant subspaces.</p>
 
-    <example xml:id="example-two-invariant-subspaces">  <!-- was TIS -->
-        <title>Two invariant subspaces</title>
+        <example xml:id="example-two-invariant-subspaces">  <!-- was TIS -->
+            <title>Two invariant subspaces</title>
 
-        <p>Consider the linear transformation <m>\ltdefn{T}{\complex{4}}{\complex{4}}</m> defined by <m>\lteval{T}{\vect{x}}=A\vect{x}</m> where <m>A</m> is given by
-        <me>A=\begin{bmatrix}
-        <![CDATA[ -8 & 6 & -15 & 9 \\
-        -8 & 14 & -10 & 18 \\
-        1 & 1 & 3 & 0 \\
-        3 & -8 & 2 & -11]]>
-        \end{bmatrix}</me>
-        Define (with zero motivation),<md>
-        <mrow>\vect{w_1}&amp;=\colvector{-7\\-2\\3\\0}
-        &amp;
-        \vect{w_2}&amp;=\colvector{-1\\-2\\0\\1}</mrow>
-        </md> and set <m>W=\spn{\set{\vect{w}_1,\,\vect{w}_2}}</m>.  We verify that <m>W</m> is an invariant subspace of <m>\complex{4}</m> with respect to <m>T</m>.  By the definition of <m>W</m>, any vector chosen from <m>W</m> can be written as a linear combination of <m>\vect{w}_1</m> and <m>\vect{w}_2</m>.  Suppose that <m>\vect{w}\in W</m>, and then check the details of the following verification, <md>
-            <mrow>\lteval{T}{\vect{w}}&amp;=\lteval{T}{a_1\vect{w}_1+a_2\vect{w}_2}&amp;&amp;<acroref type="definition" acro="SS" /></mrow>
-            <mrow>&amp;=a_1\lteval{T}{\vect{w}_1}+a_2\lteval{T}{\vect{w}_2}&amp;&amp;<acroref type="theorem" acro="LTLC" /></mrow>
-            <mrow>&amp;=a_1\colvector{-1\\-2\\0\\1}+a_2\colvector{5\\-2\\-3\\2}</mrow>
-            <mrow>&amp;=a_1\vect{w}_2+a_2\left((-1)\vect{w}_1+2\vect{w}_2\right)</mrow>
-            <mrow>&amp;=(-a_2)\vect{w}_1+(a_1+2a_2)\vect{w}_2\in W</mrow>
-        </md> So, by <acroref type="definition" acro="IS" />, <m>W</m> is an invariant subspace of <m>\complex{4}</m> relative to <m>T</m>.</p>
-
-        <p>In an entirely similar manner we construct another invariant subspace of <m>T</m>.With zero motivation, define <md>
-            <mrow>\vect{x_1}&amp;=\colvector{-3\\-1\\1\\0}
-            &amp;
-            \vect{w_2}&amp;=\colvector{-1\\-2\\0\\1}</mrow>
+            <p>Consider the linear transformation <m>\ltdefn{T}{\complex{4}}{\complex{4}}</m> defined by <m>\lteval{T}{\vect{x}}=A\vect{x}</m> where <m>A</m> is given by
+            <me>A=\begin{bmatrix}
+            <![CDATA[ -8 & 6 & -15 & 9 \\
+            -8 & 14 & -10 & 18 \\
+            1 & 1 & 3 & 0 \\
+            3 & -8 & 2 & -11]]>
+            \end{bmatrix}</me> Define (with zero motivation),<md>
+                <mrow>\vect{w_1}&amp;=\colvector{-7\\-2\\3\\0}
+                &amp;
+                \vect{w_2}&amp;=\colvector{-1\\-2\\0\\1}</mrow>
             </md> and set <m>W=\spn{\set{\vect{w}_1,\,\vect{w}_2}}</m>.  We verify that <m>W</m> is an invariant subspace of <m>\complex{4}</m> with respect to <m>T</m>.  By the definition of <m>W</m>, any vector chosen from <m>W</m> can be written as a linear combination of <m>\vect{w}_1</m> and <m>\vect{w}_2</m>.  Suppose that <m>\vect{w}\in W</m>, and then check the details of the following verification, <md>
                 <mrow>\lteval{T}{\vect{w}}&amp;=\lteval{T}{a_1\vect{w}_1+a_2\vect{w}_2}&amp;&amp;<acroref type="definition" acro="SS" /></mrow>
                 <mrow>&amp;=a_1\lteval{T}{\vect{w}_1}+a_2\lteval{T}{\vect{w}_2}&amp;&amp;<acroref type="theorem" acro="LTLC" /></mrow>
@@ -61,7 +48,7 @@
                 <mrow>&amp;=(-b_1-b_2)\vect{x}_1+(b_1-3b_2)\vect{x}_2\in X</mrow>
             </md> So, by <acroref type="definition" acro="IS" />, <m>X</m> is an invariant subspace of <m>\complex{4}</m> relative to <m>T</m>.</p>
 
-            <p>There is a bit of magic in each of these verifications where the two outputs of <m>T</m> happen to equal linear combinations of the two inputs.  But this is the essential nature of an invariant subspace.  We'll have a peek under the hood later, and it won't look so magical after all.</p>
+            <p>There is a bit of magic in each of these verifications where the two outputs of <m>T</m> happen to equal linear combinations of the two inputs.  But this is the essential nature of an invariant subspace.  We'll have a peek under the hood later in Example<nbsp /><xref="example-generalized-eigenspace-dimension-4" />, and it will not look so magical after all.</p>
 
             <p>Verify that <m>B=\set{\vect{w}_1,\,\vect{w}_2,\,\vect{x}_1,\,\vect{x}_2}</m> is linearly independent, and hence a basis of <m>\complex{4}</m>.  Splitting this basis in half, Theorem<nbsp /><xref ref="theorem-direct-sum-split-basis" /> tells us that <m>\complex{4}=W\ds X</m>.  To see exactly why a decomposition of a vector space into a direct sum of invariant subspaces might be interesting work Exercise<nbsp /><xref ref="exercise-block-matrix-representation" /> now.</p> 
         </example>

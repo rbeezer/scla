@@ -17,7 +17,7 @@
     <subsection xml:id="subsection-kernels-of-powers">
         <title>Kernels of Powers of Linear Transformations</title>
 
-        <p>With Section<nbsp /><xref provisional="section-jodan-canonical-form" /> as our goal, we will become increasingly interested in kernels of powers of linear transformations, which will go a long way to helping us understand the structure of a linear transformation, or its matrix representation.  We need the next theorem to help us understand generalized eigenspaces, though its specialization in Theorem<nbsp /><xref provisional="theorem-about-powers-nilpotent" /> to nilpotent linear transformations will be the real workhorse.</p>
+        <p>With Section<nbsp /><xref provisional="section-jordan-canonical-form" /> as our goal, we will become increasingly interested in kernels of powers of linear transformations, which will go a long way to helping us understand the structure of a linear transformation, or its matrix representation.  We need the next theorem to help us understand generalized eigenspaces, though its specialization in Theorem<nbsp /><xref provisional="theorem-about-powers-nilpotent" /> to nilpotent linear transformations will be the real workhorse.</p>
 
         <theorem xml:id="theorem-kernels-of-powers"> <!-- was KPLT -->
             <title>Kernels of Powers of Linear Transformations</title>
@@ -181,7 +181,7 @@
     <todo>Cites below of powers of kernels, maybe to invariant subspaces, maybe here? (multiple)</todo>
 
             <proof>
-                <p>To establish the set equality, first suppose that <m>\vect{x}\in\geneigenspace{T}{\lambda}</m>.  Then there is an integer <m>k</m> such that <m>\lteval{\left(T-\lambda I_V\right)^k}{\vect{x}}=\zerovector</m>.  This is equivalent to the statement that <m>\vect{x}\in\krn{\left(T-\lambda I_V\right)^k}</m>.  No matter what the value of <m>k</m> is, <xref provisional="theorem about nested powers of kernels"/> gives <me>\vect{x}\in\krn{\left(T-\lambda I_V\right)^k}\subseteq\krn{\left(T-\lambda I_V\right)^n}.</me> So, <m>\geneigenspace{T}{\lambda}\subseteq\krn{\left(T-\lambda I_V\right)^n}</m>.</p>
+                <p>To establish the set equality, first suppose that <m>\vect{x}\in\geneigenspace{T}{\lambda}</m>.  Then there is an integer <m>k</m> such that <m>\lteval{\left(T-\lambda I_V\right)^k}{\vect{x}}=\zerovector</m>.  This is equivalent to the statement that <m>\vect{x}\in\krn{\left(T-\lambda I_V\right)^k}</m>.  No matter what the value of <m>k</m> is, <xref ref="theorem-kernels-of-powers"/> gives <me>\vect{x}\in\krn{\left(T-\lambda I_V\right)^k}\subseteq\krn{\left(T-\lambda I_V\right)^n}.</me> So, <m>\geneigenspace{T}{\lambda}\subseteq\krn{\left(T-\lambda I_V\right)^n}</m>.</p>
 
                 <p>For the opposite inclusion, suppose <m>\vect{y}\in\krn{\left(T-\lambda I_V\right)^n}</m>.  Then <m>\lteval{\left(T-\lambda I_V\right)^n}{\vect{y}}=\zerovector</m>, so <m>\vect{y}\in\geneigenspace{T}{\lambda}</m> and thus <m>\krn{\left(T-\lambda I_V\right)^n}\subseteq\geneigenspace{T}{\lambda}</m>.  So we have the desired equality of sets.</p>
             </proof>
@@ -204,15 +204,16 @@
              11 & 14 & 8 & 13 & 18]]>
             \end{bmatrix}</me></p>
 
-            <p>One of the eigenvalues of <m>A</m> is <m>\lambda=2</m>, with geometric multiplicity <m>\geomult{T}{2}=1</m>, and algebraic multiplicity <m>\algmult{T}{2}=3</m>.  We get the generalized eigenspace according to Theorem<nbsp /><xref ref="theorem-generalized-eigenspace-kernel" />, <me>W=
-            \geneigenspace{T}{2}
-            =\krn{\left(T-2I_{\complex{5}}\right)^5}
-            =\spn{\set{
-            \colvector{-2\\1\\1\\0\\0},\,
-            \colvector{0\\-1\\0\\1\\0},\,
-            \colvector{-4\\2\\0\\0\\1}
-            }}
-            =\spn{\set{\vect{w}_1,\,\vect{w}_2,\,\vect{w}_3}}</me>  By Theorem<nbsp /><xref ref="theorem-generalized-eigenspace-invariant" />, we know <m>W</m> is invariant relative to <m>T</m>, so we can employ <acroref type="definition" acro="LTR" /> to form the restriction, <m>\ltdefn{\restrict{T}{W}}{W}{W}</m>.</p>
+            <p>One of the eigenvalues of <m>A</m> is <m>\lambda=2</m>, with geometric multiplicity <m>\geomult{T}{2}=1</m>, and algebraic multiplicity <m>\algmult{T}{2}=3</m>.  We get the generalized eigenspace according to Theorem<nbsp /><xref ref="theorem-generalized-eigenspace-kernel" />, <md>
+                <mrow>W&amp;=
+                \geneigenspace{T}{2}
+                =\krn{\left(T-2I_{\complex{5}}\right)^5}</mrow>
+                <mrow>&amp;=\spn{\set{
+                \colvector{-2\\1\\1\\0\\0},\,
+                \colvector{0\\-1\\0\\1\\0},\,
+                \colvector{-4\\2\\0\\0\\1}}}
+                =\spn{\set{\vect{w}_1,\,\vect{w}_2,\,\vect{w}_3}}</mrow> 
+            </md>  By Theorem<nbsp /><xref ref="theorem-generalized-eigenspace-invariant" />, we know <m>W</m> is invariant relative to <m>T</m>, so we can employ <acroref type="definition" acro="LTR" /> to form the restriction, <m>\ltdefn{\restrict{T}{W}}{W}{W}</m>.</p>
 
             <p>We will from the restriction of <m>T</m> to <m>W</m>, <m>\restrict{T}{W}</m>, since we will do this frequently in subsequent examples.  For a basis of <m>W</m> we will use <m>C=\set{\vect{w}_1,\,\vect{w}_2,\,\vect{w}_3}</m>.  Notice that <m>\dimension{W}=3</m>, so our matrix representation will be a square matrix of size 3.  Applying <acroref type="definition" acro="MR" />, we compute <md>
                 <mrow>\vectrep{C}{\lteval{T}{\vect{w}_1}}
@@ -308,7 +309,7 @@
                 <mrow>\geneigenspace{T}{1}&amp;=\spn{\set{
                 \colvector{-7\\-2\\3\\0},\,
                 \colvector{-1\\-2\\0\\1}}}</mrow>
-            </md> In Example<nbsp /><xref ref="example-two-invariant-subspaces" /> we concluded that these two invariant subspaces formed a direct sum of <m>\complex{4}</m>, only at that time, they were called <m>X</m> and <m>W</m>.  Now we can write <me>\complex{4}=\geneigenspace{T}{1}\ds\geneigenspace{T}{-2}</me>  This is no accident.   Notice that the dimension of each of these invariant subspaces is equal to the algebraic multiplicity of the associated eigenvalue.  Not an accident either. (See the upcoming Theorem<nbsp /><xref ref="theorem-generalized-eigenspace-decomposition" />.)</p>
+            </md> In Example<nbsp /><xref ref="example-two-invariant-subspaces" /> we concluded that these two invariant subspaces formed a direct sum of <m>\complex{4}</m>, only at that time, they were called <m>W</m> and <m>X</m>.  Now we can write <me>\complex{4}=\geneigenspace{T}{1}\ds\geneigenspace{T}{-2}</me>  This is no accident.   Notice that the dimension of each of these invariant subspaces is equal to the algebraic multiplicity of the associated eigenvalue.  Not an accident either. (See the upcoming Theorem<nbsp /><xref ref="theorem-generalized-eigenspace-decomposition" />.)</p>
         </example>
 
 
