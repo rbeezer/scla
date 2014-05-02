@@ -10,7 +10,7 @@
 <section xml:id="section-orthogonal-complements" filebase="orthogonal-complements">
     <title>Orthogonal Complements</title>
 
-    <p>Theorem<nbsp /><xref provisional="above on repeated sums" /> mentions repeated sums, which are of interest.  However, when we begin with a vector space <m>V</m> and a single subspace <m>W</m>, we can ask about the existence of another subspace, <m>W</m>, such that <m>V=U\ds W</m>.  The answer is that such a <m>W</m> always exists, and we then refer to it as a <term>complement</term>of <m>U</m>.</p>
+    <p>Theorem<nbsp /><xref provisional="above on repeated sums" /> mentions repeated sums, which are of interest.  However, when we begin with a vector space <m>V</m> and a single subspace <m>W</m>, we can ask about the existence of another subspace, <m>W</m>, such that <m>V=U\ds W</m>.  The answer is that such a <m>W</m> always exists, and we then refer to it as a <term>complement</term> of <m>U</m>.</p>
 
     <todo>Complments exist, basis extension</todo>
     <todo>Complement not unique</todo>
@@ -105,7 +105,7 @@
             <mrow>&amp;=\innerproduct{\vect{v}}{\vect{u}_j}-\innerproduct{\vect{v}}{\vect{u}_j}</mrow>
             <mrow>&amp;=0</mrow></md></p>
 
-            <p>We have fulfilled the hypotheses of <xref ref="theorem-direct-sum-zero-vector" /> and so can say <m>V=U\ds\per{U}</m>.</p>
+            <p>We have fulfilled the hypotheses of Theorem<nbsp /><xref ref="theorem-direct-sum-zero-vector" /> and so can say <m>V=U\ds\per{U}</m>.</p>
         </proof>
     </theorem>
 

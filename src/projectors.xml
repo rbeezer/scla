@@ -85,7 +85,7 @@
             </statement>
 
             <proof>
-                <p><me>\left(I-P\right)^2=I^2-P-P+P^2=I-P-P+P=I-P</me>.</p>
+                <p><me>\left(I-P\right)^2=I^2-P-P+P^2=I-P-P+P=I-P</me></p>
             </proof>
         </lemma>
 
