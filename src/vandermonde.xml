@@ -10,7 +10,7 @@
 <section xml:id="section-vandermonde" filebase="vandermonde">
     <title>Vandermonde Matrices</title>
 
-    <p>Alexandre-Th\'{e}ophile Vandermonde was a French mathematician in the 1700's who was among the first to write about basic properties of the determinant (such as the effect of swapping two rows).  However, the determinant that bears his name (<xref ref="theorem-DVM" />) does not appear in any of his four published mathematical papers.</p>
+    <p>Alexandre-Th\'{e}ophile Vandermonde was a French mathematician in the 1700's who was among the first to write about basic properties of the determinant (such as the effect of swapping two rows).  However, the determinant that bears his name (Theorem<nbsp /><xref ref="theorem-vandermonde-determinant" />) does not appear in any of his four published mathematical papers.</p>
 
     <definition xml:id="definition-VM">
         <title>Vandermonde Matrix</title>
@@ -94,7 +94,7 @@
         </proof>
     </theorem>
 
-    <p>Before we had <xref ref="theorem-vandermonde-determinant" /> we could see that if two of the scalar values were equal, then the Vandermonde matrix would have two equal rows and hence be singular (<acroref type="theorem" acro="DERC" />, <acroref type="theorem" acro="SMZD" />).  But with this expression for the determinant, we can establish the converse.</p>
+    <p>Before we had Theorem<nbsp /><xref ref="theorem-vandermonde-determinant" /> we could see that if two of the scalar values were equal, then the Vandermonde matrix would have two equal rows and hence be singular (<acroref type="theorem" acro="DERC" />, <acroref type="theorem" acro="SMZD" />).  But with this expression for the determinant, we can establish the converse.</p>
 
     <theorem xml:id="theorem-vandermonde-nonsingular">
         <title>Nonsingular Vandermonde Matrix</title>
@@ -104,7 +104,7 @@
         </statement>
 
         <proof>
-            <p>Let <m>A</m> denote the Vandermonde matrix with scalars <m>\scalarlist{x}{n}</m>.  By <acroref type="theorem" acro="SMZD" />, <m>A</m> is nonsingular if and only if the determinant of <m>A</m> is nonzero.  The determinant is given by <xref ref="theorem-vandermonde-determinant" />, and this product is nonzero if and only if each term of the product is nonzero.  This condition translates to <m>x_i-x_j\neq 0</m> whenever <m>i\neq j</m>.  In other words, the matrix is nonsingular if and only if the scalars are all different.</p>
+            <p>Let <m>A</m> denote the Vandermonde matrix with scalars <m>\scalarlist{x}{n}</m>.  By <acroref type="theorem" acro="SMZD" />, <m>A</m> is nonsingular if and only if the determinant of <m>A</m> is nonzero.  The determinant is given by Theorem<nbsp /><xref ref="theorem-vandermonde-determinant" />, and this product is nonzero if and only if each term of the product is nonzero.  This condition translates to <m>x_i-x_j\neq 0</m> whenever <m>i\neq j</m>.  In other words, the matrix is nonsingular if and only if the scalars are all different.</p>
         </proof>
     </theorem>
 

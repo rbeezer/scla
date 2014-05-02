@@ -176,7 +176,7 @@
             </proof>
         </theorem>
 
-        <p>Be sure to recognize <m>\vect{x}_i\adjoint{\vect{y}_i}</m> as the outer product, an <m>m\times n</m> matrix of rank one (every row is a multiple of every other row, and similarly for columns).  See Subsection<nbsp /><xref ref="subsection-SVD-image-compression" /> for a good example of the utility of this result.</p>
+        <p>Be sure to recognize <m>\vect{x}_i\adjoint{\vect{y}_i}</m> as the outer product, an <m>m\times n</m> matrix of rank one (every row is a multiple of every other row, and similarly for columns).  See Subsection<nbsp /><xref provisional="subsection-SVD-image-compression" /> for a good example of the utility of this result.</p>
 
         <todo>Properties of SVD needs range and kernel theorem (as spans of x, y vectors)</todo>
 

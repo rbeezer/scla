@@ -31,7 +31,7 @@
     
     <todo>State theorem, replace J-ibnverse by something.</todo>
    
-    <p>Again, many of the topics in this book will have a flavor similar to the previous example and theorem.  However, we will often need to limit the possibilities for the original matrix (it may need to be square, or its eigenvalues may need certain properties).  We may get more specific information about the components of the factorization, or we may get less.  We will also be interested in obtaining <term>canonical forms</term> of matrices.  You can view orthonormal diagonalization (<acroref acro="OD" type="section" />) as a good example of another matrix decomposition, and we will cover it again in some detail in (cite forward) <xref ref="" />.</p>
+    <p>Again, many of the topics in this book will have a flavor similar to the previous example and theorem.  However, we will often need to limit the possibilities for the original matrix (it may need to be square, or its eigenvalues may need certain properties).  We may get more specific information about the components of the factorization, or we may get less.  We will also be interested in obtaining <term>canonical forms</term> of matrices.  You can view orthonormal diagonalization (<acroref acro="OD" type="section" />) as a good example of another matrix decomposition, and we will cover it again in some detail in Section<nbsp /><xref provisional="section on orthonormal diagonalization/Schur" />.</p>
     
     <todo>Encourage return here.</todo>
 

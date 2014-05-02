@@ -39,7 +39,7 @@
 		</proof>
 	</theorem>
 
-	<p>A statement very similar to the converse of this theorem is also true.  Any positive semi-definite matrix can be realized as the product of a square matrix, <m>B</m>, with its adjoint, <m>\adjoint{B}</m>.  (See <xref ref="unwritten exercise about positive semi-definite and adjoints" /> after studying this entire section.)  The matrices <m>\adjoint{A}A</m> and <m>A\adjoint{A}</m> will be important later when we define singular values in Section<nbsp /><xref provisional="section-SVD" />.</p>
+	<p>A statement very similar to the converse of this theorem is also true.  Any positive semi-definite matrix can be realized as the product of a square matrix, <m>B</m>, with its adjoint, <m>\adjoint{B}</m>.  (See Exercise<nbsp /><xref provisional="unwritten exercise about positive semi-definite and adjoints" /> after studying this entire section.)  The matrices <m>\adjoint{A}A</m> and <m>A\adjoint{A}</m> will be important later when we define singular values in Section<nbsp /><xref provisional="section-SVD" />.</p>
 
 	<todo>Write an exercise: PSD is some matrix times its adjoint, similarity plus square roots?</todo>
 
