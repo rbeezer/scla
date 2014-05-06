@@ -7,7 +7,7 @@
 <!-- Copyright (C) 2004-2014  Robert A. Beezer    -->
 <!-- See the file COPYING for copying conditions. -->
 
-<section xml:id="section-least-squares" filebase="least-squares">
+<section xml:id="section-least-squares">
     <title>Least Squares</title>
 
     <p>Solving a linear system of equations is a fundamental use of the tools of linear algebra.  You know from introductory linear algebra that a linear system may have no solution.  In an applied situation there could be many reasons for this, and it begs the question: what to do next?</p>

@@ -7,7 +7,7 @@
 <!-- Copyright (C) 2004-2014  Robert A. Beezer    -->
 <!-- See the file COPYING for copying conditions. -->
 
-<section xml:id="section-normal-matrices" filebase="normal-matrices">
+<section xml:id="section-normal-matrices">
 	<title>Normal Matrices</title>
 
 	<p>Normal matrices comprise a broad class of interesting matrices, many of which you probably already know by other names.  But they are most interesting since they define exactly which matrices we can diagonalize via a unitary matrix.  This is the upcoming Theorem<nbsp /><xref provisional="orthonormal diagonalization" />.</p>

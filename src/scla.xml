@@ -13,7 +13,7 @@
 
     <xi:include href="./bookinfo.xml" />
     
-    <book xml:id="book-second-course" filebase="scla">
+    <book xml:id="scla">
         <title>A Second Course in Linear Algebra</title>
 
         <xi:include href="./fundamentals.xml" />

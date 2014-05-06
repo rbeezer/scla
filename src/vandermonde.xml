@@ -7,7 +7,7 @@
 <!-- Copyright (C) 2004-2014  Robert A. Beezer    -->
 <!-- See the file COPYING for copying conditions. -->
 
-<section xml:id="section-vandermonde" filebase="vandermonde">
+<section xml:id="section-vandermonde">
     <title>Vandermonde Matrices</title>
 
     <p>Alexandre-Th\'{e}ophile Vandermonde was a French mathematician in the 1700's who was among the first to write about basic properties of the determinant (such as the effect of swapping two rows).  However, the determinant that bears his name (Theorem<nbsp /><xref ref="theorem-vandermonde-determinant" />) does not appear in any of his four published mathematical papers.</p>

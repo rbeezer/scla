@@ -7,7 +7,7 @@
 <!-- Copyright (C) 2004-2014  Robert A. Beezer    -->
 <!-- See the file COPYING for copying conditions. -->
 
-<section xml:id="section-orthogonal-complements" filebase="orthogonal-complements">
+<section xml:id="section-orthogonal-complements">
     <title>Orthogonal Complements</title>
 
     <p>Theorem<nbsp /><xref provisional="above on repeated sums" /> mentions repeated sums, which are of interest.  However, when we begin with a vector space <m>V</m> and a single subspace <m>W</m>, we can ask about the existence of another subspace, <m>W</m>, such that <m>V=U\ds W</m>.  The answer is that such a <m>W</m> always exists, and we then refer to it as a <term>complement</term> of <m>U</m>.</p>

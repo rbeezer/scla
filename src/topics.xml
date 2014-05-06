@@ -7,7 +7,7 @@
 <!-- Copyright (C) 2004-2014  Robert A. Beezer    -->
 <!-- See the file COPYING for copying conditions. -->
    
-<chapter xml:id="chapter-topics" filebase="topics" xmlns:xi="http://www.w3.org/2001/XInclude">
+<chapter xml:id="chapter-topics" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Topics</title>
     
 	<introduction>

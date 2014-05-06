@@ -7,7 +7,7 @@
 <!-- Copyright (C) 2004-2014  Robert A. Beezer    -->
 <!-- See the file COPYING for copying conditions. -->
 
-<section xml:id="section-positive-semidefinite" filebase="positive-semidefinite">
+<section xml:id="section-positive-semidefinite">
 	<title>Positive Semi-Definite Matrices</title>
 
 	<p>Positive semi-definite matrices (and their cousins, positive definite matrices) are square matrices which in many ways behave like non-negative (respectively, positive) real numbers.  These results will be useful as we study various matrix decompositions in Chapter<nbsp /><xref ref="chapter-decompositions" />.</p>

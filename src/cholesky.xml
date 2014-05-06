@@ -7,7 +7,7 @@
 <!-- Copyright (C) 2004-2014  Robert A. Beezer    -->
 <!-- See the file COPYING for copying conditions. -->
 
-<section xml:id="section-cholesky" filebase="cholesky">
+<section xml:id="section-cholesky">
     <title>Cholesky Decomposition</title>
 
     <intoduction>
