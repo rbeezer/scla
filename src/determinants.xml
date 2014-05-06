@@ -14,7 +14,6 @@
         <p>Typically, the first definition one sees of a determinant is given by expansion about the first row, with the a recursive application to the submatrices that have size one smaller.  In the extreme, a <m>1\times 1</m> matrix has a determinant that is just the lone entry.  In this section, we show two different approaches that could be taken as the definition of a determinant, providing more insight on the nature of this enigmatic function.</p>
 
         <p>THIS SECTION IS IN-PROGRESS</p>
-
     </introduction>
 
     <subsection>

@@ -10,7 +10,9 @@
 <section xml:id="section-LU" filebase="LU">
     <title>LU (Triangular) Decomposition</title>
 
-    <p>The <term>LU decomposition</term> begins with any matrix and describes it as a product of a lower-triangular matrix (<m>L</m>) and an upper-triangular matrix (<m>U</m>).  Hence the customary shorthand name, <q>LU</q>.  The term <term>triangular decomposition</term> might be more evocative, if not more verbose.</p>
+    <introduction>
+        <p>The <term>LU decomposition</term> begins with any matrix and describes it as a product of a lower-triangular matrix (<m>L</m>) and an upper-triangular matrix (<m>U</m>).  Hence the customary shorthand name, <q>LU</q>.  The term <term>triangular decomposition</term> might be more evocative, if not more verbose.</p>
+    </introduction>
 
     <p>You will notice that the LU decomposition feels very much like reduced row-echelon form, and in some ways could be considered an improvement.  Triangular matrices are defined in Subsection <acroref acro="OD.TM" type="subsection" /> and two basic facts are that the product of two triangular matrices <q>of the same type</q> (<ie /> both upper or both lower) is again of that type (<acroref acro="PTMT" type="theorem" />) and the inverse of a nonsingular triangular matrix will be triangular of the same type (<acroref acro="ITMT" type="theorem" />).</p>
 

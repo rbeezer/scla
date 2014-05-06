@@ -10,7 +10,9 @@
 <chapter xml:id="chapter-topics" filebase="topics" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Topics</title>
     
-    <p>In this chapter we collect a variety of useful topics that are independent of much of trhe other material, though not exclusively so.</p>
+	<introduction>
+	    <p>In this chapter we collect a variety of useful topics that are independent of much of the other material, though not exclusively so.</p>
+	</introduction>
     
     <todo>Pseudoinverse as topic of its own interest</todo>
     <todo>Reformat: Trace of a matrix</todo>

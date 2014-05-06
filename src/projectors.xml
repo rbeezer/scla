@@ -1,7 +1,9 @@
 <section xml:id="section-projectors" filebase="projectors">
     <title>Projectors</title>
 
-    <p>When we multiply a vector by a matrix, we form a linear combination of the columns of the matrix.  Said differently, the result of the product is in the column space of the matrix.  So we can think of a matrix as moving a vector into a subspace, and we call that subspace the column space of the matrix <m>\csp{A}</m>.  In the case of a linear transformation, we call this subspace the range, <m>\rng{T}</m>, or we might call it the image.  A <term>projector</term> is a square matrix which moves vectors into a subspace (like any matrix can), but fixes vectors already in the subspace.  This property earns a projector the moniker <term>idempotent</term>.  We will see that projectors have a variety of interesting properties.</p>
+    <introduction>
+        <p>When we multiply a vector by a matrix, we form a linear combination of the columns of the matrix.  Said differently, the result of the product is in the column space of the matrix.  So we can think of a matrix as moving a vector into a subspace, and we call that subspace the column space of the matrix <m>\csp{A}</m>.  In the case of a linear transformation, we call this subspace the range, <m>\rng{T}</m>, or we might call it the image.  A <term>projector</term> is a square matrix which moves vectors into a subspace (like any matrix can), but fixes vectors already in the subspace.  This property earns a projector the moniker <term>idempotent</term>.  We will see that projectors have a variety of interesting properties.</p>
+    </introduction>
 
     <subsection xml:id="subsection-oblique-projectors">
         <title>Oblique Projectors</title>
