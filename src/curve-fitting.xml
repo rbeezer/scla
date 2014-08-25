@@ -26,9 +26,8 @@
 				<p>Write <m>p(x)=a_0+a_1x+a_2x^2+\cdots+a_nx^n</m>.  To meet the conclusion of the theorem, we desire,
 				<md>
 				<mrow>y_i&amp;=p(x_i)=a_0+a_1x_i+a_2x_i^2+\cdots+a_nx_i^n
-				&amp;
-				1\leq i\leq n+1&amp;
-				</mrow>
+				&amp;&amp;
+				1\leq i\leq n+1</mrow>
 				</md> This is a system of <m>n+1</m> linear equations in the <m>n+1</m> variables <m>a_0,\,a_1,\,a_2,\,\ldots,\,a_n</m>.  The vector of constants in this system is the vector containing the <m>y</m>-coordinates of the points.   More importantly, the coefficient matrix is a Vandermonde matrix (<xref provisional="definition-vandermonde" />) built from the <m>x</m>-coordinates <m>\scalarlist{x}{n+1}</m>.  Since we have required that these scalars all be different, <xref provisional="theorem-NVM" /> tells us that the coefficient matrix is nonsingular and <acroref type="theorem" acro="NMUS" /> says the solution for the coefficients of the polynomial exists, and the solution is unique.  As a practical matter, <acroref type="theorem" acro="SNCM" /> provides an expression for the solution.</p>
 			</proof>
 		</theorem>
@@ -128,9 +127,9 @@
 	        	]]>\end{bmatrix}
 	        	&amp;
 	        	\vect{b}&amp;=
-	        	\colvector{-10.867 \\ 10.120 \\ 8.172 \\ 11.693 \\ 18.931 \\ 16.215 \\ 3.863 \\ -7.971 \\ -24.108 \\ -31.217 \\ 0.719 \\ 9.550 }
-	        	</mrow></md>
-	        	<md>
+				\colvector{-10.867 \\ 10.120 \\ 8.172 \\ 11.693 \\ 18.931 \\ 16.215 \\ 3.863 \\ -7.971 \\ -24.108 \\ -31.217 \\ 0.719 \\ 9.550 }</mrow>
+			</md>
+			<md>
 	        	<mrow>\adjoint{A}A&amp;=
 	        	\begin{bmatrix}<![CDATA[
 				12.000 & 46.671 & 260.978 & 1681.324 \\

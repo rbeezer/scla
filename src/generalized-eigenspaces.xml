@@ -242,8 +242,7 @@
                 0\colvector{0\\-1\\0\\1\\0}+
                 2\colvector{-4\\2\\0\\0\\1}
                 }
-                =\colvector{-1\\0\\2}
-                </mrow>
+                =\colvector{-1\\0\\2}</mrow>
             </md> So the matrix representation of <m>\restrict{T}{W}</m> relative to <m>C</m> is
             <me>\matrixrep{\restrict{T}{W}}{C}{C}=
             \begin{bmatrix}
