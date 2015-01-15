@@ -43,7 +43,7 @@
             </proof>
         </lemma>
 
-        <p>When the null space of a projector has dimension one, it is easy to understand the choice of the term <q>projector</q>.  Imagine the setting in three dimensions where the column space of the projector is a subspace of dimension two, which is physically a plane through the origin.  Imagine some vector as an arrow from the origin, or as just the point that would be at the tip of the arrow.  A light shines on the vector and casts a shadow onto the plane (either another arrow, or just a point).   This shadow is the projection, the image of the projector.  The image of the shadow is unchanged, since shining the light on the vector that is the shadow will not move it.  What direction does the light come from?  What is the vector that describes the change from the vector to its shadow (projection)?  For a vector<m>\vect{x}</m>, this direction is <m>P\vect{x}-\vect{x}</m>, an element of the null space of <m>P</m>.  So if <m>\nsp{P}</m> has dimension one, then every vector is moved in the same direction, a multiple of a lone basis vector for <m>\nsp{P}</m>.  This matches our assumptions about physical light from a distant source, with rays all moving parallel to each other.  Here is a simple example of just this scenario.</p>
+        <p>When the null space of a projector has dimension one, it is easy to understand the choice of the term <q>projector</q>.  Imagine the setting in three dimensions where the column space of the projector is a subspace of dimension two, which is physically a plane through the origin.  Imagine some vector as an arrow from the origin, or as just the point that would be at the tip of the arrow.  A light shines on the vector and casts a shadow onto the plane (either another arrow, or just a point).   This shadow is the projection, the image of the projector.  The image of the shadow is unchanged, since shining the light on the vector that is the shadow will not move it.  What direction does the light come from?  What is the vector that describes the change from the vector to its shadow (projection)?  For a vector <m>\vect{x}</m>, this direction is <m>P\vect{x}-\vect{x}</m>, an element of the null space of <m>P</m>.  So if <m>\nsp{P}</m> has dimension one, then every vector is moved in the same direction, a multiple of a lone basis vector for <m>\nsp{P}</m>.  This matches our assumptions about physical light from a distant source, with rays all moving parallel to each other.  Here is a simple example of just this scenario.</p>
 
         <example xml:id="example-projector-three-dimensions">
             <title>Projector in Three Dimensions</title>
@@ -147,18 +147,18 @@
             </statement>
 
             <proof>
-                <p><acroref acro="HMIP" type="theorem" /> says that Hermitian matrices are characterized by the property that <m>\innerproduct{A\vect{x}}{\vect{y}}=\innerproduct{\vect{x}}{A\vect{y}}</m> for every choice of the vectors <m>\vect{x}, \vect{y}</m>.  We will use this result in both halves of the proof.</p>
+                <p><acroref acro="HMIP" type="theorem" /> says that a Hermitian matrix <m>A</m> is characterized by the property that <m>\innerproduct{A\vect{x}}{\vect{y}}=\innerproduct{\vect{x}}{A\vect{y}}</m> for every choice of the vectors <m>\vect{x}, \vect{y}</m>.  We will use this result in both halves of the proof.</p>
 
                 <p><reverse /> Suppose that <m>\vect{x}\in\nsp{P}</m>.  Then for any <m>\vect{y}\in\csp{P}</m>, there is a vector <m>\vect{w}</m> that allows us to write <me>\innerproduct{\vect{x}}{\vect{y}}
                 =\innerproduct{\vect{x}}{P\vect{w}}
                 =\innerproduct{P\vect{x}}{\vect{w}}
                 =\innerproduct{\zerovector}{\vect{w}}
-                =0.</me>  So <m>\nsp{P}\subseteq\per{\csp{A}}.</m></p>
+                =0.</me>  So <m>\nsp{P}\subseteq\per{\csp{P}}.</m></p>
 
                 <p>Now suppose that <m>\vect{x}\in\per{\csp{P}}</m>.  Consider, <me>\innerproduct{P\vect{x}}{P\vect{x}}
                 =\innerproduct{P^2\vect{x}}{\vect{x}}
                 =\innerproduct{P\vect{x}}{\vect{x}}
-                =0.</me>  By <acroref type="theorem" acro="PIP" />, we conclude that <m>P\vect{x}=\zerovector</m> and <m>\vect{x}\in\nsp{P}</m>.  So <m>\per{\csp{A}}\subseteq\nsp{P}</m> and we have establish the set equality of Definition<nbsp /><xref ref="definition-orthogonal-projector" />.</p>
+                =0.</me>  By <acroref type="theorem" acro="PIP" />, we conclude that <m>P\vect{x}=\zerovector</m> and <m>\vect{x}\in\nsp{P}</m>.  So <m>\per{\csp{P}}\subseteq\nsp{P}</m> and we have establish the set equality of Definition<nbsp /><xref ref="definition-orthogonal-projector" />.</p>
 
                 <p><forward /> Let <m>\vect{u},\vect{v}\in\complex{n}</m> be any two vectors.  Decompose each into two pieces, the first from the column space, the second from the null space, according to Theorem<nbsp /><xref ref="theorem-projector-decomposition" />.  So <md>
                     <mrow>\vect{u}&amp;=\vect{u}_1+\vect{u}_2&amp;\vect{v}&amp;=\vect{v}_1+\vect{v}_2</mrow>
