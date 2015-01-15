@@ -7,30 +7,20 @@
 <!-- Copyright (C) 2004-2014  Robert A. Beezer    -->
 <!-- See the file COPYING for copying conditions. -->
 
-   <docinfo>
-        <!-- Multiple authors will go into an eventual "authorgroup" -->
-        <author>
-            <personname>Robert A. Beezer</personname>
-            <department>Department of Mathematics and Computer Science</department>
-            <institution>University of Puget Sound</institution>
-            <email>beezer@pugetsound.edu</email>
-        </author>
-        <copyright>
-            <year>2004-13</year>
-            <holder>Robert A. Beezer</holder>
-            <shortlicense>GFDL License.</shortlicense>
-        </copyright>
-        <date>DRAFT <today /> DRAFT</date>
+<docinfo>
 
-<!-- These subsequent macro definitions allow for a consistent look for   -->
-<!-- mathematical structures.  It is relatively safe to play around with  -->
-<!-- variants if you desire other notation or looks.                      -->
-<!-- Edits here are effective for both HTML (MathJax) and LaTeX variants. -->
-<!-- Important: put macros on one long line, no line breaks               -->
-<!-- Important: no blank lines, each line is a macro or a comment         -->
-<!-- This allows for sensible minification with a sed script              -->
+    <!-- For title into HTML head, then tabs, bookmarks, etc -->
+    <initialism>SCLA</initialism>
 
-        <macros>
+    <!-- These subsequent macro definitions allow for a consistent look for   -->
+    <!-- mathematical structures.  It is relatively safe to play around with  -->
+    <!-- variants if you desire other notation or looks.                      -->
+    <!-- Edits here are effective for both HTML (MathJax) and LaTeX variants. -->
+    <!-- Important: put macros on one long line, no line breaks               -->
+    <!-- Important: no blank lines, each line is a macro or a comment         -->
+    <!-- This allows for sensible minification with a sed script              -->
+
+    <macros>
 % These macros are automatically generated from the "macros"
 % XML element.  Make permanent edits there.
 %
@@ -46,7 +36,7 @@
 %
 %     Conveniences
 %
-%%%%%%%%%%%%%%%%%%%%%O
+%%%%%%%%%%%%%%%%%%%%%
 %
 %  Order of (asymptotically limit of fraction is 1)
 %  Usage: \orderof{some function}
@@ -483,4 +473,4 @@
 \newcommand{\hadamardinverse}[1]{\widehat{#1}}
     </macros>
 
-    </docinfo>
+</docinfo>
