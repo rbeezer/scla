@@ -16,6 +16,7 @@
     <book xml:id="scla">
         <title>A Second Course in Linear Algebra</title>
 
+        <xi:include href="./frontmatter.xml" />
         <xi:include href="./fundamentals.xml" />
         <xi:include href="./decompositions.xml" />
         <xi:include href="./canonical-forms.xml" />

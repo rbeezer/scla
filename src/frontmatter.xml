@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- This file is part of the book                -->
+<!--                                              -->
+<!--      A Second Course in Linear Algebra       -->
+<!--                                              -->
+<!-- Copyright (C) 2004-2014  Robert A. Beezer    -->
+<!-- See the file COPYING for copying conditions. -->
+
+<frontmatter xml:id="index" xmlns:xi="http://www.w3.org/2001/XInclude">
+
+	<titlepage>
+
+        <author>
+            <personname>Robert A. Beezer</personname>
+            <department>Department of Mathematics and Computer Science</department>
+            <institution>University of Puget Sound</institution>
+            <email>beezer@pugetsound.edu</email>
+        </author>
+
+		<date>DRAFT <today /> DRAFT</date>
+
+	</titlepage>
+
+	<colophon>
+
+        <copyright>
+            <year>2004<ndash />2014</year>
+            <holder>Robert A. Beezer</holder>
+            <minilicense>GFDL License.</minilicense>
+			<shortlicense>Permission is granted to copy, distribute and/or modify this document under the terms of the GNU Free Documentation License, Version 1.2 or any later version published by the Free Software Foundation; with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.  A copy of the license is included in the appendix entitled <q>GNU Free Documentation License.</q></shortlicense>
+        </copyright>
+        <date>DRAFT <today /> DRAFT</date>
+
+	</colophon>
+
+	<acknowledgement>
+
+		<p>The writing of a substantial portion of this text was supported by a Course Release Unit from the University Enrichment Committee at the University of Puget Sound for the Spring<nbsp />2014 semester, in addition to previous sabbatical leaves.</p>
+
+		<p>Development of systems used to produce this textbook as an open source text have been supported by grants from the National Science Foundation (DUE-1022574) and the Shuttleworth Foundation (Flash Grant, 2013).</p>
+
+	</acknowledgement>
+
+</frontmatter>
