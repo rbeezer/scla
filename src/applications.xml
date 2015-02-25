@@ -14,5 +14,6 @@
     
     <xi:include href="./least-squares.xml" />
     <xi:include href="./curve-fitting.xml" />
+    <xi:include href="./recurrence-relations.xml" />
     
 </chapter>

@@ -12,6 +12,20 @@
     <!-- For title into HTML head, then tabs, bookmarks, etc -->
     <initialism>SCLA</initialism>
 
+
+    <!-- For LaTeX-based images; inserted both into tex preamble, -->
+    <!-- and into standalone preambles for svg production         -->
+
+    <latex-image-preamble>
+    \usepackage{tikz}
+    \usetikzlibrary{backgrounds}
+    \usetikzlibrary{arrows}
+    \usetikzlibrary{matrix}
+    \usepackage{forest}
+    \usepackage{wasysym}
+    </latex-image-preamble>
+
+
     <!-- These subsequent macro definitions allow for a consistent look for   -->
     <!-- mathematical structures.  It is relatively safe to play around with  -->
     <!-- variants if you desire other notation or looks.                      -->
