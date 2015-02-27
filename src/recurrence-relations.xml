@@ -35,7 +35,7 @@
     <example xml:id="example-honeybees">
         <title>Honeybee Ancestors</title>
 
-        <p>Male honeybees (also known as drones) hatch from unfertilized eggs, and so they have a mother but no father. Female honeybees (both queens and workers) hatch from fertilized eggs, and so each female honeybee has two parents (one of each sex). This leads to an interesting family tree for any single honeybee. If we consider a male, he only has one parent. That parent must have been female, so our male had two grandparents. As we continue to count, let's ignore any possibility for tangled family trees, which is admittedly unrealistic. Figure <xref ref="figure-bee-ancestors"/> displays the bees family tree going back several generations.</p>
+        <p>Male honeybees (also known as drones) hatch from unfertilized eggs, and so they have a mother but no father. Female honeybees (both queens and workers) hatch from fertilized eggs, and so each female honeybee has two parents (one of each sex). This leads to an interesting family tree for any single honeybee. If we consider a male, he only has one parent. That parent must have been female, so our male had two grandparents. As we continue to count, we will ignore any possibility for tangled family trees, which is admittedly unrealistic. Figure <xref ref="figure-bee-ancestors"/> displays the bees family tree going back several generations.</p>
 
         <figure xml:id="figure-bee-ancestors">
             <caption>Honeybee Ancestors</caption>
@@ -182,7 +182,7 @@
     <mrow xml:id="eq-matrix-recursion">\vect{a}_n&amp;=A\vect{a}_{n-1}\text{.}</mrow>
     </mdn></p>
 
-    <p>If we know the first <m>k</m> terms of the sequence, then we know the vector <m>\vect{a}_{k}</m>, and we can recursively apply equation <xref ref="eq-matrix-recursion"/> to get that <me>\vect{a}_n=A^{n-k}\vect{a}_{k}\text{.}</me> Generally, raising a matrix <m>A</m> to high powers would be difficult or time-consuming. But if we can diagonalize <m>A</m> first (or at least find its Jordan canonical form discussed in <xref ref="section-jordan-canonical-form"/>) it becomes fast and easy. For now let's assume that <m>A</m> is diagonalizable. If <m>D</m> is a diagonal matrix similar to <m>A</m>, having the eigenvalues of <m>A</m> for its entries, and <m>A=PD\inverse{P}</m>, then <mdn>
+    <p>If we know the first <m>k</m> terms of the sequence, then we know the vector <m>\vect{a}_{k}</m>, and we can recursively apply equation <xref ref="eq-matrix-recursion"/> to get that <me>\vect{a}_n=A^{n-k}\vect{a}_{k}\text{.}</me> Generally, raising a matrix <m>A</m> to high powers would be difficult or time-consuming. But if we can diagonalize <m>A</m> first (or at least find its Jordan canonical form discussed in Section <xref ref="section-jordan-canonical-form"/>) it becomes fast and easy. For now let's assume that <m>A</m> is diagonalizable. If <m>D</m> is a diagonal matrix similar to <m>A</m>, having the eigenvalues of <m>A</m> for its entries, and <m>A=PD\inverse{P}</m>, then <mdn>
     <mrow number="no">\vect{a}_n&amp;=A^{n-k}\vect{a}_{k}</mrow>
     <mrow xml:id="recurrence-diagonal-equation">\vect{a}_n&amp;=PD^{n-k}\inverse{P}\vect{a}_{k}\text{.}</mrow>
     </mdn>There are two ways to proceed to find a formula for <m>a_{n}</m>. If we have an explicit diagonalization of <m>A</m> (meaning we explicitly know <m>P</m>, <m>D</m>, and <m>\inverse{P}</m>) then we can simply multiply the right hand side through, and the first element of the resulting vector gives a formula for <m>a_{n}</m>.</p>
@@ -195,6 +195,7 @@
         <title>Solutions to Linear Recurrence Relations</title>
         <statement>
             <p>If <m>a_n=c_{n-1}a_{n-1}+\cdots+c_{n-k}a_{n-k}</m> is a linear recurrence relation of depth <m>k</m>, let <m>A</m> be the matrix defined as <me>A=\begin{bmatrix}c_{n-1}&amp;c_{n-2}&amp;\cdots&amp;c_{n-(k-1)}&amp;c_{n-k}\\1&amp;0&amp;\cdots&amp;0&amp;0\\0&amp;1&amp;\ddots&amp;0&amp;0\\\vdots&amp;\ddots&amp;\ddots&amp;\vdots&amp;\vdots\\0&amp;0&amp;\cdots&amp;1&amp;0\end{bmatrix}\text{.}</me></p>
+            <todo>This is a companion matrix; reference that.</todo>
             <ul>
                 <li>If <m>A=PJ\inverse{P}</m>, then <me>a_n=\begin{bmatrix}1&amp;0&amp;\cdots&amp;0\end{bmatrix}PJ^{n-k}\inverse{P}\colvector{a_k\\a_{k-1}\\\vdots\\a_1}\text{.}</me> This is helpful if <m>J</m> is diagonal or in Jordan canonical form. Note that multiplication by <m>\begin{bmatrix}1&amp;0&amp;\cdots&amp;0\end{bmatrix}</m> is just a way to extract the first element of the vector that follows.</li>
                 <li>If <m>A</m> is diagonalizable with distinct eigenvalues <m>\lambda_1,\ldots,\lambda_n</m>, then <m>A=PD\inverse{P}</m> where <m>D</m> is the diagonal matrix <m>\Delta(\lambda_1,\ldots,\lambda_n)</m> and <m>P</m> is the row-permuted Vandermonde matrix <me>P=\begin{bmatrix}\lambda_1^{n-1}&amp;\lambda_2^{n-1}&amp;\cdots&amp;\lambda_n^{n-1}\\\lambda_1^{n-2}&amp;\lambda_2^{n-2}&amp;\cdots&amp;\lambda_n^{n-2}\\\vdots&amp;\vdots&amp;\ddots&amp;\vdots\\1&amp;1&amp;\cdots&amp;1\end{bmatrix}\text{.}</me>Note that an explicit formula for the inverse of a Vandermonde matrix is known (see Section <xref ref="section-vandermonde"/>).</li>
@@ -214,11 +215,11 @@
     </theorem>
 
     <example xml:id="example-context-free-recursion">
-    <title>A Linear Recursion of Depth 3 with no Context</title>
+    <title>A Linear Recursion of Depth 3</title>
 
         <p>Suppose <m>a_1=1</m>, <m>a_2=4</m>, <m>a_3=6</m>, and <m>a_n=5a_{n-1}-2a_{n-2}-8a_{n-3}</m>. Let's find a formula for the general term of the sequence <m>a_n</m>.</p>
 
-        <p>We need to consider the matrix <me>A=\begin{bmatrix}5&amp;-2&amp;-8\\1&amp;0&amp;0\\0&amp;1&amp;0\end{bmatrix}\text{.}</me>  While we could explicitly diagonalize this matrix, it might turn out to be a bit tedious since the matrix is <m>3\times3</m>. Instead we just find its eigenvalues: <m>4,2,-1</m>. The three distinct eigenvalues tell us that <m>A</m> is indeed diagonalizable, and then it follows form Theorem <xref ref="theorem-linear-recurrence"/> that <m>a_n=x_1(4^n)+x_2(2)^n+x_3(-1)^n</m> for some as-yet unknown constants <m>x_1,x_2,x_3</m>. Considering <m>n=1</m>, <m>n=2</m>, and <m>n=3</m>, we have the system of equations<md>
+        <p>We need to consider the matrix <me>A=\begin{bmatrix}5&amp;-2&amp;-8\\1&amp;0&amp;0\\0&amp;1&amp;0\end{bmatrix}\text{.}</me>  While we could explicitly diagonalize this matrix, it might turn out to be a bit tedious since the matrix is <m>3\times3</m>. Instead we just find its eigenvalues: <m>4,2,-1</m>. The three distinct eigenvalues tell us that <m>A</m> is indeed diagonalizable, and then it follows from Theorem <xref ref="theorem-linear-recurrence"/> that <m>a_n=x_1(4^n)+x_2(2)^n+x_3(-1)^n</m> for some as-yet unknown constants <m>x_1,x_2,x_3</m>. Considering <m>n=1</m>, <m>n=2</m>, and <m>n=3</m>, we have the system of equations<md>
         <mrow>4x_1+2x_2-x_3&amp;=1</mrow>
         <mrow>16x_1+4x_2+x_3&amp;=4</mrow>
         <mrow>64x_1+8x_2-x_3&amp;=6\text{.}</mrow>
@@ -340,7 +341,7 @@
                     <mrow>&amp;=\frac{1}{\sqrt{5}}\begin{bmatrix}G&amp;g\\1&amp;1\end{bmatrix}\begin{bmatrix}G^{n-2}&amp;0\\0&amp;g^{n-2}\end{bmatrix}\colvector{1-2g\\-1+2G}</mrow>
                     <mrow>&amp;=\frac{1}{\sqrt{5}}\begin{bmatrix}G^{n-1}&amp;g^{n-1}\\*&amp;*\end{bmatrix}\colvector{G-g\\G-g}</mrow>
                     <mrow>&amp;=\frac{G-g}{\sqrt{5}}\colvector{G^{n-1}+g^{n-1}\\*}</mrow>
-                    <mrow>\colvector{\ell_n\\\ell_{n-1}}&amp;=\colvector{G^{n-1}+g^{n-1}\\*}\text{.}</mrow>
+                    <mrow>&amp;=\colvector{G^{n-1}+g^{n-1}\\*}\text{.}</mrow>
                     </md>And so we have found:<md>
                     <mrow>\ell_n&amp;=G^{n-1}+g^{n-1}</mrow>
                     <mrow>&amp;=\left(\frac{1+\sqrt{5}}{2}\right)^{n-1}+\left(\frac{1-\sqrt{5}}{2}\right)^{n-1}\text{.}</mrow>
