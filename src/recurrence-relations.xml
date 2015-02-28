@@ -322,7 +322,7 @@
                     <mrow>\colvector{a_n\\a_{n-1}}&amp;=\begin{bmatrix}G&amp;g\\1&amp;1\end{bmatrix}\begin{bmatrix}G&amp;0\\0&amp;g\end{bmatrix}^{n-2}\frac{1}{\sqrt{5}}\begin{bmatrix}1&amp;-g\\-1&amp;G\end{bmatrix}\colvector{2\\1}</mrow>
                     <mrow>&amp;=\frac{1}{\sqrt{5}}\begin{bmatrix}G&amp;g\\1&amp;1\end{bmatrix}\begin{bmatrix}G^{n-2}&amp;0\\0&amp;g^{n-2}\end{bmatrix}\colvector{2-g\\-2+G}</mrow>
                     <mrow>&amp;=\frac{1}{\sqrt{5}}\begin{bmatrix}G^{n-1}&amp;g^{n-1}\\*&amp;*\end{bmatrix}\colvector{1+G\\-1-g}</mrow>
-                    <mrow>\colvector{a_n\\a_{n-1}}&amp;=\frac{1}{\sqrt{5}}\colvector{(1+G)G^{n-1}-(1+g)g^{n-1}\\*}\text{.}</mrow>
+                    <mrow>&amp;=\frac{1}{\sqrt{5}}\colvector{(1+G)G^{n-1}-(1+g)g^{n-1}\\*}\text{.}</mrow>
                     </md>And so we have found:<md>
                     <mrow>a_n&amp;=\frac{1}{\sqrt{5}}\left((1+G)G^{n-1}-(1+g)g^{n-1}\right)</mrow>
                     <mrow>&amp;=\frac{1}{\sqrt{5}}\left(\left(\frac{3+\sqrt{5}}{2}\right)\left(\frac{1+\sqrt{5}}{2}\right)^{n-1}-\left(\frac{3-\sqrt{5}}{2}\right)\left(\frac{1-\sqrt{5}}{2}\right)^{n-1}\right)\text{.}</mrow>
