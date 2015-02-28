@@ -44,70 +44,77 @@
             <![CDATA[%
             \newcommand{\drone}{\color{yellow}\fbox{\male} }
             \newcommand{\queen}{\fbox{\female} }
-            \resizebox{\linewidth}{!}{
+            \resizebox{0.6\linewidth}{!}{
             \begin{forest}
                 for tree={grow'=90},
-                where n children=0{tier=top}{},
+                where n children=0{tier=grandparent}{},
+                [,phantom
                 [{\drone},circle,fill=black,for descendants={where={n==1}{{circle,fill=yellow}}{},where={n==2}{{circle,fill=black}}{}},
-                        [{\queen}
-                                [{\queen}
-                                        [{\queen}
-                                                [{\queen}, name=bee gp1
-                                                        [{\queen}, name=bee p1, tier=parent
-                                                                [{\queen} ] {\draw[->] () to[out=south west,in=west] (bee p1);}
-                                                                [{\drone} ] {\draw[->] () to[out=south,in= north] (bee gp1);}
-                                                        ]
-                                                        [{\drone}, name=bee p2, tier=parent
-                                                                [{\queen} ] {\draw[->] () to[out=south west,in=west] (bee p2);}
-                                                        ]
-                                                ]
-                                                [{\drone}, name=bee gp2
-                                                        [{\queen}, name=bee p3, tier=parent
-                                                                [{\queen} ] {\draw[->] () to[out=south west,in=west] (bee p3);}
-                                                                [{\drone} ] {\draw[->] () to[out=south,in= north east] (bee gp2);}
-                                                        ]
-                                                ]
-                                        ]
-                                        [{\drone}
-                                                [{\queen}, name=bee gp3
-                                                        [{\queen}, name=bee p4, tier=parent
-                                                                [{\queen} ] {\draw[->] () to[out=south west,in=west] (bee p4);}
-                                                                [{\drone} ] {\draw[->] () to[out=south,in=north] (bee gp3);}
-                                                        ]
-                                                        [{\drone}, name=bee p5, tier=parent
-                                                                [{\queen} ] {\draw[->] () to[out=south west,in=west] (bee p5);}
-                                                        ]
-                                                ]
-                                        ]
+                    [{\queen}
+                        [{\queen}, tier=greatgrandchild
+                            [{\queen}, tier=grandchild
+                                [{\queen}, name=ch1, tier=child
+                                    [{\queen}, name=p1, tier=parent
+                                        [{\queen} ] {\draw[-,dashed] () to[out=south west,in=west] (p1);}
+                                        [{\drone} ] {\draw[-,dashed] () to[out=south,in= north] (ch1);}
+                                    ]
+                                    [{\drone}, name=p2, tier=parent
+                                        [{\queen} ] {\draw[-,dashed] () to[out=south west,in=west] (p2);}
+                                    ]
                                 ]
-                                [{\drone}
-                                         [{\queen}
-                                                [{\queen}, name=bee gp4
-                                                        [{\queen}, name=bee p6, tier=parent
-                                                                [{\queen} ] {\draw[->] () to[out=south west,in=west] (bee p6);}
-                                                                [{\drone} ] {\draw[->] () to[out=south,in=north] (bee gp4);}
-                                                        ]
-                                                        [{\drone}, name=bee p7, tier=parent
-                                                                [{\queen} ] {\draw[->] () to[out=south west,in=west] (bee p7);}
-                                                        ]
-                                                ]
-                                                [{\drone}, name=bee gp5
-                                                        [{\queen}, name=bee p8, tier=parent
-                                                                [{\queen} ] {\draw[->] () to[out=south west,in=west] (bee p8);}
-                                                                [{\drone} ] {\draw[->] () to[out=south,in=north east] (bee gp5);}
-                                                        ]
-                                              ]
-                                                [{Level $n-2$}, no edge, for descendants={{no edge,fill=none,node options={ellipse}}}
-                                                    [{Level $n-1$}, tier=parent
-                                                        [{Level $n$}
-                                                        ]
-                                                    ]
-                                                ]
-                                        ]
+                                [{\drone}, name=ch2, tier=child
+                                    [{\queen}, name=p3, tier=parent
+                                        [{\queen} ] {\draw[-,dashed] () to[out=south west,in=west] (p3);}
+                                        [{\drone} ] {\draw[-,dashed] () to[out=south,in= north east] (ch2);}
+                                    ]
                                 ]
+                            ]
+                            [{\drone}, tier=grandchild
+                                [{\queen}, name=ch3, tier=child
+                                    [{\queen}, name=p4, tier=parent
+                                        [{\queen} ] {\draw[-,dashed] () to[out=south west,in=west] (p4);}
+                                        [{\drone} ] {\draw[-,dashed] () to[out=south,in=north] (ch3);}
+                                    ]
+                                    [{\drone}, name=p5, tier=parent
+                                        [{\queen} ] {\draw[-,dashed] () to[out=south west,in=west] (p5);}
+                                    ]
+                                ]
+                            ]
                         ]
+                        [{\drone}, tier=greatgrandchild
+                            [{\queen}, tier=grandchild
+                                [{\queen}, name=ch4, tier=child
+                                    [{\queen}, name=p6, tier=parent
+                                        [{\queen} ] {\draw[-,dashed] () to[out=south west,in=west] (p6);}
+                                        [{\drone} ] {\draw[-,dashed] () to[out=south,in=north] (ch4);}
+                                    ]
+                                    [{\drone}, name=p7, tier=parent
+                                        [{\queen} ] {\draw[-,dashed] () to[out=south west,in=west] (p7);}
+                                    ]
+                                ]
+                                [{\drone}, name=ch5, tier=child
+                                    [{\queen}, name=p8, tier=parent
+                                        [{\queen} ] {\draw[-,dashed] () to[out=south west,in=west] (p8);}
+                                        [{\drone} ] {\draw[-,dashed] () to[out=south,in=north east] (ch5);}
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
                 ]
-                \end{forest}}]]>
+                [,phantom
+                    [,phantom
+                        [,phantom
+                            [{Level $n-2$},ellipse,fill=none,tier=child
+                                [{Level $n-1$},ellipse,fill=none,tier=parent, no edge
+                                    [{Level $n$},ellipse,fill=none, no edge ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+                ]
+            \end{forest}}]]>
 	    </latex-image-code>
 	    </image>
 	</figure>
