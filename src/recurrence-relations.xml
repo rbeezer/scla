@@ -42,65 +42,70 @@
             <image xml:id="bee-ancestors">
             <latex-image-code>
             <![CDATA[%
-            \newcommand{\drone}{\fbox{\male} }
+            \newcommand{\drone}{\color{yellow}\fbox{\male} }
             \newcommand{\queen}{\fbox{\female} }
             \resizebox{\linewidth}{!}{
             \begin{forest}
                 for tree={grow'=90},
-                before typesetting nodes={ for tree={circle,fill=yellow}},
-                where n children=0{tier=word}{}
-                [{\drone} 
-                        [{\queen} 
-                                [{\drone} 
-                                        [{\queen} 
-                                                [{\drone}, name=bee gp1 
-                                                        [{\queen}, name=bee p1  
-                                                                [{\drone} ] {\draw[->] () to[out=south west,in=west] (bee gp1);}
-                                                                [{\queen} ] {\draw[->] () to[out=south east,in=east] (bee p1);}
-                                                        ] 
-                                                ] 
-                                                [{\queen}, name=bee gp2 
-                                                        [{\drone}, name=bee p2 
-                                                                [{\queen} ] {\draw[->] () to[out=south east,in=east] (bee p2);} 
-                                                        ] 
-                                                        [{\queen}, name=bee p3   
-                                                                [{\drone} ] {\draw[->] () to[out=south west,in=west] (bee gp2);}
-                                                                [{\queen} ] {\draw[->] () to[out=south east,in=east] (bee p3);} 
-                                                        ] 
-                                                ] 
-                                        ] 
-                                ] 
-                                [{\queen} 
-                                        [{\drone} 
-                                                [{\queen}, name=bee gp3 
-                                                        [{\drone}, name=bee p4 
-                                                                [{\queen} ] {\draw[->] () to[out=south east,in=east] (bee p4);} 
-                                                        ] 
-                                                        [{\queen}, name=bee p5 
-                                                                [{\drone} ] {\draw[->] () to[out=south west,in=west] (bee gp3);}
-                                                                [{\queen} ] {\draw[->] () to[out=south east,in=east] (bee p5);} 
-                                                        ] 
-                                                 ] 
-                                        ] 
-                                        [{\queen} 
-                                                [{\drone}, name=bee gp4
-                                                        [{\queen}, name=bee p6 
-                                                                [{\drone} ] {\draw[->] () to[out=south west,in=west] (bee gp4);}
-                                                                [{\queen} ] {\draw[->] () to[out=south east,in=east] (bee p6);} 
-                                                        ] 
-                                                ] 
-                                                [{\queen}, name=bee gp5 
-                                                        [{\drone}, name=bee p7  
-                                                                [{\queen} ] {\draw[->] () to[out=south east,in=east] (bee p7);} 
-                                                        ] 
-                                                        [{\queen}, name=bee p8 
-                                                                [{\drone} ] {\draw[->] () to[out=south west,in=west] (bee gp5);}
-                                                                [{\queen} ] {\draw[->] () to[out=south east,in=east] (bee p8);} 
-                                                        ] 
-                                                ] 
-                                        ] 
-                                ] 
-                        ] 
+                where n children=0{tier=top}{},
+                [{\drone},circle,fill=black,for descendants={where={n==1}{{circle,fill=yellow}}{},where={n==2}{{circle,fill=black}}{}},
+                        [{\queen}
+                                [{\queen}
+                                        [{\queen}
+                                                [{\queen}, name=bee gp1
+                                                        [{\queen}, name=bee p1, tier=parent
+                                                                [{\queen} ] {\draw[->] () to[out=south west,in=west] (bee p1);}
+                                                                [{\drone} ] {\draw[->] () to[out=south,in= north] (bee gp1);}
+                                                        ]
+                                                        [{\drone}, name=bee p2, tier=parent
+                                                                [{\queen} ] {\draw[->] () to[out=south west,in=west] (bee p2);}
+                                                        ]
+                                                ]
+                                                [{\drone}, name=bee gp2
+                                                        [{\queen}, name=bee p3, tier=parent
+                                                                [{\queen} ] {\draw[->] () to[out=south west,in=west] (bee p3);}
+                                                                [{\drone} ] {\draw[->] () to[out=south,in= north east] (bee gp2);}
+                                                        ]
+                                                ]
+                                        ]
+                                        [{\drone}
+                                                [{\queen}, name=bee gp3
+                                                        [{\queen}, name=bee p4, tier=parent
+                                                                [{\queen} ] {\draw[->] () to[out=south west,in=west] (bee p4);}
+                                                                [{\drone} ] {\draw[->] () to[out=south,in=north] (bee gp3);}
+                                                        ]
+                                                        [{\drone}, name=bee p5, tier=parent
+                                                                [{\queen} ] {\draw[->] () to[out=south west,in=west] (bee p5);}
+                                                        ]
+                                                ]
+                                        ]
+                                ]
+                                [{\drone}
+                                         [{\queen}
+                                                [{\queen}, name=bee gp4
+                                                        [{\queen}, name=bee p6, tier=parent
+                                                                [{\queen} ] {\draw[->] () to[out=south west,in=west] (bee p6);}
+                                                                [{\drone} ] {\draw[->] () to[out=south,in=north] (bee gp4);}
+                                                        ]
+                                                        [{\drone}, name=bee p7, tier=parent
+                                                                [{\queen} ] {\draw[->] () to[out=south west,in=west] (bee p7);}
+                                                        ]
+                                                ]
+                                                [{\drone}, name=bee gp5
+                                                        [{\queen}, name=bee p8, tier=parent
+                                                                [{\queen} ] {\draw[->] () to[out=south west,in=west] (bee p8);}
+                                                                [{\drone} ] {\draw[->] () to[out=south,in=north east] (bee gp5);}
+                                                        ]
+                                              ]
+                                                [{Level $n-2$}, no edge, for descendants={{no edge,fill=none,node options={ellipse}}}
+                                                    [{Level $n-1$}, tier=parent
+                                                        [{Level $n$}
+                                                        ]
+                                                    ]
+                                                ]
+                                        ]
+                                ]
+                        ]
                 ]
                 \end{forest}}]]>
 	    </latex-image-code>
@@ -113,12 +118,12 @@
 
     <example xml:id="example-elderberries">
         <title>Elderberries</title>
-	
+
 	<p>A certain subspecies of elderberry tree produces its fruit in berry clusters. A branch that is <q>new wood</q> (that just sprouted the previous season) will produce one fruit cluster, and it will sprout one new branch. The following year, any <q>new wood</q> branches become <q>seasoned wood</q>, and produce three berry clusters and sprout two more branches. Finally, in the year that follows, any <q>seasoned wood</q> branches become <q>old wood</q>, and produce neither berry clusters nor sprout new branches.</p>
 
 	<p>If we start at year 1 with just a single branch of <q>new wood</q>, then on year <m>n</m>, how many berry clusters will we have? Some notation will help. In year <m>n</m>, let <m>b_n</m> represent the number of berry clusters, <m>w_n</m> be the number of <q>new wood</q> branches, and <m>s_n</m> be the number of <q>seasoned wood</q> branches. The description of how branches and berry clusters are formed tells us <md>
 	<mrow>b_n&amp;=w_n+3s_n</mrow>
-	<mrow>w_n&amp;=w_{n-1}+2s_{n-1}</mrow> 
+	<mrow>w_n&amp;=w_{n-1}+2s_{n-1}</mrow>
         <mrow>s_n&amp;=w_{n-1}\text{,}</mrow>
 	</md> and this in turn tells us that <md>
 	<mrow>b_n&amp;=w_n+3s_n</mrow>
@@ -187,7 +192,7 @@
     <mrow xml:id="recurrence-diagonal-equation">\vect{a}_n&amp;=PD^{n-k}\inverse{P}\vect{a}_{k}\text{.}</mrow>
     </mdn>There are two ways to proceed to find a formula for <m>a_{n}</m>. If we have an explicit diagonalization of <m>A</m> (meaning we explicitly know <m>P</m>, <m>D</m>, and <m>\inverse{P}</m>) then we can simply multiply the right hand side through, and the first element of the resulting vector gives a formula for <m>a_{n}</m>.</p>
 
-    <p>It may be difficult to explicitly diagonalize <m>A</m> though, since finding <m>\inverse{P}</m> can take time. If that's the case, we don't actually need to explicitly work out the right side of <xref ref="recurrence-diagonal-equation"/>. We can just acknowledge that when all is said and done on the right side, the result will be a linear combination of the eigenvalues of <m>A</m> raised to the <m>n</m>th power. To find the coefficients of this linear combination, we can consider them as variables, and use the known initial values of the sequence to set up a system of equations that will determine the coefficients.</p> 
+    <p>It may be difficult to explicitly diagonalize <m>A</m> though, since finding <m>\inverse{P}</m> can take time. If that's the case, we don't actually need to explicitly work out the right side of <xref ref="recurrence-diagonal-equation"/>. We can just acknowledge that when all is said and done on the right side, the result will be a linear combination of the eigenvalues of <m>A</m> raised to the <m>n</m>th power. To find the coefficients of this linear combination, we can consider them as variables, and use the known initial values of the sequence to set up a system of equations that will determine the coefficients.</p>
 
     <p>These considerations lead us to:</p>
 
@@ -211,7 +216,7 @@
              </md>We already know this matrix has rank <m>n-1</m> since <m>\lambda_j</m> is an eigenvalue, and the bottom <m>n-1</m> rows are clearly linearly independent. So we can ignore the top row. Row reducing the remaining rows is then rather easy, and reveals that <m>\vect{x}_j=\transpose{\begin{bmatrix}\lambda_j^{n-1}&amp;\lambda_j^{n-2}&amp;\cdots&amp;1\end{bmatrix}}</m>. This establishes the form of <m>P</m> specified in the claim.</p>
 
              <p>Lastly, if <m>J</m> from the first item was diagonal with distinct eignenvalues as in the second item, and we were to multiply out the matrix product from the first item, we would have a linear combination of the powers of the eigenvalues. So <m>a_n=\sum_{i=1}^{n}x_i\lambda_i^n</m>.</p>
-        </proof> 
+        </proof>
     </theorem>
 
     <example xml:id="example-context-free-recursion">
@@ -305,7 +310,7 @@
         <exercisegroup>
             <introduction>
                 <p>These exercises use the same recurrence relation that the Fibonacci numbers have. You can use the work from <xref ref="example-fibonacci"/> to assist with your calculations.</p>
-            </introduction> 
+            </introduction>
 
             <exercise>
                 <!-- Contextual exercise from example -->
@@ -323,7 +328,7 @@
                     <mrow>&amp;=\frac{1}{\sqrt{5}}\left(\left(\frac{3+\sqrt{5}}{2}\right)\left(\frac{1+\sqrt{5}}{2}\right)^{n-1}-\left(\frac{3-\sqrt{5}}{2}\right)\left(\frac{1-\sqrt{5}}{2}\right)^{n-1}\right)\text{.}</mrow>
                     </md></p>
 
-                    <p>We can use this to compute how many great<m>^{20}</m> grandparents a male honeybee has. Note that a great<m>^{0}</m> grandparent is already a level 2 ancestor, so we are looking for <m>a_{22}</m>.<md> 
+                    <p>We can use this to compute how many great<m>^{20}</m> grandparents a male honeybee has. Note that a great<m>^{0}</m> grandparent is already a level 2 ancestor, so we are looking for <m>a_{22}</m>.<md>
                     <mrow>a_{22}&amp;=\frac{1}{\sqrt{5}}\left(\left(\frac{3+\sqrt{5}}{2}\right)\left(\frac{1+\sqrt{5}}{2}\right)^{21}-\left(\frac{3-\sqrt{5}}{2}\right)\left(\frac{1-\sqrt{5}}{2}\right)^{21}\right)</mrow>
                     <mrow>&amp;=28657\text{.}</mrow>
                     </md>So a male honeybee has 28657 ancestors at the 22nd level. That is, he has 28657 great<m>^{20}</m> grandparents.</p>
@@ -362,7 +367,7 @@
                 <mrow>&amp;=\frac{1}{3}\begin{bmatrix}2&amp;-1\end{bmatrix}\begin{bmatrix}2^{n-2}&amp;0\\0&amp;(-1)^{n-2}\end{bmatrix}\colvector{5\\-2}</mrow>
                 <mrow>&amp;=\frac{1}{3}\begin{bmatrix}2^{n-1}&amp;(-1)^{n-1}\end{bmatrix}\colvector{5\\-2}</mrow>
                 <mrow>&amp;=\frac{1}{3}\left(5(2)^{n-1}-2(-1)^{n-1}\right)\text{.}</mrow>
-                </md>So <m>b_{6}=\frac{1}{3}\left(5(2)^{5}+2\right)=54</m>. If the recurrence holds, there will be <m>54</m> berry clusters in the <m>6</m>th year.</p> 
+                </md>So <m>b_{6}=\frac{1}{3}\left(5(2)^{5}+2\right)=54</m>. If the recurrence holds, there will be <m>54</m> berry clusters in the <m>6</m>th year.</p>
             </solution>
         </exercise>
 
@@ -407,7 +412,7 @@
                 <mrow>&amp;\approx0.55496\ldots</mrow>
                 <mrow>\mu&amp;=\frac{2}{3}+\frac{e^{2\pi i/3}}{3}\sqrt[3]{\frac{7+21i\sqrt{3}}{2}}+\frac{e^{4\pi i/3}}{3}\sqrt[3]{\frac{7-21i\sqrt{3}}{2}}</mrow>
                 <mrow>&amp;\approx-0.80194\ldots\text{.}</mrow>
-                </md>Since these are distinct, <m>A</m> is diagonalizable. Theorem <xref ref="theorem-linear-recurrence"/> tells us that<md> 
+                </md>Since these are distinct, <m>A</m> is diagonalizable. Theorem <xref ref="theorem-linear-recurrence"/> tells us that<md>
                 <mrow>d_n&amp;=\transpose{\colvector{1\\0\\0}}\begin{bmatrix}\kappa^2&amp;\lambda^2&amp;\mu^2\\\kappa&amp;\lambda&amp;\mu\\1&amp;1&amp;1\end{bmatrix}\begin{bmatrix}\kappa&amp;0&amp;0\\0&amp;\lambda&amp;0\\0&amp;0&amp;\mu\end{bmatrix}^{n-3}\inverse{\begin{bmatrix}\kappa^2&amp;\lambda^2&amp;\mu^2\\\kappa&amp;\lambda&amp;\mu\\1&amp;1&amp;1\end{bmatrix}}\colvector{4\\1\\2}</mrow>
                 <mrow>&amp;=\transpose{\colvector{\kappa^2\\\lambda^2\\\mu^2}}\begin{bmatrix}\kappa^{n-3}&amp;0&amp;0\\0&amp;\lambda^{n-3}&amp;0\\0&amp;0&amp;\mu^{n-3}\end{bmatrix}\frac{\begin{bmatrix}\lambda-\mu&amp;-\lambda^2+\mu^2&amp;\lambda\mu(\lambda-\mu)\\-\kappa+\mu&amp;\kappa^2-\mu^2&amp;-\kappa\mu(\kappa-\mu)\\\kappa-\lambda&amp;-\kappa^2+\lambda^2&amp;\kappa\lambda(\kappa-\lambda)\end{bmatrix}}{(\kappa-\lambda)(\kappa-\mu)(\lambda-\mu)}\colvector{4\\1\\2}</mrow>
                 <mrow>&amp;=\frac{\begin{bmatrix}\kappa^{n-1}&amp;\lambda^{n-1}&amp;\mu^{n-1}\end{bmatrix}}{(\kappa-\lambda)(\kappa-\mu)(\lambda-\mu)}\colvector{4\lambda-4\mu-\lambda^2+\mu^2+2\lambda\mu(\lambda-\mu)\\-4\kappa+4\mu+\kappa^2-\mu^2-2\kappa\mu(\kappa-\mu)\\4\kappa-4\lambda-\kappa^2+\lambda^2+2\kappa\lambda(\kappa-\lambda)}</mrow>
@@ -502,7 +507,7 @@
                 </statement>
                 <solution>
                     <p>We need to investigate the matrix <m>A=\begin{bmatrix}6&amp;-9\\1&amp;0\end{bmatrix}</m>. We find its characteristic polynomial to be <m>x^2-6x+9</m>, with <m>3</m> as a repeated eigenvalue. <m>A</m> can't be diagonalizable, or else it would be similar to <m>3I</m>, in which case it would have to <emph>equal </emph> <m>3I</m>. So <m>A</m> is similar to a matrix of the form <m>\begin{bmatrix}3&amp;1\\0&amp;3\end{bmatrix}</m>. There are many ways to explicitly realize this relationship, but one way is <me>\begin{bmatrix}6&amp;-9\\1&amp;0\end{bmatrix}=\begin{bmatrix}3&amp;4\\1&amp;1\end{bmatrix}\begin{bmatrix}3&amp;1\\0&amp;3\end{bmatrix}\begin{bmatrix}-1&amp;4\\1&amp;-3\end{bmatrix}\text{.}</me>Now we can apply Theorem <xref ref="theorem-linear-recurrence"/>:<md>
-                    <mrow>u_n&amp;=\begin{bmatrix}1&amp;0\end{bmatrix}\begin{bmatrix}3&amp;4\\1&amp;1\end{bmatrix}\begin{bmatrix}3&amp;1\\0&amp;3\end{bmatrix}^{n-2}\begin{bmatrix}-1&amp;4\\1&amp;-3\end{bmatrix}\colvector{5\\2}</mrow> 
+                    <mrow>u_n&amp;=\begin{bmatrix}1&amp;0\end{bmatrix}\begin{bmatrix}3&amp;4\\1&amp;1\end{bmatrix}\begin{bmatrix}3&amp;1\\0&amp;3\end{bmatrix}^{n-2}\begin{bmatrix}-1&amp;4\\1&amp;-3\end{bmatrix}\colvector{5\\2}</mrow>
                     <mrow>&amp;=\begin{bmatrix}3&amp;4\end{bmatrix}\begin{bmatrix}3^{n-2}&amp;(n-2)3^{n-3}\\0&amp;3^{n-2}\end{bmatrix}\colvector{3\\-1}</mrow>
                     <mrow>&amp;=\begin{bmatrix}3^{n-1}&amp;(n-2)3^{n-2}+4\cdot3^{n-2}\end{bmatrix}\colvector{3\\-1}</mrow>
                     <mrow>&amp;=3^{n}-(n+2)3^{n-2}\text{.}</mrow>
