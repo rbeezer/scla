@@ -1,0 +1,624 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- This file is part of the book                -->
+<!--                                              -->
+<!--      A Second Course in Linear Algebra       -->
+<!--                                              -->
+<!-- Copyright (C) 2004-2014  Robert A. Beezer    -->
+<!-- See the file COPYING for copying conditions. -->
+
+<section xml:id="section-recurrence-relations">
+    <title>Linear Recurrence Relations</title>
+        <!--<author>
+        <personname>Alex Jordan</personname>
+        <department>Department of Mathematics</department>
+        <institution>Portland Community College<br />Portland, Oregon, USA</institution>
+        <email>alex.jordan@pcc.edu</email>
+    </author>-->
+
+    <p>Consider a sequence where a few initial terms are given, and then each successive term is defined using the terms that preceded it.  For instance, we might begin a sequence with <m>\set{a_1,a_2,\ldots}=\set{1,2,\ldots}</m> and then require <m>a_n=3a_{n-1}-a_{n-2}</m>. This establishes all of the terms that follow.  For instance, <md>
+    <mrow>a_3&amp;=3a_2-a_1&amp;a_4&amp;=3a_3-a_2</mrow>
+    <mrow>&amp;=3(2)-1&amp;&amp;=3(5)-2</mrow>
+    <mrow>&amp;=5&amp;&amp;=13</mrow>
+    </md> and in this way the sequence elements will all be determined: <m>\set{1,2,5,13,34,\ldots}</m>. Sequences such as this are of special interest, and motivate us to introduce vocabulary for referring to them.</p>
+
+    <definition xml:id="definition-linear-recurrence"> <!-- was DS -->
+    <title>Linear Recurrence Relation</title>
+        <statement>
+            <p>When the terms of a sequence <m>\set{a_n}</m> admit a relation of the form <m>a_n=L(a_{n-1},\ldots,a_{n-k})</m>, where <m>k</m> is fixed, and <m>L</m> is a linear function on <m>k</m> variables, we refer to the relation as a linear recurrence of depth <m>k</m>. The first several terms of the sequence may or may not respect the recurrence relation; but it is required that once <m>n</m> is large enough, the recurrence relation holds.</p>
+        </statement>
+    </definition>
+
+    <subsection xml:id="subsection-recurrence-relation-examples">
+    <title>Examples</title>
+
+    <example xml:id="example-honeybees">
+        <title>Honeybee Ancestors</title>
+
+        <p>Male honeybees (also known as drones) hatch from unfertilized eggs, and so they have a mother but no father. Female honeybees (both queens and workers) hatch from fertilized eggs, and so each female honeybee has two parents (one of each sex). This leads to an interesting family tree for any single honeybee. If we consider a male, he only has one parent. That parent must have been female, so our male had two grandparents. As we continue to count, we will ignore any possibility for tangled family trees, which is admittedly unrealistic. Figure <xref ref="figure-bee-ancestors"/> displays the bees family tree going back several generations.</p>
+
+        <figure xml:id="figure-bee-ancestors">
+            <caption>Honeybee Ancestors</caption>
+            <image xml:id="bee-ancestors">
+            <latex-image-code>
+            <![CDATA[%
+            \newcommand{\drone}{\color{yellow}\fbox{\male} }
+            \newcommand{\queen}{\fbox{\female} }
+            \resizebox{0.6\linewidth}{!}{
+            \begin{forest}
+                for tree={grow'=90},
+                where n children=0{tier=grandparent}{},
+                [,phantom
+                [{\drone},circle,fill=black,for descendants={where={n==1}{{circle,fill=yellow}}{},where={n==2}{{circle,fill=black}}{}},
+                    [{\queen}
+                        [{\queen}, tier=greatgrandchild
+                            [{\queen}, tier=grandchild
+                                [{\queen}, name=ch1, tier=child
+                                    [{\queen}, name=p1, tier=parent
+                                        [{\queen} ] {\draw[-,dashed] () to[out=south west,in=west] (p1);}
+                                        [{\drone} ] {\draw[-,dashed] () to[out=south,in= north] (ch1);}
+                                    ]
+                                    [{\drone}, name=p2, tier=parent
+                                        [{\queen} ] {\draw[-,dashed] () to[out=south west,in=west] (p2);}
+                                    ]
+                                ]
+                                [{\drone}, name=ch2, tier=child
+                                    [{\queen}, name=p3, tier=parent
+                                        [{\queen} ] {\draw[-,dashed] () to[out=south west,in=west] (p3);}
+                                        [{\drone} ] {\draw[-,dashed] () to[out=south,in= north east] (ch2);}
+                                    ]
+                                ]
+                            ]
+                            [{\drone}, tier=grandchild
+                                [{\queen}, name=ch3, tier=child
+                                    [{\queen}, name=p4, tier=parent
+                                        [{\queen} ] {\draw[-,dashed] () to[out=south west,in=west] (p4);}
+                                        [{\drone} ] {\draw[-,dashed] () to[out=south,in=north] (ch3);}
+                                    ]
+                                    [{\drone}, name=p5, tier=parent
+                                        [{\queen} ] {\draw[-,dashed] () to[out=south west,in=west] (p5);}
+                                    ]
+                                ]
+                            ]
+                        ]
+                        [{\drone}, tier=greatgrandchild
+                            [{\queen}, tier=grandchild
+                                [{\queen}, name=ch4, tier=child
+                                    [{\queen}, name=p6, tier=parent
+                                        [{\queen} ] {\draw[-,dashed] () to[out=south west,in=west] (p6);}
+                                        [{\drone} ] {\draw[-,dashed] () to[out=south,in=north] (ch4);}
+                                    ]
+                                    [{\drone}, name=p7, tier=parent
+                                        [{\queen} ] {\draw[-,dashed] () to[out=south west,in=west] (p7);}
+                                    ]
+                                ]
+                                [{\drone}, name=ch5, tier=child
+                                    [{\queen}, name=p8, tier=parent
+                                        [{\queen} ] {\draw[-,dashed] () to[out=south west,in=west] (p8);}
+                                        [{\drone} ] {\draw[-,dashed] () to[out=south,in=north east] (ch5);}
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+                [,phantom
+                    [,phantom
+                        [,phantom
+                            [{Level $n-2$},ellipse,fill=none,tier=child
+                                [{Level $n-1$},ellipse,fill=none,tier=parent, no edge
+                                    [{Level $n$},ellipse,fill=none, no edge ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+                ]
+            \end{forest}}]]>
+	    </latex-image-code>
+	    </image>
+	</figure>
+
+        <p>If we define <m>a_n</m> to be the number of ancestors at level <m>n</m>, where level 1 has our drone's parent, level 2 has his grandparents, and so on, then we see in Figure <xref ref="figure-bee-ancestors"/> the sequence <m>\set{a_1,a_2,\ldots}=\set{1,2,3,5,8,\ldots}</m>. Note that every bee, regardless of sex, has precisely one mother and precisely one grandfather. The bees at level <m>n-1</m> have their mother at level <m>n</m>, and the bees at level <m>n-2</m> have their grandfather at level <m>n</m>. Since this accounts for all of the bees at level <m>n</m>, partitioned according to sex, it tells us that <me>a_n=a_{n-1}+a_{n-2}\text{,}</me> giving us a recurrence relation. The linear function <m>L</m> referred to in Definition <xref ref="definition-linear-recurrence"/> is defined simply by <m>L(x,y)=x+y</m>, and we have <m>a_n=L(a_{n-1},a_{n-2})</m>.</p>
+
+    </example>
+
+    <example xml:id="example-elderberries">
+        <title>Elderberries</title>
+
+	<p>A certain subspecies of elderberry tree produces its fruit in berry clusters. A branch that is <q>new wood</q> (that just sprouted the previous season) will produce one fruit cluster, and it will sprout one new branch. The following year, any <q>new wood</q> branches become <q>seasoned wood</q>, and produce three berry clusters and sprout two more branches. Finally, in the year that follows, any <q>seasoned wood</q> branches become <q>old wood</q>, and produce neither berry clusters nor sprout new branches.</p>
+
+	<p>If we start at year 1 with just a single branch of <q>new wood</q>, then on year <m>n</m>, how many berry clusters will we have? Some notation will help. In year <m>n</m>, let <m>b_n</m> represent the number of berry clusters, <m>w_n</m> be the number of <q>new wood</q> branches, and <m>s_n</m> be the number of <q>seasoned wood</q> branches. The description of how branches and berry clusters are formed tells us <md>
+	<mrow>b_n&amp;=w_n+3s_n</mrow>
+	<mrow>w_n&amp;=w_{n-1}+2s_{n-1}</mrow>
+        <mrow>s_n&amp;=w_{n-1}\text{,}</mrow>
+	</md> and this in turn tells us that <md>
+	<mrow>b_n&amp;=w_n+3s_n</mrow>
+	<mrow>&amp;=(w_{n-1}+2s_{n-1})+3w_{n-1}</mrow>
+	<mrow>&amp;=(w_{n-1}+3s_{n-1})+3w_{n-1}-s_{n-1}</mrow>
+	<mrow>&amp;=b_{n-1}+(3w_{n-2}+6s_{n-2})-w_{n-2}</mrow>
+	<mrow>&amp;=b_{n-1}+2w_{n-2}+6s_{n-2}</mrow>
+	<mrow>&amp;=b_{n-1}+2b_{n-2}\text{.}</mrow>
+	</md> Thus the number of berry clusters in year <m>n</m> satisfies the recurrence relation <m>b_n=b_{n-1}+2b_{n-2}</m>. The linear function <m>L</m> referred to in Definition <xref ref="definition-linear-recurrence"/> is defined by <m>L(x,y)=x+2y</m>, and we have <m>b_n=L(b_{n-1},b_{n-2})</m>. The initial terms are <m>\set{b_1,b_2,\ldots}=\set{1,4,\ldots}</m>.</p>
+    </example>
+
+    <p>Well, we've seen a few examples of linear recurrence relations, but what does any of this have to do with linear algebra? Consider what would happen if you needed to know the hundredth term of a recursive sequence, knowing only the values of the first few terms and a recurrence relation. You could tediously compute away, calculating each term in the sequence until you reached the hundredth term. Fortunately, matrix diagonalization will provide us with a much more efficient technique.</p>
+
+    <example xml:id="example-fibonacci">
+	<title>The Fibonacci Sequence</title>
+
+	<p>The Fibonacci Sequence is a famous sequence with a simple linear recurrence relation. The sequence begins <m>\set{f_1,f_2,\ldots}=\set{1,1,\ldots}</m> and has the recurrence relation <me xml:id="fibonacci-recurrence">f_n=f_{n-1}+f_{n-2}\text{.}</me> (This is the same recurrence relation as with the bees in Example <xref ref="example-honeybees"/>, but for the bees the initial terms of the sequence were <m>\set{1,2,\ldots}</m>.)  This gives us the Fibonacci Sequence <me xml:id="fibonacci-sequence">\set{f_1,f_2,\ldots}=\set{1,1,2,3,5,8,13,21,35,\ldots}\text{,}</me> which arises several places in nature and mathematics. For example, we can see these same values arising in the ancestor count of honeybees from Example <xref ref="example-honeybees"/>.</p>
+
+	<p>We are setting out to find a simple formula for <m>f_n</m>, so that if needed, we could compute something like the hundredth Fibonacci number quickly and avoid calculating each value along the way.  We casually make the observation that <md>
+	<mrow>f_n&amp;=f_{n-1}+f_{n-2}</mrow>
+	<mrow>f_{n-1}&amp;=f_{n-1}\text{.}</mrow>
+	</md>Experience with linear algebra makes us realize that these two equations can be viewed as a single matrix equation: <md>
+	<mrow>\colvector{f_n\\f_{n-1}}&amp;=\begin{bmatrix}1&amp;1\\1&amp;0\end{bmatrix}\colvector{f_{n-1}\\f_{n-2}}\text{.}</mrow>
+	</md>So a pair of adjacent Fibonacci numbers <m>\colvector{f_n\\f_{n-1}}</m> can be obtained from multiplying the matrix <m>A=\begin{bmatrix}1&amp;1\\1&amp;0\end{bmatrix}</m> with the previous pair of adjacent Fibonacci numbers. This implies that <me>\colvector{f_n\\f_{n-1}}=A^{n-2}\colvector{f_2\\f_1}=A^{n-2}\colvector{1\\1}\text{.}</me> If we can diagonalize the matrix <m>A</m>, we will be able to take a great shortcut for evaluating the right hand side.</p>
+
+	<p>Diagonalizing <m>A</m>, we find <md>
+	<mrow>A=\begin{bmatrix}1&amp;1\\1&amp;0\end{bmatrix}&amp;=\begin{bmatrix}G&amp;g\\1&amp;1\end{bmatrix}\begin{bmatrix}G&amp;0\\0&amp;g\end{bmatrix}\inverse{\begin{bmatrix}G&amp;g\\1&amp;1\end{bmatrix}}</mrow>
+	<mrow>&amp;=\begin{bmatrix}G&amp;g\\1&amp;1\end{bmatrix}\begin{bmatrix}G&amp;0\\0&amp;g\end{bmatrix}\frac{1}{\sqrt{5}}\begin{bmatrix}1&amp;-g\\-1&amp;G\end{bmatrix}\text{,}</mrow>
+	</md>where <m>G</m> is the larger (positive) golden ratio <m>\frac{1+\sqrt{5}}{2}</m>, and <m>g</m> is the smaller (negative) golden ratio <m>\frac{1-\sqrt{5}}{2}</m>, and <m>G</m> and <m>g</m> are the eigenvalues of <m>A</m>.</p>
+
+	<p>Now let's return to the issue of finding the <m>n</m>th Fibonacci number. In the following, we will make use of the fact that <m>1-g=G</m>. We have<md>
+	<mrow>\colvector{f_n\\f_{n-1}}&amp;=A^{n-2}\colvector{1\\1}</mrow>
+	<mrow>&amp;=\begin{bmatrix}G&amp;g\\1&amp;1\end{bmatrix}\begin{bmatrix}G&amp;0\\0&amp;g\end{bmatrix}^{n-2}\frac{1}{\sqrt{5}}\begin{bmatrix}1&amp;-g\\-1&amp;G\end{bmatrix}\colvector{1\\1}</mrow>
+	<mrow>&amp;=\frac{1}{\sqrt{5}}\begin{bmatrix}G&amp;g\\1&amp;1\end{bmatrix}\begin{bmatrix}G^{n-2}&amp;0\\0&amp;g^{n-2}\end{bmatrix}\colvector{1-g\\-1+G}</mrow>
+        <mrow>&amp;=\frac{1}{\sqrt{5}}\begin{bmatrix}G^{n-1}&amp;g^{n-1}\\G^{n-2}&amp;g^{n-2}\end{bmatrix}\colvector{G\\-g}</mrow>
+        <mrow>\colvector{f_n\\f_{n-1}}&amp;=\frac{1}{\sqrt{5}}\colvector{G^{n}-g^{n}\\G^{n-1}-g^{n-1}}\text{.}</mrow>
+	</md>Thus we have found a fairly simple formula for the <m>n</m>th Fibonacci number: <mdn>
+	<mrow number="no">f_n&amp;=\frac{1}{\sqrt{5}}\left(G^n-g^n\right)</mrow>
+	<mrow xml:id="fibonacci-formula">&amp;=\frac{1}{\sqrt{5}}\left(\left(\frac{1+\sqrt{5}}{2}\right)^n-\left(\frac{1-\sqrt{5}}{2}\right)^n\right)\text{.}</mrow>
+	</mdn></p>
+
+	<p>We could stop here, but with this formula we can make one nice simplification. Since <m>\left\vert g\right\vert&lt;1</m>, for large <m>n</m>, the term <m>\frac{1}{\sqrt{5}}g^n</m> in this formula is very small, and can be neglected if we round the other term to the nearest whole number. In fact we are so fortunate in this regard that we can make that simplification for all <m>n\geq1</m>. So we have an even simpler formula for the <m>n</m>th Fibonacci number: <mdn>
+        <mrow number="no">f_n&amp;=\operatorname{round}\left(\frac{1}{\sqrt{5}}G^n\right)</mrow>
+        <mrow xml:id="simplified-fibonacci-formula">&amp;=\operatorname{round}\left(\frac{1}{\sqrt{5}}\left(\frac{1+\sqrt{5}}{2}\right)^n\right)\text{.}</mrow>
+        </mdn></p>
+
+    </example>
+
+    </subsection>
+
+    <subsection xml:id="subsection-recurrence-relation-general">
+    <title>The general approach</title>
+
+    <p>Can we generalize what happened with the Fibonacci numbers in Example <xref ref="example-fibonacci"/>? We began with a recurrence relation <me>a_{n}=L(a_{n-1},\ldots,a_{n-k})=c_{n-1}a_{n-1}+\cdots+c_{n-k}a_{n-k}\text{.}</me> We considered a trivial additional equation <me>a_{n-1}=a_{n-1}\text{.}</me> In general, we may need to consider more such trivial equations, and we can obtain the system of equations <md>
+    <mrow>a_{n}&amp;=c_{n-1}a_{n-1}+\cdots+c_{n-(k-1)}a_{n-(k-1)}+c_{n-k}a_{n-k}</mrow>
+    <mrow>a_{n-1}&amp;=\phantom{c_{n-1}}a_{n-1}</mrow>
+    <mrow>\vdots&amp;=\phantom{c_{n-1}a_{n-1}+{}}\ddots</mrow>
+    <mrow>a_{n-(k-1)}&amp;=\phantom{c_{n-1}a_{n-1}+\cdots+c_{n-(k-1)}}a_{n-(k-1)}\text{,}</mrow>
+    </md>which we interpret as a matrix equation <mdn>
+    <mrow number="no">\colvector{a_n\\a_{n-1}\\\vdots\\a_{n-(k-1)}}&amp;=\begin{bmatrix}c_{n-1}&amp;c_{n-2}&amp;\cdots&amp;c_{n-(k-1)}&amp;c_{n-k}\\1&amp;0&amp;\cdots&amp;0&amp;0\\0&amp;1&amp;\ddots&amp;0&amp;0\\\vdots&amp;\ddots&amp;\ddots&amp;\vdots&amp;\vdots\\0&amp;0&amp;\cdots&amp;1&amp;0\end{bmatrix}\colvector{a_{n-1}\\a_{n-2}\\\vdots\\a_{n-k}}</mrow>
+    <mrow xml:id="eq-matrix-recursion">\vect{a}_n&amp;=A\vect{a}_{n-1}\text{.}</mrow>
+    </mdn></p>
+
+    <p>If we know the first <m>k</m> terms of the sequence, then we know the vector <m>\vect{a}_{k}</m>, and we can recursively apply equation <xref ref="eq-matrix-recursion"/> to get that <me>\vect{a}_n=A^{n-k}\vect{a}_{k}\text{.}</me> Generally, raising a matrix <m>A</m> to high powers would be difficult or time-consuming. But if we can diagonalize <m>A</m> first (or at least find its Jordan canonical form discussed in Section <xref ref="section-jordan-canonical-form"/>) it becomes fast and easy. For now let's assume that <m>A</m> is diagonalizable. If <m>D</m> is a diagonal matrix similar to <m>A</m>, having the eigenvalues of <m>A</m> for its entries, and <m>A=PD\inverse{P}</m>, then <mdn>
+    <mrow number="no">\vect{a}_n&amp;=A^{n-k}\vect{a}_{k}</mrow>
+    <mrow xml:id="recurrence-diagonal-equation">\vect{a}_n&amp;=PD^{n-k}\inverse{P}\vect{a}_{k}\text{.}</mrow>
+    </mdn>There are two ways to proceed to find a formula for <m>a_{n}</m>. If we have an explicit diagonalization of <m>A</m> (meaning we explicitly know <m>P</m>, <m>D</m>, and <m>\inverse{P}</m>) then we can simply multiply the right hand side through, and the first element of the resulting vector gives a formula for <m>a_{n}</m>.</p>
+
+    <p>It may be difficult to explicitly diagonalize <m>A</m> though, since finding <m>\inverse{P}</m> can take time. If that's the case, we don't actually need to explicitly work out the right side of <xref ref="recurrence-diagonal-equation"/>. We can just acknowledge that when all is said and done on the right side, the result will be a linear combination of the eigenvalues of <m>A</m> raised to the <m>n</m>th power. To find the coefficients of this linear combination, we can consider them as variables, and use the known initial values of the sequence to set up a system of equations that will determine the coefficients.</p>
+
+    <p>These considerations lead us to:</p>
+
+    <theorem xml:id="theorem-linear-recurrence">
+        <title>Solutions to Linear Recurrence Relations</title>
+        <statement>
+            <p>If <m>a_n=c_{n-1}a_{n-1}+\cdots+c_{n-k}a_{n-k}</m> is a linear recurrence relation of depth <m>k</m>, let <m>A</m> be the matrix defined as <me>A=\begin{bmatrix}c_{n-1}&amp;c_{n-2}&amp;\cdots&amp;c_{n-(k-1)}&amp;c_{n-k}\\1&amp;0&amp;\cdots&amp;0&amp;0\\0&amp;1&amp;\ddots&amp;0&amp;0\\\vdots&amp;\ddots&amp;\ddots&amp;\vdots&amp;\vdots\\0&amp;0&amp;\cdots&amp;1&amp;0\end{bmatrix}\text{.}</me></p>
+            <todo>This is a companion matrix; reference that.</todo>
+            <ul>
+                <li>If <m>A=PJ\inverse{P}</m>, then <me>a_n=\begin{bmatrix}1&amp;0&amp;\cdots&amp;0\end{bmatrix}PJ^{n-k}\inverse{P}\colvector{a_k\\a_{k-1}\\\vdots\\a_1}\text{.}</me> This is helpful if <m>J</m> is diagonal or in Jordan canonical form. Note that multiplication by <m>\begin{bmatrix}1&amp;0&amp;\cdots&amp;0\end{bmatrix}</m> is just a way to extract the first element of the vector that follows.</li>
+                <li>If <m>A</m> is diagonalizable with distinct eigenvalues <m>\lambda_1,\ldots,\lambda_n</m>, then <m>A=PD\inverse{P}</m> where <m>D</m> is the diagonal matrix <m>\Delta(\lambda_1,\ldots,\lambda_n)</m> and <m>P</m> is the row-permuted Vandermonde matrix <me>P=\begin{bmatrix}\lambda_1^{n-1}&amp;\lambda_2^{n-1}&amp;\cdots&amp;\lambda_n^{n-1}\\\lambda_1^{n-2}&amp;\lambda_2^{n-2}&amp;\cdots&amp;\lambda_n^{n-2}\\\vdots&amp;\vdots&amp;\ddots&amp;\vdots\\1&amp;1&amp;\cdots&amp;1\end{bmatrix}\text{.}</me>Note that an explicit formula for the inverse of a Vandermonde matrix is known (see Section <xref ref="section-vandermonde"/>).</li>
+                <li>If <m>A</m> is diagonalizable with distinct eigenvalues <m>\lambda_1,\ldots,\lambda_n</m>, then for some coefficients <m>x_i</m>, <me>a_n=\sum_{i=1}^{n}x_i\lambda_i^n\text{.}</me></li>
+            </ul>
+        </statement>
+        <proof>
+             <p>The first item has been proved already in the discussion leading to this theorem.</p>
+
+             <p>For the second item, we know from the general diagonalization technique that the <m>j</m>th column of <m>P</m> needs to be an eignevector for <m>A</m> with eigenvalue <m>\lambda_j</m>. To find such an eigenvector, we examine the equation <md>
+             <mrow>\left(A-\lambda_jI\right)\vect{x}_j&amp;=\vect{0}</mrow>
+             <mrow>\begin{bmatrix}c_{n-1}-\lambda_j&amp;c_{n-2}&amp;\cdots&amp;c_{n-(k-1)}&amp;c_{n-k}\\1&amp;-\lambda_j&amp;\cdots&amp;0&amp;0\\0&amp;1&amp;\ddots&amp;0&amp;0\\\vdots&amp;\ddots&amp;\ddots&amp;\vdots&amp;\vdots\\0&amp;0&amp;\cdots&amp;1&amp;-\lambda_j\end{bmatrix}\vect{x}_j&amp;=\vect{0}\text{.}</mrow>
+             </md>We already know this matrix has rank <m>n-1</m> since <m>\lambda_j</m> is an eigenvalue, and the bottom <m>n-1</m> rows are clearly linearly independent. So we can ignore the top row. Row reducing the remaining rows is then rather easy, and reveals that <m>\vect{x}_j=\transpose{\begin{bmatrix}\lambda_j^{n-1}&amp;\lambda_j^{n-2}&amp;\cdots&amp;1\end{bmatrix}}</m>. This establishes the form of <m>P</m> specified in the claim.</p>
+
+             <p>Lastly, if <m>J</m> from the first item was diagonal with distinct eignenvalues as in the second item, and we were to multiply out the matrix product from the first item, we would have a linear combination of the powers of the eigenvalues. So <m>a_n=\sum_{i=1}^{n}x_i\lambda_i^n</m>.</p>
+        </proof>
+    </theorem>
+
+    <example xml:id="example-context-free-recursion">
+    <title>A Linear Recursion of Depth 3</title>
+
+        <p>Suppose <m>a_1=1</m>, <m>a_2=4</m>, <m>a_3=6</m>, and <m>a_n=5a_{n-1}-2a_{n-2}-8a_{n-3}</m>. Let's find a formula for the general term of the sequence <m>a_n</m>.</p>
+
+        <p>We need to consider the matrix <me>A=\begin{bmatrix}5&amp;-2&amp;-8\\1&amp;0&amp;0\\0&amp;1&amp;0\end{bmatrix}\text{.}</me>  While we could explicitly diagonalize this matrix, it might turn out to be a bit tedious since the matrix is <m>3\times3</m>. Instead we just find its eigenvalues: <m>4,2,-1</m>. The three distinct eigenvalues tell us that <m>A</m> is indeed diagonalizable, and then it follows from Theorem <xref ref="theorem-linear-recurrence"/> that <m>a_n=x_1(4^n)+x_2(2)^n+x_3(-1)^n</m> for some as-yet unknown constants <m>x_1,x_2,x_3</m>. Considering <m>n=1</m>, <m>n=2</m>, and <m>n=3</m>, we have the system of equations<md>
+        <mrow>4x_1+2x_2-x_3&amp;=1</mrow>
+        <mrow>16x_1+4x_2+x_3&amp;=4</mrow>
+        <mrow>64x_1+8x_2-x_3&amp;=6\text{.}</mrow>
+        </md>This system can be solved using row reduction, and yields <m>x_1=0</m>, <m>x_2=\frac{5}{6}</m>, and <m>x_3=\frac{2}{3}</m>. Therefore <m>a_n=\frac{5}{6}2^{n}+\frac{2}{3}(-1)^{n}</m>. (We should compute several terms of the sequence with this formula and compare to terms of the sequence that come from using its recurrence relation as a check that we made no mistakes.)</p>
+
+        <!-- Explicit diagonalization
+        <p>There are always many explicit diagonalizations for a diagonalizable matrix, and we find one: <me>A=\begin{bmatrix}16&amp;4&amp;1\\4&amp;2&amp;-1\\1&amp;1&amp;1\end{bmatrix}\begin{bmatrix}4&amp;0&amp;0\\0&amp;2&amp;0\\0&amp;0&amp;-1\end{bmatrix}\cdot\frac{1}{30}\begin{bmatrix}3&amp;-3&amp;-6\\-5&amp;15&amp;20\\2&amp;-12&amp;16\end{bmatrix}.</me></p>
+
+        <p>Now we know that <md>
+        <mrow>\vect{a}_n&amp;=A^{n-3}\vect{a}_k</mrow>
+        <mrow>&amp;=\begin{bmatrix}16&amp;4&amp;1\\4&amp;2&amp;-1\\1&amp;1&amp;1\end{bmatrix}\begin{bmatrix}4&amp;0&amp;0\\0&amp;2&amp;0\\0&amp;0&amp;-1\end{bmatrix}^{n-3}\cdot\frac{1}{30}\begin{bmatrix}3&amp;-3&amp;-6\\-5&amp;15&amp;20\\2&amp;-12&amp;16\end{bmatrix}\colvector{6\\4\\1}</mrow>
+        <mrow>&amp;=\begin{bmatrix}16&amp;4&amp;1\\4&amp;2&amp;-1\\1&amp;1&amp;1\end{bmatrix}\begin{bmatrix}4^{n-3}&amp;0&amp;0\\0&amp;2^{n-3}&amp;0\\0&amp;0&amp;(-1)^{n-3}\end{bmatrix}\cdot\frac{1}{30}\colvector{0\\50\\-20}</mrow>
+        <mrow>&amp;=\begin{bmatrix}16(4^{n-3})&amp;4(2^{n-3})&amp;(-1)^{n-3}\\*&amp;*&amp;*\\*&amp;*&amp;*\end{bmatrix}\colvector{0\\\sfrac{5}{3}\\-\sfrac{2}{3}}</mrow>
+        <mrow>&amp;=\colvector{\frac{5}{6}2^{n}+\frac{2}{3}(-1)^{n}\\*\\*\colvector{\text{.}</mrow>
+        </md>
+        So <m>a_n=\frac{5}{6}2^{n}+\frac{2}{3}(-1)^{n}</m>. (We should compute several terms of the sequence with this formula and compare to terms of the sequence that come from using its recurrence relation as a check that we made no mistakes.)</p>
+        -->
+    </example>
+
+    </subsection>
+
+    <exercises>
+    <title>Exercises</title>
+
+        <exercise>
+            <!-- 2x2 matrix has two distinct integer eigenvalues -->
+            <statement>
+                <p>Solve the recurrence relation <m>b_n=2b_{n-1}+3b_{n-2}</m> where <m>b_1=1</m> and <m>b_2=2</m>. Use your solution to find <m>b_{20}</m>.</p>
+            </statement>
+            <solution>
+                <p>We need to diagonalize the matrix <m>\begin{bmatrix}2&amp;3\\1&amp;0\end{bmatrix}</m>. One possible diagonalization is <me>\begin{bmatrix}2&amp;3\\1&amp;0\end{bmatrix}=\begin{bmatrix}3&amp;-1\\1&amp;1\end{bmatrix}\begin{bmatrix}3&amp;0\\0&amp;-1\end{bmatrix}\frac{1}{4}\begin{bmatrix}1&amp;1\\-1&amp;3\end{bmatrix}\text{.}</me> This tells us that <md>
+                <mrow>b_n&amp;=\begin{bmatrix}1&amp;0\end{bmatrix}\begin{bmatrix}3&amp;-1\\1&amp;1\end{bmatrix}\begin{bmatrix}3^{n-2}&amp;0\\0&amp;(-1)^{n-2}\end{bmatrix}\frac{1}{4}\begin{bmatrix}1&amp;1\\-1&amp;3\end{bmatrix}\colvector{2\\1}</mrow>
+                <mrow>&amp;=\frac{1}{4}\begin{bmatrix}3&amp;-1\end{bmatrix}\begin{bmatrix}3^{n-2}&amp;0\\0&amp;(-1)^{n-2}\end{bmatrix}\colvector{3\\1}</mrow>
+                <mrow>&amp;=\frac{1}{4}\begin{bmatrix}3^{n-1}&amp;(-1)^{n-1}\end{bmatrix}\colvector{3\\1}</mrow>
+                <mrow>&amp;=\frac{1}{4}\left(3^{n}+(-1)^{n-1}\right)\text{.}</mrow>
+                </md>So <m>b_{20}=\frac{1}{4}\left(3^{20}-1\right)=3486784400</m>.</p>
+            </solution>
+        </exercise>
+
+        <exercise>
+            <!-- 2x2 matrix has two distinct real, non-rational eigenvalues -->
+            <statement>
+                <p>Solve the recurrence relation <m>c_n=3c_{n-1}+c_{n-2}</m> where <m>c_1=0</m> and <m>c_2=2</m>. Use your solution to find <m>c_{20}</m>.</p>
+            </statement>
+            <solution>
+                <p>We need to diagonalize the matrix <m>\begin{bmatrix}3&amp;1\\1&amp;0\end{bmatrix}</m>. Its eigenvalues are <m>\lambda=\frac{3+\sqrt{13}}{2}</m> and <m>\mu=\frac{3-\sqrt{13}}{2}</m>, and one possible diagonalization is <me>\begin{bmatrix}3&amp;1\\1&amp;0\end{bmatrix}=\begin{bmatrix}\lambda&amp;\mu\\1&amp;1\end{bmatrix}\begin{bmatrix}\lambda&amp;0\\0&amp;\mu\end{bmatrix}\frac{1}{\sqrt{13}}\begin{bmatrix}1&amp;-\mu\\-1&amp;\lambda\end{bmatrix}\text{.}</me> This tells us that <md>
+                <mrow>c_n&amp;=\begin{bmatrix}1&amp;0\end{bmatrix}\begin{bmatrix}\lambda&amp;\mu\\1&amp;1\end{bmatrix}\begin{bmatrix}\lambda^{n-2}&amp;0\\0&amp;\mu^{n-2}\end{bmatrix}\frac{1}{\sqrt{13}}\begin{bmatrix}1&amp;-\mu\\-1&amp;\lambda\end{bmatrix}\colvector{2\\0}</mrow>
+                <mrow>&amp;=\frac{1}{\sqrt{13}}\begin{bmatrix}\lambda&amp;\mu\end{bmatrix}\begin{bmatrix}\lambda^{n-2}&amp;0\\0&amp;\mu^{n-2}\end{bmatrix}\colvector{2\\-2}</mrow>
+                <mrow>&amp;=\frac{1}{\sqrt{13}}\begin{bmatrix}\lambda^{n-1}&amp;\mu^{n-1}\end{bmatrix}\colvector{2\\-2}</mrow>
+                <mrow>&amp;=\frac{2}{\sqrt{13}}\left(\lambda^{n-1}-\mu^{n-1}\right)</mrow>
+                <mrow>&amp;=\frac{2}{\sqrt{13}}\left(\left(\frac{3+\sqrt{13}}{2}\right)^{n-1}-\left(\frac{3-\sqrt{13}}{2}\right)^{n-1}\right)\text{.}</mrow>
+                </md>So <m>c_{20}=\frac{2}{\sqrt{13}}\left(\left(\frac{3+\sqrt{13}}{2}\right)^{19}-\left(\frac{3-\sqrt{13}}{2}\right)^{19}\right)=4006458938</m>.</p>
+            </solution>
+
+        </exercise>
+
+        <exercise>
+            <!-- 2x2 matrix has two distinct non-real eigenvalues -->
+            <statement>
+                <p>Solve the recurrence relation <m>d_n=2d_{n-1}-5d_{n-2}</m> where <m>d_1=1</m> and <m>d_2=8</m>. Use your solution to find <m>d_{20}</m>.</p>
+            </statement>
+            <solution>
+                <p>We need to diagonalize the matrix <m>\begin{bmatrix}2&amp;-5\\1&amp;0\end{bmatrix}</m>. Its eigenvalues are <m>\lambda=1+2i</m> and <m>\mu=1-2i</m>, and one possible diagonalization is <me>\begin{bmatrix}2&amp;-5\\1&amp;0\end{bmatrix}=\begin{bmatrix}\lambda&amp;\mu\\1&amp;1\end{bmatrix}\begin{bmatrix}\lambda&amp;0\\0&amp;\mu\end{bmatrix}\frac{1}{4i}\begin{bmatrix}1&amp;-\mu\\-1&amp;\lambda\end{bmatrix}\text{.}</me> This tells us that <md>
+                <mrow>d_n&amp;=\begin{bmatrix}1&amp;0\end{bmatrix}\begin{bmatrix}\lambda&amp;\mu\\1&amp;1\end{bmatrix}\begin{bmatrix}\lambda^{n-2}&amp;0\\0&amp;\mu^{n-2}\end{bmatrix}\frac{1}{4i}\begin{bmatrix}1&amp;-\mu\\-1&amp;\lambda\end{bmatrix}\colvector{8\\1}</mrow>
+                <mrow>&amp;=\frac{1}{4i}\begin{bmatrix}\lambda&amp;\mu\end{bmatrix}\begin{bmatrix}\lambda^{n-2}&amp;0\\0&amp;\mu^{n-2}\end{bmatrix}\colvector{7+2i\\-7+2i}</mrow>
+                <mrow>&amp;=\frac{1}{4i}\begin{bmatrix}\lambda^{n-1}&amp;\mu^{n-1}\end{bmatrix}\colvector{7+2i\\-7+2i}</mrow>
+                <mrow>&amp;=\frac{1}{4i}\left((7+2i)\lambda^{n-1}+(-7+2i)\mu^{n-1}\right)</mrow>
+                <mrow>&amp;=\frac{1}{4i}\left((7+2i)(1+2i)^{n-1}+(-7+2i)(1-2i)^{n-1}\right)\text{.}</mrow>
+                </md></p>
+
+                <p>In the following, we use a trigonometric method to evaluate powers of complex numbers. There are other ways to evaluate such powers, but this way works well:<md>
+                <mrow>d_{20}&amp;=\frac{1}{4i}\left((7+2i)(1+2i)^{19}+(-7+2i)(1-2i)^{19}\right)</mrow>
+                <mrow>&amp;=\frac{\sqrt{5}^{19}}{4i}\left((7+2i)\left(\frac{1+2i}{\sqrt{5}}\right)^{19}+(-7+2i)\left(\frac{1-2i}{\sqrt{5}}\right)^{19}\right)</mrow>
+                <mrow>&amp;=\frac{\sqrt{5}^{19}}{4i}\left((7+2i)\left(e^{i\arctan(2)}\right)^{19}+(-7+2i)\left(e^{-i\arctan(2)}\right)^{19}\right)</mrow>
+                <mrow>&amp;=\frac{\sqrt{5}^{19}}{4i}\left((7+2i)e^{19i\arctan(2)}+(-7+2i)e^{-19i\arctan(2)}\right)</mrow>
+                <mrow>&amp;=\frac{\sqrt{5}^{19}}{4i}\left(14i\sin(19\arctan(2))+4i\cos(19\arctan(2))\right)</mrow>
+                <mrow>&amp;=\sqrt{5}^{19}\left(\frac{7}{2}\sin(19\arctan(2))+\cos(19\arctan(2))\right)</mrow>
+                <mrow>&amp;=9959262\text{.}</mrow>
+                </md></p>
+            </solution>
+        </exercise>
+
+        <exercisegroup>
+            <introduction>
+                <p>These exercises use the same recurrence relation that the Fibonacci numbers have. You can use the work from <xref ref="example-fibonacci"/> to assist with your calculations.</p>
+            </introduction>
+
+            <exercise>
+                <!-- Contextual exercise from example -->
+                <statement>
+                    <p>Solve the recurrence relation from Example <xref ref="example-honeybees"/> that gives the number of ancestors of level <m>n</m> for a male honeybee. How many great<m>^{20}</m> grandparents does a male honeybee have?</p>
+                </statement>
+                <solution>
+                    <p>Since the recurrence relation is the same as for the Fibonacci numbers, but now we have a series with initial terms <m>\set{a_1,a_2,\ldots}=\set{1,2,\ldots}</m>, we can write<md>
+                    <mrow>\colvector{a_n\\a_{n-1}}&amp;=\begin{bmatrix}G&amp;g\\1&amp;1\end{bmatrix}\begin{bmatrix}G&amp;0\\0&amp;g\end{bmatrix}^{n-2}\frac{1}{\sqrt{5}}\begin{bmatrix}1&amp;-g\\-1&amp;G\end{bmatrix}\colvector{2\\1}</mrow>
+                    <mrow>&amp;=\frac{1}{\sqrt{5}}\begin{bmatrix}G&amp;g\\1&amp;1\end{bmatrix}\begin{bmatrix}G^{n-2}&amp;0\\0&amp;g^{n-2}\end{bmatrix}\colvector{2-g\\-2+G}</mrow>
+                    <mrow>&amp;=\frac{1}{\sqrt{5}}\begin{bmatrix}G^{n-1}&amp;g^{n-1}\\*&amp;*\end{bmatrix}\colvector{1+G\\-1-g}</mrow>
+                    <mrow>&amp;=\frac{1}{\sqrt{5}}\colvector{(1+G)G^{n-1}-(1+g)g^{n-1}\\*}\text{.}</mrow>
+                    </md>And so we have found:<md>
+                    <mrow>a_n&amp;=\frac{1}{\sqrt{5}}\left((1+G)G^{n-1}-(1+g)g^{n-1}\right)</mrow>
+                    <mrow>&amp;=\frac{1}{\sqrt{5}}\left(\left(\frac{3+\sqrt{5}}{2}\right)\left(\frac{1+\sqrt{5}}{2}\right)^{n-1}-\left(\frac{3-\sqrt{5}}{2}\right)\left(\frac{1-\sqrt{5}}{2}\right)^{n-1}\right)\text{.}</mrow>
+                    </md></p>
+
+                    <p>We can use this to compute how many great<m>^{20}</m> grandparents a male honeybee has. Note that a great<m>^{0}</m> grandparent is already a level 2 ancestor, so we are looking for <m>a_{22}</m>.<md>
+                    <mrow>a_{22}&amp;=\frac{1}{\sqrt{5}}\left(\left(\frac{3+\sqrt{5}}{2}\right)\left(\frac{1+\sqrt{5}}{2}\right)^{21}-\left(\frac{3-\sqrt{5}}{2}\right)\left(\frac{1-\sqrt{5}}{2}\right)^{21}\right)</mrow>
+                    <mrow>&amp;=28657\text{.}</mrow>
+                    </md>So a male honeybee has 28657 ancestors at the 22nd level. That is, he has 28657 great<m>^{20}</m> grandparents.</p>
+                </solution>
+            </exercise>
+
+            <exercise>
+                <!-- Lucas Numbers -->
+                <statement>
+                    <p>The Lucas numbers arise in nature for similar reasons to the Fibonacci numbers. They have the same recurrence relation <m>\ell_n=\ell_{n-1}+\ell_{n-2}</m>, but the initial terms are <m>\set{\ell_1,\ell_2,\ldots}=\set{2,1,\ldots}</m>. Find a formula for the <m>n</m>th Lucas number similar to the formula for the Fibonacci numbers given in <xref ref="fibonacci-formula"/>.</p>
+                </statement>
+                <solution>
+                    <p>Since the recurrence relation is the same as for the Fibonacci numbers, but now we have a series with initial terms <m>\set{\ell_1,\ell_2,\ldots}=\set{2,1,\ldots}</m>, we can write<md>
+                    <mrow>\colvector{\ell_n\\\ell_{n-1}}&amp;=\begin{bmatrix}G&amp;g\\1&amp;1\end{bmatrix}\begin{bmatrix}G&amp;0\\0&amp;g\end{bmatrix}^{n-2}\frac{1}{\sqrt{5}}\begin{bmatrix}1&amp;-g\\-1&amp;G\end{bmatrix}\colvector{1\\2}</mrow>
+                    <mrow>&amp;=\frac{1}{\sqrt{5}}\begin{bmatrix}G&amp;g\\1&amp;1\end{bmatrix}\begin{bmatrix}G^{n-2}&amp;0\\0&amp;g^{n-2}\end{bmatrix}\colvector{1-2g\\-1+2G}</mrow>
+                    <mrow>&amp;=\frac{1}{\sqrt{5}}\begin{bmatrix}G^{n-1}&amp;g^{n-1}\\*&amp;*\end{bmatrix}\colvector{G-g\\G-g}</mrow>
+                    <mrow>&amp;=\frac{G-g}{\sqrt{5}}\colvector{G^{n-1}+g^{n-1}\\*}</mrow>
+                    <mrow>&amp;=\colvector{G^{n-1}+g^{n-1}\\*}\text{.}</mrow>
+                    </md>And so we have found:<md>
+                    <mrow>\ell_n&amp;=G^{n-1}+g^{n-1}</mrow>
+                    <mrow>&amp;=\left(\frac{1+\sqrt{5}}{2}\right)^{n-1}+\left(\frac{1-\sqrt{5}}{2}\right)^{n-1}\text{.}</mrow>
+                    </md></p>
+                </solution>
+            </exercise>
+
+        </exercisegroup>
+
+        <exercise>
+            <!-- Contextual exercise from example -->
+            <statement>
+                <p>Solve the recurrence relation from Example <xref ref="example-elderberries"/> that gives the number of fruit clusters on an elderberry branch after <m>n</m> years. How many berry clusters will a branch and its children be producing when the branch is <m>6</m> years old?</p>
+            </statement>
+            <solution>
+                <p>We have to solve the recurrence relation <m>b_n=b_{n-1}+2b_{n-2}</m> with <m>\set{b_1,b_2,\ldots}=\set{1,4,\ldots}</m>. We need to diagonalize the matrix <m>\begin{bmatrix}1&amp;2\\1&amp;0\end{bmatrix}</m>. One possible diagonalization is <me>\begin{bmatrix}1&amp;2\\1&amp;0\end{bmatrix}=\begin{bmatrix}2&amp;-1\\1&amp;1\end{bmatrix}\begin{bmatrix}2&amp;0\\0&amp;-1\end{bmatrix}\frac{1}{3}\begin{bmatrix}1&amp;1\\-1&amp;2\end{bmatrix}\text{.}</me> This tells us that <md>
+                <mrow>b_n&amp;=\begin{bmatrix}1&amp;0\end{bmatrix}\begin{bmatrix}2&amp;-1\\1&amp;1\end{bmatrix}\begin{bmatrix}2^{n-2}&amp;0\\0&amp;(-1)^{n-2}\end{bmatrix}\frac{1}{3}\begin{bmatrix}1&amp;1\\-1&amp;2\end{bmatrix}\colvector{4\\1}</mrow>
+                <mrow>&amp;=\frac{1}{3}\begin{bmatrix}2&amp;-1\end{bmatrix}\begin{bmatrix}2^{n-2}&amp;0\\0&amp;(-1)^{n-2}\end{bmatrix}\colvector{5\\-2}</mrow>
+                <mrow>&amp;=\frac{1}{3}\begin{bmatrix}2^{n-1}&amp;(-1)^{n-1}\end{bmatrix}\colvector{5\\-2}</mrow>
+                <mrow>&amp;=\frac{1}{3}\left(5(2)^{n-1}-2(-1)^{n-1}\right)\text{.}</mrow>
+                </md>So <m>b_{6}=\frac{1}{3}\left(5(2)^{5}+2\right)=54</m>. If the recurrence holds, there will be <m>54</m> berry clusters in the <m>6</m>th year.</p>
+            </solution>
+        </exercise>
+
+        <exercise>
+            <!-- 3x3 matrix has three distinct integer eigenvalues -->
+            <statement>
+                <p>Solve the recurrence relation <m>b_n=6b_{n-1}+b_{n-2}-30b_{n-3}</m> where <m>b_1=0</m>, <m>b_2=1</m>, and <m>b_3=2</m>.</p>
+            </statement>
+            <solution>
+                <p>The associated matrix to this system is <m>3\times3</m>, and so an explicit diagonalization may be tedious. Instead, we use the last part of Theorem <xref ref="theorem-linear-recurrence"/>. We consider the matrix <m>A=\begin{bmatrix}6&amp;1&amp;-30\\1&amp;0&amp;0\\0&amp;1&amp;0\end{bmatrix}</m> and calculate its eigenvalues: <m>5,3,-2</m>. Since these are distinct, <m>A</m> is diagonalizable, and the second part of Theorem <xref ref="theorem-linear-recurrence"/> tells us that <m>b_n=x_1(5)^n+x_2(3)^n+x_3(-2)^n</m>. The initial terms of the sequence <m>\set{b_n}</m> provide us with the system of equations:<md>
+                <mrow>5x_1+3x_2-2x_3&amp;=0</mrow>
+                <mrow>25x_1+9x_2+4x_3&amp;=1</mrow>
+                <mrow>125x_1+27x_2-8x_3&amp;=2\text{.}</mrow>
+                </md>This system can be solved using row reduction, yielding <m>x_1=\frac{1}{70}</m>, <m>x_2=\frac{1}{30}</m>, and <m>x_3=\frac{3}{35}</m>. So <me>b_n=\frac{5^n}{70}+\frac{3^n}{30}+\frac{3(-2)^n}{35}\text{.}</me></p>
+            </solution>
+        </exercise>
+
+        <exercise>
+            <!-- 3x3 matrix has one integer, two real, non-rational eigenvalues -->
+            <statement>
+                <p>Solve the recurrence relation <m>c_n=c_{n-1}+3c_{n-2}+c_{n-3}</m> where <m>c_1=1</m>, <m>c_2=1</m>, and <m>c_3=1</m>.</p>
+            </statement>
+            <solution>
+                <p>The associated matrix to this system is <m>3\times3</m>, and so an explicit diagonalization may be tedious. Instead, we use the last part of Theorem <xref ref="theorem-linear-recurrence"/>. We consider the matrix <m>A=\begin{bmatrix}1&amp;3&amp;1\\1&amp;0&amp;0\\0&amp;1&amp;0\end{bmatrix}</m> and calculate its eigenvalues: <m>1+\sqrt{2},1-\sqrt{2},-1</m>. Since these are distinct, <m>A</m> is diagonalizable, and the second part of Theorem <xref ref="theorem-linear-recurrence"/> tells us that <m>c_n=x_1\left(1+\sqrt{2}\right)^n+x_2\left(1-\sqrt{2}\right)^n+x_3(-1)^n</m>. The initial terms of the sequence <m>\set{c_n}</m> provide us with the system of equations:<md>
+                <mrow>\left(1+\sqrt{2}\right)x_1+\left(1-\sqrt{2}\right)x_2-x_3&amp;=1</mrow>
+                <mrow>\left(3+2\sqrt{2}\right)x_1+\left(3-2\sqrt{2}\right)x_2+x_3&amp;=1</mrow>
+                <mrow>\left(7+5\sqrt{2}\right)x_1+\left(7-5\sqrt{2}\right)x_2-x_3&amp;=1\text{.}</mrow>
+                </md>This system can be solved using row reduction, yielding <m>x_1=-2+\frac{3\sqrt{2}}{2}</m>, <m>x_2=-2-\frac{3\sqrt{2}}{2}</m>, and <m>x_3=1</m>. So <me>c_n=\left(-2+\frac{3\sqrt{2}}{2}\right)\left(1+\sqrt{2}\right)^n+\left(-2-\frac{3\sqrt{2}}{2}\right)\left(1-\sqrt{2}\right)^n+(-1)^n\text{.}</me></p>
+            </solution>
+        </exercise>
+
+        <exercise>
+            <!-- 3x3 matrix has three real, non-rational eigenvalues -->
+            <statement>
+                <p>Solve the recurrence relation <m>d_n=2d_{n-1}+d_{n-2}-d_{n-3}</m> where <m>d_1=2</m>, <m>d_2=1</m>, and <m>d_3=4</m>. Warning: the characteristic polynomial for the matrix in this exercise does not have rational roots. Either find approximate roots, or use the Cardano/Tartaglia/del Ferro solution to cubic equations to find exact roots.</p>
+            </statement>
+            <solution>
+                <p>The associated matrix to this system is <m>3\times3</m>. We will use the explicit diagonalization provided by Theorem <xref ref="theorem-linear-recurrence"/> and use a formula for inverting a Vandermonde matrix. (Alternatively, you could give up on finding an exact solution and work entirely with decimal approximations.) We consider the matrix <m>A=\begin{bmatrix}2&amp;1&amp;-1\\1&amp;0&amp;0\\0&amp;1&amp;0\end{bmatrix}</m> and calculate its eigenvalues using the Cardano/Tartaglia/del Ferro solution to cubic equations:<md>
+                <mrow>\kappa&amp;=\frac{2}{3}+\frac{1}{3}\sqrt[3]{\frac{7+21i\sqrt{3}}{2}}+\frac{1}{3}\sqrt[3]{\frac{7-21i\sqrt{3}}{2}}</mrow>
+                <mrow>&amp;\approx2.24698\ldots</mrow>
+                <mrow>\lambda&amp;=\frac{2}{3}+\frac{e^{4\pi i/3}}{3}\sqrt[3]{\frac{7+21i\sqrt{3}}{2}}+\frac{e^{2\pi i/3}}{3}\sqrt[3]{\frac{7-21i\sqrt{3}}{2}}</mrow>
+                <mrow>&amp;\approx0.55496\ldots</mrow>
+                <mrow>\mu&amp;=\frac{2}{3}+\frac{e^{2\pi i/3}}{3}\sqrt[3]{\frac{7+21i\sqrt{3}}{2}}+\frac{e^{4\pi i/3}}{3}\sqrt[3]{\frac{7-21i\sqrt{3}}{2}}</mrow>
+                <mrow>&amp;\approx-0.80194\ldots\text{.}</mrow>
+                </md>Since these are distinct, <m>A</m> is diagonalizable. Theorem <xref ref="theorem-linear-recurrence"/> tells us that<md>
+                <mrow>d_n&amp;=\transpose{\colvector{1\\0\\0}}\begin{bmatrix}\kappa^2&amp;\lambda^2&amp;\mu^2\\\kappa&amp;\lambda&amp;\mu\\1&amp;1&amp;1\end{bmatrix}\begin{bmatrix}\kappa&amp;0&amp;0\\0&amp;\lambda&amp;0\\0&amp;0&amp;\mu\end{bmatrix}^{n-3}\inverse{\begin{bmatrix}\kappa^2&amp;\lambda^2&amp;\mu^2\\\kappa&amp;\lambda&amp;\mu\\1&amp;1&amp;1\end{bmatrix}}\colvector{4\\1\\2}</mrow>
+                <mrow>&amp;=\transpose{\colvector{\kappa^2\\\lambda^2\\\mu^2}}\begin{bmatrix}\kappa^{n-3}&amp;0&amp;0\\0&amp;\lambda^{n-3}&amp;0\\0&amp;0&amp;\mu^{n-3}\end{bmatrix}\frac{\begin{bmatrix}\lambda-\mu&amp;-\lambda^2+\mu^2&amp;\lambda\mu(\lambda-\mu)\\-\kappa+\mu&amp;\kappa^2-\mu^2&amp;-\kappa\mu(\kappa-\mu)\\\kappa-\lambda&amp;-\kappa^2+\lambda^2&amp;\kappa\lambda(\kappa-\lambda)\end{bmatrix}}{(\kappa-\lambda)(\kappa-\mu)(\lambda-\mu)}\colvector{4\\1\\2}</mrow>
+                <mrow>&amp;=\frac{\begin{bmatrix}\kappa^{n-1}&amp;\lambda^{n-1}&amp;\mu^{n-1}\end{bmatrix}}{(\kappa-\lambda)(\kappa-\mu)(\lambda-\mu)}\colvector{4\lambda-4\mu-\lambda^2+\mu^2+2\lambda\mu(\lambda-\mu)\\-4\kappa+4\mu+\kappa^2-\mu^2-2\kappa\mu(\kappa-\mu)\\4\kappa-4\lambda-\kappa^2+\lambda^2+2\kappa\lambda(\kappa-\lambda)}</mrow>
+                <mrow>&amp;=\frac{4\lambda-4\mu-\lambda^2+\mu^2+2\lambda\mu(\lambda-\mu)}{(\kappa-\lambda)(\kappa-\mu)(\lambda-\mu)}\kappa^{n-1}</mrow>
+                <mrow>&amp;\phantom{{}={}}+\frac{-4\kappa+4\mu+\kappa^2-\mu^2-2\kappa\mu(\kappa-\mu)}{(\kappa-\lambda)(\kappa-\mu)(\lambda-\mu)}\lambda^{n-1}</mrow>
+                <mrow>&amp;\phantom{{}={}}+\frac{4\kappa-4\lambda-\kappa^2+\lambda^2+2\kappa\lambda(\kappa-\lambda)}{(\kappa-\lambda)(\kappa-\mu)(\lambda-\mu)}\mu^{n-1}</mrow>
+                <mrow>&amp;\approx(0.6507083\ldots)(2.2469796\ldots)^{n-1}</mrow>
+                <mrow>&amp;\phantom{{}={}}+(0.45686604\ldots)(0.55495813\ldots)^{n-1}</mrow>
+                <mrow>&amp;\phantom{{}={}}+(0.89242566\ldots)(-0.8019377\ldots)^{n-1}\text{.}</mrow>
+                </md></p>
+
+                <p>Note that since the latter two eigenvalues have absolute value smaller than <m>1</m>, the corresponding terms in the formula for <m>d_n</m> are negligible when <m>n</m> is large. So for large <m>n</m>, <md>
+                <mrow>d_n&amp;=\operatorname{round}\left(\frac{4\lambda-4\mu-\lambda^2+\mu^2+2\lambda\mu(\lambda-\mu)}{(\kappa-\lambda)(\kappa-\mu)(\lambda-\mu)}\kappa^{n-1}\right)</mrow>
+                <mrow>&amp;\approx\operatorname{round}\left((0.6507083\ldots)(2.2469796\ldots)^{n-1}\right)\text{.}</mrow>
+                </md>We can verify by inspection that this holds for <m>n\geq4</m>.</p>
+            </solution>
+        </exercise>
+
+        <exercise>
+            <!-- Tribonacci Numbers -->
+            <statement>
+                <p>The Tribonacci numbers have the first few terms <m>\set{t_1,t_2,t_3,\ldots}=\set{1,1,2,\ldots}</m> and satisfy the recursion <m>t_n=t_{n-1}+t_{n-2}+t_{n-3}</m>. Find a formula for the <m>n</m>th Tribonacci number.</p>
+            </statement>
+            <solution>
+                <p>The associated matrix to this system is <m>3\times3</m>. We will use the explicit diagonalization provided by Theorem <xref ref="theorem-linear-recurrence"/> and use a formula for inverting a Vandermonde matrix. (Alternatively, you could give up on finding an exact solution and work entirely with decimal approximations.) We consider the matrix <m>A=\begin{bmatrix}1&amp;1&amp;1\\1&amp;0&amp;0\\0&amp;1&amp;0\end{bmatrix}</m> and calculate its eigenvalues using the Cardano/Tartaglia/del Ferro solution to cubic equations:<md>
+                <mrow>\kappa&amp;=\frac{1}{3}+\frac{1}{3}\sqrt[3]{19+3\sqrt{33}}+\frac{1}{3}\sqrt[3]{19-3\sqrt{33}}</mrow>
+                <mrow>&amp;\approx1.8392867\ldots</mrow>
+                <mrow>\lambda&amp;=\frac{1}{3}+\frac{e^{4\pi i/3}}{3}\sqrt[3]{19+3\sqrt{33}}+\frac{e^{2\pi i/3}}{3}\sqrt[3]{19-3\sqrt{33}}</mrow>
+                <mrow>&amp;\approx-0.41964\ldots-0.60629\ldots{}i</mrow>
+                <mrow>\mu&amp;=\frac{1}{3}+\frac{e^{2\pi i/3}}{3}\sqrt[3]{19+3\sqrt{33}}+\frac{e^{4\pi i/3}}{3}\sqrt[3]{19-3\sqrt{33}}</mrow>
+                <mrow>&amp;\approx-0.41964\ldots+0.60629\ldots{}i\text{.}</mrow>
+                </md>Since these are distinct, <m>A</m> is diagonalizable. Theorem <xref ref="theorem-linear-recurrence"/> tells us that<md>
+                <mrow>t_n&amp;=\transpose{\colvector{1\\0\\0}}\begin{bmatrix}\kappa^2&amp;\lambda^2&amp;\mu^2\\\kappa&amp;\lambda&amp;\mu\\1&amp;1&amp;1\end{bmatrix}\begin{bmatrix}\kappa&amp;0&amp;0\\0&amp;\lambda&amp;0\\0&amp;0&amp;\mu\end{bmatrix}^{n-3}\inverse{\begin{bmatrix}\kappa^2&amp;\lambda^2&amp;\mu^2\\\kappa&amp;\lambda&amp;\mu\\1&amp;1&amp;1\end{bmatrix}}\colvector{2\\1\\1}</mrow>
+                <mrow>&amp;=\transpose{\colvector{\kappa^2\\\lambda^2\\\mu^2}}\begin{bmatrix}\kappa^{n-3}&amp;0&amp;0\\0&amp;\lambda^{n-3}&amp;0\\0&amp;0&amp;\mu^{n-3}\end{bmatrix}\frac{\begin{bmatrix}\lambda-\mu&amp;-\lambda^2+\mu^2&amp;\lambda\mu(\lambda-\mu)\\-\kappa+\mu&amp;\kappa^2-\mu^2&amp;-\kappa\mu(\kappa-\mu)\\\kappa-\lambda&amp;-\kappa^2+\lambda^2&amp;\kappa\lambda(\kappa-\lambda)\end{bmatrix}}{(\kappa-\lambda)(\kappa-\mu)(\lambda-\mu)}\colvector{2\\1\\1}</mrow>
+                <mrow>&amp;=\frac{\begin{bmatrix}\kappa^{n-1}&amp;\lambda^{n-1}&amp;\mu^{n-1}\end{bmatrix}}{(\kappa-\lambda)(\kappa-\mu)(\lambda-\mu)}\colvector{2\lambda-2\mu-\lambda^2+\mu^2+\lambda\mu(\lambda-\mu)\\-2\kappa+2\mu+\kappa^2-\mu^2-\kappa\mu(\kappa-\mu)\\2\kappa-2\lambda-\kappa^2+\lambda^2+\kappa\lambda(\kappa-\lambda)}</mrow>
+                <mrow>&amp;=\frac{2\lambda-2\mu-\lambda^2+\mu^2+\lambda\mu(\lambda-\mu)}{(\kappa-\lambda)(\kappa-\mu)(\lambda-\mu)}\kappa^{n-1}</mrow>
+                <mrow>&amp;\phantom{{}={}}+\frac{-2\kappa+2\mu+\kappa^2-\mu^2-\kappa\mu(\kappa-\mu)}{(\kappa-\lambda)(\kappa-\mu)(\lambda-\mu)}\lambda^{n-1}</mrow>
+                <mrow>&amp;\phantom{{}={}}+\frac{2\kappa-2\lambda-\kappa^2+\lambda^2+\kappa\lambda(\kappa-\lambda)}{(\kappa-\lambda)(\kappa-\mu)(\lambda-\mu)}\mu^{n-1}</mrow>
+                <mrow>&amp;\approx(0.6184199\ldots)(1.83929286\ldots)^{n-1}</mrow>
+                <mrow>&amp;\phantom{{}={}}+(0.19079\ldots+0.0187\ldots{}i)(-0.4196433\ldots-0.6062907\ldots{}i)^{n-1}</mrow>
+                <mrow>&amp;\phantom{{}={}}+(0.19079\ldots-0.0187\ldots{}i)(-0.4196433\ldots+0.6062907\ldots{}i)^{n-1}\text{.}</mrow>
+                </md></p>
+
+                <p>Note that since the latter two eigenvalues have absolute value smaller than <m>1</m>, the corresponding terms in the formula for <m>t_n</m> are negligible when <m>n</m> is large. So for large <m>n</m>, <md>
+                <mrow>t_n&amp;=\operatorname{round}\left(\frac{2\lambda-2\mu-\lambda^2+\mu^2+\lambda\mu(\lambda-\mu)}{(\kappa-\lambda)(\kappa-\mu)(\lambda-\mu)}\kappa^{n-1}\right)</mrow>
+                <mrow>&amp;\approx\operatorname{round}\left((0.6184199\ldots)(1.83929286\ldots)^{n-1}\right)\text{.}</mrow>
+                </md>We can verify by inspection that this holds for <m>n\geq1</m>.</p>
+            </solution>
+        </exercise>
+
+        <exercise>
+            <!-- Contextual exercise -->
+            <statement>
+                <p>A certain species of rat typically has a life span of just over one year, and females can birth a litter every three months. When a female is born, three months later her first litter will have four pups (two female and two male). Her three subsequent litters will each have six pups (three female and three male), and then she will have no more litters.  When a ship laid anchor off the shore of a remote tropical island, eight very young rats of this type (four female and four male) jumped ship and swam to colonize the island. From that point on, every three months, more litters were born. This island has no predators, and for several years the rat population grew and had no constraints from food or space limitations.</p>
+                <ol>
+                    <li>Use this information to formulate a linear recurrence relation for <m>r_n</m>, the number of female pups born in the <m>n</m>th litter. To be clear, <m>r_1=8</m>, corresponding to the <m>8</m> female pups born to the original four females three months after the colonization.</li>
+                    <li>If you have the right tools, solve the recurrence and find a formula for <m>r_n</m>. The associated matrix is <m>4\times4</m>, so it's not likely that you will solve this recurrence by hand. Only two of the four eigenvalues are real. You will probably need to use approximate eigenvalues and eigenvectors.</li>
+                </ol>
+            </statement>
+            <solution>
+                <p>In year <m>n</m>, the previous litter's female rats will birth a litter that has two females. Each of the three previous generations will give birth to litters with three females. This tells us that <me>r_n=2r_{n-1}+3r_{n-2}+3r_{n-3}+3r_{n-4}\text{.}</me>The associated matrix has characteristic polynomial <m>t^4-2t^3-3t^2-3t-3</m>, and its eigenvalues are <md>
+                <mrow>\kappa&amp;=1+\sqrt[3]{\frac{5+\sqrt{21}}{2}}+\sqrt[3]{\frac{5-\sqrt{21}}{2}}</mrow>
+                <mrow>&amp;\approx3.27901\ldots</mrow>
+                <mrow>\lambda&amp;=1+e^{4\pi i/3}\sqrt[3]{\frac{5+\sqrt{21}}{2}}+e^{2\pi i/3}\sqrt[3]{\frac{5-\sqrt{21}}{2}}</mrow>
+                <mrow>&amp;\approx-0.139509\ldots-0.946279\ldots{}i</mrow>
+                <mrow>\mu&amp;=1+e^{2\pi i/3}\sqrt[3]{\frac{5+\sqrt{21}}{2}}+e^{4\pi i/3}\sqrt[3]{\frac{5-\sqrt{21}}{2}}</mrow>
+                <mrow>&amp;\approx-0.139509\ldots+0.946279\ldots{}i</mrow>
+                <mrow>\nu&amp;=-1\text{.}</mrow>
+                </md>Since these are distinct, <m>A</m> is diagonalizable. Inverting the matrix <m>P</m> from Theorem <xref ref="theorem-linear-recurrence"/> will be rather difficult here. The formula for the inverse of a Vandermonde matrix of dimension <m>4</m> or greater is difficult to apply. Instead, we relax the search for an exact solution to a search for an approximate solution, using decimal approximations. We'll do this with the last part of Theorem <xref ref="theorem-linear-recurrence"/>. The theorem tells us that <me>r_n=x_1\kappa^n+x_2\lambda^n+x_3\mu^n+x_4(-1)^n\text{.}</me></p>
+                <p>Using the first terms of the sequence <m>\set{r_1,r_2,r_3,r_4,\ldots}=\set{8,28,92,304,\ldots}</m>, and using decimal approximations, we have the system of equations<md>
+                <mrow>3.279018x_1+(-0.139509-0.946279i)x_2+ (-0.139509+0.946279i)x_3-x_4&amp;=8</mrow>
+                <mrow>10.75196x_1+(-0.875982+0.264029i)x_2+ (-0.875982-0.264029i)x_3+x_4&amp;=28</mrow>
+                <mrow>35.25589x_1+(0.372053+0.792089i) x_2+ (0.372053-0.792089i) x_3-x_4&amp;=92</mrow>
+                <mrow>115.6047x_1+(0.697632-0.462570i) x_2+ (0.697632+0.462570i) x_3+x_4&amp;=304\text{,}</mrow>
+                </md>which can be solved using row reduction. Be careful when row reducing with approximate values. If at some stage, you find a value close to zero, it could be that the value <emph>should</emph> be zero, but the approximation has thrown it off by a small bit. The solution is approximately <md>
+                <mrow>r_n&amp;\approx2.61942\ldots(3.27901\ldots)^n</mrow>
+                <mrow>&amp;\phantom{{}={}}+(0.404576\ldots+0.0502961\ldots{}i)(-0.139509\ldots-0.946279\ldots{}i)^n</mrow>
+                <mrow>&amp;\phantom{{}={}}+(0.404576\ldots-0.0502961\ldots{}i)(-0.139509\ldots+0.946279\ldots{}i)^n</mrow>
+                <mrow>&amp;\phantom{{}={}}+0.571437\ldots(-1)^n\text{.}</mrow>
+                </md></p>
+            </solution>
+        </exercise>
+
+        <exercisegroup>
+            <introduction>
+                <p>Not all matrices are diagonalizable. This block of exercises addresses recurrence relations that lead to non-diagonalizable <m>2\times2</m> matrices.</p>
+            </introduction>
+
+            <exercise>
+                <statement>
+                    <p>Solve the recurrence relation <m>u_n=6u_{n-1}-9u_{n-2}</m> with <m>u_1=2</m> and <m>u_2=5</m>. You will not be able to diagonalize the associated matrix to this recursion. However with the right change of basis matrix, you can express the matrix in Jordan canonical form (see Section <xref ref="section-jordan-canonical-form"/>). This will show the matrix is similar to a matrix of the form <m>\begin{bmatrix}\lambda&amp;1\\0&amp;\lambda\end{bmatrix}</m>. Although this is not diagonal, it is still easy to raise matrices like this to large powers.</p>
+                </statement>
+                <solution>
+                    <p>We need to investigate the matrix <m>A=\begin{bmatrix}6&amp;-9\\1&amp;0\end{bmatrix}</m>. We find its characteristic polynomial to be <m>x^2-6x+9</m>, with <m>3</m> as a repeated eigenvalue. <m>A</m> can't be diagonalizable, or else it would be similar to <m>3I</m>, in which case it would have to <emph>equal </emph> <m>3I</m>. So <m>A</m> is similar to a matrix of the form <m>\begin{bmatrix}3&amp;1\\0&amp;3\end{bmatrix}</m>. There are many ways to explicitly realize this relationship, but one way is <me>\begin{bmatrix}6&amp;-9\\1&amp;0\end{bmatrix}=\begin{bmatrix}3&amp;4\\1&amp;1\end{bmatrix}\begin{bmatrix}3&amp;1\\0&amp;3\end{bmatrix}\begin{bmatrix}-1&amp;4\\1&amp;-3\end{bmatrix}\text{.}</me>Now we can apply Theorem <xref ref="theorem-linear-recurrence"/>:<md>
+                    <mrow>u_n&amp;=\begin{bmatrix}1&amp;0\end{bmatrix}\begin{bmatrix}3&amp;4\\1&amp;1\end{bmatrix}\begin{bmatrix}3&amp;1\\0&amp;3\end{bmatrix}^{n-2}\begin{bmatrix}-1&amp;4\\1&amp;-3\end{bmatrix}\colvector{5\\2}</mrow>
+                    <mrow>&amp;=\begin{bmatrix}3&amp;4\end{bmatrix}\begin{bmatrix}3^{n-2}&amp;(n-2)3^{n-3}\\0&amp;3^{n-2}\end{bmatrix}\colvector{3\\-1}</mrow>
+                    <mrow>&amp;=\begin{bmatrix}3^{n-1}&amp;(n-2)3^{n-2}+4\cdot3^{n-2}\end{bmatrix}\colvector{3\\-1}</mrow>
+                    <mrow>&amp;=3^{n}-(n+2)3^{n-2}\text{.}</mrow>
+                    </md></p>
+                </solution>
+            </exercise>
+
+            <exercise>
+                <statement>
+                    <p>Since <m>2\times2</m> matrices are either diagonalizable over <m>\complexes</m> or similar to a matrix of the form <m>\begin{bmatrix}\lambda&amp;1\\0&amp;\lambda\end{bmatrix}</m>, we can explicitly solve a generic linear recursion of depth <m>2</m>. Let <m>c_1, c_2, a_1, a_2</m> be four real numbers.</p>
+                    <ol>
+                        <li>If <m>\set{a_1,a_2,\ldots}</m> are the first two terms to a sequence that satisfies the recursion <m>a_n=c_1a_{n-1}+c_2a_{n-2}</m>, and <m>c_1^2+4c_2\neq0</m>, solve the recursion. (Find a formula for <m>a_n</m> in terms of <m>c_1, c_2, a_1, a_2</m>.)</li>
+                        <li>If <m>\set{a_1,a_2,\ldots}</m> are the first two terms to a sequence that satisfies the recursion <m>a_n=c_1a_{n-1}+c_2a_{n-2}</m>, and <m>c_1^2+4c_2=0</m>, solve the recursion. (Find a formula for <m>a_n</m> in terms of <m>c_1, c_2, a_1, a_2</m>.)</li>
+                    </ol>
+                </statement>
+                <solution>
+                    <ol>
+                        <li><p>The matrix <m>\begin{bmatrix}c_1&amp;c_2\\1&amp;0\end{bmatrix}</m> has eigenvalues <m>\lambda=\frac{c_1+\sqrt{c_1^2+4c_2}}{2}</m> and <m>\mu=\frac{c_1-\sqrt{c_1^2+4c_2}}{2}</m>. Since <m>c_1^2+4c_2\neq0</m>, the eigenvalues are distinct, and so <m>A</m> is diagonalizable. It will be convenient to let <m>\sigma=\frac{1}{\sqrt{c_1^2+4c_2}}</m>. Theorem <xref ref="theorem-linear-recurrence"/> tells us that <md>
+                        <mrow>a_n&amp;=\begin{bmatrix}1&amp;0\end{bmatrix}\begin{bmatrix}\lambda&amp;\mu\\1&amp;1\end{bmatrix}\begin{bmatrix}\lambda&amp;0\\0&amp;\mu\end{bmatrix}^{n-2}\frac{1}{\sigma}\begin{bmatrix}1&amp;-\mu\\-1&amp;\lambda\end{bmatrix}\colvector{a_2\\a_1}</mrow>
+                        <mrow>&amp;=\frac{1}{\sigma}\begin{bmatrix}\lambda&amp;\mu\end{bmatrix}\begin{bmatrix}\lambda^{n-2}&amp;0\\0&amp;\mu^{n-2}\end{bmatrix}\colvector{a_2-\mu a_1\\-a_2+\lambda a_1}</mrow>
+                        <mrow>&amp;=\frac{1}{\sigma}\begin{bmatrix}\lambda^{n-1}&amp;\mu^{n-1}\end{bmatrix}\colvector{a_2-\mu a_1\\-a_2+\lambda a_1}</mrow>
+                        <mrow>&amp;=\frac{1}{\sigma}\left(\left(a_2-\mu a_1\right)\lambda^{n-1}+\left(-a_2+\lambda a_1\right)\mu^{n-1}\right)\text{.}</mrow>
+                        <mrow>&amp;=\frac{1}{\sqrt{c_1^2+4c_2}}\left(\left(a_2-\frac{c_1-\sqrt{c_1^2+4c_2}}{2}a_1\right)\left(\frac{c_1+\sqrt{c_1^2+4c_2}}{2}\right)^{n-1}\right.</mrow>
+                        <mrow>&amp;\phantom{{}={}}+\left.\left(-a_2+\frac{c_1+\sqrt{c_1^2+4c_2}}{2}a_1\right)\left(\frac{c_1-\sqrt{c_1^2+4c_2}}{2}\right)^{n-1}\right)\text{.}</mrow>
+                        </md></p></li>
+                        <li><p>The matrix <m>\begin{bmatrix}c_1&amp;c_2\\1&amp;0\end{bmatrix}</m> has only one eigenvalue, <m>\lambda=\frac{c_1}{2}</m>, since <m>c_1^2+4c_2=0</m>. <m>A</m> cannot be diagonalizable, since if it were, it would be similar to a scalar matrix and therefore would have to <emph>be </emph> a scalar matrix. So <m>A</m> is similar to the matrix <m>\begin{bmatrix}\lambda&amp;1\\0&amp;\lambda\end{bmatrix}</m>. One explicit realization of this similarity is given by <me>\begin{bmatrix}c_1&amp;c_2\\1&amp;0\end{bmatrix}=\begin{bmatrix}\lambda&amp;1+\lambda\\1&amp;1\end{bmatrix}\begin{bmatrix}\lambda&amp;1\\0&amp;\lambda\end{bmatrix}\begin{bmatrix}-1&amp;1+\lambda\\1&amp;\lambda\end{bmatrix}\text{.}</me>Theorem <xref ref="theorem-linear-recurrence"/> tells us that <md>
+                        <mrow>u_n&amp;=\begin{bmatrix}1&amp;0\end{bmatrix}\begin{bmatrix}\lambda&amp;1+\lambda\\1&amp;1\end{bmatrix}\begin{bmatrix}\lambda&amp;1\\0&amp;\lambda\end{bmatrix}^{n-2}\begin{bmatrix}-1&amp;1+\lambda\\1&amp;\lambda\end{bmatrix}\colvector{a_2\\a_1}</mrow>
+                        <mrow>&amp;=\begin{bmatrix}\lambda&amp;1+\lambda\end{bmatrix}\begin{bmatrix}\lambda^{n-2}&amp;(n-2)\lambda^{n-3}\\0&amp;\lambda^{n-2}\end{bmatrix}\colvector{-a_2+\left(1+\lambda\right)a_1\\a_2+\lambda a_1}</mrow>
+                        <mrow>&amp;=\begin{bmatrix}\lambda^{n-1}&amp;(n-2)\lambda^{n-2}+\left(1+\lambda\right)\lambda^{n-2}\end{bmatrix}\colvector{-a_2+\left(1+\lambda\right)a_1\\a_2+\lambda a_1}</mrow>
+                        <mrow>&amp;=\left(-a_2+\left(1+\lambda\right)a_1\right)\lambda^{n-1}+\left(a_2+\lambda a_1\right)\left(n-1+\lambda\right)\lambda^{n-2}\text{.}</mrow>
+                        <mrow>&amp;=\left(-a_2+a_1+\frac{c_1}{2}a_1\right)\left(\frac{c_1}{2}\right)^{n-1}+\left(a_2+\frac{c_1}{2}a_1\right)\left(n-1+\frac{c_1}{2}\right)\left(\frac{c_1}{2}\right)^{n-2}\text{.}</mrow>
+                        </md></p></li>
+                    </ol>
+                </solution>
+            </exercise>
+
+        </exercisegroup>
+
+        <exercisegroup>
+            <introduction>
+                <p>These exercises make use of the formula in Equation <xref ref="fibonacci-formula"/>. They don't necessarily require linear algebra, but since we found that formula, we might as well have some fun with it. These exercises may require knowledge of geometric sums and series.</p>
+            </introduction>
+
+            <exercise>
+                <statement>
+                    <p>Encode the Fibonacci numbers into decimals and add them in the following way: <md>
+                    <mrow>&amp;\phantom{{}+{}}0.1</mrow>
+                    <mrow>&amp;+0.01</mrow>
+                    <mrow>&amp;+0.002</mrow>
+                    <mrow>&amp;+0.0003</mrow>
+                    <mrow>&amp;+0.00005</mrow>
+                    <mrow>&amp;+0.000008</mrow>
+                    <mrow>&amp;+0.0000013</mrow>
+                    <mrow>&amp;\phantom{+{}}\vdots</mrow>
+                    </md>
+                    What is the sum? (The answer can be expressed as a certain rational number.)</p>
+                </statement>
+                <solution>
+                    <p>We have been asked to find the value of <m>\sum_{n=1}^{\infty}\frac{f_n}{10^n}</m>.<md>
+                    <mrow>\sum_{n=1}^{\infty}\frac{f_n}{10^n}&amp;=\sum_{n=1}^{\infty}\frac{\frac{1}{\sqrt{5}}\left(G^n-g^n\right)}{10^n}</mrow>
+                    <mrow>&amp;=\frac{1}{\sqrt{5}}\sum_{n=1}^{\infty}\left(\left(\frac{G}{10}\right)^n-\left(\frac{g}{10}\right)^n\right)</mrow>
+                    <mrow>&amp;=\frac{1}{\sqrt{5}}\left(\frac{\frac{G}{10}}{1-\frac{G}{10}}-\frac{\frac{g}{10}}{1-\frac{g}{10}}\right)</mrow>
+                    <mrow>&amp;=\frac{1}{\sqrt{5}}\left(\frac{G}{10-G}-\frac{g}{10-g}\right)</mrow>
+                    <mrow>&amp;=\frac{1}{\sqrt{5}}\frac{10G-10g}{100-10G-10g+Gg}</mrow>
+                    <mrow>&amp;=\frac{1}{\sqrt{5}}\frac{10\sqrt{5}}{100-10G-10(1-G)+G(1-G)}</mrow>
+                    <mrow>&amp;=\frac{10}{100-10-1}</mrow>
+                    <mrow>&amp;=\frac{10}{89}</mrow>
+                    </md></p>
+                </solution>
+            </exercise>
+
+            <exercise>
+                <statement>
+                    <p>Find the limit of the ratio of two consecutive Fibonacci numbers: <me>\lim\limits_{n\to\infty}\frac{f_{n+1}}{f_n}\text{.}</me></p>
+                </statement>
+                <solution>
+                    <p><md>
+                    <mrow>\lim_{n\to\infty}\frac{f_{n+1}}{f_n}&amp;=\lim_{n\to\infty}\frac{\frac{1}{\sqrt{5}}\left(G^{n+1}-g^{n+1}\right)}{\frac{1}{\sqrt{5}}\left(G^{n}-g^{n}\right)}</mrow>
+                    <mrow>&amp;=\lim_{n\to\infty}\frac{G^{n+1}-g^{n+1}}{G^{n}-g^{n}}</mrow>
+                    <mrow>&amp;=\lim_{n\to\infty}\frac{G-g\left(\frac{g}{G}\right)^n}{1-\left(\frac{g}{G}\right)^{n}}</mrow>
+                    <mrow>&amp;=\frac{G-0}{1-0}</mrow>
+                    <mrow>&amp;=G</mrow>
+                    </md></p>
+                </solution>
+            </exercise>
+
+            <exercise>
+                <statement>
+                    <p>Show that for the Fibonacci numbers <m>\set{f_n}</m>, <me>f_{n-1}^2+f_n^2=f_{2n-1}\text{.}</me></p>
+                </statement>
+                <solution>
+                    <p><md>
+                    <mrow>f_{n-1}^2+f_n^2&amp;=\left(\frac{1}{\sqrt{5}}\left(G^{n-1}-g^{n-1}\right)\right)^2+\left(\frac{1}{\sqrt{5}}\left(G^{n}-g^{n}\right)\right)^2</mrow>
+                    <mrow>&amp;=\frac{1}{5}\left(G^{2n-2}-2g^{n-1}G^{n-1}+g^{2n-2}\right)+\frac{1}{5}\left(G^{2n}-2g^{n}G^{n}+g^{2n}\right)</mrow>
+                    <mrow>&amp;=\frac{1}{5}\left(G^{2n-2}-2g^{n-1}G^{n-1}+g^{2n-2}+G^{2n}-2g^{n}G^{n}+g^{2n}\right)</mrow>
+                    <mrow>&amp;=\frac{1}{5}\left(G^{2n-1}\left(\frac{1}{G}+G\right)-2g^{n-1}G^{n-1}(1+gG)+g^{2n-1}\left(\frac{1}{g}+g\right)\right)</mrow>
+                    <mrow>&amp;=\frac{1}{5}\left(G^{2n-1}\sqrt{5}-g^{2n-1}\sqrt{5}\right)</mrow>
+                    <mrow>&amp;=\frac{1}{\sqrt{5}}\left(G^{2n-1}-g^{2n-1}\right)</mrow>
+                    <mrow>&amp;=f_{2n-1}</mrow>
+                    </md></p>
+                </solution>
+            </exercise>
+
+        </exercisegroup>
+
+    </exercises>
+</section>
