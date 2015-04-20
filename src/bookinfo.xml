@@ -12,6 +12,8 @@
     <!-- For title into HTML head, then tabs, bookmarks, etc -->
     <initialism>SCLA</initialism>
 
+    <!-- Image on book HTML layout -->
+    <brandlogo url="http://linear.ups.edu/scla/html/index.html" source="images/scla-cover-126x144-72dpi.png" />
 
     <!-- For LaTeX-based images; inserted both into tex preamble, -->
     <!-- and into standalone preambles for svg production         -->
