@@ -37,16 +37,20 @@
 
 			<p>Suppose we have the following 5 points in the plane and we wish to pass a degree 4 polynomial through them.</p>
 
-	        <table>
-	            <tgroup cols="6" align="center">
-	                <tbody>
-	                    <row><entry><m>i</m></entry><entry>1</entry><entry>2</entry><entry>3</entry><entry>4</entry><entry>5</entry></row>
-	                    <row><entry><m>x_i</m></entry><entry>-3</entry><entry>-1</entry><entry>2</entry><entry>3</entry><entry>6</entry></row>
-	                    <row><entry><m>y_i</m></entry><entry>276</entry><entry>16</entry><entry>31</entry><entry>144</entry><entry>2319</entry></row>
-	                </tbody>
-	            </tgroup>
-	            <caption>Points on a polynomial</caption>
-	        </table>
+			<table>
+				<caption>Points on a polynomial</caption>
+				<tabular halign="right">
+					<row>
+						<cell><m>i</m></cell><cell>1</cell><cell>2</cell><cell>3</cell><cell>4</cell><cell>5</cell>
+					</row>
+					<row>
+						<cell><m>x_i</m></cell><cell>-3</cell><cell>-1</cell><cell>2</cell><cell>3</cell><cell>6</cell>
+					</row>
+					<row>
+						<cell><m>y_i</m></cell><cell>276</cell><cell>16</cell><cell>31</cell><cell>144</cell><cell>2319</cell>
+					</row>
+					</tabular>
+			</table>
 
 			<p>The required system of equations has a coefficient matrix that is the Vandermonde matrix where row <m>i</m> is successive powers of <m>x_i</m>
 			<me><![CDATA[A=
@@ -86,32 +90,30 @@
 
 			<p>Suppose we believe the twelve data points below are related by a degree three polynomial, <m>y=p(x)=a_0+a_1x+a_2x^2+a_3x^3</m>.  We have four unknown parameters, the coefficients of the polynomial.  For each point we can create a <m>5</m> tuple, <m>(1, x_i, x_i^2, x_i^3, y_i)</m>, with entries that are related by the linear equation <m>a_0+a_1x_i+a_2x_i^2+a_3x_i^3=y_i</m>.  So we have <m>12</m> linear equations in <m>4</m> variables.  The coefficent matrix <m>A</m> has <m>12</m> rows and <m>4</m> columns, similar in spirit to a Vandermonde matrix (Section<nbsp /><xref ref="section-vandermonde" />), though not even square.  The vector of constants is the <m>12</m> values of <m>y_i</m>.</p>
 
-	        <table>
-	            <tgroup cols="2" align="center">
-	            	<thead>
-	            		<row><entry><m>x_i</m></entry><entry><m>y_i</m></entry></row>
-	            	</thead>
-	                <tbody>
-						<row><entry>0.142</entry><entry>-10.867</entry></row>
-						<row><entry>0.645</entry><entry> 10.120</entry></row>
-						<row><entry>0.953</entry><entry> 8.1728</entry></row>
-						<row><entry>2.958</entry><entry> 11.693</entry></row>
-						<row><entry>2.975</entry><entry> 18.931</entry></row>
-						<row><entry>3.167</entry><entry> 16.215</entry></row>
-						<row><entry>3.413</entry><entry>  3.863</entry></row>
-						<row><entry>4.301</entry><entry> -7.971</entry></row>
-						<row><entry>5.552</entry><entry>-24.108</entry></row>
-						<row><entry>6.576</entry><entry>-31.217</entry></row>
-						<row><entry>7.957</entry><entry>  0.719</entry></row>
-						<row><entry>8.027</entry><entry>  9.550</entry></row>
-	                </tbody>
-	            </tgroup>
-	            <caption>Points on a polynomial</caption>
-	        </table>
+			<table>
+				<caption>Points on a polynomial</caption>
+				<tabular halign="right">
+					<row halign="center" bottom="major">
+						<cell><m>x_i</m></cell><cell><m>y_i</m></cell>
+					</row>
+					<row><cell>0.142</cell><cell>-10.867</cell></row>
+					<row><cell>0.645</cell><cell> 10.120</cell></row>
+					<row><cell>0.953</cell><cell> 8.1728</cell></row>
+					<row><cell>2.958</cell><cell> 11.693</cell></row>
+					<row><cell>2.975</cell><cell> 18.931</cell></row>
+					<row><cell>3.167</cell><cell> 16.215</cell></row>
+					<row><cell>3.413</cell><cell>  3.863</cell></row>
+					<row><cell>4.301</cell><cell> -7.971</cell></row>
+					<row><cell>5.552</cell><cell>-24.108</cell></row>
+					<row><cell>6.576</cell><cell>-31.217</cell></row>
+					<row><cell>7.957</cell><cell>  0.719</cell></row>
+					<row><cell>8.027</cell><cell>  9.550</cell></row>
+				</tabular>
+			</table>
 
-	        <p>Here are the relevant pieces of the system, the normal equations, and the solution.<md>
-	        	<mrow>A&amp;=
-	        	\begin{bmatrix}<![CDATA[
+			<p>Here are the relevant pieces of the system, the normal equations, and the solution.<md>
+				<mrow>A&amp;=
+				\begin{bmatrix}<![CDATA[
 				1 & 0.142 & 0.020 & 0.003 \\
 				1 & 0.646 & 0.417 & 0.269 \\
 				1 & 0.954 & 0.909 & 0.867 \\
@@ -124,25 +126,25 @@
 				1 & 6.576 & 43.247 & 284.403 \\
 				1 & 7.958 & 63.325 & 503.917 \\
 				1 & 8.028 & 64.444 & 517.341
-	        	]]>\end{bmatrix}
-	        	&amp;
-	        	\vect{b}&amp;=
+				]]>\end{bmatrix}
+				&amp;
+				\vect{b}&amp;=
 				\colvector{-10.867 \\ 10.120 \\ 8.172 \\ 11.693 \\ 18.931 \\ 16.215 \\ 3.863 \\ -7.971 \\ -24.108 \\ -31.217 \\ 0.719 \\ 9.550 }</mrow>
 			</md>
 			<md>
-	        	<mrow>\adjoint{A}A&amp;=
-	        	\begin{bmatrix}<![CDATA[
+				<mrow>\adjoint{A}A&amp;=
+				\begin{bmatrix}<![CDATA[
 				12.000 & 46.671 & 260.978 & 1681.324 \\
 				46.671 & 260.978 & 1681.324 & 11718.472 \\
 				260.978 & 1681.324 & 11718.472 & 85542.108 \\
 				1681.324 & 11718.472 & 85542.108 & 642050.755
-	        	]]>\end{bmatrix}</mrow></md>
+				]]>\end{bmatrix}</mrow></md>
 				<md><mrow>\adjoint{A}\vect{b}&amp;=
-	        	\colvector{5.102 \\ -122.81 \\ -1090.783 \\ -6856.475}
-	        	&amp;
-	        	\vect{x}&amp;=
-	        	\colvector{-17.726 \\ 47.157 \\ -16.122 \\ 1.323}</mrow>
-        	</md>  So the polynomial obtained from a least-squares fit is <me>\hat{p}(x)=1.323x^3-16.122x^2+47.157x-17.726</me></p>
+				\colvector{5.102 \\ -122.81 \\ -1090.783 \\ -6856.475}
+				&amp;
+				\vect{x}&amp;=
+				\colvector{-17.726 \\ 47.157 \\ -16.122 \\ 1.323}</mrow>
+			</md>  So the polynomial obtained from a least-squares fit is <me>\hat{p}(x)=1.323x^3-16.122x^2+47.157x-17.726</me></p>
 
 		</example>
 
