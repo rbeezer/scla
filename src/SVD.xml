@@ -163,20 +163,30 @@
             <title>SVD Rank One Decomposition</title>
 
             <statement>
-                <p>Suppose the singular value decomposition of an <m>m\times n</m> matrix <m>A</m> is given by <m>A=US\adjoint{V}</m>, where the nonzero singular values in the first <m>r</m> entries of the diagonal of <m>S</m> are <m>\scalarlist{s}{r}</m>, and the columns of <m>U</m> and <m>V</m> are, respectively, <m>\vectorlist{x}{n}</m> and <m>\vectorlist{y}{m}</m>.  Then <me>A=\sum_{i=1}^r\,s_i\,\vect{x}_i\adjoint{\vect{y}_i}</me></p>
+                <p>Suppose the singular value decomposition of an <m>m\times n</m> matrix <m>A</m> is given by <m>A=US\adjoint{V}</m>, where the nonzero singular values in the first <m>r</m> entries of the diagonal of <m>S</m> are <m>\scalarlist{s}{r}</m>, and the columns of <m>U</m> and <m>V</m> are, respectively, <m>\vectorlist{y}{m}</m> and <m>\vectorlist{x}{n}</m>.  Then <me>A=\sum_{i=1}^r\,s_i\,\vect{y}_i\adjoint{\vect{x}_i}</me></p>
             </statement>
 
             <proof>
                 <p>As usual, let <m>\vect{e}_i</m> be column <m>i</m> of the identity matrix <m>I_m</m>.  Define <m>S_i</m>, for <m>1\leq i\leq r</m> to be the <m>m\times n</m> matrix where every entry is zero, except column <m>i</m> is <m>s_i\vect{e}_i</m>.  Then, by design, <m>S=\sum_{i=1}^r\,S_i</m>.  We have, <md>
-                    <mrow>A&amp;=US\adjoint{V}=U\,\sum_{i=1}^r\,S_i\,\adjoint{V}=\sum_{i=1}^rUS_i\adjoint{V}</mrow>
-                    <mrow>&amp;=\sum_{i=1}^r\,U\left\lbrack\zerovector|\dots|s_i\vect{e}_i|\dots|\zerovector\right\rbrack\adjoint{V}=\sum_{i=1}^r\,s_i\left\lbrack\zerovector|\dots|U\vect{e}_i|\dots|\zerovector\right\rbrack\adjoint{V}</mrow>
-                    <mrow>&amp;=\sum_{i=1}^r\,s_i\left\lbrack\zerovector|\dots|\vect{x}_i|\dots|\zerovector\right\rbrack\adjoint{V}=\sum_{i=1}^r\,s_i\vect{x}_i\adjoint{\vect{y}_i}</mrow>
+                    <mrow>
+                        A
+                        &amp;=US\adjoint{V}=U\,\sum_{i=1}^r\,S_i\,\adjoint{V}
+                             =\sum_{i=1}^rUS_i\adjoint{V}
+                    </mrow>
+                    <mrow>
+                        &amp;=\sum_{i=1}^r\,U\left\lbrack\zerovector|\dots|s_i\vect{e}_i|\dots|\zerovector\right\rbrack\adjoint{V}
+                        =\sum_{i=1}^r\,s_i\left\lbrack\zerovector|\dots|U\vect{e}_i|\dots|\zerovector\right\rbrack\adjoint{V}
+                    </mrow>
+                    <mrow>
+                        &amp;=\sum_{i=1}^r\,s_i\left\lbrack\zerovector|\dots|\vect{y}_i|\dots|\zerovector\right\rbrack\adjoint{V}
+                             =\sum_{i=1}^r\,s_i\vect{y}_i\adjoint{\vect{x}_i}
+                    </mrow>
                 </md>
                 </p>
             </proof>
         </theorem>
 
-        <p>Be sure to recognize <m>\vect{x}_i\adjoint{\vect{y}_i}</m> as the outer product, an <m>m\times n</m> matrix of rank one (every row is a multiple of every other row, and similarly for columns).  See Subsection<nbsp /><xref provisional="subsection-SVD-image-compression" /> for a good example of the utility of this result.</p>
+        <p>Be sure to recognize <m>\vect{y}_i\adjoint{\vect{x}_i}</m> as the outer product, an <m>m\times n</m> matrix of rank one (every row is a multiple of every other row, and similarly for columns).  See Subsection<nbsp /><xref provisional="subsection-SVD-image-compression" /> for a good example of the utility of this result.</p>
 
         <todo>Properties of SVD needs (numerical) rank discussion</todo>
         <todo>Properties of SVD needs range and kernel theorem (as spans of x, y vectors)</todo>
