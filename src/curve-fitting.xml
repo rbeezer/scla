@@ -38,7 +38,7 @@
 			<p>Suppose we have the following 5 points in the plane and we wish to pass a degree 4 polynomial through them.</p>
 
 			<table>
-				<caption>Points on a polynomial</caption>
+				<title>Points on a polynomial</title>
 				<tabular halign="right">
 					<row>
 						<cell><m>i</m></cell><cell>1</cell><cell>2</cell><cell>3</cell><cell>4</cell><cell>5</cell>
@@ -91,7 +91,7 @@
 			<p>Suppose we believe the twelve data points below are related by a degree three polynomial, <m>y=p(x)=a_0+a_1x+a_2x^2+a_3x^3</m>.  We have four unknown parameters, the coefficients of the polynomial.  For each point we can create a <m>5</m> tuple, <m>(1, x_i, x_i^2, x_i^3, y_i)</m>, with entries that are related by the linear equation <m>a_0+a_1x_i+a_2x_i^2+a_3x_i^3=y_i</m>.  So we have <m>12</m> linear equations in <m>4</m> variables.  The coefficent matrix <m>A</m> has <m>12</m> rows and <m>4</m> columns, similar in spirit to a Vandermonde matrix (Section<nbsp /><xref ref="section-vandermonde" />), though not even square.  The vector of constants is the <m>12</m> values of <m>y_i</m>.</p>
 
 			<table>
-				<caption>Points on a polynomial</caption>
+				<title>Points on a polynomial</title>
 				<tabular halign="right">
 					<row halign="center" bottom="major">
 						<cell><m>x_i</m></cell><cell><m>y_i</m></cell>

@@ -42,7 +42,7 @@
         <figure xml:id="figure-bee-ancestors">
             <caption>Honeybee Ancestors</caption>
             <image xml:id="bee-ancestors">
-            <latex-image-code>
+            <latex-image>
             <![CDATA[%
             \newcommand{\drone}{\color{yellow}\fbox{\male} }
             \newcommand{\queen}{\fbox{\female} }
@@ -117,9 +117,9 @@
                 ]
                 ]
             \end{forest}}]]>
-	    </latex-image-code>
-	    </image>
-	</figure>
+            </latex-image>
+           </image>
+       </figure>
 
         <p>If we define <m>a_n</m> to be the number of ancestors at level <m>n</m>, where level 1 has our drone's parent, level 2 has his grandparents, and so on, then we see in Figure <xref ref="figure-bee-ancestors"/> the sequence <m>\set{a_1,a_2,\ldots}=\set{1,2,3,5,8,\ldots}</m>. Note that every bee, regardless of sex, has precisely one mother and precisely one grandfather. The bees at level <m>n-1</m> have their mother at level <m>n</m>, and the bees at level <m>n-2</m> have their grandfather at level <m>n</m>. Since this accounts for all of the bees at level <m>n</m>, partitioned according to sex, it tells us that <me>a_n=a_{n-1}+a_{n-2}\text{,}</me> giving us a recurrence relation. The linear function <m>L</m> referred to in Definition <xref ref="definition-linear-recurrence"/> is defined simply by <m>L(x,y)=x+y</m>, and we have <m>a_n=L(a_{n-1},a_{n-2})</m>.</p>
 
