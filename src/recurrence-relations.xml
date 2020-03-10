@@ -18,18 +18,22 @@
         -->
     </author>
 
-    <p>Consider a sequence where a few initial terms are given, and then each successive term is defined using the terms that preceded it.  For instance, we might begin a sequence with <m>\set{a_1,a_2,\ldots}=\set{1,2,\ldots}</m> and then require <m>a_n=3a_{n-1}-a_{n-2}</m>. This establishes all of the terms that follow.  For instance, <md>
-    <mrow>a_3&amp;=3a_2-a_1&amp;a_4&amp;=3a_3-a_2</mrow>
-    <mrow>&amp;=3(2)-1&amp;&amp;=3(5)-2</mrow>
-    <mrow>&amp;=5&amp;&amp;=13</mrow>
-    </md> and in this way the sequence elements will all be determined: <m>\set{1,2,5,13,34,\ldots}</m>. Sequences such as this are of special interest, and motivate us to introduce vocabulary for referring to them.</p>
+    <subsection>
+        <title>Linear Recurrence Realtions</title>
 
-    <definition xml:id="definition-linear-recurrence"> <!-- was DS -->
-    <title>Linear Recurrence Relation</title>
-        <statement>
-            <p>When the terms of a sequence <m>\set{a_n}</m> admit a relation of the form <m>a_n=L(a_{n-1},\ldots,a_{n-k})</m>, where <m>k</m> is fixed, and <m>L</m> is a linear function on <m>k</m> variables, we refer to the relation as a linear recurrence of depth <m>k</m>. The first several terms of the sequence may or may not respect the recurrence relation; but it is required that once <m>n</m> is large enough, the recurrence relation holds.</p>
-        </statement>
-    </definition>
+        <p>Consider a sequence where a few initial terms are given, and then each successive term is defined using the terms that preceded it.  For instance, we might begin a sequence with <m>\set{a_1,a_2,\ldots}=\set{1,2,\ldots}</m> and then require <m>a_n=3a_{n-1}-a_{n-2}</m>. This establishes all of the terms that follow.  For instance, <md>
+            <mrow>a_3&amp;=3a_2-a_1&amp;a_4&amp;=3a_3-a_2</mrow>
+            <mrow>&amp;=3(2)-1&amp;&amp;=3(5)-2</mrow>
+            <mrow>&amp;=5&amp;&amp;=13</mrow>
+        </md> and in this way the sequence elements will all be determined: <m>\set{1,2,5,13,34,\ldots}</m>. Sequences such as this are of special interest, and motivate us to introduce vocabulary for referring to them.</p>
+
+        <definition xml:id="definition-linear-recurrence"> <!-- was DS -->
+        <title>Linear Recurrence Relation</title>
+            <statement>
+                <p>When the terms of a sequence <m>\set{a_n}</m> admit a relation of the form <m>a_n=L(a_{n-1},\ldots,a_{n-k})</m>, where <m>k</m> is fixed, and <m>L</m> is a linear function on <m>k</m> variables, we refer to the relation as a linear recurrence of depth <m>k</m>. The first several terms of the sequence may or may not respect the recurrence relation; but it is required that once <m>n</m> is large enough, the recurrence relation holds.</p>
+            </statement>
+        </definition>
+    </subsection>
 
     <subsection xml:id="subsection-recurrence-relation-examples">
     <title>Examples</title>

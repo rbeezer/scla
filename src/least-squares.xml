@@ -10,110 +10,114 @@
 <section xml:id="section-least-squares">
     <title>Least Squares</title>
 
-    <p>Solving a linear system of equations is a fundamental use of the tools of linear algebra.  You know from introductory linear algebra that a linear system may have no solution.  In an applied situation there could be many reasons for this, and it begs the question: what to do next?</p>
+    <subsection>
+        <title>Theory of Least Squares</title>
 
-    <p>We often construct mathematical models of practical situations, frequently in an effort to measure various parameters of the model.  Suppose we think that interest rates <m>R</m>, as measured by the rate on one-year government bonds, are a linear function of construction activity <m>C</m>, as measured by the number of permits issued for new construction in the last 30 days.  So the <q>hotter</q> the construction market, the greater the demand for loans, so the cost of money (the interest rate) is greater.  With a good model, we might be able to predict interest rates by examining public records for changes in the number of construction permits issued.</p>
+        <p>Solving a linear system of equations is a fundamental use of the tools of linear algebra.  You know from introductory linear algebra that a linear system may have no solution.  In an applied situation there could be many reasons for this, and it begs the question: what to do next?</p>
 
-    <p>So we have a mathematical model <me>I = aR + b</me> where we do not know <m>a</m> or <m>b</m>, the parameters of the model.  But we would like to <em>know</em> the values of these parameters.  Or at least have good <em>estimates</em>, since we understand that our model is an extremely simple representation of a much more complicated situation.  So we collect data by obtaining monthly records of the interest rate and construction permits for the past sixty years.   Now we have <m>720</m> pairs of permits issued and interest rates.  We can substitute each pair into our model and we get a linear equation in the parameters <m>a</m> and <m>b</m>.  Two such equations would be likely to have a unique solution, however if we consider all <m>720</m> equations there is unlikely to be a solution.  Why do we say that?  Imagine the linear system we would obtain from all these equations.  The <m>720\times 2</m> coefficient matrix will have the values of <m>C</m> in the first column, and the second column will be all <m>1</m>'s.  The vector of constants will be the values of <m>R</m>.  If you form the augmented matrix of this system and row-reduce, you will be virtually guaranteed to get a pivot column in the third column and thus have no solution (<acroref type="theorem" acro="RCLS" />).</p>
+        <p>We often construct mathematical models of practical situations, frequently in an effort to measure various parameters of the model.  Suppose we think that interest rates <m>R</m>, as measured by the rate on one-year government bonds, are a linear function of construction activity <m>C</m>, as measured by the number of permits issued for new construction in the last 30 days.  So the <q>hotter</q> the construction market, the greater the demand for loans, so the cost of money (the interest rate) is greater.  With a good model, we might be able to predict interest rates by examining public records for changes in the number of construction permits issued.</p>
 
-    <p>The lack of a solution for our model can be expressed more clearly by saying that vector of constants (the values of <m>R</m>) is not in the column space of the coefficient matrix.  Or the vector of <m>C</m> values is not a linear combination of the vector of <m>R</m> values and the vector of all ones.  If it were, then the scalars in the linear combination would be our solution for <m>a</m> and <m>b</m>.  We will temporarily leave our economic forecasting example to be more general, but we will return to the example soon.</p>
+        <p>So we have a mathematical model <me>I = aR + b</me> where we do not know <m>a</m> or <m>b</m>, the parameters of the model.  But we would like to <em>know</em> the values of these parameters.  Or at least have good <em>estimates</em>, since we understand that our model is an extremely simple representation of a much more complicated situation.  So we collect data by obtaining monthly records of the interest rate and construction permits for the past sixty years.   Now we have <m>720</m> pairs of permits issued and interest rates.  We can substitute each pair into our model and we get a linear equation in the parameters <m>a</m> and <m>b</m>.  Two such equations would be likely to have a unique solution, however if we consider all <m>720</m> equations there is unlikely to be a solution.  Why do we say that?  Imagine the linear system we would obtain from all these equations.  The <m>720\times 2</m> coefficient matrix will have the values of <m>C</m> in the first column, and the second column will be all <m>1</m>'s.  The vector of constants will be the values of <m>R</m>.  If you form the augmented matrix of this system and row-reduce, you will be virtually guaranteed to get a pivot column in the third column and thus have no solution (<acroref type="theorem" acro="RCLS" />).</p>
 
-    <p>Consider the general problem of solving <m>A\vect{x}=\vect{b}</m> when there is no solution.  We <em>desire</em> an <m>\vect{x}</m> so that <m>A\vect{x}</m> <em>equals</em> <m>\vect{b}</m>, but we will <em>settle</em> for an <m>\vect{x}</m> so that <m>A\vect{x}</m> is <em>very close</em> to <m>\vect{b}</m>.  What do we mean by close?  One measure would be that we want the difference <m>A\vect{x}-\vect{b}</m> to be a short vector, as short as possible.  In other words we want to minimize the norm, <m>\norm{A\vect{x}-\vect{b}}</m>.  We will return to this minimization idea shortly, but let's ask informally what <em>direction</em> this short vector might have?</p>
+        <p>The lack of a solution for our model can be expressed more clearly by saying that vector of constants (the values of <m>R</m>) is not in the column space of the coefficient matrix.  Or the vector of <m>C</m> values is not a linear combination of the vector of <m>R</m> values and the vector of all ones.  If it were, then the scalars in the linear combination would be our solution for <m>a</m> and <m>b</m>.  We will temporarily leave our economic forecasting example to be more general, but we will return to the example soon.</p>
 
-    <p>We have a subspace, the column space of <m>A</m>, represented by all possibilities for <m>A\vect{x}</m> as we course over all values of <m>\vect{x}</m>.  We have a vector <m>\vect{b}</m> that is not in the subspace.  Which element in the subspace is closest to <m>\vect{b}</m>?  Consider the situation in two dimensions, where the subspace is a line through the origin, and the point lies off the line.  From the point off the line, which of the infinitely many points on the line is closest, and what direction would you take to get there?  In three dimensions, consider a subspace that is a plane containing the origin, and the point lies off the plane.  From the point off the plane, which of the infinitely many points on the plane is closest, and what direction would you take to get there?   You should have answered <q>in a perpendicular direction</q> and <q>in the direction of the normal vector to the plane</q>.  Move orthogonally to the subspace.  More exactly, in the direction of an element of the orthogonal complement of the subspace.</p>
+        <p>Consider the general problem of solving <m>A\vect{x}=\vect{b}</m> when there is no solution.  We <em>desire</em> an <m>\vect{x}</m> so that <m>A\vect{x}</m> <em>equals</em> <m>\vect{b}</m>, but we will <em>settle</em> for an <m>\vect{x}</m> so that <m>A\vect{x}</m> is <em>very close</em> to <m>\vect{b}</m>.  What do we mean by close?  One measure would be that we want the difference <m>A\vect{x}-\vect{b}</m> to be a short vector, as short as possible.  In other words we want to minimize the norm, <m>\norm{A\vect{x}-\vect{b}}</m>.  We will return to this minimization idea shortly, but let's ask informally what <em>direction</em> this short vector might have?</p>
 
-    <p>More carefully, <m>A\vect{x}-\vect{b}\in\per{\left(\csp{A}\right)}=\nsp{\adjoint{A}}</m>, so <md>
-    <mrow>\zerovector=\adjoint{A}\left(A\vect{x}-\vect{b}\right)&amp;=\adjoint{A}A\vect{x}-\adjoint{A}\vect{b}
-    &amp;
-    &amp;\Rightarrow
-    &amp;
-    \adjoint{A}A\vect{x}&amp;=\adjoint{A}\vect{b}.</mrow>
-    </md>  This linear system is called the <term>normal equations</term>, due to the role of orthogonality in its derivation.  Several good things have happened.  Primarily, <m>\adjoint{A}A</m> is a square matrix, is positive semi-definite, and if <m>A</m> has full column rank, then <m>\adjoint{A}A</m> is nonsingular.  With a nonsingular coefficient matrix, we have the unique solution <me>\vect{x}=\inverse{\left(\adjoint{A}A\right)}\adjoint{A}\vect{b}.</me></p>
+        <p>We have a subspace, the column space of <m>A</m>, represented by all possibilities for <m>A\vect{x}</m> as we course over all values of <m>\vect{x}</m>.  We have a vector <m>\vect{b}</m> that is not in the subspace.  Which element in the subspace is closest to <m>\vect{b}</m>?  Consider the situation in two dimensions, where the subspace is a line through the origin, and the point lies off the line.  From the point off the line, which of the infinitely many points on the line is closest, and what direction would you take to get there?  In three dimensions, consider a subspace that is a plane containing the origin, and the point lies off the plane.  From the point off the plane, which of the infinitely many points on the plane is closest, and what direction would you take to get there?   You should have answered <q>in a perpendicular direction</q> and <q>in the direction of the normal vector to the plane</q>.  Move orthogonally to the subspace.  More exactly, in the direction of an element of the orthogonal complement of the subspace.</p>
 
-    <p>We consider two very simple examples of using the normal equations, in cases where our geometric intuition is useful.</p>
-
-    <example xml:id="example-2d-least-squares">
-        <title>Trivial Least Squares</title>
-
-        <p>Consider the extremely trivial system of equations in one variable, <m>A\vect{x}=\vect{b}</m> with<md>
-        <mrow>A&amp;=\begin{bmatrix}1\\2\end{bmatrix}
+        <p>More carefully, <m>A\vect{x}-\vect{b}\in\per{\left(\csp{A}\right)}=\nsp{\adjoint{A}}</m>, so <md>
+        <mrow>\zerovector=\adjoint{A}\left(A\vect{x}-\vect{b}\right)&amp;=\adjoint{A}A\vect{x}-\adjoint{A}\vect{b}
         &amp;
-        \vect{x}&amp;=\colvector{x_1}
+        &amp;\Rightarrow
         &amp;
-        \vect{b}&amp;=\colvector{5\\15}</mrow>
-        </md>  Quite clearly this system has no solution.  Forming the normal equations we get the silly system <me>\begin{bmatrix}5\end{bmatrix}\colvector{x_1}=\colvector{35}</me> which has the unique solution <m>x_1=7</m>.  What is more interesting is that <me>A\colvector{7} = \colvector{7\\14}.</me>  This is a vector in <m>\csp{A}</m> and the difference <me>\vect{r}=\colvector{5\\15}-\colvector{7\\14}=\colvector{-2\\1}</me> is orthogonal to the columns of <m>A</m>, in other words <m>\vect{r}</m> is in the orthogonal complement of the column space of <m>A</m>.  Geometrically, the point <m>(5,15)</m> is not on the line <m>y=2x</m>, but <m>(7,14)</m> is.  The line has slope <m>2</m>, while the line segment joining <m>(5,15)</m> to <m>(7,14)</m> has slope <m>-\frac{1}{2}</m>, making it perpendicular to the line.  So <m>(7,14)</m> is the point on the line closest to <m>(5,15)</m> and leads to the solution <m>x_1=7</m> of the resulting system.</p>
-    </example>
+        \adjoint{A}A\vect{x}&amp;=\adjoint{A}\vect{b}.</mrow>
+        </md>  This linear system is called the <term>normal equations</term>, due to the role of orthogonality in its derivation.  Several good things have happened.  Primarily, <m>\adjoint{A}A</m> is a square matrix, is positive semi-definite, and if <m>A</m> has full column rank, then <m>\adjoint{A}A</m> is nonsingular.  With a nonsingular coefficient matrix, we have the unique solution <me>\vect{x}=\inverse{\left(\adjoint{A}A\right)}\adjoint{A}\vect{b}.</me></p>
 
-    <p>Let's do it again, staying simple, but not trivially so.</p>
+        <p>We consider two very simple examples of using the normal equations, in cases where our geometric intuition is useful.</p>
+
+        <example xml:id="example-2d-least-squares">
+            <title>Trivial Least Squares</title>
+
+            <p>Consider the extremely trivial system of equations in one variable, <m>A\vect{x}=\vect{b}</m> with<md>
+            <mrow>A&amp;=\begin{bmatrix}1\\2\end{bmatrix}
+            &amp;
+            \vect{x}&amp;=\colvector{x_1}
+            &amp;
+            \vect{b}&amp;=\colvector{5\\15}</mrow>
+            </md>  Quite clearly this system has no solution.  Forming the normal equations we get the silly system <me>\begin{bmatrix}5\end{bmatrix}\colvector{x_1}=\colvector{35}</me> which has the unique solution <m>x_1=7</m>.  What is more interesting is that <me>A\colvector{7} = \colvector{7\\14}.</me>  This is a vector in <m>\csp{A}</m> and the difference <me>\vect{r}=\colvector{5\\15}-\colvector{7\\14}=\colvector{-2\\1}</me> is orthogonal to the columns of <m>A</m>, in other words <m>\vect{r}</m> is in the orthogonal complement of the column space of <m>A</m>.  Geometrically, the point <m>(5,15)</m> is not on the line <m>y=2x</m>, but <m>(7,14)</m> is.  The line has slope <m>2</m>, while the line segment joining <m>(5,15)</m> to <m>(7,14)</m> has slope <m>-\frac{1}{2}</m>, making it perpendicular to the line.  So <m>(7,14)</m> is the point on the line closest to <m>(5,15)</m> and leads to the solution <m>x_1=7</m> of the resulting system.</p>
+        </example>
+
+        <p>Let's do it again, staying simple, but not trivially so.</p>
 
 
-    <example xml:id="example-3d-least-squares">
-        <title>Simple Least Squares</title>
+        <example xml:id="example-3d-least-squares">
+            <title>Simple Least Squares</title>
 
-        <p>Consider the simple system of equations in two variables, <m>A\vect{x}=\vect{b}</m> with<md>
-        <mrow>A&amp;=\begin{bmatrix}1&amp;-1\\2&amp;3\\3&amp;0\end{bmatrix}
-        &amp;
-        \vect{x}&amp;=\colvector{x_1\\x_2}
-        &amp;
-        \vect{b}&amp;=\colvector{1\\5\\-2}</mrow>
-        </md>  If you try to solve this system, say by row-reducing an augmented matrix, you will discover that there is no solution.  The vector <m>\vect{b}</m> is not in the column space of <m>A</m>. The normal equations give the system <me>\begin{bmatrix}14&amp;5\\5&amp;10\end{bmatrix}\colvector{x_1\\x_2}=\colvector{5\\14}</me> which has the unique solution <m>x_1=-\frac{4}{23}</m>, <m>x_2=\frac{171}{115}</m>.  What is more interesting is that <me>A\colvector{-\frac{4}{23}\\\frac{171}{115}} = \colvector{-\frac{191}{115}\\\frac{473}{115}\\-\frac{12}{23}}.</me>  This is a vector in <m>\csp{A}</m> and the difference <me>\vect{r}= \colvector{1\\5\\-2}- \colvector{-\frac{191}{115}\\\frac{473}{115}\\-\frac{12}{23}}= \colvector{\frac{306}{115}\\\frac{102}{115}\\-\frac{34}{23}}</me> is orthogonal to both of the columns of <m>A</m>, in other words <m>\vect{r}</m> is in the orthogonal complement of the column space of <m>A</m>.  Geometrically, the point <m>(1,5,-2)</m> is not on the plane spanned by the columns of <m>A</m>, which has equation <m>9x+3y-5z=0</m>, but <m>(-\frac{191}{115},\,\frac{473}{115},\,-\frac{12}{23})</m> is on the plane.  The plane has a normal vector <m>9\vec{i}+3\vec{j}-5\vec{k}</m>, while the vector joining <m>(1,5,-2)</m> to <m>(-\frac{191}{115},\,\frac{473}{115},\,-\frac{12}{23})</m> is <m>\frac{306}{115}\vec{i}+\frac{102}{115}\vec{j}-\frac{34}{23}\vec{k}</m>, which is a scalar multiple of the normal vector to the plane.  So <m>(-\frac{191}{115},\,\frac{473}{115},\,-\frac{12}{23})</m> is the point on the plane closest to <m>(1,5,-2)</m> and leads to the solution <m>x_1=-\frac{4}{23}</m>, <m>x_2=\frac{171}{115}</m> of the resulting system.</p>
-    </example>
+            <p>Consider the simple system of equations in two variables, <m>A\vect{x}=\vect{b}</m> with<md>
+            <mrow>A&amp;=\begin{bmatrix}1&amp;-1\\2&amp;3\\3&amp;0\end{bmatrix}
+            &amp;
+            \vect{x}&amp;=\colvector{x_1\\x_2}
+            &amp;
+            \vect{b}&amp;=\colvector{1\\5\\-2}</mrow>
+            </md>  If you try to solve this system, say by row-reducing an augmented matrix, you will discover that there is no solution.  The vector <m>\vect{b}</m> is not in the column space of <m>A</m>. The normal equations give the system <me>\begin{bmatrix}14&amp;5\\5&amp;10\end{bmatrix}\colvector{x_1\\x_2}=\colvector{5\\14}</me> which has the unique solution <m>x_1=-\frac{4}{23}</m>, <m>x_2=\frac{171}{115}</m>.  What is more interesting is that <me>A\colvector{-\frac{4}{23}\\\frac{171}{115}} = \colvector{-\frac{191}{115}\\\frac{473}{115}\\-\frac{12}{23}}.</me>  This is a vector in <m>\csp{A}</m> and the difference <me>\vect{r}= \colvector{1\\5\\-2}- \colvector{-\frac{191}{115}\\\frac{473}{115}\\-\frac{12}{23}}= \colvector{\frac{306}{115}\\\frac{102}{115}\\-\frac{34}{23}}</me> is orthogonal to both of the columns of <m>A</m>, in other words <m>\vect{r}</m> is in the orthogonal complement of the column space of <m>A</m>.  Geometrically, the point <m>(1,5,-2)</m> is not on the plane spanned by the columns of <m>A</m>, which has equation <m>9x+3y-5z=0</m>, but <m>(-\frac{191}{115},\,\frac{473}{115},\,-\frac{12}{23})</m> is on the plane.  The plane has a normal vector <m>9\vec{i}+3\vec{j}-5\vec{k}</m>, while the vector joining <m>(1,5,-2)</m> to <m>(-\frac{191}{115},\,\frac{473}{115},\,-\frac{12}{23})</m> is <m>\frac{306}{115}\vec{i}+\frac{102}{115}\vec{j}-\frac{34}{23}\vec{k}</m>, which is a scalar multiple of the normal vector to the plane.  So <m>(-\frac{191}{115},\,\frac{473}{115},\,-\frac{12}{23})</m> is the point on the plane closest to <m>(1,5,-2)</m> and leads to the solution <m>x_1=-\frac{4}{23}</m>, <m>x_2=\frac{171}{115}</m> of the resulting system.</p>
+        </example>
 
 
-    <p>What does a solution to the normal equations look like for our economic forecasting model?  As discussed above <m>A</m> is a <m>720\times 2</m> matrix, where the first column has the numbers of construction permits, <m>c_i</m> for <m>1\leq i\leq 720</m>, and the second column is all ones.  The vector <m>\vect{b}</m> contains the <m>720</m> values of the interest rate, <m>r_i</m>, <m>1\leq i\leq 720</m>.  So <md>
-    <mrow>\adjoint{A}A&amp;=\begin{bmatrix}\sum c_i^2&amp;\sum c_i\\\sum c_i&amp;720\end{bmatrix}</mrow>
-    <mrow>\adjoint{A}\vect{b}&amp;=\begin{bmatrix}\sum c_ir_i\\\sum r_i\end{bmatrix}</mrow></md>   Then, <md>
-    <mrow>\begin{bmatrix}a\\b\end{bmatrix}
-    &amp;=\vect{x}=\inverse{\left(\adjoint{A}A\right)}\adjoint{A}\vect{b}</mrow>
-    <mrow>&amp;=\inverse{\begin{bmatrix}\sum c_i^2&amp;\sum c_i\\\sum c_i&amp;720\end{bmatrix}}
-    \begin{bmatrix}\sum c_ir_i\\\sum r_i\end{bmatrix}</mrow>
-    <mrow>&amp;=\frac{1}{720\sum c_i^2 - \left(\sum c_i\right)^2}
-    \begin{bmatrix}720&amp;-\sum c_i\\-\sum c_i&amp;\sum c_i^2\end{bmatrix}
-    \begin{bmatrix}\sum c_ir_i\\\sum r_i\end{bmatrix}</mrow>
-    <mrow>&amp;=\frac{1}{720\sum c_i^2 - \left(\sum c_i\right)^2}
-    \begin{bmatrix}720\sum c_ir_i-\sum c_i\sum r_i\\-\sum c_i\sum c_ir_i + \sum c_i^2\sum r_i\end{bmatrix}</mrow></md>
-    The expressions above can be cleaned up some, but the point is to see that we have an expression for each of <m>a</m> and <m>b</m>, that depends soley on the <m>720</m> pairs of data points <m>(c_i, r_i)</m>, <m>1\leq i\leq 720</m>.  These expressions may look familiar as the most basic case of <term>linear regression</term>.  Exercise<nbsp /><xref ref="exercise-two-parameter-linear-regression" /> asks you to derive these expressions, and in the more typical order.  With estimates in hand, you can now consult the number of construction permits issued and form a prediction of interest rates.</p>
+        <p>What does a solution to the normal equations look like for our economic forecasting model?  As discussed above <m>A</m> is a <m>720\times 2</m> matrix, where the first column has the numbers of construction permits, <m>c_i</m> for <m>1\leq i\leq 720</m>, and the second column is all ones.  The vector <m>\vect{b}</m> contains the <m>720</m> values of the interest rate, <m>r_i</m>, <m>1\leq i\leq 720</m>.  So <md>
+        <mrow>\adjoint{A}A&amp;=\begin{bmatrix}\sum c_i^2&amp;\sum c_i\\\sum c_i&amp;720\end{bmatrix}</mrow>
+        <mrow>\adjoint{A}\vect{b}&amp;=\begin{bmatrix}\sum c_ir_i\\\sum r_i\end{bmatrix}</mrow></md>   Then, <md>
+        <mrow>\begin{bmatrix}a\\b\end{bmatrix}
+        &amp;=\vect{x}=\inverse{\left(\adjoint{A}A\right)}\adjoint{A}\vect{b}</mrow>
+        <mrow>&amp;=\inverse{\begin{bmatrix}\sum c_i^2&amp;\sum c_i\\\sum c_i&amp;720\end{bmatrix}}
+        \begin{bmatrix}\sum c_ir_i\\\sum r_i\end{bmatrix}</mrow>
+        <mrow>&amp;=\frac{1}{720\sum c_i^2 - \left(\sum c_i\right)^2}
+        \begin{bmatrix}720&amp;-\sum c_i\\-\sum c_i&amp;\sum c_i^2\end{bmatrix}
+        \begin{bmatrix}\sum c_ir_i\\\sum r_i\end{bmatrix}</mrow>
+        <mrow>&amp;=\frac{1}{720\sum c_i^2 - \left(\sum c_i\right)^2}
+        \begin{bmatrix}720\sum c_ir_i-\sum c_i\sum r_i\\-\sum c_i\sum c_ir_i + \sum c_i^2\sum r_i\end{bmatrix}</mrow></md>
+        The expressions above can be cleaned up some, but the point is to see that we have an expression for each of <m>a</m> and <m>b</m>, that depends soley on the <m>720</m> pairs of data points <m>(c_i, r_i)</m>, <m>1\leq i\leq 720</m>.  These expressions may look familiar as the most basic case of <term>linear regression</term>.  Exercise<nbsp /><xref ref="exercise-two-parameter-linear-regression" /> asks you to derive these expressions, and in the more typical order.  With estimates in hand, you can now consult the number of construction permits issued and form a prediction of interest rates.</p>
 
-    <exercise xml:id="exercise-two-parameter-linear-regression">
-        <statement>
-            <p>Suppose we have <m>n</m> pairs of a dependent variable <m>y</m> that varies linearly according to the independent variable <m>x</m>, <m>\left(x_i,y_i\right)</m>, <m>1\leq i\leq n</m>.  Model the data by the linear equation <m>y=a + bx</m>.  Solve the normal equations to find expressions that estimate the parameters <m>a</m> and <m>b</m>.</p>
-        </statement>
-    </exercise>
+        <exercise xml:id="exercise-two-parameter-linear-regression">
+            <statement>
+                <p>Suppose we have <m>n</m> pairs of a dependent variable <m>y</m> that varies linearly according to the independent variable <m>x</m>, <m>\left(x_i,y_i\right)</m>, <m>1\leq i\leq n</m>.  Model the data by the linear equation <m>y=a + bx</m>.  Solve the normal equations to find expressions that estimate the parameters <m>a</m> and <m>b</m>.</p>
+            </statement>
+        </exercise>
 
-    <exercise xml:id="exercise-one-parameter-linear-regression">
-        <statement>
-            <p>Find the least-squares estimate obtained from data modeled by the linear equation <m>y=bx</m> (a situation where we know there is no <m>y</m>-intercept).</p>
-        </statement>
-    </exercise>
+        <exercise xml:id="exercise-one-parameter-linear-regression">
+            <statement>
+                <p>Find the least-squares estimate obtained from data modeled by the linear equation <m>y=bx</m> (a situation where we know there is no <m>y</m>-intercept).</p>
+            </statement>
+        </exercise>
 
-    <exercise xml:id="exercise-three-parameter-linear-regression">
-        <statement>
-            <p>Suppose you have data modeled by a single quantity, <m>z</m>, that depends on two independent variables, <m>x</m> and <m>y</m>, linearly according to the model <m>z = a+bx+cy</m>.  So your data points are triples <m>\left(x_i,y_i,z_i\right)</m>, <m>1\leq i\leq n</m>.  Can you solve the normal equations to obtain expressions estimating <m>a,b,c</m>?  This might not be a very instructive exercise, but perhaps determine <m>\adjoint{A}A</m> and <m>\adjoint{A}\vect{b}</m> before letting the matrix inverse dissuade you.  What does the geometric picture of the data and your resulting estimates look like?</p>
-        </statement>
-    </exercise>
+        <exercise xml:id="exercise-three-parameter-linear-regression">
+            <statement>
+                <p>Suppose you have data modeled by a single quantity, <m>z</m>, that depends on two independent variables, <m>x</m> and <m>y</m>, linearly according to the model <m>z = a+bx+cy</m>.  So your data points are triples <m>\left(x_i,y_i,z_i\right)</m>, <m>1\leq i\leq n</m>.  Can you solve the normal equations to obtain expressions estimating <m>a,b,c</m>?  This might not be a very instructive exercise, but perhaps determine <m>\adjoint{A}A</m> and <m>\adjoint{A}\vect{b}</m> before letting the matrix inverse dissuade you.  What does the geometric picture of the data and your resulting estimates look like?</p>
+            </statement>
+        </exercise>
 
-    <p>So far we have not stated any theorems, to say nothing of proving anything.  Moving in an orthogonal direction feels like a good idea, but is it really best?  Here is a theorem that suggests it is best according to one natural criteria.</p>
+        <p>So far we have not stated any theorems, to say nothing of proving anything.  Moving in an orthogonal direction feels like a good idea, but is it really best?  Here is a theorem that suggests it is best according to one natural criteria.</p>
 
-    <theorem xml:id="theorem-least-squares" >
-        <statement>
-            <p>Suppose that <m>A</m> is an <m>m\times n</m> matrix and <m>\vect{b}\in\complex{m}</m>.  Then <m>r\left(\vect{x}\right)=\norm{A\vect{x}-\vect{b}}</m> is minimized by a solution, <m>\hat{\vect{x}}</m>, to the normal equations, <m>\adjoint{A}A\vect{x}=\adjoint{A}\vect{b}</m>.</p>
-        </statement>
-        <proof>
-            <p>For any vector <m>\vect{x}</m> we can write<md>
-            <mrow>A\vect{x}-\vect{b}
-            &amp;=A\vect{x}-A\hat{\vect{x}}+A\hat{\vect{x}}-\vect{b}</mrow>
-            <mrow>&amp;=A\left(\vect{x}-\hat{\vect{x}}\right)+\left(A\hat{\vect{x}}-\vect{b}\right)</mrow></md>
-            Clearly the first term is a vector in the column space of <m>A</m>.  The second vector, by virtue of <m>\hat{\vect{x}}</m> being a solution to the normal equations, is an element of <m>\nsp{\adjoint{A}}</m>, the orthogonal complement of the column space (Theorem<nbsp /><xref provisional="result on orthogonal complement of colum space" />).  So this is the promised decomposition of <m>A\vect{x}-\vect{b}</m> into the element of a subspace (the column space of <m>A</m> here) and the orthogonal complement of the subspace.  Since these two vectors are orthogonal, we can apply the generalized version of the Pythagorean Theorem (<xref provisional="Pythagorean theorem, perhaps into FCLA" />)<md>
-            <mrow>\norm{A\vect{x}-\vect{b}}^2
-            &amp;=\norm{A\left(\vect{x}-\hat{\vect{x}}\right)+\left(A\hat{\vect{x}}-\vect{b}\right)}^2</mrow>
-            <mrow>&amp;=\norm{A\left(\vect{x}-\hat{\vect{x}}\right)}^2+\norm{\left(A\hat{\vect{x}}-\vect{b}\right)}^2</mrow>
-            <mrow>&amp;\geq\norm{\left(A\hat{\vect{x}}-\vect{b}\right)}^2</mrow></md></p>
+        <theorem xml:id="theorem-least-squares" >
+            <statement>
+                <p>Suppose that <m>A</m> is an <m>m\times n</m> matrix and <m>\vect{b}\in\complex{m}</m>.  Then <m>r\left(\vect{x}\right)=\norm{A\vect{x}-\vect{b}}</m> is minimized by a solution, <m>\hat{\vect{x}}</m>, to the normal equations, <m>\adjoint{A}A\vect{x}=\adjoint{A}\vect{b}</m>.</p>
+            </statement>
+            <proof>
+                <p>For any vector <m>\vect{x}</m> we can write<md>
+                <mrow>A\vect{x}-\vect{b}
+                &amp;=A\vect{x}-A\hat{\vect{x}}+A\hat{\vect{x}}-\vect{b}</mrow>
+                <mrow>&amp;=A\left(\vect{x}-\hat{\vect{x}}\right)+\left(A\hat{\vect{x}}-\vect{b}\right)</mrow></md>
+                Clearly the first term is a vector in the column space of <m>A</m>.  The second vector, by virtue of <m>\hat{\vect{x}}</m> being a solution to the normal equations, is an element of <m>\nsp{\adjoint{A}}</m>, the orthogonal complement of the column space (Theorem<nbsp /><xref provisional="result on orthogonal complement of colum space" />).  So this is the promised decomposition of <m>A\vect{x}-\vect{b}</m> into the element of a subspace (the column space of <m>A</m> here) and the orthogonal complement of the subspace.  Since these two vectors are orthogonal, we can apply the generalized version of the Pythagorean Theorem (<xref provisional="Pythagorean theorem, perhaps into FCLA" />)<md>
+                <mrow>\norm{A\vect{x}-\vect{b}}^2
+                &amp;=\norm{A\left(\vect{x}-\hat{\vect{x}}\right)+\left(A\hat{\vect{x}}-\vect{b}\right)}^2</mrow>
+                <mrow>&amp;=\norm{A\left(\vect{x}-\hat{\vect{x}}\right)}^2+\norm{\left(A\hat{\vect{x}}-\vect{b}\right)}^2</mrow>
+                <mrow>&amp;\geq\norm{\left(A\hat{\vect{x}}-\vect{b}\right)}^2</mrow></md></p>
 
-            <p>This inequality establishes that <m>\hat{\vect{x}}</m> minimizes <m>r\left(\vect{x}\right)</m>.</p>
-         </proof>
-    </theorem>
+                <p>This inequality establishes that <m>\hat{\vect{x}}</m> minimizes <m>r\left(\vect{x}\right)</m>.</p>
+             </proof>
+        </theorem>
 
-    <p>There are other measures of distance than the norm (we are using what would be called the <term><m>2</m>-norm</term>, in order to differentiate it from other norms).  But <q>Euclidean distance</q>, as we have used here, is often the most tractable and the results are often the most useful.  In statistics, it is assumed that deviations in data, deviations from what the model would predict, are due to quantities that vary according to probability distributions.  With this assumption, estimators, such as our least-squares estimates, become complicated functions of these random quantities.  With the <m>2</m>-norm, and reasonable assumptions about the probability distributions for the data, the resulting least-squares estimators have probability distributions that are well-understood, thus making it possible to understand their properties and behavior.</p>
+        <p>There are other measures of distance than the norm (we are using what would be called the <term><m>2</m>-norm</term>, in order to differentiate it from other norms).  But <q>Euclidean distance</q>, as we have used here, is often the most tractable and the results are often the most useful.  In statistics, it is assumed that deviations in data, deviations from what the model would predict, are due to quantities that vary according to probability distributions.  With this assumption, estimators, such as our least-squares estimates, become complicated functions of these random quantities.  With the <m>2</m>-norm, and reasonable assumptions about the probability distributions for the data, the resulting least-squares estimators have probability distributions that are well-understood, thus making it possible to understand their properties and behavior.</p>
+    </subsection>
 
     <todo>Least squares from unitary transformation</todo>
 
@@ -129,24 +133,24 @@
         <mrow>&amp;=\adjoint{Q}QR\vect{x}=R\vect{x}</mrow>
         </md>  This system has an upper triangular coefficient matrix, so one round of back-solving will provide a solution for <m>\vect{x}</m>.  And the product <m>\adjoint{Q}\vect{b}</m> will be reasonably well-behaved due to the orthogonal columns of <m>Q</m>.  Notice that in the case of a square matrix <m>A</m>, the matrix <m>Q</m> will be invertible, and the same system that in general leads to the least-squares solution will also provide the exact solution in this special case.</p>
 
+
+        <exercise xml:id="exercise-3d-least-squares">
+            <statement>
+                <p>Compute the least-squares solution to the system \(A\vect{x}=\vect{b}\).  Compute the residual vector associated with your solution. <md>
+                    <mrow>A&amp;=\begin{bmatrix}<![CDATA[1&1\\0&0\\2&3]]>\end{bmatrix}
+                    &amp;
+                    \vect{b}&amp;=\colvector{2\\1\\4}</mrow>
+                </md></p>
+            </statement>
+            <solution>
+                <p>We compute the pieces of the normal equations<md>
+                    <mrow>\adjoint{A}A&amp;=\begin{bmatrix}<![CDATA[5 & 7\\7 & 10]]>\end{bmatrix}
+                    &amp;
+                    \adjoint{A}\vect{b}&amp;=\colvector{10\\14}</mrow>
+                </md>  So the solution is <me>\vect{x}=\inverse{\begin{bmatrix}<![CDATA[5 & 7\\7 & 10]]>\end{bmatrix}}\colvector{10\\14}=\begin{bmatrix}<![CDATA[10 & -7\\-7 & 5]]>\end{bmatrix}\colvector{10\\14}=\colvector{2\\0}</me>  The residual is the difference <me>A\vect{x}-\vect{b} = \begin{bmatrix}<![CDATA[1&1\\0&0\\2&3]]>\end{bmatrix}\colvector{2\\0}-\colvector{2\\1\\4}=\colvector{0\\-1\\0}</me>  Notice that residual is indeed orthogonal to the column space of <m>A</m>.</p>
+            </solution>
+        </exercise>
+
     </subsection>
-
-    <exercise xml:id="exercise-3d-least-squares">
-        <statement>
-            <p>Compute the least-squares solution to the system \(A\vect{x}=\vect{b}\).  Compute the residual vector associated with your solution. <md>
-                <mrow>A&amp;=\begin{bmatrix}<![CDATA[1&1\\0&0\\2&3]]>\end{bmatrix}
-                &amp;
-                \vect{b}&amp;=\colvector{2\\1\\4}</mrow>
-            </md></p>
-        </statement>
-        <solution>
-            <p>We compute the pieces of the normal equations<md>
-                <mrow>\adjoint{A}A&amp;=\begin{bmatrix}<![CDATA[5 & 7\\7 & 10]]>\end{bmatrix}
-                &amp;
-                \adjoint{A}\vect{b}&amp;=\colvector{10\\14}</mrow>
-            </md>  So the solution is <me>\vect{x}=\inverse{\begin{bmatrix}<![CDATA[5 & 7\\7 & 10]]>\end{bmatrix}}\colvector{10\\14}=\begin{bmatrix}<![CDATA[10 & -7\\-7 & 5]]>\end{bmatrix}\colvector{10\\14}=\colvector{2\\0}</me>  The residual is the difference <me>A\vect{x}-\vect{b} = \begin{bmatrix}<![CDATA[1&1\\0&0\\2&3]]>\end{bmatrix}\colvector{2\\0}-\colvector{2\\1\\4}=\colvector{0\\-1\\0}</me>  Notice that residual is indeed orthogonal to the column space of <m>A</m>.</p>
-        </solution>
-    </exercise>
-
 
 </section>
