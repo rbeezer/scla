@@ -178,7 +178,7 @@
                 <p>Suppose that <m>\ltdefn{T}{V}{V}</m> is a linear transformation, <m>\dimension{V}=n</m>, and <m>\lambda</m> is an eigenvalue of <m>T</m>.  Then <m>\geneigenspace{T}{\lambda}=\krn{\left(T-\lambda I_V\right)^n}</m>.</p>
             </statement>
 
-    <todo>Cites below of powers of kernels, maybe to invariant subspaces, maybe here? (multiple)</todo>
+    <!-- TODO: Cites below of powers of kernels, maybe to invariant subspaces, maybe here? (multiple) -->
 
             <proof>
                 <p>To establish the set equality, first suppose that <m>\vect{x}\in\geneigenspace{T}{\lambda}</m>.  Then there is an integer <m>k</m> such that <m>\lteval{\left(T-\lambda I_V\right)^k}{\vect{x}}=\zerovector</m>.  This is equivalent to the statement that <m>\vect{x}\in\krn{\left(T-\lambda I_V\right)^k}</m>.  No matter what the value of <m>k</m> is, <xref ref="theorem-kernels-of-powers"/> gives <me>\vect{x}\in\krn{\left(T-\lambda I_V\right)^k}\subseteq\krn{\left(T-\lambda I_V\right)^n}.</me> So, <m>\geneigenspace{T}{\lambda}\subseteq\krn{\left(T-\lambda I_V\right)^n}</m>.</p>
@@ -264,7 +264,7 @@
 
             <p>If you would like more practice with these sorts of computations, mimic the above using the other eigenvalue of <m>T</m>, which is <m>\lambda=-2</m>.  The generalized eigenspace has dimension 2, so the matrix representation of the restriction to the generalized eigenspace will be a <m>2\times 2</m> matrix.</p>
 
-            <todo>Make exercise of suggestion for generalized eigenspace with other eigenvalue</todo>
+            <!-- TODO: Make exercise of suggestion for generalized eigenspace with other eigenvalue -->
         </example>
 
         <p>Our next two examples compute a complete set of generalized eigenspaces for a linear transformation.</p>

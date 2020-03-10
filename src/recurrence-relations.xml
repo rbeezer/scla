@@ -213,7 +213,7 @@
         <title>Solutions to Linear Recurrence Relations</title>
         <statement>
             <p>If <m>a_n=c_{n-1}a_{n-1}+\cdots+c_{n-k}a_{n-k}</m> is a linear recurrence relation of depth <m>k</m>, let <m>A</m> be the matrix defined as <me>A=\begin{bmatrix}c_{n-1}&amp;c_{n-2}&amp;\cdots&amp;c_{n-(k-1)}&amp;c_{n-k}\\1&amp;0&amp;\cdots&amp;0&amp;0\\0&amp;1&amp;\ddots&amp;0&amp;0\\\vdots&amp;\ddots&amp;\ddots&amp;\vdots&amp;\vdots\\0&amp;0&amp;\cdots&amp;1&amp;0\end{bmatrix}\text{.}</me></p>
-            <todo>This is a companion matrix; reference that.</todo>
+            <!-- TODO: This is a companion matrix; reference that. -->
             <ul>
                 <li>If <m>A=PJ\inverse{P}</m>, then <me>a_n=\begin{bmatrix}1&amp;0&amp;\cdots&amp;0\end{bmatrix}PJ^{n-k}\inverse{P}\colvector{a_k\\a_{k-1}\\\vdots\\a_1}\text{.}</me> This is helpful if <m>J</m> is diagonal or in Jordan canonical form. Note that multiplication by <m>\begin{bmatrix}1&amp;0&amp;\cdots&amp;0\end{bmatrix}</m> is just a way to extract the first element of the vector that follows.</li>
                 <li>If <m>A</m> is diagonalizable with distinct eigenvalues <m>\lambda_1,\ldots,\lambda_n</m>, then <m>A=PD\inverse{P}</m> where <m>D</m> is the diagonal matrix <m>\Delta(\lambda_1,\ldots,\lambda_n)</m> and <m>P</m> is the row-permuted Vandermonde matrix <me>P=\begin{bmatrix}\lambda_1^{n-1}&amp;\lambda_2^{n-1}&amp;\cdots&amp;\lambda_n^{n-1}\\\lambda_1^{n-2}&amp;\lambda_2^{n-2}&amp;\cdots&amp;\lambda_n^{n-2}\\\vdots&amp;\vdots&amp;\ddots&amp;\vdots\\1&amp;1&amp;\cdots&amp;1\end{bmatrix}\text{.}</me>Note that an explicit formula for the inverse of a Vandermonde matrix is known (see Section <xref ref="section-vandermonde"/>).</li>

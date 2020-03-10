@@ -14,9 +14,9 @@
 	    <p>In this chapter we collect a variety of useful topics that are independent of much of the other material, though not exclusively so.</p>
 	</introduction>
     
-    <todo>Pseudoinverse as topic of its own interest</todo>
-    <todo>Reformat: Trace of a matrix</todo>
-    <todo>Reformat: Hadamard product</todo>
+    <!-- TODO: Pseudoinverse as topic of its own interest -->
+    <!-- TODO: Reformat: Trace of a matrix -->
+    <!-- TODO: Reformat: Hadamard product -->
     
     <xi:include href="./vandermonde.xml" />
     <xi:include href="./determinants.xml" />

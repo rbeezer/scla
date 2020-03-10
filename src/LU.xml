@@ -19,7 +19,7 @@
     <subsection xml:id="subsection-LU-nonsingular">
         <title>LU Decomposition, Nonsingular Case</title>
 
-        <todo>Define principal minors</todo>
+        <!-- TODO: Define principal minors -->
 
         <theorem xml:id="theorem-LU">
             <title>LU (Triangular) Decomposition</title>
@@ -376,13 +376,13 @@
 
         <p>The hypotheses of <acroref type="theorem" acro="TD" /> can be weakened slightly to include matrices where not every <m>A_k</m> is nonsingular.  The introduces a rearrangement of the rows and columns of <m>A</m> to force as many as possible of the smaller submatrices to be nonsingular.  Then permutation matrices also enter into the decomposition.  We will not present the details here, but instead suggest consulting a more advanced text on matrix analysis.</p> 
 
-        <todo>Pivoting proofs, an example</todo>
+        <!-- TODO: Pivoting proofs, an example -->
 
-        <todo>LU for rectangular case</todo>
+        <!-- TODO: LU for rectangular case -->
 
     </subsection>
 
-    <todo>Mention LU uses only field operations</todo>
-    <todo>Perhaps the LDV decomposition (units on L and V, D diagonal)</todo>
+    <!-- TODO: Mention LU uses only field operations -->
+    <!-- TODO: Perhaps the LDV decomposition (units on L and V, D diagonal) -->
 
 </section>

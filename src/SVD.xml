@@ -28,7 +28,7 @@
                     <li> The distinct nonzero eigenvalues can be ordered such that <m>\lambda_i=\rho_i</m>, <m>1\leq i\leq p</m>.</li>
                     <li> Properly ordered, the algebraic multiplicities of the nonzero eigenvalues are identical, <m>\algmult{\adjoint{A}A}{\lambda_i}=\algmult{A\adjoint{A}}{\rho_i}</m>, <m>1\leq i\leq p</m>.</li>
                     <li> The rank of <m>\adjoint{A}A</m> is equal to the rank of <m>A\adjoint{A}</m>. </li>
-                    <todo>List inside of list, once working</todo>
+                    <!-- TODO: List inside of list, once working -->
                     <li> There is an orthonormal basis, <m>\set{\vectorlist{x}{n}}</m> of <m>\complex{n}</m> composed of eigenvectors of <m>\adjoint{A}A</m> and an orthonormal basis, <m>\set{\vectorlist{y}{m}}</m> of <m>\complex{m}</m> composed of eigenvectors of <m>A\adjoint{A}</m> with the following properties.  Order the eigenvectors so that <m>\vect{x}_i</m>, <m>r+1\leq i\leq n</m> are the eigenvectors of <m>\adjoint{A}A</m> for the zero eigenvalue.  Let <m>\delta_i</m>, <m>1\leq i\leq r</m> denote the nonzero eigenvalues of <m>\adjoint{A}A</m>.  Then <m>A\vect{x}_i=\sqrt{\delta_i}\vect{y_i}</m>, <m>1\leq i\leq r</m> and <m>A\vect{x}_i=\zerovector</m>, <m>r+1\leq i\leq n</m>.  Finally, <m>\vect{y}_i</m>, <m>r+1\leq i\leq m</m>, are eigenvectors of <m>A\adjoint{A}</m> for the zero eigenvalue.
                     </li>
                 </ol></p>
@@ -125,7 +125,7 @@
                     <mrow>&amp;=\matrixentry{U}{ij}\matrixentry{S}{jj}=\sum_{k=1}^{m}\matrixentry{U}{ik}\matrixentry{S}{kj}=\matrixentry{US}{ij}</mrow>
                 </md></p>
 
-                <todo>SVD proof may need more care with zero columns?</todo>
+                <!-- TODO: SVD proof may need more care with zero columns? -->
 
                 <p>So by <acroref type="theorem" acro="ME" />, <m>AV</m> and <m>US</m> are equal matrices, <m>AV=US</m>.  <m>V</m> is unitary, so applying its inverse yields the decomposition <me>A=US\adjoint{V}</me></p>
             </proof>
@@ -188,8 +188,8 @@
 
         <p>Be sure to recognize <m>\vect{y}_i\adjoint{\vect{x}_i}</m> as the outer product, an <m>m\times n</m> matrix of rank one (every row is a multiple of every other row, and similarly for columns).  See Subsection<nbsp /><xref provisional="subsection-SVD-image-compression" /> for a good example of the utility of this result.</p>
 
-        <todo>Properties of SVD needs (numerical) rank discussion</todo>
-        <todo>Properties of SVD needs range and kernel theorem (as spans of x, y vectors)</todo>
+        <!-- TODO: Properties of SVD needs (numerical) rank discussion -->
+        <!-- TODO: Properties of SVD needs range and kernel theorem (as spans of x, y vectors) -->
 
     </subsection>
 

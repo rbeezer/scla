@@ -23,13 +23,13 @@
 
         <p>Any permutation of set can be achieved by a sequence of interchanges of two elements of the set.  A simple version of the Bubble Sort algorithm might convince you of this.  Begin with the elements of the set in their natural order.  Pass through the set examining adjacent elements.  If two adjacent elements are not in the relative order they appear in the permuted version of the list (the list of images of the function), then interchange them.  At the conclusion of the pass, go back to the start of thodoe list and make another pass.  Keep making passes through the list, until a pass makes no interchanges.  Then the list is in the desired order.</p>
 
-        <todo>Finish introduction to permutations for determinants</todo>
+        <!-- TODO: Finish introduction to permutations for determinants -->
     </subsection>
 
-    <todo>Derive permutation version of determinants from properties, until get permuted identity matrices, see research notebook ~2014/04/10</todo>
+    <!-- TODO: Derive permutation version of determinants from properties, until get permuted identity matrices, see research notebook ~2014/04/10 -->
 
-    <todo>"Volumes" of parallelograms in 2D to motivate upcoming axioms, see course notes, and Ajit's supervisor's book</todo>
+    <!-- TODO: "Volumes" of parallelograms in 2D to motivate upcoming axioms, see course notes, and Ajit's supervisor's book -->
 
-    <todo>Axiomatic definition of determinant, derive remainder of properties, follow Curtis 3e</todo>
+    <!-- TODO: Axiomatic definition of determinant, derive remainder of properties, follow Curtis 3e -->
 
 </section>

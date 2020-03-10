@@ -119,7 +119,7 @@
         <p>There are other measures of distance than the norm (we are using what would be called the <term><m>2</m>-norm</term>, in order to differentiate it from other norms).  But <q>Euclidean distance</q>, as we have used here, is often the most tractable and the results are often the most useful.  In statistics, it is assumed that deviations in data, deviations from what the model would predict, are due to quantities that vary according to probability distributions.  With this assumption, estimators, such as our least-squares estimates, become complicated functions of these random quantities.  With the <m>2</m>-norm, and reasonable assumptions about the probability distributions for the data, the resulting least-squares estimators have probability distributions that are well-understood, thus making it possible to understand their properties and behavior.</p>
     </subsection>
 
-    <todo>Least squares from unitary transformation</todo>
+    <!-- TODO: Least squares from unitary transformation -->
 
     <subsection xml:id="subsection-least-squares-computations">
         <title>Computing Least-Squares Solutions</title>

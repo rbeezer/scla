@@ -19,7 +19,7 @@
 
         <p>Our main purpose in this section is to find a basis so that a nilpotent linear transformation will have a pleasing, nearly-diagonal matrix representation.  Of course, we will not have a definition for <q>pleasing,</q> nor for <q>nearly-diagonal.</q>  But the short answer is that our preferred matrix representation will be built up from Jordan blocks, <m>\jordan{k}{0}</m>.  Here's the theorem.  You will find Example<nbsp /><xref provisional="example-canonical-form-nilpotent-size-6-index-4" />, just following,  helpful as you study this proof, since it uses the same notation, and is large enough to (barely) illustrate the full generality of the theorem.</p>
 
-        <todo>Corollary: s_i decrease (?)</todo>
+        <!-- TODO: Corollary: s_i decrease (?) -->
 
         <theorem xml:id="theorem-canonical-form-nilpotent-linear-transformation"> <!-- was CFNLT -->
             <title>Canonical Form for Nilpotent Linear Transformations</title>
@@ -184,7 +184,7 @@
 
                 <p>When we apply <m>T</m> to the basis vectors of the second row, what happens?  Applying <m>T</m> to the first vector, the result is the zero vector, so the representation gets a zero column.  Applying <m>T</m> to the second vector in the row, the output is simply the first vector in that row, making the next column of the representation all zeros plus a lone one, sitting just above the diagonal.  Continuing, we create a Jordan block, sitting on the diagonal of the matrix representation.  It is not possible in general to state the size of this block, but since the second row is no longer than the first, it cannot have size larger than <m>p</m>.</p>
 
-                <todo>Describe the sizes of the blocks in terms of n_i, "The size of successive blocks"</todo>
+                <!-- TODO: Describe the sizes of the blocks in terms of n_i, "The size of successive blocks" -->
 
                 <p>Since there are as many rows as the dimension of <m>\krn{T}</m>, the representation contains as many Jordan blocks as the nullity of <m>T</m>, <m>\nullity{T}</m>.  Each successive block is smaller than the preceding one, with the first, and largest, having size <m>p</m>.  The blocks are Jordan blocks since the basis vectors <m>\vect{z}_{i,j}</m> were often defined as the result of applying <m>T</m> to other elements of the basis already determined, and then we rearranged the basis into an order that placed outputs of <m>T</m> just before their inputs, excepting the start of each row, which was an element of <m>\krn{T}</m>.</p>
             </proof>
@@ -234,7 +234,7 @@
             <p>If we construct the matrix <m>S</m> having the vectors of <m>B</m> as columns, then <acroref type="theorem" acro="SCB" /> tells us that a similarity transformation by <m>S</m> relates the original matrix representation of <m>T</m> with the matrix representation consisting of Jordan blocks, in other words, <m>\similar{A}{S}=\matrixrep{T}{B}{B}</m>.</p>
         </example>
 
-        <todo>A more complicated nilpotent matrix canonical form</todo>
+        <!-- TODO: A more complicated nilpotent matrix canonical form -->
 
         <p>Notice that constructing interesting examples of matrix representations requires domains with dimensions bigger than just two or three.  Going forward our examples will get even bigger.</p>
 
@@ -265,7 +265,7 @@
             </proof>
         </theorem>
 
-        <todo>Do we need an example of Jordan blocks from generalized eigenspaces, maybe original size 4?</todo>
+        <!-- TODO: Do we need an example of Jordan blocks from generalized eigenspaces, maybe original size 4? -->
 
         <p>Of course, Theorem<nbsp /><xref ref="theorem-canonical-form-nilpotent-linear-transformation" /> provides some extra information on the sizes of the Jordan blocks in a representation and we could carry over this information to Theorem<nbsp /><xref ref="theorem-restriction-generalized-eigenspace-nilpotent" />, but we will save this description and incorporate it into our final major result in the next section.</p>
 
@@ -713,7 +713,7 @@
 
         </example>
 
-        <todo>Maybe JCF needs another big example, or rather a combinatorial example?</todo>
+        <!-- TODO: Maybe JCF needs another big example, or rather a combinatorial example? -->
 
     </subsection>
 

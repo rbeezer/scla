@@ -92,9 +92,9 @@
         </proof>
     </theorem>
 
-    <todo>Prove Householder works as advertised</todo>
+    <!-- TODO: Prove Householder works as advertised -->
 
-    <todo>State a Householder version for vectors with complex entries</todo>
+    <!-- TODO: State a Householder version for vectors with complex entries -->
 
 
     <example xml:id="example-householder">

@@ -10,7 +10,7 @@
 <chapter xml:id="chapter-applications" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Applications</title>
 
-    <todo>Reformat: Secret sharing</todo>
+    <!-- TODO: Reformat: Secret sharing -->
     
     <xi:include href="./least-squares.xml" />
     <xi:include href="./curve-fitting.xml" />

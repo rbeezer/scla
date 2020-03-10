@@ -21,8 +21,8 @@
 
 	<p>For a definition of <term>positive definite</term> replace the inequality in the definition with a strict inequality, and exclude the zero vector from the vectors <m>\vect{x}</m> required to meet the condition.  Similar variations allow definitions of <term>negative definite</term> and <term>negative semi-definite</term>.</p>
 
-	<todo>Characterization of positive semi-definite with positive determinants?</todo>
-	<todo>Example:  Build positive semidefinite as a quadratic form, massage to get factorization into positive stuff, begin with A*A-adjoint and decompose</todo>
+	<!-- TODO: Characterization of positive semi-definite with positive determinants? -->
+	<!-- TODO: Example:  Build positive semidefinite as a quadratic form, massage to get factorization into positive stuff, begin with A*A-adjoint and decompose -->
 
 	<p>Our first theorem in this section gives us an easy way to build positive semi-definite matrices.</p>
 
@@ -41,7 +41,7 @@
 
 	<p>A statement very similar to the converse of this theorem is also true.  Any positive semi-definite matrix can be realized as the product of a square matrix, <m>B</m>, with its adjoint, <m>\adjoint{B}</m>.  (See Exercise<nbsp /><xref provisional="unwritten exercise about positive semi-definite and adjoints" /> after studying this entire section.)  The matrices <m>\adjoint{A}A</m> and <m>A\adjoint{A}</m> will be important later when we define singular values in Section<nbsp /><xref provisional="section-SVD" />.</p>
 
-	<todo>Write an exercise: PSD is some matrix times its adjoint, similarity plus square roots?</todo>
+	<!-- TODO: Write an exercise: PSD is some matrix times its adjoint, similarity plus square roots? -->
 
 	<p>Positive semi-definite matrices can also be characterized by their eigenvalues, without any mention of inner products.  This next result further reinforces the notion that positive semi-definite matrices behave like non-negative real numbers.</p>
 

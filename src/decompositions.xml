@@ -16,9 +16,9 @@
         <p>There is a <q>Big Five</q> of matrix decompositions, which you will come to know as the LU, QR, SVD, Schur and Cholesky.  Every student of advanced linear algebra should become intimately familiar with these basic decompositions.  There are many other ways to decompose a matrix, and we will see these at other junctures.  Encyclopedic texts like Horn &amp; Johnson, <xref provisional="horn-johnson" /> or Watkins <xref provisional="watkins" /> are good places to begin exploring more.</p>
     </introduction>
     
-    <todo>Reformat: rank-one decomposition, (compare to SVD)</todo>
-    <todo>Reformat: square roots</todo>
-    <todo>Reformat: polar decomposition</todo>
+    <!-- TODO: Reformat: rank-one decomposition, (compare to SVD) -->
+    <!-- TODO: Reformat: square roots -->
+    <!-- TODO: Reformat: polar decomposition -->
 
     <xi:include href="./LU.xml" />
     <xi:include href="./QR.xml" />

@@ -49,7 +49,7 @@
             </proof>
         </theorem>
 
-        <todo>Revisit thick/thin, reduced nomenclature</todo>
+        <!-- TODO: Revisit thick/thin, reduced nomenclature -->
 
         <p>The decomposition of Theorem<nbsp /><xref ref="theorem-thin-QR" /> is referred to as a <term>thin</term> decomposition, while the decomposition of Theorem<nbsp /><xref ref="theorem-full-QR" /> is referred to as a <term>full</term> decomposition.</p>
 
@@ -214,7 +214,7 @@
     <subsection>
         <title>Final Thoughts</title>
 
-        <todo>QR still gives ON bases for column spaces</todo>
+        <!-- TODO: QR still gives ON bases for column spaces -->
 
     </subsection>
 

@@ -18,7 +18,7 @@
 		<p>We have just discussed the determination of a canonical form as a question about matrices.  However, we know that every square matrix creates a natural linear transformation (<acroref type="theorem" acro="MBLT" />) and every linear transformation with identical domain and codomain has a square matrix representation for each choice of a basis, with a change of basis creating a similarity transformation (<acroref type="theorem" acro="SCB" />).  So we will state, and prove, theorems using the language of linear transformations on abstract vector spaces, while most of our examples will work with square matrices.  You can, and should, mentally translate between the two settings frequently and easily.</p>
 	</introduction>
     
-    <todo>New section: Rational canonical form</todo>
+    <!-- TODO: New section: Rational canonical form -->
 
     <xi:include href="./generalized-eigenspaces.xml" />
     <xi:include href="./nilpotent-linear-transformations.xml" />

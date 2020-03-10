@@ -106,7 +106,7 @@
             }</me>  Again, <acroref type="theorem" acro="DMFE" /> tells us that <m>B</m> is far from being diagonalizable.</p>
         </example>
 
-        <todo>Reference some FCLA theorem about zeros and complex numbers</todo>
+        <!-- TODO: Reference some FCLA theorem about zeros and complex numbers -->
 
         <p>On a first encounter with the definition of a nilpotent matrix, you might wonder if such a thing was possible at all.  That a high power of a nonzero object could be zero is so very different from our experience with scalars that it seems very unnatural.  Hopefully the two previous examples were somewhat surprising.  But we have seen that matrix algebra does not always behave the way we expect (<acroref type="example" acro="MMNC" />), and we also now recognize matrix products not just as arithmetic, but as function composition (<acroref type="theorem" acro="MRCLT" />).  With a couple examples completed, we turn to some general properties.</p>
 
@@ -123,7 +123,7 @@
 
         <p>Paraphrasing, all of the eigenvalues of a nilpotent linear transformation are zero.  So in particular, the characteristic polynomial of a nilpotent linear transformation, <m>T</m>, on a vector space of dimension <m>n</m>, is simply <m>\charpoly{T}{x}=(x-0)^n=x^n</m>.</p>
 
-        <todo>Later get the converse from JCF, Cayley-Hamilton, and reference it here</todo>
+        <!-- TODO: Later get the converse from JCF, Cayley-Hamilton, and reference it here -->
 
         <p>The next theorem is not critical for what follows, but it will explain our interest in nilpotent linear transformations.  More specifically, it is the first step in backing up the assertion that nilpotent linear transformations are the essential obstacle in a non-diagonalizable linear transformation.  While it is not obvious from the statement of the theorem, it says that a nilpotent linear transformation is not diagonalizable, unless it is trivially so.</p>
 

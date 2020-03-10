@@ -12,7 +12,7 @@
 
     <p>This book is about advanced topics in linear algebra.  So we presume you have some experience with matrix algebra, vector spaces (possibly abstract ones), eigenvalues, linear transformations, and matrix representations of linear transformations.  All of this material can be found in <pubtitle>A First Course in Linear Algebra</pubtitle>, which we will reference frequently.</p>
     
-    <todo>Consult FCLA often.</todo>
+    <!-- TODO: Consult FCLA often. -->
    
     <p>Our approach is mathematical, which means we include proofs of our results.  However, we are also practical, and will not always be as general as we could be.  For example, we will stick to a single inner product throughout (the sesquilinear one that is most useful when employing complex numbers).  We will sometimes be careful about our field of scalars, but will not dwell on the distinctions peculiar to the real numbers (versus the algebraically closed complex numbers).  This is not a course in numerical linear algebra, but much of what we do provides the mathematical underpinninngs of that topic, so this could be a very useful resource for study in that area.  We will make mention of algorithmic performance, relying on Trefethen and Bau's excellent <pubtitle>Numerical Linear Algebra</pubtitle> for details.</p>
     
@@ -29,15 +29,15 @@
                 
     </example>
     
-    <todo>State theorem, replace J-ibnverse by something.</todo>
+    <!-- TODO: State theorem, replace J-ibnverse by something. -->
    
     <p>Again, many of the topics in this book will have a flavor similar to the previous example and theorem.  However, we will often need to limit the possibilities for the original matrix (it may need to be square, or its eigenvalues may need certain properties).  We may get more specific information about the components of the factorization, or we may get less.  We will also be interested in obtaining <term>canonical forms</term> of matrices.  You can view orthonormal diagonalization (<acroref acro="OD" type="section" />) as a good example of another matrix decomposition, and we will cover it again in some detail in Section<nbsp /><xref provisional="section on orthonormal diagonalization/Schur" />.</p>
     
-    <todo>Encourage return here.</todo>
+    <!-- TODO: Encourage return here. -->
 
 
-   <todo>matrices linear transforms</todo>
-   <todo>exercise on easy aspects of diagonal matreices</todo>
-   <todo>exercise on OD as decomposition</todo>
+   <!-- TODO: matrices linear transforms -->
+   <!-- TODO: exercise on easy aspects of diagonal matreices -->
+   <!-- TODO: exercise on OD as decomposition -->
 
 </section>
