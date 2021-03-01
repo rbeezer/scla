@@ -335,7 +335,7 @@
                 &amp;=\vectrep{D}{\colvector{-14\\-3\\-3\\-4\\-1\\2}}
                 =\vectrep{D}{(-1)\vect{u}_1+2\vect{u}_2}
                 =\colvector{-1\\2}</mrow>
-            </md> Thus <me>M=\matrixrep{\restrict{S}{U}}{U}{U}=\begin{bmatrix} <![CDATA[4 & -1 \\ 1 & 2]]> \end{bmatrix}</me></p>
+            </md> Thus <me>M=\matrixrep{\restrict{S}{U}}{D}{D}=\begin{bmatrix} <![CDATA[4 & -1 \\ 1 & 2]]> \end{bmatrix}</me></p>
 
             <p>Now we can illustrate Theorem<nbsp /><xref ref="theorem-restriction-generalized-eigenspace-nilpotent" /> with powers of the matrix representation (rather than the restriction itself), <md>
                 <mrow>M-3I_2&amp;= \begin{bmatrix}<![CDATA[1 & -1 \\ 1 & -1]]>\end{bmatrix}</mrow>
@@ -387,7 +387,7 @@
                 3\vect{w}_4
                 }
                 =\colvector{-8\\2\\6\\3}</mrow>
-            </md> Thus <me>N=\matrixrep{\restrict{S}{W}}{W}{W} = \begin{bmatrix}
+            </md> Thus <me>N=\matrixrep{\restrict{S}{W}}{E}{E} = \begin{bmatrix}
             <![CDATA[ 5 & -10 & 17 & -8 \\
              2 & -2 & 1 & 2 \\
              -2 & 5 & -10 & 6 \\
