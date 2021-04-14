@@ -25,13 +25,14 @@
 
         <p>We have a subspace, the column space of <m>A</m>, represented by all possibilities for <m>A\vect{x}</m> as we course over all values of <m>\vect{x}</m>.  We have a vector <m>\vect{b}</m> that is not in the subspace.  Which element in the subspace is closest to <m>\vect{b}</m>?  Consider the situation in two dimensions, where the subspace is a line through the origin, and the point lies off the line.  From the point off the line, which of the infinitely many points on the line is closest, and what direction would you take to get there?  In three dimensions, consider a subspace that is a plane containing the origin, and the point lies off the plane.  From the point off the plane, which of the infinitely many points on the plane is closest, and what direction would you take to get there?   You should have answered <q>in a perpendicular direction</q> and <q>in the direction of the normal vector to the plane</q>.  Move orthogonally to the subspace.  More exactly, in the direction of an element of the orthogonal complement of the subspace.</p>
 
-        <p>More carefully, <m>A\vect{x}-\vect{b}\in\per{\left(\csp{A}\right)}=\nsp{\adjoint{A}}</m>, so <md>
-        <mrow>\zerovector=\adjoint{A}\left(A\vect{x}-\vect{b}\right)&amp;=\adjoint{A}A\vect{x}-\adjoint{A}\vect{b}
+        <p>More carefully, let <m>\hat{\vect{b}}</m> be the <q>closest</q> vector to <m>\vect{b}</m> that is in the column space of <m>A</m>, and define <m>\hat{\vect{x}}</m> by the scalars in the linear combination of the columns of <m>A</m> that yields <m>\hat{\vect{b}}</m>.  That is, <m>A\hat{\vect{x}} = \hat{\vect{b}}</m>.  We desire
+        <me>\hat{\vect{b}}-\vect{b} = A\hat{\vect{x}}-\vect{b}\in\per{\left(\csp{A}\right)}=\nsp{\adjoint{A}}</me>, so <md>
+        <mrow>\zerovector=\adjoint{A}\left(A\hat{\vect{x}}-\vect{b}\right)&amp;=\adjoint{A}A\hat{\vect{x}}-\adjoint{A}\vect{b}
         &amp;
         &amp;\Rightarrow
         &amp;
-        \adjoint{A}A\vect{x}&amp;=\adjoint{A}\vect{b}.</mrow>
-        </md>  This linear system is called the <term>normal equations</term>, due to the role of orthogonality in its derivation.  Several good things have happened.  Primarily, <m>\adjoint{A}A</m> is a square matrix, is positive semi-definite, and if <m>A</m> has full column rank, then <m>\adjoint{A}A</m> is nonsingular.  With a nonsingular coefficient matrix, we have the unique solution <me>\vect{x}=\inverse{\left(\adjoint{A}A\right)}\adjoint{A}\vect{b}.</me></p>
+        \adjoint{A}A\hat{\vect{x}}&amp;=\adjoint{A}\vect{b}.</mrow>
+        </md>  This linear system is called the <term>normal equations</term>, due to the role of orthogonality in its derivation.  Several good things have happened.  Primarily, <m>\adjoint{A}A</m> is a square matrix, is positive semi-definite, and if <m>A</m> has full column rank, then <m>\adjoint{A}A</m> is nonsingular.  With a nonsingular coefficient matrix, we have the unique solution <me>\hat{\vect{x}}=\inverse{\left(\adjoint{A}A\right)}\adjoint{A}\vect{b}</me>.  The difference between <m>\vect{b}</m> and <m>\hat{\vect{b}}</m>, <m>\vect{r}=\vect{b}-\hat{\vect{b}}</m>, is known as the <term>residual</term>, and its length (the distance in the orthogonal direction) can be used as a measure of the approximation that is inherent in taking <m>\hat{\vect{x}}</m> as a solution to the system.</p>
 
         <p>We consider two very simple examples of using the normal equations, in cases where our geometric intuition is useful.</p>
 
