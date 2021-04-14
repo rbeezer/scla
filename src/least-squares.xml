@@ -162,7 +162,7 @@
 
         <exercise xml:id="exercise-3d-least-squares">
             <statement>
-                <p>Compute the least-squares solution to the system \(A\vect{x}=\vect{b}\).  Compute the residual vector associated with your solution. <md>
+                <p>Compute the least-squares solution to the system <m>A\vect{x}=\vect{b}</m>.  Compute the residual vector associated with your solution. <md>
                     <mrow>A&amp;=\begin{bmatrix}<![CDATA[1&1\\0&0\\2&3]]>\end{bmatrix}
                     &amp;
                     \vect{b}&amp;=\colvector{2\\1\\4}</mrow>
