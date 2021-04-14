@@ -126,6 +126,19 @@
         <p>There are other measures of distance than the norm (we are using what would be called the <term><m>2</m>-norm</term>, in order to differentiate it from other norms).  But <q>Euclidean distance</q>, as we have used here, is often the most tractable and the results are often the most useful.  In statistics, it is assumed that deviations in data, deviations from what the model would predict, are due to quantities that vary according to probability distributions.  With this assumption, estimators, such as our least-squares estimates, become complicated functions of these random quantities.  With the <m>2</m>-norm, and reasonable assumptions about the probability distributions for the data, the resulting least-squares estimators have probability distributions that are well-understood, thus making it possible to understand their properties and behavior.</p>
     </subsection>
 
+    <subsection xml:id="subsection-least-squares-fit">
+        <title>Goodness of Fit</title>
+
+        <p>We can associate a single number as a measure of how <q>good</q> our solution <m>\hat{\vect{b}}</m> really is.  First, realize that the simplest possible model is to assume that <m>\vect{b}</m> should have constant entries, so the matrix <m>A</m> is a single columns of all ones.  In this case, the normal equations provide <m>\hat{\vect{x}}</m> as the vector with a single entry that is the average of the entries of the vector <m>\vect{b}</m>.  If we write the entries of <m>\vect{b}</m> as <m>b_i</m> and write the average as <m>\overline{b}</m>, then the length of the residual vector, squared, is
+        <me>\norm{\vect{r}}^2 = \sum_{i=1}^{n}\left(b_i - \overline{b}\right)^2 = \mathrm{SS}_\mathrm{tot}</me>.</p>
+
+        <p>When we use a more sophisticated model, the residual vector will be shorter, and if we denote the entries of <m>\hat{\vect{b}}</m> by <m>\hat{b}_i</m>, we have
+        <me>\norm{\vect{r}}^2 = \sum_{i=1}^{n}\left(b_i - \hat{b}_i\right)^2 = \mathrm{SS}_\mathrm{res}</me>.  The notation for these expressions is read as a <q>sum of squares</q>, either <q>total</q> or <q>residual</q>.  Then the <term>coefficient of determination</term> is defined as
+        <me>R^2 = 1 - \frac{\mathrm{SS}_\mathrm{res}}{\mathrm{SS}_\mathrm{tot}}</me>.</p>
+
+        <p>When we actually have a solution to the original system, then the residual vector for the model is the zero vector, so <m>\mathrm{SS}_\mathrm{res}=0</m> and <m>R^2=1</m>.  When the model does not do better than the simplest possible model, then <m>\mathrm{SS}_\mathrm{res} = \mathrm{SS}_\mathrm{tot}</m> and <m>R^2=0</m>.  So the hope is that a model will fit the data with an <m>R^2</m> as close to <m>1</m> as possible.  What is considered <q>close</q> will vary from situation to situation.  What is considered close for economics data may not be considered close for data from a physics experiment.</p>
+    </subsection>
+
     <!-- TODO: Least squares from unitary transformation -->
 
     <subsection xml:id="subsection-least-squares-computations">
