@@ -96,6 +96,12 @@
             </statement>
         </exercise>
 
+        <exercise xml:id="exercise-nonsingular-normal-equations">
+            <statement>
+                <p>Suppose that <m>A</m> is a nonsingular matrix.  What can you say about a solution, <m>\hat{\vect{x}}</m>, to the normal equations?  Comment on this situation.</p>
+            </statement>
+        </exercise>
+
         <p>So far we have not stated any theorems, to say nothing of proving anything.  Moving in an orthogonal direction feels like a good idea, but is it really best?  Here is a theorem that suggests it is best according to one natural criteria.</p>
 
         <theorem xml:id="theorem-least-squares" >
