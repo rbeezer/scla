@@ -9,9 +9,9 @@
 
 <!-- References to FCLA preserve acronyms -->
 <xsl:template match="acroref">
-    <xsl:text>{\small\sc </xsl:text>
+    <xsl:text>{\sc </xsl:text>
     <xsl:apply-templates select="." mode="fcla-name" />
-    <xsl:text> </xsl:text>
+    <xsl:text>~</xsl:text>
     <xsl:value-of select="@acro" />
     <xsl:text>}</xsl:text>
 </xsl:template>

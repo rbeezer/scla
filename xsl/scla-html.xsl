@@ -7,12 +7,15 @@
 <!-- Intend output for rendering by pdflatex -->
 <xsl:output method="text" />
 
+<!-- WITHOUT trailing slash -->
+<xsl:variable name="fcla-base-url" select="'http://linear.ups.edu/fcla'"/>
+
 <!-- References to FCLA preserve acronyms -->
 <!-- TODO make links to knowls in FCLA website -->
 <xsl:template match="acroref">
 	<xsl:apply-templates select="." mode="fcla-name" />
 	<xsl:text> </xsl:text>
-	<a knowl="../../html/knowls/{@type}.{@acro}.knowl">
+	<a class="xref" data-knowl="{$fcla-base-url}/knowl/{@type}-{@acro}.html">
 		<xsl:value-of select="@acro" />
     </a>
 </xsl:template>
@@ -20,7 +23,7 @@
 <xsl:template match="acroref[@type='chapter' or @type='section']">
 	<xsl:apply-templates select="." mode="fcla-name" />
 	<xsl:text> </xsl:text>
-	<a href="../../html/{@type}-{@acro}.html" target="_blank">
+	<a href="{$fcla-base-url}/{@type}-{@acro}.html" target="_blank">
 		<xsl:value-of select="@acro" />
     </a>
 </xsl:template>
