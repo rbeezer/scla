@@ -40,7 +40,11 @@
 
                 <p>Since <m>\vect{x}</m> is an eigenvector, <m>\vect{x}\neq\zerovector</m>, and by <acroref type="theorem" acro="PIP" />, <m>\innerproduct{\vect{x}}{\vect{x}}\neq 0</m>.  As <m>\lambda</m> was assumed to be nonzero, we see that <m>\innerproduct{A\vect{x}}{A\vect{x}}\neq 0</m>.  Again, <acroref type="theorem" acro="PIP" /> tells us that <m>A\vect{x}\neq\zerovector</m>.</p>
 
-                <p> Much of the sequel turns on the following simple computation.  If you ever wonder what all the fuss is about adjoints, Hermitian matrices, square roots, and singular values, return to this brief computation, as it holds the key.  There is much more to do in this proof, but after this it is mostly bookkeeping.  Here we go.  We check that <m>A\vect{x}</m> functions as an eigenvector of <m>A\adjoint{A}</m> for the eigenvalue <m>\lambda</m>, <me>\left(A\adjoint{A}\right)A\vect{x}=A\lambda\vect{x}=\lambda\left(A\vect{x}\right)</me></p>
+                <p> Much of the sequel turns on the following simple computation.  If you ever wonder what all the fuss is about adjoints, Hermitian matrices, square roots, and singular values, return to this brief computation, as it holds the key.  There is much more to do in this proof, but after this it is mostly bookkeeping.  Here we go.  We check that <m>A\vect{x}</m> functions as an eigenvector of <m>A\adjoint{A}</m> for the eigenvalue <m>\lambda</m>,
+                <me>\left(A\adjoint{A}\right)\left(A\vect{x}\right)
+                   =A\left(\adjoint{A}A\right)\vect{x}
+                   =A\lambda\vect{x}
+                   =\lambda\left(A\vect{x}\right)</me></p>
 
                 <p>That's it.  If <m>\vect{x}</m> is an eigenvector of <m>\adjoint{A}A</m>, for a <em>nonzero</em> eigenvalue, then <m>A\vect{x}</m> is an eigenvector for <m>A\adjoint{A}</m> for the same nonzero eigenvalue.  Let's see what this buys us.</p>
 
