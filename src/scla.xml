@@ -22,7 +22,9 @@
         <xi:include href="./canonical-forms.xml" />
         <xi:include href="./applications.xml" />
         <xi:include href="./topics.xml" />
-        <xi:include href="./gfdl-mathbook.xml" />
+        <backmatter>
+            <xi:include href="./gfdl-mathbook.xml" />
+        </backmatter>
 
         <!-- TODO: Cruise Math 420, Spring 2014 exercise list for new problems -->
    </book>
