@@ -146,13 +146,19 @@
 
         <p>In Exercise<nbsp /><xref ref="exercise-three-parameter-linear-regression" /> we suggest formulating general expressions for least-squares estimates of three parameters of a model.  This begins to get a bit absurd when you invert a matrix larger than size <m>2</m>.  Instead it makes sense to formulate from the data the matrix <m>\adjoint{A}A</m> and the vector <m>\adjoint{A}\vect{b}</m>, and then proceed to a numerical solution.  As <m>\adjoint{A}A</m> is a Hermitian positive definite matrix (<xref ref="theorem-matrix-adjoint-positive-definite" />, it can be decomposed into a Cholesky factorization twice as fast as we can decompose an arbitrary matrix into an LU factorization <xref provisional="cost to form Cholesky" />.  The Cholesky factorization allows a round of forward-solving followed by a round of back-solving to find a solution to the normal equations.</p>
 
-        <p>But it gets better.  Consider solving the system <m>A\vect{x}=\vect{b}</m>.  Suppose <m>A</m> has rank <m>n</m> and we have a thin QR decomposition of <m>A</m>, <m>A=QR</m> where <m>Q</m> has orthogonal columns and <m>R</m> is upper triangular with positive diagonal entries.  Notice in particular that <m>R</m> is invertible.  Then<md>
-        <mrow>\adjoint{Q}\vect{b}
-              &amp;=\inverse{\left(\adjoint{R}\right)}\adjoint{R}\adjoint{Q}\vect{b}=\inverse{\left(\adjoint{R}\right)}\adjoint{A}\vect{b}</mrow>
-        <mrow>&amp;=\inverse{\left(\adjoint{R}\right)}\adjoint{A}A\vect{x}=\inverse{\left(\adjoint{R}\right)}\adjoint{R}\adjoint{Q}A\vect{x}</mrow>
-        <mrow>&amp;=\adjoint{Q}QR\vect{x}=R\vect{x}</mrow>
-        </md>  This system has an upper triangular coefficient matrix, so one round of back-solving will provide a solution for <m>\vect{x}</m>.  And the product <m>\adjoint{Q}\vect{b}</m> will be reasonably well-behaved due to the orthogonal columns of <m>Q</m>.  Notice that in the case of a square matrix <m>A</m>, the matrix <m>Q</m> will be invertible, and the same system that in general leads to the least-squares solution will also provide the exact solution in this special case.</p>
+        <p>But it gets better.  Consider solving the system <m>A\vect{x}=\vect{b}</m>.  Suppose <m>A</m> has rank <m>n</m> and we have a thin QR decomposition of <m>A</m>, <m>A=QR</m> where <m>Q</m> has orthogonal columns and <m>R</m> is an upper triangular square matrix with positive diagonal entries.  Notice in particular that <m>R</m> is invertible.  Then<md>
+            <mrow>\adjoint{R}R\hat{\vect{x}}&amp;=\adjoint{R}\adjoint{Q}QR\hat{\vect{x}}</mrow>
+            <mrow>&amp;=\adjoint{\left(QR\right)}QR\hat{\vect{x}}</mrow>
+            <mrow>&amp;=\adjoint{A}A\hat{\vect{x}}</mrow>
+            <mrow>&amp;=\adjoint{A}\vect{b}</mrow>
+            <mrow>&amp;=\adjoint{\left(QR\right)}\vect{b}</mrow>
+            <mrow>&amp;=\adjoint{R}\adjoint{Q}\vect{b}</mrow>
+        </md>.  Since <m>R</m> is invertible, so is <m>\adjoint{R}</m>, and we can multiply both sides of the above equation by <m>\inverse{\left(\adjoint{R}\right)}</m> to obtain the system
+        <me>R\hat{\vect{x}}=\adjoint{Q}\vect{b}</me>.</p>
 
+        <p>This new system has an upper triangular coefficient matrix, so one round of back-solving will provide a solution for <m>\hat{\vect{x}}</m>.  And the product <m>\adjoint{Q}\vect{b}</m> will be reasonably well-behaved due to the orthogonal columns of <m>Q</m>.  Notice that in the case of a square matrix <m>A</m> (of full rank), the matrix <m>Q</m> will be invertible, and the same system that in general leads to the least-squares solution will also provide the exact solution in this special case.</p>
+
+        <p>This is an excellent example of how knowledge of a specialized situation, and a matrix decomposition, can be parlayed into better accuracty and greater speed.  But it is not free, there is still significant effort required to compute the QR decomposition in the first place.</p>
 
         <exercise xml:id="exercise-3d-least-squares">
             <statement>
